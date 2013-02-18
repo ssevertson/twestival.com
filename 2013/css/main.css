@@ -1,0 +1,420 @@
+/* ==========================================================================
+   HTML5 Boilerplate styles - h5bp.com (generated via initializr.com)
+   ========================================================================== */
+
+html,
+button,
+input,
+select,
+textarea {
+    color: #222;
+}
+
+body {
+    font-size: 1em;
+    line-height: 1.4;
+}
+
+::-moz-selection {
+    background: #b3d4fc;
+    text-shadow: none;
+}
+
+::selection {
+    background: #b3d4fc;
+    text-shadow: none;
+}
+
+hr {
+    display: block;
+    height: 1px;
+    border: 0;
+    border-top: 1px solid #ccc;
+    margin: 1em 0;
+    padding: 0;
+}
+
+img {
+    vertical-align: middle;
+}
+
+fieldset {
+    border: 0;
+    margin: 0;
+    padding: 0;
+}
+
+textarea {
+    resize: vertical;
+}
+
+.chromeframe {
+    margin: 0.2em 0;
+    background: #ccc;
+    color: #000;
+    padding: 0.2em 0;
+}
+
+
+/* ==========================================================================
+   Author's custom styles
+   ========================================================================== */
+
+@font-face {
+  font-family: 'Melbourne';
+  src: url('../font/melbourne.otf'), url('../font/melbourne.eot');
+}
+
+a:link, a:visited, a:hover, a:active {
+	color: #000000;
+	text-decoration: none;
+}
+
+input, select {
+	color: #666666;
+	border: medium none;
+}
+.wrapper {
+	width: 972px;
+	margin-left: auto;
+	margin-right: auto;
+}
+ul.horizontal {
+	margin: 0px;
+	padding: 0px;
+}
+ul.horizontal li {
+	float: left;
+	list-style-type: none;
+}
+
+#header {
+	height: 76px;
+	font-family: 'Melbourne';
+	-webkit-box-shadow: 0px 1px 5px rgba(0, 0, 0, 0.20);
+	-moz-box-shadow:    0px 1px 5px rgba(0, 0, 0, 0.20);
+	box-shadow:         0px 1px 5px rgba(0, 0, 0, 0.20);
+}
+#header .logo {
+	float: left;
+	margin-top: 18px;
+}
+#header .menu {
+	float: left;
+	margin-left: 83px;
+	margin-top: 32px;
+}
+#header .menu li {
+	margin-right: 20px;
+	margin-top: 6px;
+	font-size: 16px;
+}
+#header .menu li.button-gray {
+	background: url('../img/common/header/button.png') no-repeat;
+	width: 110px;
+	height: 30px;
+	text-align: center;
+	margin-top: 0px;
+	margin-left: 6px;
+	padding-top: 6px;
+}
+#header .info {
+	font-size: 14px;
+	float: right;
+	border: 1px solid #cc2f3a;
+	-webkit-border-bottom-right-radius: 3px;
+	-webkit-border-bottom-left-radius: 3px;
+	-moz-border-radius-bottomright: 3px;
+	-moz-border-radius-bottomleft: 3px;
+	border-bottom-right-radius: 3px;
+	border-bottom-left-radius: 3px;
+	background-color: #d23a42;
+	width: 152px;
+	padding: 12px 12px 8px 12px;
+	-webkit-box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
+	-moz-box-shadow:    0px 2px 5px rgba(0, 0, 0, 0.2);
+	box-shadow:         0px 2px 5px rgba(0, 0, 0, 0.2);
+}
+#header .info .social-media a:first-child {
+	margin-right: 6px;
+}
+#header .info .stats {
+	list-style-type: none;
+	padding: 0px;
+	text-align: center;
+	margin: 8px 0px 8px 0px;
+}
+#header .info .stats li {
+	text-transform: uppercase;
+	font-weight: bold;
+	font-size: 13px;
+	margin: 3px 0px 3px 0px;
+	border-bottom: 1px solid #b32b35;
+}
+#header .info .stats li:last-child {
+	border: none;
+}
+#header .info .search {
+	background-color: #ffffff;
+	height: 25px;
+}
+#header .info .search #search-query {
+	width: 120px;
+	height: 25px;
+	padding: 0px 0px 0px 4px;
+	vertical-align: top;
+	font-family: 'Melbourne';
+	font-size: 18px;
+}
+#header .info .search #search-button {
+	margin-right: 0px;
+	float: right;
+	margin-right: 6px;
+}
+
+#footer {
+	-webkit-box-shadow: 0px -2px 3px rgba(0, 0, 0, 0.4);
+	-moz-box-shadow:    0px -2px 3px rgba(0, 0, 0, 0.4);
+	box-shadow:         0px -2px 3px rgba(0, 0, 0, 0.4);
+	background: url('../img/common/footer/gradient.png') repeat-x;
+	height: 237px;
+	font-family: 'Melbourne';
+}
+#footer .newsletter {
+	margin-top: 50px;
+	float: left;
+}
+#footer .newsletter form label {
+	display: block;
+	font-size: 19px;
+	width: 200px;
+}
+#footer .newsletter form input#subscribe-email {
+	width: 305px;
+	height: 40px;
+	background: #ffffff;
+	font-family: 'Melbourne';
+	font-size: 20px;
+	margin-top: 12px;
+}
+#footer .newsletter form input#subscribe-button {
+	float: right;
+	position: relative;
+	background: url('../img/common/footer/subscribe.png') no-repeat;
+	width: 119px;
+	height: 49px;
+	margin-top: -28px;
+	margin-left: -100px;
+	z-index: 100;
+	text-transform: uppercase;
+	font-family: 'Melbourne';
+	font-weight: bold;
+	font-size: 16px;
+	padding-right: 28px;
+	padding-top: 4px;
+}
+#footer .menu {
+	margin-top: 50px;
+	padding-bottom: 18px;
+	float: right;
+	border-bottom: 1px solid #000000;
+}
+#footer .menu li {
+	font-size: 19px;
+	margin-right: 32px;
+}
+#footer .menu li:last-child {
+	margin-right: 0px;
+}
+#footer .menu li.important {
+	text-decoration: underline;
+}
+#footer .social-media {
+	float: right;
+	margin-top: 20px;
+}
+#footer .social-media .title {
+	float: left;
+	font-size: 18px;
+	margin-right: 41px;
+	margin-top: 15px;
+}
+#footer .social-media .horizontal {
+	float: right;
+}
+#footer .social-media .horizontal li {
+	float: left;
+	margin-right: 23px;
+}
+#footer .social-media .horizontal li:last-child {
+	margin-right: 0px;
+}
+#footer .social-media .horizontal li {
+	overflow: hidden;
+	display: block;
+	width: 42px;
+	height: 41px;
+	border: 1px solid green;
+}
+#bottom {
+	background-color: #69151c;
+	color: #d84248;
+	height: 44px;
+	padding-top: 16px;
+	font-family: 'Melbourne';
+	font-size: 14px;
+}
+#bottom .copyright {
+	float: left;
+}
+#bottom .hosting {
+	float: right;
+}
+
+/* ==========================================================================
+   Media Queries
+   ========================================================================== */
+
+@media only screen and (min-width: 35em) {
+
+}
+
+@media print,
+       (-o-min-device-pixel-ratio: 5/4),
+       (-webkit-min-device-pixel-ratio: 1.25),
+       (min-resolution: 120dpi) {
+
+}
+
+/* ==========================================================================
+   Helper classes
+   ========================================================================== */
+
+.ir {
+    background-color: transparent;
+    border: 0;
+    overflow: hidden;
+    *text-indent: -9999px;
+}
+
+.ir:before {
+    content: "";
+    display: block;
+    width: 0;
+    height: 150%;
+}
+
+.hidden {
+    display: none !important;
+    visibility: hidden;
+}
+
+.visuallyhidden {
+    border: 0;
+    clip: rect(0 0 0 0);
+    height: 1px;
+    margin: -1px;
+    overflow: hidden;
+    padding: 0;
+    position: absolute;
+    width: 1px;
+}
+
+.visuallyhidden.focusable:active,
+.visuallyhidden.focusable:focus {
+    clip: auto;
+    height: auto;
+    margin: 0;
+    overflow: visible;
+    position: static;
+    width: auto;
+}
+
+.invisible {
+    visibility: hidden;
+}
+
+.clearfix:before,
+.clearfix:after {
+    content: " ";
+    display: table;
+}
+
+.clearfix:after {
+    clear: both;
+}
+
+.clearfix {
+    *zoom: 1;
+}
+
+/* ==========================================================================
+   Print styles
+   ========================================================================== */
+
+@media print {
+    * {
+        background: transparent !important;
+        color: #000 !important; /* Black prints faster: h5bp.com/s */
+        box-shadow: none !important;
+        text-shadow: none !important;
+    }
+
+    a,
+    a:visited {
+        text-decoration: underline;
+    }
+
+    a[href]:after {
+        content: " (" attr(href) ")";
+    }
+
+    abbr[title]:after {
+        content: " (" attr(title) ")";
+    }
+
+    /*
+     * Don't show links for images, or javascript/internal links
+     */
+
+    .ir a:after,
+    a[href^="javascript:"]:after,
+    a[href^="#"]:after {
+        content: "";
+    }
+
+    pre,
+    blockquote {
+        border: 1px solid #999;
+        page-break-inside: avoid;
+    }
+
+    thead {
+        display: table-header-group; /* h5bp.com/t */
+    }
+
+    tr,
+    img {
+        page-break-inside: avoid;
+    }
+
+    img {
+        max-width: 100% !important;
+    }
+
+    @page {
+        margin: 0.5cm;
+    }
+
+    p,
+    h2,
+    h3 {
+        orphans: 3;
+        widows: 3;
+    }
+
+    h2,
+    h3 {
+        page-break-after: avoid;
+    }
+}
