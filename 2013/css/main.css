@@ -200,18 +200,19 @@ ul.horizontal li {
 #footer .newsletter form input#subscribe-button {
 	float: right;
 	position: relative;
-	background: url('../img/common/footer/subscribe.png') no-repeat;
-	width: 119px;
-	height: 49px;
+	background: url('../img/common/footer/button-subscribe.png') no-repeat;
+	color: #000000;
+	width: 124px;
+	height: 52px;
 	margin-top: -28px;
 	margin-left: -100px;
 	z-index: 100;
 	text-transform: uppercase;
 	font-family: 'Melbourne';
 	font-weight: bold;
-	font-size: 16px;
+	font-size: 14px;
 	padding-right: 28px;
-	padding-top: 4px;
+	padding-top: 6px;
 }
 #footer .menu {
 	margin-top: 50px;
@@ -248,13 +249,6 @@ ul.horizontal li {
 }
 #footer .social-media .horizontal li:last-child {
 	margin-right: 0px;
-}
-#footer .social-media .horizontal li {
-	overflow: hidden;
-	display: block;
-	width: 42px;
-	height: 41px;
-	border: 1px solid green;
 }
 #bottom {
 	background-color: #69151c;
