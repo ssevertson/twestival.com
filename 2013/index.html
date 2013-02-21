@@ -22,6 +22,18 @@
 
 		<link href="http://fonts.googleapis.com/css?family=Lato" rel="stylesheet" type="text/css"/>
 		<meta name="google-translate-customization" content="dce9ce2b70773ac7-f775263886d4b470-g2466ff957e338966-d"></meta>
+		
+		<script type="text/javascript" src="js/vendor/slides.min.jquery-1.2.0.js"></script>
+		<script type="text/javascript">
+			$(function(){
+				$("#slides").slides({
+					preload: true,
+					play: 3000,
+					pause: 3000,
+					hoverPause: true
+				});
+			});
+		</script>
     </head>
     <body id="home">
         <!--[if lt IE 7]>
@@ -33,7 +45,6 @@
 			  new google.translate.TranslateElement({pageLanguage: 'en', gaTrack: true, gaId: 'UA-21127575-1'}, 'google_translate_element');
 			}
 		</script><script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
-				
 
 		<div id="header">
 			<div class="wrapper">
@@ -69,6 +80,42 @@
 			</div>
 		</div>
 
+		<div id="slides">
+			<div class="slides_container">
+				<!-- TODO: Make manageable via PHP -->
+				<div class="slide">
+					<a href="#" title="Drilling the first Charity: Water well" target="_blank">
+						<img src="img/home/slider/drilling2.jpg" width="1500" height="600" alt="Drilling the first Charity: Water well"/>
+					</a>
+					<div class="caption">
+						<a href="#" title="Drilling the first Charity: Water well" target="_blank">
+							<div class="title">
+								Drilling the first Charity: Water well
+							</div>
+							<div class="link">
+								read more
+							</div>
+						</a>
+					</div>
+				</div>
+				<div class="slide">
+					<a href="#" title="The Twestival Tunisia Team" target="_blank">
+						<img src="img/home/slider/TunisTwestival2.jpg" width="1500" height="600" alt="The Twestival Tunisia Team"/>
+					</a>
+					<div class="caption">
+						<a href="#" title="The Twestival Tunisia Team" target="_blank">
+							<div class="title">
+								The Twestival Tunisia Team
+							</div>
+							<div class="link">
+								read more
+							</div>
+						</a>
+					</div>
+				</div>
+			</div>
+		</div>
+		
 		<div style="height: 2719px;">
 			Placeholder
 		</div>
@@ -118,14 +165,13 @@
 				</div>
 			</div>
 		</div>
-
 		<!-- 
-		<div style="position: absolute; top: 0px; left: 0px; opacity: 0.2; width: 100%; pointer-events: none;">
+		<div style="position: absolute; top: 0px; left: 0px; opacity: 0.2; width: 100%; pointer-events: none; z-index:1000;">
 			<div style="margin: 0px auto 0px auto; width:1556px">
 				<img src="img/homepage.png" />
 			</div>
 		</div>
-		-->
+		 -->
 
         <script type="text/javascript">
             var _gaq=[['_setAccount','UA-21127575-1'],['_trackPageview']];
