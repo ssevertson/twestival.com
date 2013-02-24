@@ -1,0 +1,364 @@
+#header-stamps {
+	position: relative;
+}
+
+#header-stamps .stamp {
+	position: absolute;
+	z-index: 150;
+	width: 173px;
+	height: 164px;
+	background: url('../img/home/stamps/stamp.png') no-repeat;
+	top: -100px;
+}
+#header-stamps .stamp img {
+	margin: 10px 14px 2px 14px;
+}
+#header-stamps .stamp:hover {
+	top: -32px;
+}
+#header-stamps .stamp .location {
+	display: block;
+	text-align: center;
+	font-size: 22px;
+	font-family: 'Melbourne-Bold';
+	text-transform: uppercase;
+	letter-spacing: -1px;
+}
+#header-stamps .stamp .date {
+	display: block;
+	text-align: center;
+	font-size: 14px;
+	margin-top: -8px;
+	font-family: 'Melbourne';
+}
+#header-stamps #header-stamp-1 {
+	left: 4px;
+}
+#header-stamps #header-stamp-2 {
+	left: 200px;
+}
+#header-stamps #header-stamp-3 {
+	left: 396px;
+}
+#header-stamps #header-stamp-4 {
+	left: 592px;
+}
+
+#slides {
+	width: 1500px;
+	margin-left: auto;
+	margin-right: auto;
+}
+#slides .slides_container {
+	width: 1500px;
+	height: 600px;
+}
+#slides .slides_container .slide {
+	width: 1500px;
+	height: 600px;
+	display: block;
+}
+#slides .slides_container .slide .caption {
+	position: relative;
+	height: 63px;
+	margin-top: -63px;
+	z-index: 200;
+	background: rgba(102, 0, 0, 0.65);
+}
+#slides .slides_container .slide .caption a {
+	color: #ffffff;
+}
+#slides .slides_container .slide .caption .title {
+	font-size: 22px;
+	font-family: 'Melbourne-Bold';
+	margin-top: 18px;
+	margin-left: 264px;
+	float: left;
+
+}
+#slides .slides_container .slide .caption .link {
+	font-size: 18px;
+	margin-top: 20px;
+	margin-left: 16px;
+	padding-right: 24px;
+	float: left;
+	background: url("../img/home/slider/arrow.png") no-repeat;
+	background-position: right center;
+	font-family: 'Melbourne';
+}
+
+#slides .pagination {
+	position: relative;
+	z-index: 300;
+	float: right;
+	margin-right: 264px;
+	margin-top: -34px;
+	height: 12px;
+}
+#slides .pagination li {
+	float: left;
+	list-style: none outside none;
+	margin: 0 2px;
+	height: 12px;
+	overflow: hidden;
+}
+#slides .pagination li a {
+	background: url("../img/home/slider/pagination-inactive.png") no-repeat;
+	display: block;
+	float: right;
+	width: 12px;
+	padding-top: 18px;
+}
+#slides .pagination li.current a {
+	background: url("../img/home/slider/pagination-active.png") no-repeat;
+}
+
+#sponsors .header {
+	margin-top: 36px;
+}
+#sponsors #sponsor-list {
+	width: 100%;
+	height: 100px;
+}
+#sponsors #sponsor-list .sponsor {
+	text-align: center;
+	vertical-align: middle;
+	width: 20%;
+}
+
+#involve {
+	width: 1014px;
+	height: 520px;
+	margin-top: 16px;
+	background: url("../img/home/involve/postcard.png") no-repeat;
+}
+#involve #involve-video {
+	border: 1px solid #c6c6c6;
+	width: 560px;
+	height: 315px;
+	padding: 6px;
+	float: left;
+	margin-top: 86px;
+	margin-left: 52px;
+}
+#involve #involve-stamp {
+	float: right;
+	margin-top: 58px;
+	margin-right: 50px;
+}
+#involve #involve-message {
+	float: right;
+	margin-top: 36px;
+	margin-right: 58px;
+	text-align: center;
+}
+#involve #involve-message .header {
+	font-family: 'Melbourne-Bold';
+	font-size: 24px;
+}
+#involve #involve-message .line {
+	font-family: 'Melbourne';
+	font-size: 20px;
+}
+#involve #involve-message hr {
+	border-top: 1px solid #c1c1c0;
+	margin: 0px auto 1px auto;
+	width: 254px;
+}
+#involve #involve-button {
+	margin: 37px 3px 0px 0px;
+	float: right;
+	width: 270px;
+	height: 70px;
+	padding-top: 30px;
+	text-align: center;
+	text-transform: uppercase;
+	font-size: 14px;
+	letter-spacing: 0.0px;
+	background: url("../img/home/involve/button.png") no-repeat;
+}
+
+#social-media {
+	font-family: 'Melbourne';
+}
+#social-media .header {
+	margin-top: 50px;
+}
+#social-media .caption {
+	margin-top: 16px;
+	font-family: 'Melbourne-Bold';
+	font-size: 31px;
+	text-align: center;
+	letter-spacing: -0.5px;
+}
+#social-media #networks {
+	margin-top: 32px;
+}
+#social-media #networks .network {
+	border-right: 1px solid #d1d1d0;
+	float: left;
+	padding: 0px 21px 0px 22px;
+	width: 212px;
+}
+#social-media #networks .network .body {
+	height: 212px;
+}
+#social-media #networks .network:first-child {
+	padding-left: 0px;
+}
+#social-media #networks .network:last-child {
+	border-right: none;
+	padding-right: 0px;
+}
+#social-media .action {
+	display: block;
+	width: 212px;
+	height: 42px;
+	text-transform: uppercase;
+	font-family: 'Melbourne-Bold';
+	font-size: 14px;
+	letter-spacing: 1.3px;
+	text-align: center;
+	padding-top: 12px;
+	padding-left: 12px;
+	margin: 20px -12px -12px 0px;
+}
+
+#social-media .twtr-widget .twtr-hd, #social-media .twtr-widget .twtr-ft {
+	display: none;
+}
+#social-media .twtr-widget .twtr-tweet {
+	border: none;
+}
+
+#social-media .twtr-widget .twtr-tweet-wrap {
+	padding: 0px 5px 12px 5px;
+	position: relative;
+}
+#social-media .twtr-widget .twtr-avatar, #social-media .twtr-widget .twtr-img {
+	width: 48px;
+	height: 48px;
+}
+#social-media .twtr-widget .twtr-avatar {
+	margin-top: 2px;
+}
+#social-media .twtr-widget .twtr-tweet-text {
+	margin-left: 57px;
+}
+#social-media .twtr-widget .twtr-img img {
+	width: 100%;
+	height: 100%;
+	vertical-align: middle;
+	-webkit-border-radius: 3px;
+	-moz-border-radius: 3px;
+	border-radius: 4px;
+}
+#social-media .twtr-widget .twtr-user {
+	display: block;
+	font-weight: bold;
+	font-size: 14px;
+}
+#social-media .twtr-widget .twtr-user:before {
+	content: "@";
+}
+#social-media .twtr-widget .twtr-timestamp {
+	color: #444444 !important;
+}
+#social-media #social-media-twitter-action {
+	background: url("../img/home/social-media/button-twitter.png") no-repeat;
+}
+
+#social-media #networks #social-media-instagram {
+	padding-right: 9px;
+	width: 224px;
+}
+#social-media #social-media-instagram-body img {
+	width: 100px;
+	height: 100px;
+	margin-right: 12px;
+	margin-bottom: 12px;
+}
+#social-media #social-media-instagram-action {
+	background: url("../img/home/social-media/button-instagram.png") no-repeat;
+}
+
+#social-media #networks #social-media-youtube {
+	padding-right: 9px;
+	width: 224px;
+}
+#social-media #social-media-youtube-body img {
+	width: 100px;
+	height: 75px;
+	margin-right: 12px;
+	margin-top: 12px;
+	margin-bottom: 25px;
+}
+#social-media #social-media-youtube-action {
+	background: url("../img/home/social-media/button-youtube.png") no-repeat;
+}
+#social-media #social-media-facebook-action {
+	background: url("../img/home/social-media/button-facebook.png") no-repeat;
+	margin-top: 18px;
+}
+
+
+#events {
+	margin-top: 64px;
+}
+#events .header {
+	margin-bottom: 17px;
+}
+#events #event-groups {
+	background: url("../img/home/events/background.png") no-repeat;
+	background-position: center center;
+	height: 589px;
+}
+#events .event-group {
+	clear: both;
+	height: 182px;
+	padding-top: 12px;
+}
+#events .event-group:first-child, #events .event-group:last-child {
+	padding-top: 15px;
+}
+#events .event {
+	float: left;
+	width: 247px;
+	height: 192px;
+	text-align: center;
+}
+#events .event:first-child, #events .event:last-child {
+	width: 244px
+}
+#events .event .logo {
+	display: block;
+	text-align: center;
+}
+#events .event .location, #events .event .date {
+	display: block;
+	text-align: center;
+	font-family: 'Melbourne-Bold';
+	font-size: 13px;
+	text-transform: uppercase;
+	letter-spacing: 1px;
+}
+#events .event .location {
+	margin-top: 12px;
+}
+#events .event .date {
+	margin-top: 2px;
+	color: #34747c;
+}
+#events #event-more a {
+	display: block;
+	position: relative;
+	background: url("../img/home/events/button-events.png") no-repeat;
+	width: 178px;
+	height: 122px;
+	text-align: center;
+	font-family: 'Melbourne-Bold';
+	text-transform: uppercase;
+	margin: 0px auto;
+	padding-top: 22px;
+	letter-spacing: 1px;
+}

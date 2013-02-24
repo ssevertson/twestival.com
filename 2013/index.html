@@ -1,51 +1,71 @@
 <!DOCTYPE html>
-<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
-<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
-<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
-<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
-    <head>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<!--[if lt IE 7]>	  <html class="no-js lt-ie9 lt-ie8 lt-ie7" xmlns:fb="http://ogp.me/ns/fb#"> <![endif]-->
+<!--[if IE 7]>		 <html class="no-js lt-ie9 lt-ie8" xmlns:fb="http://ogp.me/ns/fb#"> <![endif]-->
+<!--[if IE 8]>		 <html class="no-js lt-ie9" xmlns:fb="http://ogp.me/ns/fb#"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" xmlns:fb="http://ogp.me/ns/fb#"> <!--<![endif]-->
+
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 		<!--TODO: Copy title/keywords/description PHP from system/application/views/blocks/header.html-->
-        <title>Twestival 2013</title>
-        <meta name="viewport" content="width=device-width">
+		<title>Twestival 2013</title>
+		<meta name="viewport" content="width=device-width">
 
-        <link rel="stylesheet" href="css/normalize.min.css">
-        <link rel="stylesheet" href="css/main.css">
+		<link rel="stylesheet" href="css/normalize.min.css">
+		<link rel="stylesheet" href="css/main.css">
 
-        <script src="js/vendor/modernizr-2.6.2.min.js"></script>
-        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-        <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.9.1.min.js"><\/script>')</script>
+		<script src="js/vendor/modernizr-2.6.2.min.js"></script>
+		<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+		<script>window.jQuery || document.write('<script src="js/vendor/jquery-1.9.1.min.js"><\/script>')</script>
 
-        <script src="js/plugins.js"></script>
-        <script src="js/main.js"></script>
+		<script src="js/plugins.js"></script>
+		<script src="js/main.js"></script>
 
 		<link href="http://fonts.googleapis.com/css?family=Lato" rel="stylesheet" type="text/css"/>
 		<meta name="google-translate-customization" content="dce9ce2b70773ac7-f775263886d4b470-g2466ff957e338966-d"></meta>
 		
+		
+		<!-- Home Content -->
+		
+		<!--  Slider -->
+		<link rel="stylesheet" href="css/home.css">
 		<script type="text/javascript" src="js/vendor/slides.min.jquery-1.2.0.js"></script>
 		<script type="text/javascript">
 			$(function(){
 				$("#slides").slides({
 					preload: true,
-					play: 3000,
-					pause: 3000,
+					play: 5000,
+					pause: 5000,
 					hoverPause: true
 				});
 			});
 		</script>
-    </head>
-    <body id="home">
-        <!--[if lt IE 7]>
-            <p class="chromeframe">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">activate Google Chrome Frame</a> to improve your experience.</p>
-        <![endif]-->
+		
+		<!-- Twitter -->
+		<script type="text/javascript" src="http://widgets.twimg.com/j/2/widget.js"></script>
+		<link href="http://widgets.twimg.com/j/2/widget.css" type="text/css" rel="stylesheet"/>
+		
+		<!-- Instagram -->
+		<script type="text/javascript" src="js/vendor/spectragram.min.js"></script>
+		<script type="text/javascript">
+			jQuery.fn.spectragram.accessData = {
+				clientID: '170979fa018b4752977f4b7c15d7c7fd'
+			};
+		</script>
+	</head>
+	<body id="home">
+		<!--[if lt IE 7]>
+			<p class="chromeframe">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">activate Google Chrome Frame</a> to improve your experience.</p>
+		<![endif]-->
 
+		<!-- 
 		<div id="google_translate_element"></div><script type="text/javascript">
 			function googleTranslateElementInit() {
 			  new google.translate.TranslateElement({pageLanguage: 'en', gaTrack: true, gaId: 'UA-21127575-1'}, 'google_translate_element');
 			}
 		</script><script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
-
+		 -->
+ 
 		<div id="header">
 			<div class="wrapper">
 				<img class="logo" src="img/common/header/logo.png" alt="TWESTIVAL: tweet. meet. give."/>
@@ -79,47 +99,362 @@
 				</div>
 			</div>
 		</div>
+		
+		<!-- Home -->
+		<div id="header-stamps" class="wrapper">
+			<!-- TODO: Make manageable via PHP -->
+			<div class="stamp" id="header-stamp-1">
+				<a href="#">
+					<img src="img/home/stamps/content/stamp-1.jpg" alt="" />
+					<span class="location">
+						Cracow
+					</span>
+					<span class="date">
+						23 November 2013
+					</span>
+				</a>
+			</div>
+			<div class="stamp" id="header-stamp-2">
+				<a href="#">
+					<img src="img/home/stamps/content/stamp-2.jpg" alt="" />
+					<span class="location">
+						Amsterdam
+					</span>
+					<span class="date">
+						23 November 2013
+					</span>
+				</a>
+			</div>
+			<div class="stamp" id="header-stamp-3">
+				<a href="#">
+					<img src="img/home/stamps/content/stamp-3.jpg" alt="" />
+					<span class="location">
+						Tokyo
+					</span>
+					<span class="date">
+						23 November 2013
+					</span>
+				</a>
+			</div>
+			<div class="stamp" id="header-stamp-4">
+				<a href="#">
+					<img src="img/home/stamps/content/stamp-4.jpg" alt="" />
+					<span class="location">
+						Salt Lake City
+					</span>
+					<span class="date">
+						23 November 2013
+					</span>
+				</a>
+			</div>
+		</div>
 
 		<div id="slides">
 			<div class="slides_container">
 				<!-- TODO: Make manageable via PHP -->
 				<div class="slide">
 					<a href="#" title="Drilling the first Charity: Water well" target="_blank">
-						<img src="img/home/slider/drilling2.jpg" width="1500" height="600" alt="Drilling the first Charity: Water well"/>
+						<img src="img/home/slider/content/slide-1.jpg" width="1500" height="600" alt="Drilling the first Charity: Water well"/>
 					</a>
 					<div class="caption">
 						<a href="#" title="Drilling the first Charity: Water well" target="_blank">
-							<div class="title">
+							<span class="title">
 								Drilling the first Charity: Water well
-							</div>
-							<div class="link">
+							</span>
+							<span class="link">
 								read more
-							</div>
+							</span>
 						</a>
 					</div>
 				</div>
 				<div class="slide">
 					<a href="#" title="The Twestival Tunisia Team" target="_blank">
-						<img src="img/home/slider/TunisTwestival2.jpg" width="1500" height="600" alt="The Twestival Tunisia Team"/>
+						<img src="img/home/slider/content/slide-2.jpg" width="1500" height="600" alt="The Twestival Tunisia Team"/>
 					</a>
 					<div class="caption">
 						<a href="#" title="The Twestival Tunisia Team" target="_blank">
-							<div class="title">
+							<span class="title">
 								The Twestival Tunisia Team
-							</div>
-							<div class="link">
+							</span>
+							<span class="link">
 								read more
-							</div>
+							</span>
 						</a>
 					</div>
 				</div>
 			</div>
 		</div>
 		
-		<div style="height: 2719px;">
-			Placeholder
+		<div id="sponsors" class="wrapper">
+			<div class="header">
+				<img src="img/home/sponsors/header.png" alt="Special Thanks"/>
+			</div>
+			<!-- Vertical and horizonal centering of unknown image sizes. http://giveupandusetables.com/ -->
+			<table id="sponsor-list">
+				<tbody>
+					<tr>
+						<!-- TODO: Make manageable via PHP -->
+						<td class="sponsor">
+							<a href="https://www.paypal.com/">
+								<img src="img/home/sponsors/content/sponsor-1.png" alt="PayPal"/>
+							</a>
+						</td>
+						<td class="sponsor">
+							<a href="#">
+								<img src="img/home/sponsors/content/sponsor-2.png" alt="???"/>
+							</a>
+						</td>
+						<td class="sponsor">
+							<a href="#">
+								<img src="img/home/sponsors/content/sponsor-3.png" alt="???"/>
+							</a>
+						</td>
+						<td class="sponsor">
+							<a href="#">
+								<img src="img/home/sponsors/content/sponsor-4.png" alt="???"/>
+							</a>
+						</td>
+						<td class="sponsor">
+							<a href="#">
+								<img src="img/home/sponsors/content/sponsor-5.png" alt="???"/>
+							</a>
+						</td>
+					</tr>
+				</tbody>
+			</table>
 		</div>
-
+		
+		<div id="involve" class="wrapper">
+			<div id="involve-video">
+ 				<iframe width="560" height="315" src="http://www.youtube.com/embed/wg2w2EMIWTM" frameborder="0" allowfullscreen></iframe>
+			</div>
+			<div id="involve-stamp">
+				<img src="img/home/involve/stamp.png" alt=""/>
+			</div>
+			<div id="involve-message">
+				<div class="header">Twestival is a global movement</div>
+				<hr/>
+				<div class="line">using the power of social media to</div>
+				<hr/>
+				<div class="line">organize offline events that mobilize</div>
+				<hr/>
+				<div class="line">communities in support of local causes.</div>
+				<hr/>
+				<div class="line">Put your city on the map.</div>
+				<hr/>
+			</div>
+			<a href="get_involved" id="involve-button">
+				Get Involved
+			</a>
+		</div>
+		
+		<div id="social-media" class="wrapper">
+			<div class="header">
+				<img src="img/home/social-media/header.png" alt="Tag it #Twestival"/>
+			</div>
+			<div class="caption">
+				Check out what's happening around the world !
+			</div>
+			
+			<div id="networks">
+				<div id="social-media-twitter" class="network">
+					<div id="social-media-twitter-body" class="body">
+						<script type="text/javascript">
+							new TWTR.Widget({
+								version: 2,
+								type: 'search',
+								search: 'twestival',
+								interval: 5000,
+								title: '',
+								subject: '',
+								width: 212,
+								height: 212,
+								theme: {
+									shell: {
+										background: 'transparent',
+										color: '#444444'
+									},
+									tweets: {
+										background: 'transparent',
+										color: '#444444',
+										links: '#34747c'
+									}
+								},
+								features: {
+									scrollbar: false,
+									loop: true,
+									live: true,
+									hashtags: true,
+									timestamp: true,
+									avatars: true,
+									toptweets: true,
+									behavior: 'default'
+								}
+							}).render().start();
+						</script>
+						<div class="fadeout">&nbsp;</div>
+					</div>
+					<a href="http://twitter.com/twestival" id="social-media-twitter-action" class="action" target="_blank">Follow&nbsp;&nbsp;Us</a>
+				</div>
+				<div id="social-media-instagram" class="network">
+					<div id="social-media-instagram-body" class="body"></div>
+					<script type="text/javascript">
+						$.getJSON('https://api.instagram.com/v1/tags/twestival/media/recent?callback=?',
+								{
+									client_id: '170979fa018b4752977f4b7c15d7c7fd',
+									count: 4
+								},
+								function(response) {
+									var target = $('#social-media-instagram-body');
+									for(var i = 0; i < response.data.length; i++) {
+										var item = response.data[i];
+										target
+												.append($('<a/>', {href: item.link, target: '_blank'})
+														.append($('<img/>', {src: item.images.low_resolution.url, alt: item.caption.text})));
+									};
+								}).error(function(foo, bar, baz) { console.log(foo); });
+					</script>
+					<a href="http://instagram.com/twestival" id="social-media-instagram-action" class="action" target="_blank">Follow&nbsp;&nbsp;Us</a>
+				</div>
+				<div id="social-media-youtube" class="network">
+					<div id="social-media-youtube-body" class="body"></div>
+					<script type="text/javascript">
+						$.getJSON('https://gdata.youtube.com/feeds/api/users/twestivalglobal/uploads?callback=?',
+								{
+									'v': 2,
+									'alt': 'jsonc',
+									'start-index': 1,
+									'max-results': 4
+								},
+								function(response) {
+									var target = $('#social-media-youtube-body');
+									for(var i = 0; i < response.data.items.length; i++) {
+										var item = response.data.items[i];
+										target
+												.append($('<a/>', {href: item.player.default, target: '_blank'})
+														.append($('<img/>', {src: item.thumbnail.sqDefault, alt: item.title})));
+									};
+								});
+					</script>
+					<a href="https://www.youtube.com/user/twestivalglobal" id="social-media-youtube-action" class="action" target="_blank">See&nbsp;&nbsp;More</a>
+				</div>
+				<div id="social-media-facebook" class="network">
+					<div id="fb-root"></div>
+					<script type="text/javascript">
+						(function(d, s, id) {
+							  var js, fjs = d.getElementsByTagName(s)[0];
+							  if (d.getElementById(id)) return;
+							  js = d.createElement(s); js.id = id;
+							  js.src = "//connect.facebook.net/en_US/all.js#xfbml=1";
+							  fjs.parentNode.insertBefore(js, fjs);
+						}(document, 'script', 'facebook-jssdk'));
+					</script>
+					<fb:fan id="social-media-facebook-body" href="https://www.facebook.com/Twestival" profile_id="129327630098" width="212" height="212" show_faces="true" stream="false" border_color="#f2f1f0" header="false" css="http://www.twestival.com/2013/css/facebook-custom-fan.css"></fb:fan>
+					<a href="https://www.facebook.com/Twestival" id="social-media-facebook-action" class="action" target="_blank">Like&nbsp;&nbsp;It</a>
+				</div>
+			</div>
+		</div>
+		
+		<div class="clearfix"></div>
+		
+		<div id="events" class="wrapper">
+			<div class="header">
+				<img src="img/home/events/header.png" alt="Official Events"/>
+			</div>
+			
+			<!-- TODO: Make manageable via PHP -->
+			<div id="event-groups">
+				<ul id="event-group-1" class="event-group horizontal">
+					<li id="event-1" class="event">
+						<a href="#">
+							<span class="logo"><img src="img/home/events/content/event-1.png" alt="Event #1"/></span>
+							<span class="location">New York</span>
+							<span class="date">23 November 2013</span>
+						</a>
+					</li>
+					<li id="event-2" class="event">
+						<a href="#">
+							<span class="logo"><img src="img/home/events/content/event-2.png" alt="Event #2"/></span>
+							<span class="location">New York</span>
+							<span class="date">23 November 2013</span>
+						</a>
+					</li>
+					<li id="event-3" class="event">
+						<a href="#">
+							<span class="logo"><img src="img/home/events/content/event-3.png" alt="Event #3"/></span>
+							<span class="location">New York</span>
+							<span class="date">23 November 2013</span>
+						</a>
+					</li>
+					<li id="event-4" class="event">
+						<a href="#">
+							<span class="logo"><img src="img/home/events/content/event-4.png" alt="Event #4"/></span>
+							<span class="location">New York</span>
+							<span class="date">23 November 2013</span>
+						</a>
+					</li>
+				</ul>
+				<ul id="event-group-2" class="event-group horizontal">
+					<li id="event-5" class="event">
+						<a href="#">
+							<span class="logo"><img src="img/home/events/content/event-5.png" alt="Event #5"/></span>
+							<span class="location">New York</span>
+							<span class="date">23 November 2013</span>
+						</a>
+					</li>
+					<li id="event-6" class="event">
+						<a href="#">
+							<span class="logo"><img src="img/home/events/content/event-6.png" alt="Event #6"/></span>
+							<span class="location">New York</span>
+							<span class="date">23 November 2013</span>
+						</a>
+					</li>
+					<li id="event-7" class="event">
+						<a href="#">
+							<span class="logo"><img src="img/home/events/content/event-7.png" alt="Event #7"/></span>
+							<span class="location">New York</span>
+							<span class="date">23 November 2013</span>
+						</a>
+					</li>
+					<li id="event-8" class="event">
+						<a href="#">
+							<span class="logo"><img src="img/home/events/content/event-8.png" alt="Event #8"/></span>
+							<span class="location">New York</span>
+							<span class="date">23 November 2013</span>
+						</a>
+					</li>
+				</ul>
+				<ul id="event-group-3" class="event-group horizontal">
+					<li id="event-9" class="event">
+						<a href="#">
+							<span class="logo"><img src="img/home/events/content/event-9.png" alt="Event #9"/></span>
+							<span class="location">New York</span>
+							<span class="date">23 November 2013</span>
+						</a>
+					</li>
+					<li id="event-10" class="event">
+						<a href="#">
+							<span class="logo"><img src="img/home/events/content/event-10.png" alt="Event #10"/></span>
+							<span class="location">New York</span>
+							<span class="date">23 November 2013</span>
+						</a>
+					</li>
+					<li id="event-11" class="event">
+						<a href="#">
+							<span class="logo"><img src="img/home/events/content/event-11.png" alt="Event #11"/></span>
+							<span class="location">New York</span>
+							<span class="date">23 November 2013</span>
+						</a>
+					</li>
+					<li id="event-more" class="event">
+						<a href="official_events">See All Events</a>
+					</li>
+				</ul>
+			</div>
+		</div>
+		
+		<div class="clearfix"></div>
+		
 		<div id="footer">
 			<div class="wrapper">
 				<div class="newsletter">
@@ -165,6 +500,7 @@
 				</div>
 			</div>
 		</div>
+		
 		<!-- 
 		<div style="position: absolute; top: 0px; left: 0px; opacity: 0.2; width: 100%; pointer-events: none; z-index:1000;">
 			<div style="margin: 0px auto 0px auto; width:1556px">
@@ -173,11 +509,11 @@
 		</div>
 		 -->
 
-        <script type="text/javascript">
-            var _gaq=[['_setAccount','UA-21127575-1'],['_trackPageview']];
-            (function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
-            g.src=('https:'==location.protocol?'//ssl':'//www')+'.google-analytics.com/ga.js';
-            s.parentNode.insertBefore(g,s)}(document,'script'));
-        </script>
-    </body>
+		<script type="text/javascript">
+			var _gaq=[['_setAccount','UA-21127575-1'],['_trackPageview']];
+			(function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
+			g.src=('https:'==location.protocol?'//ssl':'//www')+'.google-analytics.com/ga.js';
+			s.parentNode.insertBefore(g,s)}(document,'script'));
+		</script>
+	</body>
 </html>
