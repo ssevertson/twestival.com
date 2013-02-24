@@ -2,7 +2,7 @@
 	border: none;
 	background: none;
 }
-.fan_box .connect_top, .fan_box .total_plus {
+.fan_box .connect_top, .fan_box .total_plus, .fan_box .total {
 	display: none;
 }
 .fan_box .connections {

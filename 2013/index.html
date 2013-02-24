@@ -5,14 +5,14 @@
 <!--[if gt IE 8]><!--> <html class="no-js" xmlns:fb="http://ogp.me/ns/fb#" lang="en/us" xmlns:xml="http://www.w3.org/XML/1998/namespace" xml:lang="en/us"> <!--<![endif]-->
 
 	<head>
-		<meta charset="utf-8">
-		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<meta charset="utf-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
 		<!--TODO: Copy title/keywords/description PHP from system/application/views/blocks/header.html-->
 		<title>Twestival 2013</title>
-		<meta name="viewport" content="width=device-width">
+		<meta name="viewport" content="width = 982, initial-scale = 0.5" />
 
-		<link rel="stylesheet" href="css/normalize.min.css">
-		<link rel="stylesheet" href="css/main.css">
+		<link rel="stylesheet" href="css/normalize.min.css" />
+		<link rel="stylesheet" href="css/main.css" />
 
 		<script src="js/vendor/modernizr-2.6.2.min.js"></script>
 		<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
@@ -28,7 +28,7 @@
 		<!-- Home Content -->
 		
 		<!--  Slider -->
-		<link rel="stylesheet" href="css/home.css">
+		<link rel="stylesheet" href="css/home.css" />
 		<script type="text/javascript" src="js/vendor/slides.min.jquery-1.2.0.js"></script>
 		<script type="text/javascript">
 			$(function(){
@@ -58,6 +58,8 @@
 			<p class="chromeframe">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">activate Google Chrome Frame</a> to improve your experience.</p>
 		<![endif]-->
 
+		<a href="#content" class="accessible-text">Skip navigation</a>
+
 		<!-- 
 		<div id="google_translate_element"></div><script type="text/javascript">
 			function googleTranslateElementInit() {
@@ -79,7 +81,7 @@
 					</ul>
 				</div>
 				<div class="info">
-					<div class="social-media">
+					<div id="header-social-media-twitter" class="social-media">
 						<a href="http://www.facebook.com/sharer.php?u=http://www.twestival.com" target="_blank">
 							<img src="img/common/header/share-facebook.png" alt="Facebook Like"/>
 						</a>
@@ -89,12 +91,12 @@
 					</div>
 					<ul class="stats">
 						<!-- TODO: Make live via PHP -->
-						<li>209 cities</li>
-						<li>241 countries</li>
-						<li>$565,928 raised</li>
+						<li id="stats-cities">209 cities</li>
+						<li id="stats-countries">241 countries</li>
+						<li id="stats-total">$565,928 raised</li>
 					</ul>
 					<form action="url/to/search" method="GET" class="search">
-						<label class="accessable-text" for="search-query">Find a Twestival</label>
+						<label class="accessible-text" for="search-query">Find a Twestival</label>
 						<input type="text" id="search-query" name="q" value="Find a Twestival"/>
 						<label class="accessible-text" for="search-button">Search</label>
 						<input type="image" id="search-button" name="btn" src="img/common/header/search.png" alt="Search"/>
@@ -227,9 +229,13 @@
 			</table>
 		</div>
 		
+		<a id="content"></a>
+		
 		<div id="involve" class="wrapper">
 			<div id="involve-video">
- 				<iframe width="560" height="315" src="http://www.youtube.com/embed/wg2w2EMIWTM" frameborder="0" allowfullscreen></iframe>
+ 				<iframe width="560" height="315" src="http://www.youtube.com/embed/wg2w2EMIWTM" frameborder="0" allowfullscreen>
+ 					<a href="https://www.youtube.com/watch?v=wg2w2EMIWTM">Watch Twestival introduction</a>
+ 				</iframe>
 			</div>
 			<div id="involve-stamp">
 				<img src="img/home/involve/stamp.png" alt=""/>
@@ -295,6 +301,9 @@
 								}
 							}).render().start();
 						</script>
+						<noscript>
+							<a href="https://twitter.com/search?q=%23twestival">See #twestival Tweets</a>
+						</noscript>
 						<div class="fadeout">&nbsp;</div>
 					</div>
 					<a href="http://twitter.com/twestival" id="social-media-twitter-action" class="action" target="_blank">Follow&nbsp;&nbsp;Us</a>
@@ -317,6 +326,9 @@
 									};
 								}).error(function(foo, bar, baz) { console.log(foo); });
 					</script>
+					<noscript>
+						<a href="http://instagram.com/tags/twestival/feed/recent.rss">See recent #twestival Instagrams</a>
+					</noscript>
 					<a href="http://instagram.com/twestival" id="social-media-instagram-action" class="action" target="_blank">Follow&nbsp;&nbsp;Us</a>
 				</div>
 				<div id="social-media-youtube" class="network">
@@ -334,12 +346,13 @@
 									for(var i = 0; i < response.data.items.length; i++) {
 										var item = response.data.items[i];
 										target
-												.append($('<a/>', {href: item.player.default, target: '_blank'})
+												.append($('<a/>', {href: item.player['default'], target: '_blank'})
 														.append($('<img/>', {src: item.thumbnail.sqDefault, alt: item.title})));
 									};
 								});
 					</script>
-					<a href="https://www.youtube.com/user/twestivalglobal" id="social-media-youtube-action" class="action" target="_blank">See&nbsp;&nbsp;More</a>
+					<noscript></noscript>
+					<a href="https://www.youtube.com/user/twestivalglobal" id="social-media-youtube-action" class="action" target="_blank">See&nbsp;&nbsp;More<span class="accessible-text">on YouTube</span></a>
 				</div>
 				<div id="social-media-facebook" class="network">
 					<div id="fb-root"></div>
@@ -352,6 +365,7 @@
 							  fjs.parentNode.insertBefore(js, fjs);
 						}(document, 'script', 'facebook-jssdk'));
 					</script>
+					<noscript></noscript>
 					<fb:fan id="social-media-facebook-body" href="https://www.facebook.com/Twestival" profile_id="129327630098" width="212" height="212" show_faces="true" stream="false" border_color="#f2f1f0" header="false" css="http://www.twestival.com/2013/css/facebook-custom-fan.css"></fb:fan>
 					<a href="https://www.facebook.com/Twestival" id="social-media-facebook-action" class="action" target="_blank">Like&nbsp;&nbsp;It</a>
 				</div>
@@ -367,8 +381,8 @@
 			
 			<!-- TODO: Make manageable via PHP -->
 			<div id="event-groups">
-				<ul id="event-group-1" class="event-group horizontal">
-					<li id="event-1" class="event">
+				<ul id="event-group-1" class="event-group top horizontal">
+					<li id="event-1" class="event left">
 						<a href="#">
 							<span class="logo"><img src="img/home/events/content/event-1.png" alt="Event #1"/></span>
 							<span class="location">New York</span>
@@ -389,7 +403,7 @@
 							<span class="date">23 November 2013</span>
 						</a>
 					</li>
-					<li id="event-4" class="event">
+					<li id="event-4" class="event right">
 						<a href="#">
 							<span class="logo"><img src="img/home/events/content/event-4.png" alt="Event #4"/></span>
 							<span class="location">New York</span>
@@ -398,7 +412,7 @@
 					</li>
 				</ul>
 				<ul id="event-group-2" class="event-group horizontal">
-					<li id="event-5" class="event">
+					<li id="event-5" class="event left">
 						<a href="#">
 							<span class="logo"><img src="img/home/events/content/event-5.png" alt="Event #5"/></span>
 							<span class="location">New York</span>
@@ -419,7 +433,7 @@
 							<span class="date">23 November 2013</span>
 						</a>
 					</li>
-					<li id="event-8" class="event">
+					<li id="event-8" class="event right">
 						<a href="#">
 							<span class="logo"><img src="img/home/events/content/event-8.png" alt="Event #8"/></span>
 							<span class="location">New York</span>
@@ -427,8 +441,8 @@
 						</a>
 					</li>
 				</ul>
-				<ul id="event-group-3" class="event-group horizontal">
-					<li id="event-9" class="event">
+				<ul id="event-group-3" class="event-group bottom horizontal">
+					<li id="event-9" class="event left">
 						<a href="#">
 							<span class="logo"><img src="img/home/events/content/event-9.png" alt="Event #9"/></span>
 							<span class="location">New York</span>
@@ -449,7 +463,7 @@
 							<span class="date">23 November 2013</span>
 						</a>
 					</li>
-					<li id="event-more" class="event">
+					<li id="event-more" class="event right">
 						<a href="official_events">See All Events</a>
 					</li>
 				</ul>
@@ -475,19 +489,19 @@
 						<li><a href="disclaimer">Conditions</a></li>
 						<li><a href="privacy">Privacy</a></li>
 						<li><a href="press">Press</a></li>
-						<li class="important"><a href="mailto:info@twestival.com">Contact Us</a></li>
+						<li id="footer-contact-us"><a href="mailto:info@twestival.com">Contact Us</a></li>
 					</ul>
 				</div>
 				<div class="social-media">
 					<div class="title">Follow Us:</div>
 					<ul class="horizontal">
-						<li><a href="http://twitter.com/twestival" target="_blank"><img src="img/common/footer/emblem-twitter.png" alt="Twitter"/></a></li>
-						<li><a href="http://facebook.com/twestival" target="_blank"><img src="img/common/footer/emblem-facebook.png" alt="Facebook"/></a></li>
-						<li><a href="http://linkedin.com/twestival" target="_blank"><img src="img/common/footer/emblem-linkedin.png" alt="LinkedIn"/></a></li>
-						<li><a href="http://twestival.tumblr.com/l" target="_blank"><img src="img/common/footer/emblem-tumblr.png" alt="Tumblr"/></a></li>
-						<li><a href="http://www.youtube.com/user/twestivalglobal" target="_blank"><img src="img/common/footer/emblem-youtube.png" alt="YouTube"/></a></li>
-						<li><a href="https://pinterest.com/twestival/" target="_blank"><img src="img/common/footer/emblem-pinterest.png" alt="Pinterest"/></a></li>
-						<li><a href="https://plus.google.com/112844332844002811178/" target="_blank"><img src="img/common/footer/emblem-googleplus.png" alt="Google+"/></a></li>
+						<li id="footer-twitter"><a href="http://twitter.com/twestival" target="_blank"><img src="img/common/footer/emblem-twitter.png" alt="Twitter"/></a></li>
+						<li id="footer-facebook"><a href="http://facebook.com/twestival" target="_blank"><img src="img/common/footer/emblem-facebook.png" alt="Facebook"/></a></li>
+						<li id="footer-linkedin"><a href="http://linkedin.com/twestival" target="_blank"><img src="img/common/footer/emblem-linkedin.png" alt="LinkedIn"/></a></li>
+						<li id="footer-tumblr"><a href="http://twestival.tumblr.com/l" target="_blank"><img src="img/common/footer/emblem-tumblr.png" alt="Tumblr"/></a></li>
+						<li id="footer-youtube"><a href="http://www.youtube.com/user/twestivalglobal" target="_blank"><img src="img/common/footer/emblem-youtube.png" alt="YouTube"/></a></li>
+						<li id="footer-pinterest"><a href="https://pinterest.com/twestival/" target="_blank"><img src="img/common/footer/emblem-pinterest.png" alt="Pinterest"/></a></li>
+						<li id="footer-googleplus"><a href="https://plus.google.com/112844332844002811178/" target="_blank"><img src="img/common/footer/emblem-googleplus.png" alt="Google+"/></a></li>
 					</ul>
 				</div>
 			</div>
@@ -518,5 +532,6 @@
 			g.src=('https:'==location.protocol?'//ssl':'//www')+'.google-analytics.com/ga.js';
 			s.parentNode.insertBefore(g,s)}(document,'script'));
 		</script>
+		<noscript></noscript>
 	</body>
 </html>

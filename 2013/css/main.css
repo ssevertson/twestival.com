@@ -79,8 +79,7 @@ input, select {
 }
 .wrapper {
 	width: 982px;
-	margin-left: auto;
-	margin-right: auto;
+	margin: 0px auto;
 }
 ul.horizontal {
 	margin: 0px;
@@ -98,12 +97,14 @@ ul.horizontal li {
 	height: 8px;
 	background-image: url("../img/common/fadeout.png");
 }
-.accessable-text {
+.accessible-text {
 	display: none;
 }
 
 /* Header */
 #header {
+	min-width: 982px;
+	width: 100%;
 	height: 90px;
 	font-family: 'Melbourne';
 	-webkit-box-shadow: 0px 1px 5px rgba(0, 0, 0, 0.20);
@@ -138,6 +139,9 @@ ul.horizontal li {
 }
 #header .info {
 	position: relative;
+	width: 152px;
+	height: 134px;
+	margin-bottom: -64px;
 	z-index: 200;
 	font-size: 14px;
 	float: right;
@@ -149,13 +153,12 @@ ul.horizontal li {
 	border-bottom-right-radius: 3px;
 	border-bottom-left-radius: 3px;
 	background-color: #d23a42;
-	width: 152px;
 	padding: 12px 12px 8px 12px;
 	-webkit-box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
 	-moz-box-shadow:	0px 2px 5px rgba(0, 0, 0, 0.2);
 	box-shadow:		 0px 2px 5px rgba(0, 0, 0, 0.2);
 }
-#header .info .social-media a:first-child {
+# header .info #header-social-media-twitter {
 	margin-right: 6px;
 }
 #header .info .stats {
@@ -171,7 +174,7 @@ ul.horizontal li {
 	margin: 3px 0px 3px 0px;
 	border-bottom: 1px solid #b32b35;
 }
-#header .info .stats li:last-child {
+#header .info .stats #stats-total {
 	border: none;
 }
 #header .info .search {
@@ -194,11 +197,12 @@ ul.horizontal li {
 
 /* Footer */
 #footer {
+	min-width: 982px;
+	height: 237px;
 	-webkit-box-shadow: 0px -2px 3px rgba(0, 0, 0, 0.4);
 	-moz-box-shadow:	0px -2px 3px rgba(0, 0, 0, 0.4);
 	box-shadow:		 0px -2px 3px rgba(0, 0, 0, 0.4);
 	background: url('../img/common/footer/gradient.png') repeat-x;
-	height: 237px;
 	font-family: 'Melbourne';
 	clear: both;
 	margin-top: 62px;
@@ -247,11 +251,9 @@ ul.horizontal li {
 	font-size: 19px;
 	margin-right: 32px;
 }
-#footer .menu li:last-child {
-	margin-right: 0px;
-}
-#footer .menu li.important {
+#footer .menu #footer-contact-us {
 	text-decoration: underline;
+	margin-right: 0px;
 }
 #footer .social-media {
 	float: right;
@@ -270,13 +272,14 @@ ul.horizontal li {
 	float: left;
 	margin-right: 23px;
 }
-#footer .social-media .horizontal li:last-child {
+#footer .social-media .horizontal #footer-googleplus {
 	margin-right: 0px;
 }
 #bottom {
+	min-width: 982px;
+	height: 44px;
 	background-color: #69151c;
 	color: #d84248;
-	height: 44px;
 	font-family: 'Melbourne';
 	font-size: 14px;
 }
