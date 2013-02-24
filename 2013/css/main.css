@@ -98,7 +98,11 @@ ul.horizontal li {
 	height: 8px;
 	background-image: url("../img/common/fadeout.png");
 }
+.accessable-text {
+	display: none;
+}
 
+/* Header */
 #header {
 	height: 90px;
 	font-family: 'Melbourne';
@@ -188,6 +192,7 @@ ul.horizontal li {
 	margin-right: 6px;
 }
 
+/* Footer */
 #footer {
 	-webkit-box-shadow: 0px -2px 3px rgba(0, 0, 0, 0.4);
 	-moz-box-shadow:	0px -2px 3px rgba(0, 0, 0, 0.4);

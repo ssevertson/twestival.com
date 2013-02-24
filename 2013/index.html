@@ -1,8 +1,8 @@
 <!DOCTYPE html>
-<!--[if lt IE 7]>	  <html class="no-js lt-ie9 lt-ie8 lt-ie7" xmlns:fb="http://ogp.me/ns/fb#"> <![endif]-->
-<!--[if IE 7]>		 <html class="no-js lt-ie9 lt-ie8" xmlns:fb="http://ogp.me/ns/fb#"> <![endif]-->
-<!--[if IE 8]>		 <html class="no-js lt-ie9" xmlns:fb="http://ogp.me/ns/fb#"> <![endif]-->
-<!--[if gt IE 8]><!--> <html class="no-js" xmlns:fb="http://ogp.me/ns/fb#"> <!--<![endif]-->
+<!--[if lt IE 7]>	  <html class="no-js lt-ie9 lt-ie8 lt-ie7" xmlns:fb="http://ogp.me/ns/fb#" xmlns:xml="http://www.w3.org/XML/1998/namespace" lang="en/us" xml:lang="en/us"> <![endif]-->
+<!--[if IE 7]>		 <html class="no-js lt-ie9 lt-ie8" xmlns:fb="http://ogp.me/ns/fb#" xmlns:xml="http://www.w3.org/XML/1998/namespace" lang="en/us" xml:lang="en/us"> <![endif]-->
+<!--[if IE 8]>		 <html class="no-js lt-ie9" xmlns:fb="http://ogp.me/ns/fb#" xmlns:xml="http://www.w3.org/XML/1998/namespace" lang="en/us" xml:lang="en/us"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" xmlns:fb="http://ogp.me/ns/fb#" lang="en/us" xmlns:xml="http://www.w3.org/XML/1998/namespace" xml:lang="en/us"> <!--<![endif]-->
 
 	<head>
 		<meta charset="utf-8">
@@ -81,20 +81,23 @@
 				<div class="info">
 					<div class="social-media">
 						<a href="http://www.facebook.com/sharer.php?u=http://www.twestival.com" target="_blank">
-							<img src="img/common/header/share-facebook.png"/>
+							<img src="img/common/header/share-facebook.png" alt="Facebook Like"/>
 						</a>
 						<a href="http://twitter.com/share?text=Check%20out%20%40Twestival!%20It's%20back%20and%20you%20can%20register%20your%20city%20at%26url%3Dhttp%3A%2F%2Fwww.twestival.com" target="_blank">
-							<img src="img/common/header/share-twitter.png"/>
+							<img src="img/common/header/share-twitter.png" alt="Twitter Share"/>
 						</a>
 					</div>
 					<ul class="stats">
+						<!-- TODO: Make live via PHP -->
 						<li>209 cities</li>
 						<li>241 countries</li>
 						<li>$565,928 raised</li>
 					</ul>
 					<form action="url/to/search" method="GET" class="search">
+						<label class="accessable-text" for="search-query">Find a Twestival</label>
 						<input type="text" id="search-query" name="q" value="Find a Twestival"/>
-						<input type="image" id="search-button" name="btn" src="img/common/header/search.png"/>
+						<label class="accessible-text" for="search-button">Search</label>
+						<input type="image" id="search-button" name="btn" src="img/common/header/search.png" alt="Search"/>
 					</form>
 				</div>
 			</div>
@@ -105,7 +108,7 @@
 			<!-- TODO: Make manageable via PHP -->
 			<div class="stamp" id="header-stamp-1">
 				<a href="#">
-					<img src="img/home/stamps/content/stamp-1.jpg" alt="" />
+					<img src="img/home/stamps/content/stamp-1.jpg" alt="Cracow Event" />
 					<span class="location">
 						Cracow
 					</span>
@@ -116,7 +119,7 @@
 			</div>
 			<div class="stamp" id="header-stamp-2">
 				<a href="#">
-					<img src="img/home/stamps/content/stamp-2.jpg" alt="" />
+					<img src="img/home/stamps/content/stamp-2.jpg" alt="Amsterdam Event" />
 					<span class="location">
 						Amsterdam
 					</span>
@@ -127,7 +130,7 @@
 			</div>
 			<div class="stamp" id="header-stamp-3">
 				<a href="#">
-					<img src="img/home/stamps/content/stamp-3.jpg" alt="" />
+					<img src="img/home/stamps/content/stamp-3.jpg" alt="Tokyo Event" />
 					<span class="location">
 						Tokyo
 					</span>
@@ -138,7 +141,7 @@
 			</div>
 			<div class="stamp" id="header-stamp-4">
 				<a href="#">
-					<img src="img/home/stamps/content/stamp-4.jpg" alt="" />
+					<img src="img/home/stamps/content/stamp-4.jpg" alt="Salt Lake City Event" />
 					<span class="location">
 						Salt Lake City
 					</span>
