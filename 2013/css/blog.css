@@ -1,0 +1,92 @@
+#breadcrumbs {
+	font-family: 'Melbourne';
+	font-size: 15px;
+	margin-top: 10px;
+	letter-spacing: 0.5px;
+}
+
+#breadcrumbs li:after {
+	content: "\0000a0>\0000a0";
+}
+
+#breadcrumbs .current {
+	color: #34747c;
+}
+#breadcrumbs .current:after {
+	content: none;
+}
+
+#event {
+	width: 715px;
+	height: 465px;
+	margin-top: 26px;
+	margin-left: -16px; /* 22px px once layout complete */
+	background: url("../img/blog/event/background.png") no-repeat;
+	clear:both;
+}
+
+#event .info {
+	font-family: 'Lato';
+	font-size: 14px;
+	width: 290px;
+	padding-top: 37px;
+	padding-left: 53px;
+	float: left;
+}
+#event .info .name {
+	font-family: 'Melbourne-Bold';
+	font-size: 32px;
+	letter-spacing: -0.5px;
+}
+#event .info .datetime {
+	font-weight: bold;
+	letter-spacing: -1px;
+}
+#event .info .location {
+	line-height: 22px;
+}
+
+#event .stamp .logo {
+	float: right;
+	background: url("../img/blog/event/logo-background.png") no-repeat;
+	width: 156px;
+	height: 116px;
+	padding: 11px 12px;
+	margin-top: 33px;
+	margin-right: 38px;
+	transform:rotate(3deg);
+	-ms-transform:rotate(3deg); /* IE 9 */
+	-moz-transform:rotate(3deg); /* Firefox */
+	-webkit-transform:rotate(3deg); /* Safari and Chrome */
+	-o-transform:rotate(3deg); /* Opera */
+}
+#event .stamp .logo img {
+	width: 134px;
+	height: 92px;
+}
+#event .stamp .overlay {
+	position: relative;
+	float: right;
+	display: block;
+	margin-top: 118px;
+	margin-right: -176px;
+}
+
+#event .charity {
+	width: 252px;
+	margin-left: 260px;
+	margin-top: 5px;
+	font-family: 'Melbourne-Bold';
+}
+#event .charity .caption {
+	color: #d03740;
+	text-transform: uppercase;
+	font-size: 15px;
+}
+#event .charity .name {
+	color: #444444;
+	font-size: 30px;
+	letter-spacing: -1px;
+	line-height: 38px;
+	border-bottom: 1px solid #444444;
+}

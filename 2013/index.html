@@ -24,11 +24,14 @@
 		<link href="http://fonts.googleapis.com/css?family=Lato" rel="stylesheet" type="text/css"/>
 		<meta name="google-translate-customization" content="dce9ce2b70773ac7-f775263886d4b470-g2466ff957e338966-d"></meta>
 		
+		<link rel="icon" type="image/vnd.microsoft.icon" href="favicon.ico"/>
+		<link rel="SHORTCUT ICON" href="favicon.ico"/>
+		<link rel="icon" type="image/ico" href="favicon.ico"/>
 		
 		<!-- Home Content -->
+		<link rel="stylesheet" href="css/home.css" />
 		
 		<!--  Slider -->
-		<link rel="stylesheet" href="css/home.css" />
 		<script type="text/javascript" src="js/vendor/slides.min.jquery-1.2.0.js"></script>
 		<script type="text/javascript">
 			$(function(){
@@ -91,9 +94,9 @@
 					</div>
 					<ul class="stats">
 						<!-- TODO: Make live via PHP -->
-						<li id="stats-cities">209 cities</li>
-						<li id="stats-countries">241 countries</li>
-						<li id="stats-total">$565,928 raised</li>
+						<li id="stats-cities"><!-- SELECT COUNT(*) FROM Year INNER JOIN Event ON Year.Year = Event.Year INNER JOIN EventLocation ON Event.EventId = EventLocation.EventId INNER JOIN Location ON EventLocation.LocationID = Location.LocationID WHERE Year.Active = TRUE AND Location.Type = 'CITY'  -->209 cities</li>
+						<li id="stats-countries"><!-- SELECT COUNT(*) FROM Year INNER JOIN Event ON Year.Year = Event.Year INNER JOIN EventLocation ON Event.EventId = EventLocation.EventId INNER JOIN Location ON EventLocation.LocationID = Location.LocationID WHERE Year.Active = TRUE  AND Location.Type = 'COUNTRY' -->241 countries</li>
+						<li id="stats-total"><!-- SELECT SUM(Event.DonationTotalUSD) FROM Year INNER JOIN Event ON Year.Year = Event.Year WHERE Year.Active = TRUE -->2$565,928 raised</li>
 					</ul>
 					<form action="url/to/search" method="GET" class="search">
 						<label class="accessible-text" for="search-query">Find a Twestival</label>
@@ -521,7 +524,7 @@
 		<!-- 
 		<div style="position: absolute; top: 0px; left: 0px; opacity: 0.2; width: 100%; pointer-events: none; z-index:1000;">
 			<div style="margin: 0px auto 0px auto; width:1556px">
-				<img src="img/homepage.png" />
+				<img src="img/home/screenshot.png" />
 			</div>
 		</div>
 		 -->
