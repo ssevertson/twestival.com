@@ -20,7 +20,7 @@
 	width: 715px;
 	height: 465px;
 	margin-top: 26px;
-	margin-left: -16px; /* 22px px once layout complete */
+	margin-left: -22px;
 	background: url("../img/blog/event/background.png") no-repeat;
 	clear:both;
 }
@@ -89,4 +89,76 @@
 	letter-spacing: -1px;
 	line-height: 38px;
 	border-bottom: 1px solid #444444;
+}
+
+#fundraising {
+	float: right;
+	width: 238px;
+	border: 1px solid #DCDCDC;
+	margin-top: -389px;
+	padding: 52px 27px 0px 38px;
+}
+#fundraising .caption {
+	font-family: 'Melbourne-Bold';
+	font-size: 19px;
+	letter-spacing: -1px;
+	float: left;
+}
+#fundraising .goal {
+	float: right;
+	font-family: 'Melbourne-Bold';
+	font-size: 24px;
+	color: #58c2d1;
+	margin-top: -6px;
+	letter-spacing: -0.5px;
+}
+#fundraising .graph {
+	clear: both;
+	width: 240px;
+	height: 29px;
+	border: 1px solid #DCDCDC;
+}
+#fundraising .graph .progress {
+	background-color: #46a97a;
+	height: 29px;
+}
+#fundraising .donated {
+	font-family: 'Melbourne-Bold';
+	font-size: 16px;
+	color: #444444;
+	margin-top: 5px;
+	margin-bottom: 23px;
+}
+#fundraising .button {
+	float: right;
+	clear: both;
+	width: 200px;
+	height: 65px;
+	margin-right: -94px;
+	margin-bottom: -10px;
+	padding-left: 78px;
+	padding-top: 22px;
+}
+#fundraising .button a {
+	font-family: 'Melbourne-Bold';
+	font-size: 14px;
+	letter-spacing: 0.5px;
+	text-transform: uppercase;
+}
+#fundraising .attend {
+	background: url("../img/blog/button-attend.png") no-repeat;
+}
+#fundraising .donate {
+	background: url("../img/blog/button-donate.png") no-repeat;
+}
+#fundraising .description {
+	clear: both;
+	font-family: 'Melbourne';
+	font-size: 16px;
+	padding-top: 16px;
+	padding-bottom: 22px;
+	line-height: 20px;
+}
+#fundraising .description .event {
+	font-family: 'Melbourne-Bold';
 }

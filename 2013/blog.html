@@ -111,11 +111,35 @@
 				<div class="clearfix"></div>
 				<div class="charity">
 					<div class="caption">Charity</div>
-					<div class="name">Pertubuhan Masyarakat Prihatin</div>
+					<div class="name"><a href="#"><!-- href = DB: EventCharity.URL -->Pertubuhan Masyarakat Prihatin<!-- DB: EventCharity.Name --></a></div>
 				</div>
 				
 			</div>
+			
+			<div id="fundraising">
+				<div class="caption">Help to aim at the goal!</div>
+				<div class="goal"><!-- DB: Event.FundraisingGoalUSD -->$33,940</div>
+				<div class="graph">
+					<div class="progress" style="width: 16.97%"><!-- style width = (DB: Event.DonationTotalUSD / Event.FundraisingGoalUSD) * 100 --></div>
+				</div>
+				<div class="donated" style="margin-left: 16.97%"><!-- style margin-left = (DB: Event.DonationTotalUSD / Event.FundraisingGoalUSD) * 100 --><!-- DB: Event.DonationTotalUSD -->$2,000</div>
+				<!--  DB: IF Event.AttendURL IS NOT NULL -->
+					<div class="button attend">
+						<a href="#"><!-- href = DB: Event.AttendURL -->Attend</a>
+					</div>
+				<!-- /DB: IF -->
+				<!-- DB: IF Event.DonateURL IS NOT NULL -->
+					<div class="button donate">
+						<a href="#"><!-- href = DB: Event.DonateURL -->Donate</a>
+					</div>
+				<!-- DB: IF -->
+				<div class="description">
+					<span class="event"><!-- DB: Event.Name -->Twestival Kuala Lumpr</span>
+					&reg; (or Twitter Festival) uses social media for social good by connecting communities on a single day to highlight a greater cause and have a fun event.
+				</div>
+			</div>
 		</div>
+		
 		
 		<div class="clearfix"></div>
 		
