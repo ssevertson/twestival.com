@@ -23,6 +23,8 @@
 	margin-left: -22px;
 	background: url("../img/blog/event/background.png") no-repeat;
 	clear:both;
+	position: relative;
+	z-index: 200;
 }
 
 #event .info {
@@ -97,6 +99,8 @@
 	border: 1px solid #DCDCDC;
 	margin-top: -389px;
 	padding: 52px 27px 0px 38px;
+	position: relative;
+	z-index: 100;
 }
 #fundraising .caption {
 	font-family: 'Melbourne-Bold';
