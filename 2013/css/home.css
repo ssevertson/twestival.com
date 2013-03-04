@@ -82,7 +82,7 @@
 	margin-left: 16px;
 	padding-right: 24px;
 	float: left;
-	background: url("../img/home/slider/arrow.png") no-repeat;
+	background: url('../img/home/slider/arrow.png') no-repeat;
 	background-position: right center;
 	font-family: 'Melbourne';
 }
@@ -103,14 +103,14 @@
 	overflow: hidden;
 }
 #slides .pagination li a {
-	background: url("../img/home/slider/pagination-inactive.png") no-repeat;
+	background: url('../img/home/slider/pagination-inactive.png') no-repeat;
 	display: block;
 	float: right;
 	width: 12px;
 	padding-top: 18px;
 }
 #slides .pagination li.current a {
-	background: url("../img/home/slider/pagination-active.png") no-repeat;
+	background: url('../img/home/slider/pagination-active.png') no-repeat;
 }
 
 #sponsors .header {
@@ -130,44 +130,48 @@
 	width: 1014px;
 	height: 520px;
 	margin-top: 16px;
-	background: url("../img/home/involve/background.png") no-repeat;
+	background: url('../img/home/involve/background.png') no-repeat;
+	position: relative;
 }
 #involve #involve-video {
 	border: 1px solid #c6c6c6;
 	width: 560px;
 	height: 315px;
 	padding: 6px;
-	float: left;
-	margin-top: 86px;
-	margin-left: 52px;
+	position: absolute;
+	top: 86px;
+	left: 52px;
 }
 #involve #involve-stamp {
-	float: right;
-	margin-top: 58px;
-	margin-right: 50px;
+	position: absolute;
+	top: 58px;
+	right: 48px;
 }
 #involve #involve-message {
-	float: right;
-	margin-top: 36px;
-	margin-right: 58px;
+	position: absolute;
+	top: 190px;
+	right: 50px;
 	text-align: center;
+	width: 300px;
 }
 #involve #involve-message .header {
 	font-family: 'Melbourne-Bold';
 	font-size: 24px;
 }
-#involve #involve-message .line {
+#involve #involve-message .message {
 	font-family: 'Melbourne';
 	font-size: 20px;
-}
-#involve #involve-message hr {
-	border-top: 1px solid #c1c1c0;
-	margin: 0px auto 1px auto;
-	width: 254px;
+	background: url('../img/home/involve/background-message.png') repeat-y;
+	background-position: top center;
+	line-height: 32px;
+	padding-bottom: 8px;
+	margin-top: -3px;
+	padding-top: 3px;
 }
 #involve #involve-button {
-	margin: 37px 3px 0px 0px;
-	float: right;
+	position: absolute;
+	right: 3px;
+	top: 388px;
 	width: 270px;
 	height: 70px;
 	padding-top: 30px;
@@ -175,11 +179,11 @@
 	text-transform: uppercase;
 	font-size: 14px;
 	letter-spacing: 0.0px;
-	background: url("../img/home/involve/button.png") no-repeat;
+	background: url('../img/home/involve/button.png') no-repeat;
 }
 
 #social-media {
-	font-family: 'Melbourne';
+	font-family: 'Melbourne-Bold';
 }
 #social-media .header {
 	margin-top: 50px;
@@ -259,13 +263,13 @@
 	font-size: 14px;
 }
 #social-media .twtr-widget .twtr-user:before {
-	content: "@";
+	content: '@';
 }
 #social-media .twtr-widget .twtr-timestamp {
 	color: #444444 !important;
 }
 #social-media #social-media-twitter-action {
-	background: url("../img/home/social-media/button-twitter.png") no-repeat;
+	background: url('../img/home/social-media/button-twitter.png') no-repeat;
 }
 
 #social-media #networks #social-media-instagram {
@@ -279,7 +283,7 @@
 	margin-bottom: 12px;
 }
 #social-media #social-media-instagram-action {
-	background: url("../img/home/social-media/button-instagram.png") no-repeat;
+	background: url('../img/home/social-media/button-instagram.png') no-repeat;
 }
 
 #social-media #networks #social-media-youtube {
@@ -294,10 +298,10 @@
 	margin-bottom: 25px;
 }
 #social-media #social-media-youtube-action {
-	background: url("../img/home/social-media/button-youtube.png") no-repeat;
+	background: url('../img/home/social-media/button-youtube.png') no-repeat;
 }
 #social-media #social-media-facebook-action {
-	background: url("../img/home/social-media/button-facebook.png") no-repeat;
+	background: url('../img/home/social-media/button-facebook.png') no-repeat;
 	margin-top: 18px;
 }
 
@@ -309,7 +313,7 @@
 	margin-bottom: 17px;
 }
 #events #event-groups {
-	background: url("../img/home/events/background.png") no-repeat;
+	background: url('../img/home/events/background.png') no-repeat;
 	background-position: center center;
 	height: 589px;
 }
@@ -352,7 +356,7 @@
 #events #event-more a {
 	display: block;
 	position: relative;
-	background: url("../img/home/events/button-events.png") no-repeat;
+	background: url('../img/home/events/button-events.png') no-repeat;
 	width: 178px;
 	height: 122px;
 	text-align: center;

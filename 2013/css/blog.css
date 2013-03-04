@@ -6,7 +6,7 @@
 }
 
 #breadcrumbs li:after {
-	content: "\0000a0>\0000a0";
+	content: '\0000a0>\0000a0';
 }
 
 #breadcrumbs .current {
@@ -19,11 +19,11 @@
 #event {
 	width: 715px;
 	height: 465px;
-	margin-top: 26px;
-	margin-left: -22px;
-	background: url("../img/blog/event/background.png") no-repeat;
+	background: url('../img/blog/event/background.png') no-repeat;
 	clear:both;
 	position: relative;
+	top: 26px;
+	left: -22px;
 	z-index: 200;
 }
 
@@ -31,9 +31,9 @@
 	font-family: 'Lato';
 	font-size: 14px;
 	width: 290px;
-	padding-top: 37px;
-	padding-left: 53px;
-	float: left;
+	top: 37px;
+	left: 53px;
+	position: absolute;
 }
 #event .info .name {
 	font-family: 'Melbourne-Bold';
@@ -49,13 +49,13 @@
 }
 
 #event .stamp .logo {
-	float: right;
-	background: url("../img/blog/event/logo-background.png") no-repeat;
+	position: absolute;
+	top: 33px;
+	right: 38px;
+	background: url('../img/blog/event/background-logo.png') no-repeat;
 	width: 156px;
 	height: 116px;
 	padding: 11px 12px;
-	margin-top: 33px;
-	margin-right: 38px;
 	transform:rotate(3deg);
 	-ms-transform:rotate(3deg); /* IE 9 */
 	-moz-transform:rotate(3deg); /* Firefox */
@@ -67,39 +67,69 @@
 	height: 92px;
 }
 #event .stamp .overlay {
-	position: relative;
-	float: right;
+	position: absolute;
+	top: 118px;
+	right: 42px;
 	display: block;
-	margin-top: 118px;
-	margin-right: -176px;
 }
 
 #event .charity {
-	width: 252px;
-	margin-left: 260px;
-	margin-top: 5px;
+	width: 512px;
+	position: absolute;
+	top: 208px;
+}
+#event .charity .logo {
+	width: 234px;
+	text-align: right;
+	vertical-align: bottom;
+	padding: 0px 25px 0px 0px;
+}
+#event .charity .logo img {
+	height: 84px;
+}
+#event .charity .description {
 	font-family: 'Melbourne-Bold';
 }
-#event .charity .caption {
+#event .charity .description .caption {
 	color: #d03740;
 	text-transform: uppercase;
 	font-size: 15px;
+	margin-top: 4px;
 }
-#event .charity .name {
-	color: #444444;
+#event .charity .description .name {
 	font-size: 30px;
 	letter-spacing: -1px;
 	line-height: 38px;
-	border-bottom: 1px solid #444444;
+	background: url('../img/blog/event/background-charity.png');
+	padding-bottom: 8px;
+}
+#event .contact {
+	background: url('../img/common/arrow-small.png') no-repeat;
+	background-position: center right;
+	padding-right: 21px;
+	font-family: 'Melbourne';
+	font-size: 16px;
+	letter-spacing: -0.1px;
+	position: absolute;
+	bottom: 33px;
+	left: 54px;
+}
+#event .social-media {
+	position: absolute;
+	bottom: 33px;
+	right: 60px;
+}
+#event .social-media li {
+	margin-left: 12px;
 }
 
 #fundraising {
-	float: right;
+	position: absolute;
+	top: 104px;
+	right: 0px;
 	width: 238px;
 	border: 1px solid #DCDCDC;
-	margin-top: -389px;
-	padding: 52px 27px 0px 38px;
-	position: relative;
+	padding: 48px 27px 0px 38px;
 	z-index: 100;
 }
 #fundraising .caption {
@@ -113,7 +143,7 @@
 	font-family: 'Melbourne-Bold';
 	font-size: 24px;
 	color: #58c2d1;
-	margin-top: -6px;
+	margin-top: -4px;
 	letter-spacing: -0.5px;
 }
 #fundraising .graph {
@@ -129,17 +159,14 @@
 #fundraising .donated {
 	font-family: 'Melbourne-Bold';
 	font-size: 16px;
-	color: #444444;
 	margin-top: 5px;
-	margin-bottom: 23px;
+	margin-bottom: 25px;
 }
 #fundraising .button {
-	float: right;
-	clear: both;
+	position: relative;
+	right: -56px;
 	width: 200px;
 	height: 65px;
-	margin-right: -94px;
-	margin-bottom: -10px;
 	padding-left: 78px;
 	padding-top: 22px;
 }
@@ -150,19 +177,207 @@
 	text-transform: uppercase;
 }
 #fundraising .attend {
-	background: url("../img/blog/button-attend.png") no-repeat;
+	top: -4px;
+	background: url('../img/blog/button-attend.png') no-repeat;
 }
 #fundraising .donate {
-	background: url("../img/blog/button-donate.png") no-repeat;
+	top: -12px;
+	background: url('../img/blog/button-donate.png') no-repeat;
 }
 #fundraising .description {
-	clear: both;
 	font-family: 'Melbourne';
 	font-size: 16px;
-	padding-top: 16px;
-	padding-bottom: 22px;
+	position: relative;
+	top: -4px;
+	padding-bottom: 16px;
 	line-height: 20px;
+	margin-bottom: -4px;
 }
 #fundraising .description .event {
 	font-family: 'Melbourne-Bold';
+}
+
+#blog .content {
+	position: relative;
+	top: 80px;
+}
+#blog-posts {
+	width: 590px;
+	float: left;
+	margin-top: 20px;
+	margin-left: 6px;
+	font-family: 'Lato';
+}
+#blog-posts .post .subject {
+	display: block;
+	font-weight: bold;
+	font-size: 24px;
+	letter-spacing: -1.5px;
+	line-height: 32px;
+	margin-bottom: 12px;
+}
+#blog-posts .post .date {
+	font-style:italic;
+	display: inline;
+}
+#blog-posts .post .comment-link {
+	text-decoration: underline;
+}
+#blog-posts .post .body {
+	margin-top: 24px;
+	line-height: 24px;
+	font-size: 16px;
+}
+#blog-posts .post .body p {
+	margin: 28px 0px;
+}
+
+#blog-posts .post .social-media {
+	margin-top: 36px;
+}
+#blog-posts .post .social-media .share {
+	padding-left: 22px;
+	border: 1px solid #DCDCDC;
+	margin-right: 11px;
+	float: left;
+	height: 22px;
+}
+#blog-posts .post .social-media .share-facebook {
+	background: #f7f7f6 url('../img/common/share/facebook.png') no-repeat;
+}
+#blog-posts .post .social-media .share-twitter {
+	background: #f7f7f6 url('../img/common/share/twitter.png') no-repeat;
+}
+#blog-posts .post .social-media .share-googleplus {
+	background: #f7f7f6 url('../img/common/share/googleplus.png') no-repeat;
+}
+#blog-posts .post .social-media .share-pinterest {
+	background: #f7f7f6 url('../img/common/share/pinterest.png') no-repeat;
+}
+#blog-posts .post .social-media .share-email {
+	background: #f7f7f6 url('../img/common/share/mail.png') no-repeat;
+}
+#blog-posts .post .social-media .share .count {
+	font-size: 11px;
+	font-weight: bold;
+	padding: 0px 3px 0px 3px;
+	display: none;
+	height: 22px;
+	position: relative;
+	text-align: center;
+	top: -2px;
+}
+
+#sidebars {
+	float: right;
+	height: 2000px;
+	position: relative;
+	top: 44px;
+	margin-right: 6px;
+}
+#sidebars .sidebar {
+	background: url('../img/common/sidebar/background.png');
+	border: 1px solid #DCDCDC;
+	margin-top: 25px;
+	margin-bottom: 36px;
+	padding: 16px;
+	width: 270px;
+	text-align: center;
+}
+#sidebars .sidebar .title {
+	border: 1px solid #DCDCDC;
+	background: #ffffff;
+	font-family: 'Melbourne-Bold';
+	font-size: 24px;
+	letter-spacing: 0.5px;
+	color: #50B1BD;
+	
+	display: inline-block;
+	position: relative;
+	top: -32px;
+	margin: 0px auto;
+	padding: 7px 10px 3px 10px;
+	text-align: center;
+}
+#sidebars .sidebar .body {
+	text-align: left;
+	position: relative;
+	top: -16px;
+	margin-bottom: -16px;
+}
+
+#event-twitter .twtr-widget .twtr-hd, #event-twitter .twtr-widget .twtr-ft {
+	display: none;
+}
+#event-twitter .twtr-widget .twtr-tweet {
+	border: none;
+}
+
+#event-twitter .twtr-widget .twtr-tweet-wrap {
+	padding: 0px 5px 12px 5px;
+	position: relative;
+}
+#event-twitter .twtr-widget .twtr-avatar, #event-twitter .twtr-widget .twtr-img {
+	width: 48px;
+	height: 48px;
+}
+#event-twitter .twtr-widget .twtr-avatar {
+	margin-top: 2px;
+}
+#event-twitter .twtr-widget .twtr-tweet-text {
+	margin-left: 57px;
+}
+#event-twitter .twtr-widget .twtr-img img {
+	width: 100%;
+	height: 100%;
+	vertical-align: middle;
+	-webkit-border-radius: 3px;
+	-moz-border-radius: 3px;
+	border-radius: 4px;
+}
+#event-twitter .twtr-widget .twtr-user {
+	display: block;
+	font-weight: bold;
+	font-size: 14px;
+}
+#event-twitter .twtr-widget .twtr-user:before {
+	content: '@';
+}
+#event-twitter .twtr-widget .twtr-timestamp {
+	color: #444444 !important;
+}
+
+#event-sponsors table {
+	width: 100%;
+}
+#event-sponsors td {
+	width: 50%;
+	vertical-align: middle;
+	text-align: center;
+	padding: 8px 0px;
+}
+
+#event-team.sidebar {
+	padding: 16px 10px 12px 10px;
+	width: 282px;
+}
+
+#event-team li {
+	margin: 4px;
+}
+#event-team li img {
+	-webkit-border-radius: 3px;
+	-moz-border-radius: 3px;
+	border-radius: 4px;
+}
+
+#global-blog ul {
+	margin: -12px 0px -24px 0px;
+	padding: 0px;
+}
+#global-blog li {
+	font-family: 'Lato';
+	font-size: 13px;
+	list-style-type: none;
+	padding: 12px 0px;
 }
