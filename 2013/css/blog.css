@@ -131,6 +131,7 @@
 	border: 1px solid #DCDCDC;
 	padding: 48px 27px 0px 38px;
 	z-index: 100;
+	background: url('../img/common/sidebar/background.png');
 }
 #fundraising .caption {
 	font-family: 'Melbourne-Bold';
@@ -270,10 +271,9 @@
 
 #sidebars {
 	float: right;
-	height: 2000px;
 	position: relative;
-	top: 44px;
-	margin-right: 6px;
+	top: 25px;
+	margin-bottom: 36px;
 }
 #sidebars .sidebar {
 	background: url('../img/common/sidebar/background.png');
