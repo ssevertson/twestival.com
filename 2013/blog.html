@@ -123,7 +123,15 @@
 				<div class="info">
 					<div class="name"><!-- DB: Event.Name -->Twestival Kuala Lumpur</div>
 					<div class="datetime"><!-- DB: Event.Date, or "Comming Soon" -->Tuesday, 23 January 2013<!--  DB: Event.StartTime (include AM/PM if different from Event.EndTime) -->, 7:00<!--  DB: Event.EndTime -->-10:00pm</div>
-					<div class="location"><!--  DB: Event.LocationName, wrapped in link if Event.LocationURL set --><a href="#">Finnegan's Irish Pubs and Restaurant, Midvalley MegaMall</a></div>
+					<div class="location">
+						<!--  DB: Event.LocationName, wrapped in link if Event.LocationURL set --><a href="#">Finnegan's Irish Pubs and Restaurant</a>
+						<!-- DB: IF Event.LocationAddress1 IS NOT NULL -->
+							<div class="address"><!--  DB: Event.LocationAddress1 -->Midvalley MegaMall</div>
+						<!-- DB: IF -->
+						<!-- DB: IF Event.LocationAddress2 IS NOT NULL -->
+							<div class="address"><!--  DB: Event.LocationAddress2 --></div>
+						<!-- DB: IF -->
+					</div>
 				</div>
 				<div class="stamp">
 					<div class="logo"><img src="img/event/content/event-logo-1.png" alt=""/><!-- src = DB: Event.ImageFilename --></div>

@@ -30,7 +30,7 @@
 #event .info {
 	font-family: 'Lato';
 	font-size: 14px;
-	width: 290px;
+	width: 370px;
 	top: 37px;
 	left: 53px;
 	position: absolute;
@@ -39,13 +39,21 @@
 	font-family: 'Melbourne-Bold';
 	font-size: 32px;
 	letter-spacing: -0.5px;
+	width: 370px;
 }
 #event .info .datetime {
 	font-weight: bold;
 	letter-spacing: -1px;
+	width: 320px;
+	
 }
 #event .info .location {
 	line-height: 22px;
+	width: 320px;
+}
+#event .info .location .address {
+	line-height: 22px;
+	width: 320px;
 }
 
 #event .stamp .logo {
