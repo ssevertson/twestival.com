@@ -86,10 +86,10 @@ input, select {
 ul.horizontal {
 	margin: 0px;
 	padding: 0px;
+	list-style-type: none;
 }
 ul.horizontal li {
 	float: left;
-	list-style-type: none;
 }
 .fadeout {
 	z-index: 100;
@@ -98,9 +98,6 @@ ul.horizontal li {
 	width: 100%;
 	height: 8px;
 	background-image: url('../img/common/fadeout.png');
-}
-#sidebars .fadeout {
-	background-image: url('../img/common/sidebar/fadeout.png');
 }
 .accessible-text {
 	display: none;
@@ -190,22 +187,169 @@ h1 {
 	border: none;
 }
 #header .info .search {
-	background-color: #ffffff;
+	background-color: #fbfaf6;
 	height: 25px;
+	border: 1px solid #bf1e2e;
 }
 #header .info .search #search-query {
 	width: 120px;
-	height: 25px;
-	padding: 0px 0px 0px 4px;
+	height: 22px;
+	padding: 2px 0px 0px 4px;
 	vertical-align: top;
 	font-family: 'Melbourne';
-	font-size: 18px;
+	font-size: 16px;
+	background-color: #fbfaf6;
 }
 #header .info .search #search-button {
 	margin-right: 0px;
 	float: right;
 	margin-right: 6px;
 }
+
+/* Sidebars */
+#sidebars {
+	float: right;
+	position: relative;
+	top: 25px;
+	margin-bottom: 36px;
+}
+#sidebars .sidebar {
+	background: url('../img/common/sidebar/background.png');
+	border: 1px solid #DCDCDC;
+	margin-top: 25px;
+	margin-bottom: 36px;
+	padding: 16px;
+	width: 270px;
+	text-align: center;
+}
+#sidebars .sidebar .title {
+	border: 1px solid #DCDCDC;
+	background: #ffffff;
+	font-family: 'Melbourne-Bold';
+	font-size: 24px;
+	letter-spacing: 0.5px;
+	color: #50B1BD;
+	
+	display: inline-block;
+	position: relative;
+	top: -32px;
+	margin: 0px auto;
+	padding: 7px 10px 3px 10px;
+	text-align: center;
+}
+#sidebars .sidebar .body {
+	text-align: left;
+	position: relative;
+	top: -16px;
+	margin-bottom: -16px;
+}
+#sidebars #global-blog ul {
+	margin: -12px 0px -24px 0px;
+	padding: 0px;
+	list-style-type: none;
+}
+#sidebars #global-blog li {
+	font-family: 'Lato';
+	font-size: 13px;
+	padding: 12px 0px;
+}
+
+#sidebars #sidebar-twitter .twtr-widget .twtr-hd, #sidebars #sidebar-twitter .twtr-widget .twtr-ft {
+	display: none;
+}
+#sidebars #sidebar-twitter .twtr-widget .twtr-tweet {
+	border: none;
+}
+#sidebars #sidebar-twitter .twtr-widget .twtr-tweet-wrap {
+	padding: 0px 5px 12px 5px;
+	position: relative;
+}
+#sidebars #sidebar-twitter .twtr-widget .twtr-avatar, #sidebars #sidebar-twitter .twtr-widget .twtr-img {
+	width: 48px;
+	height: 48px;
+}
+#sidebars #sidebar-twitter .twtr-widget .twtr-avatar {
+	margin-top: 2px;
+}
+#sidebars #sidebar-twitter .twtr-widget .twtr-tweet-text {
+	margin-left: 57px;
+}
+#sidebars #sidebar-twitter .twtr-widget .twtr-img img {
+	width: 100%;
+	height: 100%;
+	vertical-align: middle;
+	-webkit-border-radius: 3px;
+	-moz-border-radius: 3px;
+	border-radius: 4px;
+}
+#sidebars #sidebar-twitter .twtr-widget .twtr-user {
+	display: block;
+	font-weight: bold;
+	font-size: 14px;
+}
+#sidebars #sidebar-twitter .twtr-widget .twtr-user:before {
+	content: '@';
+}
+#sidebars #sidebar-twitter .twtr-widget .twtr-timestamp {
+	color: #444444 !important;
+}
+
+#sidebars #sidebar-instagram {
+	width: 286px;
+	padding-right: 0px;
+}
+#sidebars #sidebar-instagram img {
+	width: 125px;
+	height: 125px;
+	margin-right: 16px;
+	margin-bottom: 16px;
+}
+
+#sidebars .fadeout {
+	background-image: url('../img/common/sidebar/fadeout.png');
+}
+
+/* Social Media Share */
+.social-media-share {
+	margin-top: 36px;
+	float: right;
+}
+.social-media-share .share {
+	padding-left: 22px;
+	border: 1px solid #DCDCDC;
+	margin-right: 11px;
+	float: left;
+	height: 22px;
+}
+.social-media-share .share-facebook {
+	background: #f7f7f6 url('../img/common/share/facebook.png') no-repeat;
+}
+.social-media-share .share-twitter {
+	background: #f7f7f6 url('../img/common/share/twitter.png') no-repeat;
+}
+.social-media-share .share-googleplus {
+	background: #f7f7f6 url('../img/common/share/googleplus.png') no-repeat;
+}
+.social-media-share .share-pinterest {
+	background: #f7f7f6 url('../img/common/share/pinterest.png') no-repeat;
+}
+.social-media-share .share-linkedin {
+	background: #f7f7f6 url('../img/common/share/linkedin.png') no-repeat;
+}
+.social-media-share .share-email {
+	background: #f7f7f6 url('../img/common/share/mail.png') no-repeat;
+}
+.social-media-share .share .count {
+	font-size: 11px;
+	font-weight: bold;
+	padding: 0px 3px 0px 3px;
+	display: none;
+	height: 22px;
+	position: relative;
+	text-align: center;
+	top: -2px;
+}
+
 
 /* Footer */
 #footer {

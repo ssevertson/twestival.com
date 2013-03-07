@@ -30,8 +30,14 @@
 		
 		<!-- Register Content -->
 		<link rel="stylesheet" href="css/events.css" />
-		
+
+		<!-- Google Maps -->		
    		<script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false"></script>
+   		
+   		<!-- Twitter -->
+		<script type="text/javascript" src="//widgets.twimg.com/j/2/widget.js"></script>
+		<link href="//widgets.twimg.com/j/2/widget.css" type="text/css" rel="stylesheet"/>
+   		
 	</head>
 	<body id="events">
 		<!--[if lt IE 7]>
@@ -91,9 +97,8 @@
 				<h1>Official Events</h1>
 			</div>
 		
-			<div id="map">
-				<div id="map-canvas"></div>
-			</div>
+			<div id="map"></div>
+			<div id="map-loading"><img src="img/common/loading.gif" alt="Loading"/></div>
 			<script type="text/javascript">
 				function initializeMap() {
 	  				var styles = [
@@ -139,7 +144,7 @@
 							draggable: false
 	  				};
 					
-	  				var map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
+	  				var map = new google.maps.Map(document.getElementById('map'), mapOptions);
 					
 	 		 		map.mapTypes.set('map_style', styledMap);
 	  				map.setMapTypeId('map_style');
@@ -189,10 +194,193 @@
 							};
 						}, 500);
 					};
+					
+					google.maps.event.addListenerOnce(map, 'idle', function() {
+						$('#map-loading').fadeOut();
+					});
 				};
 				google.maps.event.addDomListener(window, 'load', initializeMap);
 	  		</script>
 	  	</div>
+		
+		<div class="wrapper">
+			<div class="continent">
+				<div class="caption">
+					<div class="name">Africa</div>
+					<div class="stats">
+						12 countries,
+						14 cities
+					</div>
+					<div class="clearfix"></div>
+				</div>
+				<ul class="events">
+					<li>
+						<span class="location">
+							<a href="http://dakar.twestival.com/" class="blog">Dakar</a>,
+							Sénégal,
+						</span>
+						<a href="http://twitter.com/DKRtwestival">@DKRtwestival</a>
+					</li>
+					<li>
+						<span class="location">
+							<a href="http://dakar.twestival.com/" class="blog">Bandar Seri Begawan</a>,
+							Brunei,
+						</span>
+						<a href="http://twitter.com/TwestivalBrunei">@TwestivalBrunei</a>
+					</li>
+				</ul>
+			</div>
+		
+			<div id="sidebars">
+				<div id="global-blog" class="sidebar">
+					<div class="title">Global Stories</div>
+					<div class="body">
+						<ul></ul>
+						<script type="text/javascript">
+							// twestival.tumblr.com is not returning any posts, so use staff.tumblr.com as a temporary stand-in
+							$.getJSON('http://api.tumblr.com/v2/blog/staff.tumblr.com/posts/text?callback=?',
+									{
+										api_key: '3QS3yzIDSOfn2gZ0Tl8tItq5dcoBRDMhfL5O1pryvkcMDn3186',
+										limit: 4
+									},
+									function(response) {
+										var target = $('#global-blog .body ul');
+										for(var i = 0; i < response.response.posts.length; i++) {
+											var post = response.response.posts[i];
+											target
+													.append($('<li/>')
+															.append($('<a/>', {href: post.post_url, target: '_blank'})
+																	.append(
+																			post.title
+																			|| post.slug
+																					.replace(/-/g, ' ')
+																					.replace(/\w\S*/g, function(txt){ return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase(); })
+																	)
+															)
+													);
+										};
+									});
+						</script>
+						<noscript>
+							<a href="http://twestival.tumblr.com">See recent Twestival Tumblr Stories</a>
+						</noscript>
+					</div>
+				</div>
+				<div id="sidebar-twitter" class="sidebar">
+					<div class="title">Tweets</div>
+					<div class="body">
+						<script type="text/javascript">
+							new TWTR.Widget({
+								version: 2,
+								type: 'search',
+								search: 'twestival',
+								interval: 5000,
+								title: '',
+								subject: '',
+								width: 270,
+								height: 260,
+								theme: {
+									shell: {
+										background: 'transparent',
+										color: '#444444'
+									},
+									tweets: {
+										background: 'transparent',
+										color: '#444444',
+										links: '#34747c'
+									}
+								},
+								features: {
+									scrollbar: false,
+									loop: true,
+									live: true,
+									hashtags: true,
+									timestamp: true,
+									avatars: true,
+									toptweets: true,
+									behavior: 'default'
+								}
+							}).render().start();
+						</script>
+						<noscript>
+							<a href="https://twitter.com/search?q=%40nyctwestival"><!-- href = 'https://twitter.com/search?q=%40' + DB: Event.TwitterName -->See @nyctwestival<!-- DB: Event.TwitterName --> Tweets</a>
+						</noscript>
+						<div class="fadeout"></div>
+					</div>
+				</div>
+				<div id="sidebar-instagram" class="sidebar">
+					<div class="title">Photos</div>
+					<div class="body" id="sidebar-instagram-body">
+					</div>
+					<script type="text/javascript">
+						$.getJSON('https://api.instagram.com/v1/tags/twestival/media/recent?callback=?',
+								{
+									client_id: '170979fa018b4752977f4b7c15d7c7fd',
+									count: 8
+								},
+								function(response) {
+									var target = $('#sidebar-instagram-body');
+									for(var i = 0; i < response.data.length; i++) {
+										var item = response.data[i];
+										target
+												.append($('<a/>', {href: item.link, target: '_blank'})
+														.append($('<img/>', {src: item.images.thumbnail.url, alt: item.caption.text})));
+									};
+								});
+					</script>
+					<noscript>
+						<a href="http://instagram.com/tags/twestival/feed/recent.rss">See recent #twestival Instagrams</a>
+					</noscript>
+				</div>
+			</div>
+			
+			<div class="clearfix"></div>
+			
+			<div class="social-media-share">
+				<a class="share share-facebook" href="#"><!-- href = 'http://www.facebook.com/sharer.php?u=' + URLEncode(PageURL) -->
+					<span class="accessible-text">Facebook Share Count: </span>
+					<span class="count" id="share-facebook-count-page"></span>
+				</a>
+				<a class="share share-twitter" href="#"><!-- href = 'http://twitter.com/share?text=' + URLEncode(PageURL) -->
+					<span class="accessible-text">Twitter Share Count: </span>
+					<span class="count" id="share-twitter-count-page"></span>
+				</a>
+				<a class="share share-pinterest" href="#"><!-- href = 'http://pinterest.com/pin/create/button/?url=' + URLEncode(PageURL) + '&media=' + URLEncode('Waiting on requirements')  + '&description=' + URLEncode(BlogPost.Subject) -->
+					<span class="accessible-text">Pinterest Pin Count: </span>
+					<span class="count" id="share-pinterest-count-page"></span>
+				</a>
+				<a class="share share-googleplus" href="#"><!-- href = 'https://plus.google.com/share?url=' + URLEncode(PageURL) -->
+					<span class="accessible-text">Google+ Share Count: </span>
+					<span class="count" id="share-googleplus-count-page"></span>
+				</a>
+				<a class="share share-linkedin" href="#"><!-- href = 'http://www.linkedin.com/shareArticle?mini=true&source=Twestival&url=' + URLEncode(PageURL) -->
+					<span class="accessible-text">LinkedIn Share Count: </span>
+					<span class="count" id="share-linkedin-count-page"></span>
+				</a>
+				<a class="share share-email" href="mailto:?body="><!-- href = 'mailto:?body=' + URLEncode(PageURL) -->
+					<span class="accessible-text">Email Link</span>
+					<span class="count" id="share-email-count-page"></span>
+				</a>
+				<script type="text/javascript">
+					var loadSocialMediaCountsForPage = function(response) {
+						$('#share-facebook-count-page').text(response.Facebook.share_count).fadeIn();
+						$('#share-twitter-count-page').text(response.Twitter).fadeIn();
+						$('#share-pinterest-count-page').text(response.Pinterest).fadeIn();
+						$('#share-googleplus-count-page').text(response.GooglePlusOne).fadeIn();
+						$('#share-linkedin-count-page').text(response.LinkedIn).fadeIn();
+					};
+					$.ajax({
+						dataType: 'jsonp',
+						url: '//' + (location.protocol == 'https:' ? 'sharedcount.appspot' : 'api.sharedcount') + '.com',
+						data: {
+							url: 'http://www.twestival.com/' /* PageURL */
+						},
+						cache: true,
+						jsonpCallback: 'loadSocialMediaCountsForPage'
+					});
+				</script>
+			</div>
+		</div>
 		
 		<div class="clearfix"></div>
 		
@@ -242,8 +430,8 @@
 			</div>
 		</div>
 		
-		<!-- 
-		<div style="position: absolute; top: 0px; left: 0px; opacity: 0.25; width: 100%; pointer-events: none; z-index:1000;">
+		<!--
+		<div style="position: absolute; top: 105px; left: 0px; opacity: 0.25; width: 100%; pointer-events: none; z-index:1000;">
 			<div style="margin: 0px auto 0px auto; width:1556px">
 				<img src="img/events/screenshot.png" />
 			</div>
