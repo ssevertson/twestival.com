@@ -1,0 +1,90 @@
+#register .intro {
+	font-family: 'Lato';
+	font-size: 14px;
+	width: 758px;
+}
+#register .intro a {
+	color: #50B1BD;
+}
+
+form.involve {
+	font-family: 'Lato';
+	font-size: 14px
+}
+
+form.involve fieldset {
+	background: url('../img/common/sidebar/background.png');
+	border: 1px solid #DCDCDC;
+	margin-top: 64px;
+	margin-bottom: 36px;
+	padding: 22px 36px 26px 36px;
+	text-align: center;
+}
+form.involve fieldset .legend {
+	border: 1px solid #DCDCDC;
+	background: #ffffff;
+	font-family: 'Melbourne-Bold';
+	font-size: 24px;
+	letter-spacing: 0.5px;
+	color: #50B1BD;
+	
+	display: inline-block;
+	position: relative;
+	top: -47px;
+	margin: 0px auto;
+	padding: 10px 10px 4px 10px;
+	text-align: center;
+	text-transform: uppercase;
+}
+form.involve fieldset .body {
+	text-align: left;
+	position: relative;
+	top: -16px;
+	margin-bottom: -16px;
+}
+form.involve label {
+	padding-top: 16px;
+	padding-left: 4px;
+}
+form.invovle input {
+	display: block;
+}
+form.involve .required:after {
+	content: ' *';
+	font-weight: bold;
+	color: #e64d45;
+}
+form.involve input[type="radio"] {
+	margin-right: 8px;
+	margin-bottom: 24px;
+}
+form.involve input[type="text"], form.involve textarea {
+	border: 1px solid #DCDCDC;
+	margin-top: 4px;
+	padding: 5px 4px 3px 4px;
+	display: block;
+}
+form.involve .before-field {
+	float: left;
+	margin: 5px 2px 0px 4px;
+}
+form.involve .inline {
+	float: left;
+	margin-right: 10px;
+}
+form.involve .symbols {
+	margin-top: 24px;
+}
+
+form.involve input#involve-submit-button {
+	background: url('../img/common/button/button-green.png') no-repeat;
+	width: 270px;
+	height: 70px;
+	text-transform: uppercase;
+	font-family: 'Melbourne-Bold';
+	font-size: 14px;
+	text-align: center;
+	padding-top: 5px;
+	letter-spacing: 1px;
+	margin-top: 60px;
+}

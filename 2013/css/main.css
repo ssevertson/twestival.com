@@ -105,6 +105,13 @@ ul.horizontal li {
 .accessible-text {
 	display: none;
 }
+h1 {
+	font-family: 'Melbourne-Bold';
+	font-weight: normal;
+	font-size: 30px;
+	margin-top: 50px;
+	margin-bottom: 35px;
+}
 
 /* Header */
 #header {
@@ -163,7 +170,7 @@ ul.horizontal li {
 	-moz-box-shadow:	0px 2px 5px rgba(0, 0, 0, 0.2);
 	box-shadow:		 0px 2px 5px rgba(0, 0, 0, 0.2);
 }
-#header .info #header-social-media-twitter {
+#header .info #header-social-media-facebook {
 	margin-right: 6px;
 }
 #header .info .stats {
@@ -212,7 +219,8 @@ ul.horizontal li {
 	margin-top: 62px;
 }
 #footer .newsletter {
-	margin-top: 50px;
+	position: relative;
+	top: 50px;
 	float: left;
 }
 #footer .newsletter form label {
@@ -230,14 +238,13 @@ ul.horizontal li {
 	text-align: center;
 }
 #footer .newsletter form input#subscribe-button {
-	float: right;
-	position: relative;
+	position: absolute;
+	display: block;
 	background: url('../img/common/footer/button-subscribe.png') no-repeat;
-	color: #000000;
 	width: 124px;
 	height: 52px;
-	margin-top: -28px;
-	margin-left: -100px;
+	top: 24px;
+	right: -22px;
 	z-index: 100;
 	text-transform: uppercase;
 	font-family: 'Melbourne-Bold';
