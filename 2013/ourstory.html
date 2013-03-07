@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>	  <html class="no-js lt-ie9 lt-ie8 lt-ie7" xmlns:fb="http://ogp.me/ns/fb#" xmlns:xml="http://www.w3.org/XML/1998/namespace" lang="en/us" xml:lang="en/us"> <![endif]-->
+<!--[if IE 7]>		 <html class="no-js lt-ie9 lt-ie8" xmlns:fb="http://ogp.me/ns/fb#" xmlns:xml="http://www.w3.org/XML/1998/namespace" lang="en/us" xml:lang="en/us"> <![endif]-->
+<!--[if IE 8]>		 <html class="no-js lt-ie9" xmlns:fb="http://ogp.me/ns/fb#" xmlns:xml="http://www.w3.org/XML/1998/namespace" lang="en/us" xml:lang="en/us"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" xmlns:fb="http://ogp.me/ns/fb#" lang="en/us" xmlns:xml="http://www.w3.org/XML/1998/namespace" xml:lang="en/us"> <!--<![endif]-->
+
+	<head>
+		<meta charset="utf-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+		<!--TODO: Copy title/keywords/description PHP from system/application/views/blocks/header.html-->
+		<title>Twestival 2013</title>
+		<meta name="viewport" content="width = 982, initial-scale = 0.5" />
+
+		<link rel="stylesheet" href="css/normalize.min.css" />
+		<link rel="stylesheet" href="css/main.css" />
+
+		<script src="js/vendor/modernizr-2.6.2.min.js"></script>
+		<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+		<script>window.jQuery || document.write('<script src="js/vendor/jquery-1.9.1.min.js"><\/script>')</script>
+
+		<script src="js/plugins.js"></script>
+		<script src="js/main.js"></script>
+
+		<link href="//fonts.googleapis.com/css?family=Lato" rel="stylesheet" type="text/css"/>
+		<meta name="google-translate-customization" content="dce9ce2b70773ac7-f775263886d4b470-g2466ff957e338966-d"></meta>
+		
+		<link rel="icon" type="image/vnd.microsoft.icon" href="favicon.ico"/>
+		<link rel="SHORTCUT ICON" href="favicon.ico"/>
+		<link rel="icon" type="image/ico" href="favicon.ico"/>
+		
+		<!-- Register Content -->
+		<link rel="stylesheet" href="css/ourstory.css" />
+		
+   		<script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false"></script>
+	</head>
+	<body id="events">
+		<!--[if lt IE 7]>
+			<p class="chromeframe">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">activate Google Chrome Frame</a> to improve your experience.</p>
+		<![endif]-->
+
+		<a href="#content" class="accessible-text">Skip navigation</a>
+
+		<!-- 
+		<div id="google_translate_element"></div><script type="text/javascript">
+			function googleTranslateElementInit() {
+			  new google.translate.TranslateElement({pageLanguage: 'en', gaTrack: true, gaId: 'UA-21127575-1'}, 'google_translate_element');
+			}
+		</script><script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+		 -->
+ 
+		<div id="header">
+			<div class="wrapper">
+				<img class="logo" src="img/common/header/logo.png" alt="TWESTIVAL: tweet. meet. give."/>
+				<div class="menu">
+					<ul class="horizontal">
+						<li><a href="our_story">Our Story</a></li>
+						<li><a href="stats-scoreboard">Impact</a></li>
+						<li><a href="http://twestival.tumblr.com/">Global Blog</a></li>
+						<li><a href="events">Official Events</a></li>
+						<li class="button-gray"><a href="get_involved">Get Involved</a></li>
+					</ul>
+				</div>
+				 <div class="our-story">
+				 </div>
+		
+		<!-- Events -->
+		<div class="white-bar">
+			<div class="clearfix"></div>
+			<div class="wrapper">
+				<h1>Official Events</h1>
+			</div>
+		
+			<div id="map">
+				<div id="map-canvas"></div>
+			</div>
+			<script type="text/javascript">
+				function initializeMap() {
+	  				var styles = [
+							{
+		  						"featureType": "landscape.natural.landcover",
+		  						"elementType": "geometry.fill",
+		  						stylers: [
+		  							{ "color": "#a0e6ed" },
+		  							{ "saturation": 100 },
+		  							{ "visibility": "on" }
+		  						]
+							}, {
+								"featureType": "water",
+								"stylers": [
+		  							{ "color": "#ffffff" }
+								]
+							}, {
+								featureType: "all",
+								elementType: "labels",
+								stylers: [
+		  							{ visibility: "off" }
+								]
+							}, {
+								featureType: "administrative",
+								elementType: "geometry",
+								stylers: [
+		  							{ visibility: "off" }
+								]
+	  					}
+	  				];
+					
+	  				var styledMap = new google.maps.StyledMapType(styles,
+							{name: "Twestival Map"});
+					
+	  				var mapOptions = {
+							zoom: 2,
+							center: new google.maps.LatLng(42.0, 10.0),
+							mapTypeControlOptions: {
+		 				 		mapTypeIds: [google.maps.MapTypeId.ROADMAP, 'map_style']
+							},
+							disableDefaultUI: true,
+							scrollwheel: false,
+							draggable: false
+	  				};
+					
+	  				var map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
+					
+	 		 		map.mapTypes.set('map_style', styledMap);
+	  				map.setMapTypeId('map_style');
+	  				
+					var geocoder = new google.maps.Geocoder(); 
+					if (geocoder) { 
+	
+						var pin = {
+							url: 'img/events/pin.png',
+							anchor: new google.maps.Point(5, 17)};
+	
+						var geocode_result_handler = function(results, status, url) {
+							if(status == google.maps.GeocoderStatus.OK) { 
+								var marker = new google.maps.Marker({ 
+									map: map, 
+									position: results[0].geometry.location,
+									flat: true,
+									title: results[0].formatted_address,
+									icon: pin,
+									url: url});
+								google.maps.event.addListener(marker, 'click', function() {
+									window.location.href = this.url;
+								});
+							};
+						};
+						
+						var locs = [];
+						// DEFINE: city = SELECT Location.Name FROM EventLocation INNER JOIN Location ON EventLocation.LocationID = Location.LocationID WHERE Location.Type = 'CITY' AND EventLocation.EventID = ?
+						// DEFINE: stateProvince = SELECT Location.Name FROM EventLocation INNER JOIN Location ON EventLocation.LocationID = Location.LocationID WHERE Location.Type = 'STATE_PROVINCE' AND EventLocation.EventID = ?
+						// DEFINE: country = SELECT Location.Name FROM EventLocation INNER JOIN Location ON EventLocation.LocationID = Location.LocationID WHERE Location.Type = 'COUNTRY' AND EventLocation.EventID = ?
+						// DEFINE: address = city + (stateProvince ? : ', ' + stateProvince : '') + country
+						// DEFINE: subdomain = SELECT Blog.Subdomain FROM Event INNER JOIN Blog ON Event.BlogID = Blog.BlogID
+						// DEFINE: url = 'http://' + subdomain + '.twestival.com/'
+						locs.push({ address: 'Asheville, NC, USA' /* address */, url: '#' /* url */ });
+						locs.push({ address: 'Toronto, ON, Canada' /* address */, url: '#' /* url */ });
+						locs.push({ address: 'London, UK' /* address */, url: '#' /* url */ });
+						locs.push({ address: 'Tanzania' /* address */, url: '#' /* url */ });
+						locs.push({ address: 'Timbuktu' /* address */, url: '#' /* url */ });
+						var timer = setInterval(function() {
+							if(locs.length > 0) {
+								var random = parseInt(Math.random() * locs.length);
+								var loc = locs[random];
+								locs.splice(random, 1);
+								geocoder.geocode ( { 'address': loc.address }, function(results, status) { geocode_result_handler(results, status, loc.url ); } ); 
+							} else {
+								clearInterval(timer);
+							};
+						}, 500);
+					};
+				};
+				google.maps.event.addDomListener(window, 'load', initializeMap);
+	  		</script>
+	  	</div>
+		
+		<div class="clearfix"></div>
+		
+		<div id="footer">
+			<div class="wrapper">
+				<div class="newsletter">
+					<form action="http://twestival.us2.list-manage1.com/subscribe/post?u=1e12004a88086491a227acb3a&id=7938ef1692" method="POST" class="subscribe" target="_blank">
+						<label for="subscribe-email">Would you like to receive a Twestival Newsletter?</label>
+						<input type="text" id="subscribe-email" name="mce-EMAIL" value=""/><br/>
+						<input type="submit" id="subscribe-button" value="Sign Up"/>
+					</form>
+				</div>
+				<div class="menu">
+					<ul class="horizontal">
+						<li><a href="team">Team</a></li>
+						<li><a href="partners">Partners</a></li>
+						<li><a href="faq">FAQ</a></li>
+						<li><a href="disclaimer">Conditions</a></li>
+						<li><a href="privacy">Privacy</a></li>
+						<li><a href="press">Press</a></li>
+						<li id="footer-contact-us"><a href="mailto:info@twestival.com">Contact Us</a></li>
+					</ul>
+				</div>
+				<div class="social-media">
+					<div class="title">Follow Us:</div>
+					<ul class="horizontal">
+						<li id="footer-twitter"><a href="http://twitter.com/twestival" target="_blank"><img src="img/common/footer/emblem-twitter.png" alt="Twitter"/></a></li>
+						<li id="footer-facebook"><a href="http://facebook.com/twestival" target="_blank"><img src="img/common/footer/emblem-facebook.png" alt="Facebook"/></a></li>
+						<li id="footer-linkedin"><a href="http://linkedin.com/twestival" target="_blank"><img src="img/common/footer/emblem-linkedin.png" alt="LinkedIn"/></a></li>
+						<li id="footer-tumblr"><a href="http://twestival.tumblr.com/l" target="_blank"><img src="img/common/footer/emblem-tumblr.png" alt="Tumblr"/></a></li>
+						<li id="footer-youtube"><a href="http://www.youtube.com/user/twestivalglobal" target="_blank"><img src="img/common/footer/emblem-youtube.png" alt="YouTube"/></a></li>
+						<li id="footer-pinterest"><a href="https://pinterest.com/twestival/" target="_blank"><img src="img/common/footer/emblem-pinterest.png" alt="Pinterest"/></a></li>
+						<li id="footer-googleplus"><a href="https://plus.google.com/112844332844002811178/" target="_blank"><img src="img/common/footer/emblem-googleplus.png" alt="Google+"/></a></li>
+					</ul>
+				</div>
+			</div>
+		</div>
+		<div id="bottom">
+			<div class="wrapper">
+				<div class="copyright">
+					&copy; Copyright 2013, Connect the Dots Foundation (Twestival). All Rights Reserved.
+				</div>
+				<div class="hosting">
+					Hosting provided by
+					<img src="img/common/footer/hosting.png" alt="mediatemple"/>
+				</div>
+			</div>
+		</div>
+		
+		<!-- 
+		<div style="position: absolute; top: 0px; left: 0px; opacity: 0.25; width: 100%; pointer-events: none; z-index:1000;">
+			<div style="margin: 0px auto 0px auto; width:1556px">
+				<img src="img/events/screenshot.png" />
+			</div>
+		</div>
+		-->
+
+		<script type="text/javascript">
+			var _gaq=[['_setAccount','UA-21127575-1'],['_trackPageview']];
+			(function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
+			g.src=('https:'==location.protocol?'//ssl':'//www')+'.google-analytics.com/ga.js';
+			s.parentNode.insertBefore(g,s)}(document,'script'));
+		</script>
+		<noscript></noscript>
+	</body>
+</html>
