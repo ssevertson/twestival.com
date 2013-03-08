@@ -43,17 +43,47 @@
  
   }
     .timeline{
-    	margin: 50px 0px 0;
+    	margin: 70px 0px 0;
     }
   .timeline .block{
-  	width: 490px;
+  	width: 449px;
   	border: 1px solid #d3d2d1;
   	background: rgba(238, 238, 238, 0.2);
-  	overflow: hidden;
+   	height: 160px;
+  	margin-top: -50px;
+  	padding: 25px 20px;
+  	font-family: 'Lato';
+ 	font-size: 15px;
+ 	margin-left: 1px;
   }
-  .timeline .pull-right{
-  	margin-top: -80px;
+
+  .timeline .block:first-of-type{
+  	margin-top: 0px;
   }
+ .timeline .date{
+ 	font-family: 'Melbourne-Bold';
+	font-size: 24px;
+	color: #50b1bd;
+	background: #fff;
+	padding: 5px 15px;
+	border: 1px solid #d3d2d1;
+	display: inline-block;
+	margin-top: -50px;
+ }
+ .timeline .date.pull-left{
+ 	margin-left: -21px;
+ }
+  .timeline .date.pull-right{
+ 	margin-right: -21px;
+ }
+ .timeline .info{
+ 	float: left;
+ 	padding-top: 20px;
+ }
+ .timeline .info img{
+ 	float: left;
+ 	margin-right: 15px;
+ }
   .pull-left{
   	float: left;
   }
