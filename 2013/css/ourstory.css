@@ -42,3 +42,21 @@
 	color: #fff;
  
   }
+    .timeline{
+    	margin: 50px 0px 0;
+    }
+  .timeline .block{
+  	width: 490px;
+  	border: 1px solid #d3d2d1;
+  	background: rgba(238, 238, 238, 0.2);
+  	overflow: hidden;
+  }
+  .timeline .pull-right{
+  	margin-top: -80px;
+  }
+  .pull-left{
+  	float: left;
+  }
+  .pull-right{
+  	float: right;
+  }
