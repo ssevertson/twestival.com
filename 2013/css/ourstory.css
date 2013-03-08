@@ -1,6 +1,9 @@
 .our-story{
 	background: red;
 }
+.video-block{
+	height: 400px;
+}
 
 #involve-video-story{
 	border: 1px solid #c6c6c6;
@@ -15,16 +18,27 @@
   	background: rgba(238, 238, 238, 0.2);
 	float: right;
 	position: relative;
-	top: -270px;
+	margin-top: -270px;
+	margin-left: 510px;
 	z-index: -1;
 	padding: 25px 30px 35px 85px;
- 	margin-left: 510px;
+ 	
  	color:#444;
  	font-family: 'Lato';
  	font-size: 15px;
  	line-height: 26px;
+
 }
 .twestival-story span{
 	font-weight: bold;
 	color: #50b1bd;
 }
+.notice{
+	background: #50b1bd;
+	padding: 10px 0px;
+	text-align: center;
+	font-family: 'Melbourne-Bold';
+	font-size: 24px;
+	color: #fff;
+ 
+  }
