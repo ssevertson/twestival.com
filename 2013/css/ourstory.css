@@ -11,11 +11,20 @@
 	float: left;
 }
 .twestival-story{
-	border: 1px solid #c6c6c6;
- 	margin: -250px 0 0 450px;
-	padding: 30px 40px 70px 145px;
- 	background: transparent;
+	border: 1px solid #d3d2d1;
+  	background: rgba(238, 238, 238, 0.2);
 	float: right;
 	position: relative;
+	top: -270px;
 	z-index: -1;
+	padding: 25px 30px 35px 85px;
+ 	margin-left: 510px;
+ 	color:#444;
+ 	font-family: 'Lato';
+ 	font-size: 15px;
+ 	line-height: 26px;
+}
+.twestival-story span{
+	font-weight: bold;
+	color: #50b1bd;
 }
