@@ -21,7 +21,4 @@
     }
 }());
 
- $(document).ready(function(){
-    $("a[rel^='prettyPhoto']").prettyPhoto();
-  })
 // Place any jQuery/helper plugins in here.
