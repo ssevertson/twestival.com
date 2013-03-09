@@ -28,18 +28,10 @@
 		<link rel="SHORTCUT ICON" href="favicon.ico"/>
 		<link rel="icon" type="image/ico" href="favicon.ico"/>
 		
-		<!-- Events Content -->
-		<link rel="stylesheet" href="css/events.css" />
-
-		<!-- Google Maps -->		
-   		<script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false"></script>
-   		
-   		<!-- Twitter -->
-		<script type="text/javascript" src="//widgets.twimg.com/j/2/widget.js"></script>
-		<link href="//widgets.twimg.com/j/2/widget.css" type="text/css" rel="stylesheet"/>
-   		
+		<!-- Press Content -->
+		<link rel="stylesheet" href="css/press.css" />
 	</head>
-	<body id="events">
+	<body id="press">
 		<!--[if lt IE 7]>
 			<p class="chromeframe">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">activate Google Chrome Frame</a> to improve your experience.</p>
 		<![endif]-->
@@ -90,247 +82,27 @@
 			</div>
 		</div>
 		
-		<!-- Events -->
-		<div class="white-bar">
-			<div class="clearfix"></div>
-			<div class="wrapper">
-				<h1>Official Events</h1>
-			</div>
-		
-			<div id="map"></div>
-			<div id="map-loading"><img src="img/common/loading.gif" alt="Loading"/></div>
-			<script type="text/javascript">
-				function initializeMap() {
-	  				var styles = [
-							{
-		  						"featureType": "landscape.natural.landcover",
-		  						"elementType": "geometry.fill",
-		  						stylers: [
-		  							{ "color": "#a0e6ed" },
-		  							{ "saturation": 100 },
-		  							{ "visibility": "on" }
-		  						]
-							}, {
-								"featureType": "water",
-								"stylers": [
-		  							{ "color": "#ffffff" }
-								]
-							}, {
-								featureType: "all",
-								elementType: "labels",
-								stylers: [
-		  							{ visibility: "off" }
-								]
-							}, {
-								featureType: "administrative",
-								elementType: "geometry",
-								stylers: [
-		  							{ visibility: "off" }
-								]
-	  					}
-	  				];
-					
-	  				var styledMap = new google.maps.StyledMapType(styles,
-							{name: "Twestival Map"});
-					
-	  				var mapOptions = {
-							zoom: 2,
-							center: new google.maps.LatLng(42.0, 10.0),
-							mapTypeControlOptions: {
-		 				 		mapTypeIds: [google.maps.MapTypeId.ROADMAP, 'map_style']
-							},
-							disableDefaultUI: true,
-							scrollwheel: false,
-							draggable: false
-	  				};
-					
-	  				var map = new google.maps.Map(document.getElementById('map'), mapOptions);
-					
-	 		 		map.mapTypes.set('map_style', styledMap);
-	  				map.setMapTypeId('map_style');
-	  				
-					var geocoder = new google.maps.Geocoder(); 
-					if (geocoder) { 
-	
-						var pin = {
-							url: 'img/events/pin.png',
-							anchor: new google.maps.Point(5, 17)};
-	
-						var geocode_result_handler = function(results, status, url) {
-							if(status == google.maps.GeocoderStatus.OK) { 
-								var marker = new google.maps.Marker({ 
-									map: map, 
-									position: results[0].geometry.location,
-									flat: true,
-									title: results[0].formatted_address,
-									icon: pin,
-									url: url});
-								google.maps.event.addListener(marker, 'click', function() {
-									window.location.href = this.url;
-								});
-							};
-						};
-						
-						var locs = [];
-						// DEFINE: city = SELECT Location.Name FROM EventLocation INNER JOIN Location ON EventLocation.LocationID = Location.LocationID WHERE Location.Type = 'CITY' AND EventLocation.EventID = ?
-						// DEFINE: stateProvince = SELECT Location.Name FROM EventLocation INNER JOIN Location ON EventLocation.LocationID = Location.LocationID WHERE Location.Type = 'STATE_PROVINCE' AND EventLocation.EventID = ?
-						// DEFINE: country = SELECT Location.Name FROM EventLocation INNER JOIN Location ON EventLocation.LocationID = Location.LocationID WHERE Location.Type = 'COUNTRY' AND EventLocation.EventID = ?
-						// DEFINE: address = city + (stateProvince ? : ', ' + stateProvince : '') + country
-						// DEFINE: subdomain = SELECT Blog.Subdomain FROM Event INNER JOIN Blog ON Event.BlogID = Blog.BlogID
-						// DEFINE: url = 'http://' + subdomain + '.twestival.com/'
-						locs.push({ address: 'Asheville, NC, USA' /* address */, url: '#' /* url */ });
-						locs.push({ address: 'Toronto, ON, Canada' /* address */, url: '#' /* url */ });
-						locs.push({ address: 'London, UK' /* address */, url: '#' /* url */ });
-						locs.push({ address: 'Tanzania' /* address */, url: '#' /* url */ });
-						locs.push({ address: 'Timbuktu' /* address */, url: '#' /* url */ });
-						var timer = setInterval(function() {
-							if(locs.length > 0) {
-								var random = parseInt(Math.random() * locs.length);
-								var loc = locs[random];
-								locs.splice(random, 1);
-								geocoder.geocode ( { 'address': loc.address }, function(results, status) { geocode_result_handler(results, status, loc.url ); } ); 
-							} else {
-								clearInterval(timer);
-							};
-						}, 500);
-					};
-					
-					google.maps.event.addListenerOnce(map, 'idle', function() {
-						$('#map-loading').fadeOut();
-					});
-				};
-				google.maps.event.addDomListener(window, 'load', initializeMap);
-	  		</script>
-	  	</div>
-		
+		<!-- Press -->
 		<div class="wrapper">
-			<div class="continent">
-				<div class="caption">
-					<div class="name">Africa</div>
-					<div class="stats">
-						12 countries,
-						14 cities
-					</div>
-					<div class="clearfix"></div>
+			<h1>Press</h1>
+			
+			<div class="coverage">
+				<div class="recent">
 				</div>
-				<ul class="events">
-					<li>
-						<span class="location">
-							<a href="http://dakar.twestival.com/" class="blog">Dakar</a>,
-							Sénégal,
-						</span>
-						<a href="http://twitter.com/DKRtwestival">@DKRtwestival</a>
-					</li>
-					<li>
-						<span class="location">
-							<a href="http://dakar.twestival.com/" class="blog">Bandar Seri Begawan</a>,
-							Brunei,
-						</span>
-						<a href="http://twitter.com/TwestivalBrunei">@TwestivalBrunei</a>
-					</li>
-				</ul>
+				<div class="previous">
+				</div>
 			</div>
 		
 			<div id="sidebars">
-				<div id="global-blog" class="sidebar">
-					<div class="title">Global Stories</div>
+				<div id="sidebar-download" class="sidebar">
+					<div class="title">Downloads</div>
 					<div class="body">
-						<ul></ul>
-						<script type="text/javascript">
-							// twestival.tumblr.com is not returning any posts, so use staff.tumblr.com as a temporary stand-in
-							$.getJSON('http://api.tumblr.com/v2/blog/staff.tumblr.com/posts/text?callback=?',
-									{
-										api_key: '3QS3yzIDSOfn2gZ0Tl8tItq5dcoBRDMhfL5O1pryvkcMDn3186',
-										limit: 4
-									},
-									function(response) {
-										var target = $('#global-blog .body ul');
-										for(var i = 0; i < response.response.posts.length; i++) {
-											var post = response.response.posts[i];
-											target
-													.append($('<li/>')
-															.append($('<a/>', {href: post.post_url, target: '_blank'})
-																	.append(
-																			post.title
-																			|| post.slug
-																					.replace(/-/g, ' ')
-																					.replace(/\w\S*/g, function(txt){ return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase(); })
-																	)
-															)
-													);
-										};
-									});
-						</script>
-						<noscript>
-							<a href="http://twestival.tumblr.com">See recent Twestival Tumblr Stories</a>
-						</noscript>
 					</div>
 				</div>
-				<div id="sidebar-twitter" class="sidebar">
-					<div class="title">Tweets</div>
+				<div id="sidebar-contact" class="sidebar">
+					<div class="title">Contact</div>
 					<div class="body">
-						<script type="text/javascript">
-							new TWTR.Widget({
-								version: 2,
-								type: 'search',
-								search: 'twestival',
-								interval: 5000,
-								title: '',
-								subject: '',
-								width: 270,
-								height: 260,
-								theme: {
-									shell: {
-										background: 'transparent',
-										color: '#444444'
-									},
-									tweets: {
-										background: 'transparent',
-										color: '#444444',
-										links: '#34747c'
-									}
-								},
-								features: {
-									scrollbar: false,
-									loop: true,
-									live: true,
-									hashtags: true,
-									timestamp: true,
-									avatars: true,
-									toptweets: true,
-									behavior: 'default'
-								}
-							}).render().start();
-						</script>
-						<noscript>
-							<a href="https://twitter.com/search?q=%40nyctwestival"><!-- href = 'https://twitter.com/search?q=%40' + DB: Event.TwitterName -->See @nyctwestival<!-- DB: Event.TwitterName --> Tweets</a>
-						</noscript>
-						<div class="fadeout"></div>
 					</div>
-				</div>
-				<div id="sidebar-instagram" class="sidebar">
-					<div class="title">Photos</div>
-					<div class="body" id="sidebar-instagram-body">
-					</div>
-					<script type="text/javascript">
-						$.getJSON('https://api.instagram.com/v1/tags/twestival/media/recent?callback=?',
-								{
-									client_id: '170979fa018b4752977f4b7c15d7c7fd',
-									count: 8
-								},
-								function(response) {
-									var target = $('#sidebar-instagram-body');
-									for(var i = 0; i < response.data.length; i++) {
-										var item = response.data[i];
-										target
-												.append($('<a/>', {href: item.link, target: '_blank'})
-														.append($('<img/>', {src: item.images.thumbnail.url, alt: item.caption.text})));
-									};
-								});
-					</script>
-					<noscript>
-						<a href="http://instagram.com/tags/twestival/feed/recent.rss">See recent #twestival Instagrams</a>
-					</noscript>
 				</div>
 			</div>
 			
@@ -430,13 +202,13 @@
 			</div>
 		</div>
 		
-		<!--
-		<div style="position: absolute; top: 105px; left: 0px; opacity: 0.25; width: 100%; pointer-events: none; z-index:1000;">
+		<!-- -->
+		<div style="position: absolute; top: 0px; left: 0px; opacity: 0.25; width: 100%; pointer-events: none; z-index:1000;">
 			<div style="margin: 0px auto 0px auto; width:1556px">
-				<img src="img/events/screenshot.png" />
+				<img src="img/press/screenshot.png" />
 			</div>
 		</div>
-		-->
+		<!-- -->
 
 		<script type="text/javascript">
 			var _gaq=[['_setAccount','UA-21127575-1'],['_trackPageview']];
