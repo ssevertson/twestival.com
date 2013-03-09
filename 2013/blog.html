@@ -32,7 +32,7 @@
 		<link rel="stylesheet" href="css/blog.css" />
 		
 		<!-- Twitter -->
-		<script type="text/javascript" src="//widgets.twimg.com/j/2/widget.js"></script>
+		<script src="//widgets.twimg.com/j/2/widget.js"></script>
 		<link href="//widgets.twimg.com/j/2/widget.css" type="text/css" rel="stylesheet"/>
 		
 		<!-- Social Media Counts -->
@@ -196,7 +196,11 @@
 			<div id="blog-posts">
 				<div class="post" id="post-3"><!-- id = 'post-' + BlogPost.PostID -->
 					<!-- Define: PostURL = 'http://' + DB: Blog.Subdomain + '.twestival.com/blog-entry/' + DB: DB: BlogPost.PostID + '/' + ToSafePageName(BlogPost.Subject) + '.html' -->
-					<a href="#" class="subject"><!-- href = PostURL -->TWESTIVAL KL:<br/>What YOU helped raise!</a>
+					<!-- IF authenticated for current Blog -->
+						<!-- Define: EditURL = 'http://' + DB: Blog.Subdomain + '.twestival.com/blog-entry/' + DB: DB: BlogPost.PostID + '?action=edit' -->
+						<a href="#" class="edit"><!-- href = EditURL -->Edit</a>
+					<!-- IF -->
+					<a href="#" class="subject"><!-- href = PostURL -->TWESTIVAL KL: What YOU helped raise!</a>
 				
 					<div class="date">April 5th, 2011</div>
 					<a href="comment" class="comment-link">Comment</a>

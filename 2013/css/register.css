@@ -49,11 +49,6 @@ form.involve label {
 form.invovle input {
 	display: block;
 }
-form.involve .required:after {
-	content: ' *';
-	font-weight: bold;
-	color: #e64d45;
-}
 form.involve input[type="radio"] {
 	margin-right: 8px;
 	margin-bottom: 24px;

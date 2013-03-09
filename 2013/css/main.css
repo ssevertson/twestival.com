@@ -54,6 +54,11 @@ textarea {
 	color: #000;
 	padding: 0.2em 0;
 }
+form .required:after {
+	content: ' *';
+	font-weight: bold;
+	color: #e64d45;
+}
 
 
 /* ==========================================================================
@@ -75,7 +80,7 @@ a:link, a:visited, a:hover, a:active {
 }
 
 input, select {
-	color: #666666;
+	color: #444444;
 	border: medium none;
 }
 .wrapper {
@@ -188,6 +193,7 @@ h1 {
 }
 #header .info .search {
 	background-color: #fbfaf6;
+	color: #666666;
 	height: 25px;
 	border: 1px solid #bf1e2e;
 }
