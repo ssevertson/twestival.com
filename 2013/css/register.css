@@ -1,10 +1,7 @@
 #register .intro {
 	font-family: 'Lato';
 	font-size: 14px;
-	width: 758px;
-}
-#register .intro a {
-	color: #50B1BD;
+	width: 805px;
 }
 
 form.involve {
@@ -69,6 +66,9 @@ form.involve .inline {
 }
 form.involve .symbols {
 	margin-top: 24px;
+}
+form.involve a {
+	color: #50B1BD;
 }
 
 form.involve input#involve-submit-button {
