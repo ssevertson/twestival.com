@@ -3,3 +3,6 @@
 	float: left;
 	padding-right: 15px;
 }
+.faqs dt, .faqs dd{
+	margin: 10px 0px;
+}
