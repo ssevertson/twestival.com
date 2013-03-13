@@ -6,3 +6,12 @@
 .faqs dt, .faqs dd{
 	margin: 10px 0px;
 }
+.faqs dt{
+	font-family: 'Melbourne-Bold';
+	font-size: 24px;
+}
+.faqs dd{
+	font-family: 'Lato';
+	font-size: 14px;
+	line-height: 25px;
+}
