@@ -1,0 +1,23 @@
+.box-block{
+	border: 1px solid #d3d2d1;
+	background: url('../img/common/sidebar/background.png');
+	padding: 22px 18px;
+	font-family: 'Lato';
+	font-size: 16px;
+	overflow: hidden;
+	margin: 20px 0;
+}
+.box-block img{
+	float: left;
+	margin-right: 20px;
+}
+.box-block p{
+	margin: 0;
+}
+.box-block p span{
+	font-weight: normal;
+	color: #50b1bd;
+	font-family: 'Melbourne-Bold';
+	font-size: 24px;
+
+}
