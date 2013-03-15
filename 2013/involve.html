@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>	  <html class="no-js lt-ie9 lt-ie8 lt-ie7" xmlns:fb="http://ogp.me/ns/fb#" xmlns:xml="http://www.w3.org/XML/1998/namespace" lang="en/us" xml:lang="en/us"> <![endif]-->
+<!--[if IE 7]>		 <html class="no-js lt-ie9 lt-ie8" xmlns:fb="http://ogp.me/ns/fb#" xmlns:xml="http://www.w3.org/XML/1998/namespace" lang="en/us" xml:lang="en/us"> <![endif]-->
+<!--[if IE 8]>		 <html class="no-js lt-ie9" xmlns:fb="http://ogp.me/ns/fb#" xmlns:xml="http://www.w3.org/XML/1998/namespace" lang="en/us" xml:lang="en/us"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" xmlns:fb="http://ogp.me/ns/fb#" lang="en/us" xmlns:xml="http://www.w3.org/XML/1998/namespace" xml:lang="en/us"> <!--<![endif]-->
+
+	<head>
+		<meta charset="utf-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+		<!--TODO: Copy title/keywords/description PHP from system/application/views/blocks/header.html-->
+		<title>Twestival 2013</title>
+		<meta name="viewport" content="width = 982, initial-scale = 0.5" />
+
+		<link rel="stylesheet" href="css/normalize.min.css" />
+		<link rel="stylesheet" href="css/main.css" />
+
+		<script src="js/vendor/modernizr-2.6.2.min.js"></script>
+		<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+		<script>window.jQuery || document.write('<script src="js/vendor/jquery-1.9.1.min.js"><\/script>')</script>
+
+		<script src="js/plugins.js"></script>
+		<script src="js/main.js"></script>
+
+		<link href="//fonts.googleapis.com/css?family=Lato" rel="stylesheet" type="text/css"/>
+		<meta name="google-translate-customization" content="dce9ce2b70773ac7-f775263886d4b470-g2466ff957e338966-d"></meta>
+		
+		<link rel="icon" type="image/vnd.microsoft.icon" href="favicon.ico"/>
+		<link rel="SHORTCUT ICON" href="favicon.ico"/>
+		<link rel="icon" type="image/ico" href="favicon.ico"/>
+		
+		<!-- Register Content -->
+		<link rel="stylesheet" href="css/involve.css" />
+	</head>
+	<body id="register">
+		<!--[if lt IE 7]>
+			<p class="chromeframe">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">activate Google Chrome Frame</a> to improve your experience.</p>
+		<![endif]-->
+
+		<a href="#content" class="accessible-text">Skip navigation</a>
+
+		<!-- 
+		<div id="google_translate_element"></div><script type="text/javascript">
+			function googleTranslateElementInit() {
+			  new google.translate.TranslateElement({pageLanguage: 'en', gaTrack: true, gaId: 'UA-21127575-1'}, 'google_translate_element');
+			}
+		</script><script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+		 -->
+ 
+		<div id="header">
+			<div class="wrapper">
+				<img class="logo" src="img/common/header/logo.png" alt="TWESTIVAL: tweet. meet. give."/>
+				<div class="menu">
+					<ul class="horizontal">
+						<li><a href="our_story">Our Story</a></li>
+						<li><a href="stats-scoreboard">Impact</a></li>
+						<li><a href="http://twestival.tumblr.com/">Global Blog</a></li>
+						<li><a href="events">Official Events</a></li>
+						<li class="button-gray"><a href="get_involved">Get Involved</a></li>
+					</ul>
+				</div>
+				<div class="info">
+					<div class="social-media">
+						<a href="https://www.facebook.com/sharer.php?u=http://www.twestival.com" target="_blank" id="header-social-media-facebook">
+							<img src="img/common/header/share-facebook.png" alt="Facebook Like"/>
+						</a>
+						<a href="https://twitter.com/share?text=Check%20out%20%40Twestival!%20It's%20back%20and%20you%20can%20register%20your%20city%20at%26url%3Dhttp%3A%2F%2Fwww.twestival.com" target="_blank" id="header-social-media-twitter">
+							<img src="img/common/header/share-twitter.png" alt="Twitter Share"/>
+						</a>
+					</div>
+					<ul class="stats">
+						<li id="stats-cities"><!-- SELECT COUNT(*) FROM Year INNER JOIN Event ON Year.Year = Event.Year INNER JOIN EventLocation ON Event.EventId = EventLocation.EventId INNER JOIN Location ON EventLocation.LocationID = Location.LocationID WHERE Year.Active = TRUE AND Location.Type = 'CITY'  -->209 cities</li>
+						<li id="stats-countries"><!-- SELECT COUNT(*) FROM Year INNER JOIN Event ON Year.Year = Event.Year INNER JOIN EventLocation ON Event.EventId = EventLocation.EventId INNER JOIN Location ON EventLocation.LocationID = Location.LocationID WHERE Year.Active = TRUE  AND Location.Type = 'COUNTRY' -->241 countries</li>
+						<li id="stats-total"><!-- SELECT SUM(Event.DonationTotalUSD) FROM Year INNER JOIN Event ON Year.Year = Event.Year WHERE Year.Active = TRUE -->$565,928 raised</li>
+					</ul>
+					<form action="url/to/search" method="GET" class="search">
+						<label class="accessible-text" for="search-query">Find a Twestival</label>
+						<input type="text" id="search-query" name="q" value="Find a Twestival"/>
+						<label class="accessible-text" for="search-button">Search</label>
+						<input type="image" id="search-button" name="btn" src="img/common/header/search.png" alt="Search"/>
+					</form>
+				</div>
+			</div>
+		</div>
+		
+ 		<div class="wrapper">
+			<h1>Get Involved in Twestival</h1> 
+			<div class="box-block">
+				<img src="img/common/placeholder.jpg" />
+						<p>
+							<span>Organize a Twestival</span> <br/>
+							Forming a team of volunteers to host a Twestival in your community is an incredible opportunity to work closely with others to make a real difference for a local cause you believe in. It can also be tremendous fun! (Copy to be updated)</p>
+			</div>
+						<div class="box-block">
+				<img src="img/common/placeholder.jpg" />
+						<p>
+							<span>Organize a Twestival</span> <br/>
+							Forming a team of volunteers to host a Twestival in your community is an incredible opportunity to work closely with others to make a real difference for a local cause you believe in. It can also be tremendous fun! (Copy to be updated)</p>
+			</div>
+						<div class="box-block">
+				<img src="img/common/placeholder.jpg" />
+						<p>
+							<span>Organize a Twestival</span> <br/>
+							Forming a team of volunteers to host a Twestival in your community is an incredible opportunity to work closely with others to make a real difference for a local cause you believe in. It can also be tremendous fun! (Copy to be updated)</p>
+			</div>
+						<div class="box-block">
+				<img src="img/common/placeholder.jpg" />
+						<p>
+							<span>Organize a Twestival</span> <br/>
+							Forming a team of volunteers to host a Twestival in your community is an incredible opportunity to work closely with others to make a real difference for a local cause you believe in. It can also be tremendous fun! (Copy to be updated)</p>
+			</div>
+		</div>
+		</div>
+		
+		<div class="clearfix"></div>
+
+		
+		<div id="footer">
+			<div class="wrapper">
+				<div class="newsletter">
+					<form action="http://twestival.us2.list-manage1.com/subscribe/post?u=1e12004a88086491a227acb3a&id=7938ef1692" method="POST" class="subscribe" target="_blank">
+						<label for="subscribe-email">Would you like to receive a Twestival Newsletter?</label>
+						<input type="text" id="subscribe-email" name="mce-EMAIL" value=""/><br/>
+						<input type="submit" id="subscribe-button" value="Sign Up"/>
+					</form>
+				</div>
+				<div class="menu">
+					<ul class="horizontal">
+						<li><a href="team">Team</a></li>
+						<li><a href="partners">Partners</a></li>
+						<li><a href="faq">FAQ</a></li>
+						<li><a href="disclaimer">Conditions</a></li>
+						<li><a href="privacy">Privacy</a></li>
+						<li><a href="press">Press</a></li>
+						<li id="footer-contact-us"><a href="mailto:info@twestival.com">Contact Us</a></li>
+					</ul>
+				</div>
+				<div class="social-media">
+					<div class="title">Follow Us:</div>
+					<ul class="horizontal">
+						<li id="footer-twitter"><a href="http://twitter.com/twestival" target="_blank"><img src="img/common/footer/emblem-twitter.png" alt="Twitter"/></a></li>
+						<li id="footer-facebook"><a href="http://facebook.com/twestival" target="_blank"><img src="img/common/footer/emblem-facebook.png" alt="Facebook"/></a></li>
+						<li id="footer-linkedin"><a href="http://linkedin.com/twestival" target="_blank"><img src="img/common/footer/emblem-linkedin.png" alt="LinkedIn"/></a></li>
+						<li id="footer-tumblr"><a href="http://twestival.tumblr.com/l" target="_blank"><img src="img/common/footer/emblem-tumblr.png" alt="Tumblr"/></a></li>
+						<li id="footer-youtube"><a href="http://www.youtube.com/user/twestivalglobal" target="_blank"><img src="img/common/footer/emblem-youtube.png" alt="YouTube"/></a></li>
+						<li id="footer-pinterest"><a href="https://pinterest.com/twestival/" target="_blank"><img src="img/common/footer/emblem-pinterest.png" alt="Pinterest"/></a></li>
+						<li id="footer-googleplus"><a href="https://plus.google.com/112844332844002811178/" target="_blank"><img src="img/common/footer/emblem-googleplus.png" alt="Google+"/></a></li>
+					</ul>
+				</div>
+			</div>
+		</div>
+		<div id="bottom">
+			<div class="wrapper">
+				<div class="copyright">
+					&copy; Copyright 2013, Connect the Dots Foundation (Twestival). All Rights Reserved.
+				</div>
+				<div class="hosting">
+					Hosting provided by
+					<img src="img/common/footer/hosting.png" alt="mediatemple"/>
+				</div>
+			</div>
+		</div>
+		
+		<!--
+		<div style="position: absolute; top: 0px; left: 0px; opacity: 0.25; width: 100%; pointer-events: none; z-index:1000;">
+			<div style="margin: 0px auto 0px auto; width:1556px">
+				<img src="img/register/screenshot.png" />
+			</div>
+		</div>
+		-->
+
+		<script type="text/javascript">
+			var _gaq=[['_setAccount','UA-21127575-1'],['_trackPageview']];
+			(function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
+			g.src=('https:'==location.protocol?'//ssl':'//www')+'.google-analytics.com/ga.js';
+			s.parentNode.insertBefore(g,s)}(document,'script'));
+		</script>
+		<noscript></noscript>
+	</body>
+</html>
