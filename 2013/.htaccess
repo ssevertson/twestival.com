@@ -1,0 +1,5 @@
+RewriteEngine on
+RewriteRule ^$ index.html [L]
+RewriteCond %{REQUEST_URI} !/php/dispatch\.php$
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^.*$ php/dispatch.php [L,QSA]
