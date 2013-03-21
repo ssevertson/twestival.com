@@ -8,6 +8,8 @@ $baseDir = dirname($vendorDir);
 return array(
     'Twestival' => $baseDir . '/src/',
     'Tonic' => $vendorDir . '/peej/tonic/src/',
+    'Psr\\Log\\' => $vendorDir . '/psr/log/',
     'Pimple' => $vendorDir . '/pimple/pimple/lib/',
     'Mustache' => $vendorDir . '/mustache/mustache/src/',
+    'Monolog' => $vendorDir . '/monolog/monolog/src/',
 );

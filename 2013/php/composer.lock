@@ -1,6 +1,68 @@
 {
-    "hash": "eff4131484ce31572352ba01b7f1ab1c",
+    "hash": "b497792b396962857926a5e6f34c34d1",
     "packages": [
+        {
+            "name": "monolog/monolog",
+            "version": "1.4.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Seldaek/monolog",
+                "reference": "1.4.0"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Seldaek/monolog/zipball/1.4.0",
+                "reference": "1.4.0",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.0",
+                "psr/log": ">=1.0,<2.0"
+            },
+            "require-dev": {
+                "doctrine/couchdb": "dev-master",
+                "mlehner/gelf-php": "1.0.*",
+                "raven/raven": "0.3.*"
+            },
+            "suggest": {
+                "doctrine/couchdb": "Allow sending log messages to a CouchDB server",
+                "ext-amqp": "Allow sending log messages to an AMQP server (1.0+ required)",
+                "ext-mongo": "Allow sending log messages to a MongoDB server",
+                "mlehner/gelf-php": "Allow sending log messages to a GrayLog2 server",
+                "raven/raven": "Allow sending log messages to a Sentry server"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.4.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-0": {
+                    "Monolog": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Jordi Boggiano",
+                    "email": "j.boggiano@seld.be",
+                    "homepage": "http://seld.be",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Sends your logs to files, sockets, inboxes, databases and various web services",
+            "homepage": "http://github.com/Seldaek/monolog",
+            "keywords": [
+                "log",
+                "logging",
+                "psr-3"
+            ],
+            "time": "2013-02-13 18:06:51"
+        },
         {
             "name": "mustache/mustache",
             "version": "v2.1.0",
@@ -45,16 +107,16 @@
         },
         {
             "name": "peej/tonic",
-            "version": "dev-master",
+            "version": "v3.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/peej/tonic.git",
-                "reference": "f794a04657adf4b86e1a59982453ac427b123b58"
+                "reference": "v3.1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/peej/tonic/zipball/f794a04657adf4b86e1a59982453ac427b123b58",
-                "reference": "f794a04657adf4b86e1a59982453ac427b123b58",
+                "url": "https://api.github.com/repos/peej/tonic/zipball/v3.1",
+                "reference": "v3.1",
                 "shasum": ""
             },
             "require": {
@@ -90,7 +152,7 @@
                 "microframework",
                 "rest"
             ],
-            "time": "2013-03-20 13:09:29"
+            "time": "2013-03-20 15:12:58"
         },
         {
             "name": "pimple/pimple",
@@ -137,6 +199,44 @@
                 "dependency injection"
             ],
             "time": "2013-03-08 08:21:40"
+        },
+        {
+            "name": "psr/log",
+            "version": "1.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/php-fig/log",
+                "reference": "1.0.0"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://github.com/php-fig/log/archive/1.0.0.zip",
+                "reference": "1.0.0",
+                "shasum": ""
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "Psr\\Log\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "PHP-FIG",
+                    "homepage": "http://www.php-fig.org/"
+                }
+            ],
+            "description": "Common interface for logging libraries",
+            "keywords": [
+                "log",
+                "psr",
+                "psr-3"
+            ],
+            "time": "2012-12-21 11:40:51"
         }
     ],
     "packages-dev": [
@@ -146,9 +246,9 @@
 
     ],
     "minimum-stability": "stable",
-    "stability-flags": {
-        "peej/tonic": 20
-    },
+    "stability-flags": [
+
+    ],
     "platform": [
 
     ],

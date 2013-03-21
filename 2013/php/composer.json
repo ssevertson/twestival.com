@@ -1,8 +1,9 @@
 {
 	"require": {
-		"peej/tonic": "dev-master",
+		"peej/tonic": "v3.1",
 		"mustache/mustache": "2.1.*",
-		"pimple/pimple": "1.0.*"
+		"pimple/pimple": "1.0.*",
+		"monolog/monolog": "1.4.*"
 	},
 	"autoload": {
 		"psr-0": {"Twestival": "src/"}

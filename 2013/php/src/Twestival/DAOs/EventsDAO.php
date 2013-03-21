@@ -3,8 +3,8 @@
 class EventsDAO extends BaseDAO
 {
 	function countEventLocationsByType($locationType) {
-		$db = $this->container['db_ro'];
-		$query = $db->prepare('
+		$conn = $this->container['connection'];
+		$query = $conn->prepare('
 			SELECT
 				COUNT(DISTINCT Location.LocationID)
 			FROM
@@ -25,8 +25,8 @@ class EventsDAO extends BaseDAO
 	}
 	
 	function sumEventDonationTotalUSD() {
-		$db = $this->container['db_ro'];
-		$query = $db->prepare('
+		$conn = $this->container['connection'];
+		$query = $conn->prepare('
 			SELECT
 				SUM(Event.DonationTotalUSD)
 			FROM

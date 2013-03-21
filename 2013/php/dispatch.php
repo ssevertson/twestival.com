@@ -1,11 +1,13 @@
 <?php
 
-if (!@include('vendor/autoload.php')) {
+if (!@include('vendor/autoload.php'))
+{
 	die('Could not find autoloader');
 }
 
-
+$baseDir = realpath(dirname(__FILE__));
 $baseUri = '/2013';
+
 $app = new Tonic\Application(array(
 	'load' => array(
 		'src/Twestival/Resources/*.php'
@@ -15,50 +17,51 @@ $app = new Tonic\Application(array(
 		'blog' => '/blog'),
 	'baseUri' => $baseUri
 ));
-$app->baseDir = dirname(__FILE__);
+
 $request = new Tonic\Request(array(
-	'uri' => getURI($baseUri)
+	'uri' => getTonicURI($baseUri)
 ));
 
-$container = new Pimple();
-$container['db_ro'] = function() {
-	$config = require 'config/database_ro.php';
-	try {
-		return new \PDO(
-			$config['dsn'],
-			$config['username'],
-			$config['password'],
-			array(
-				\PDO::ATTR_ERRMODE => \PDO::ERRMODE_EXCEPTION,
-				\PDO::ATTR_PERSISTENT => false,
-				\PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES utf8'
-			));
-	} catch (Exception $e) {
-		throw $e;
-	}
-};
+$container = new Twestival\Container($baseDir, $baseUri, $request->method == 'GET');
 
-try {
+try
+{
 	$resource = $app->getResource($request);
 	$resource->container = $container;
 	$response = $resource->exec();
+	
+	if($container['connection.transaction.open'])
+	{
+		$connection = $container['connection'];
+		$connection->commit();
+	}
 
-} catch (Tonic\NotFoundException $e) {
+}
+catch (Tonic\NotFoundException $e)
+{
+	// TODO: Log exception and redirect to generic error page with 404 response
 	$response = new Tonic\Response(404, $e->getMessage());
-
-} catch (Tonic\UnauthorizedException $e) {
+}
+catch (Tonic\UnauthorizedException $e)
+{
+	// TODO: Redirect to namespace-relative login page, instead of basic auth
 	$response = new Tonic\Response(401, $e->getMessage());
 	$response->wwwAuthenticate = 'Basic realm="My Realm"';
-} catch (Tonic\Exception $e) {
+}
+catch (Tonic\Exception $e)
+{
+	// Log exception and redirect to generic error page with $e->getCode() response
 	$response = new Tonic\Response($e->getCode(), $e->getMessage());
+}
+catch (Exception $e)
+{
+	// Log exception and redirect to generic error page
 }
 
 $response->output();
 
 
-
-
-function getURI($baseUri)
+function getTonicURI($baseUri)
 {
 	$namespace = 'global';
 	$hostname = $_SERVER['HTTP_HOST'];
@@ -86,9 +89,6 @@ function getURI($baseUri)
 	{
 		// use PHP_SELF from Apache environment
 		$uri = substr($_SERVER['PHP_SELF'], strlen($_SERVER['SCRIPT_NAME']));
-	} else {
-		// fail
-		throw new \Exception('URI not provided');
 	}
 	
 	if($baseUri && substr($uri, 0, strlen($baseUri)) == $baseUri)
@@ -98,3 +98,4 @@ function getURI($baseUri)
 	
 	return '/' . $namespace . $uri;
 }
+
