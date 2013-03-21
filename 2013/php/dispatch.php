@@ -35,7 +35,6 @@ try
 		$connection = $container['connection'];
 		$connection->commit();
 	}
-
 }
 catch (Tonic\NotFoundException $e)
 {

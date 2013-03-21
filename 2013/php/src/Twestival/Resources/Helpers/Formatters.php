@@ -1,6 +1,6 @@
 <?php namespace Twestival\Resources\Helpers;
 
-class NumberFormatters extends BaseHelper
+class Formatters extends BaseHelper
 {
 	const US_LOCALE = 'en_US.UTF-8';
 

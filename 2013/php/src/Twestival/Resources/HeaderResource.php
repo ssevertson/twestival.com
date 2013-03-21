@@ -13,7 +13,6 @@ class HeaderResource extends BaseResource
 	function html() {
 		$globalStatsService = new GlobalStatsService($this->container);
 		$summaryStats = $globalStatsService->getSummaryStats();
-		
 		return $this->renderMustache('Header', $summaryStats);
 	}
 }

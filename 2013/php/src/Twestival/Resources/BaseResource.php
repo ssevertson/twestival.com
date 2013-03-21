@@ -15,13 +15,16 @@ class BaseResource extends \Tonic\Resource
 		$mustache = new Mustache_Engine(array(
 			'loader' => new Mustache_Loader_FilesystemLoader($this->container['baseDir'] . '/src/Twestival/Views'),
 			'helpers' => array(
-				'format_number' => new Helpers\NumberFormatters()
+				'format' => new Helpers\Formatters(),
+				'siteAdmin' => array($this, 'renderForSiteAdmin'),
+				'currentBlogEventAdmin' => array($this, 'renderForCurrentBlogEventAdmin')
 			)
 		));
 		
 		return $mustache->loadTemplate($template)->render($data);
 	}
 	
+
 	function isSiteAdmin()
 	{
 		if(!$this->container['session.exists'])
@@ -30,6 +33,10 @@ class BaseResource extends \Tonic\Resource
 		}
 		$session = $this->container['session'];
 		return 'SITE_ADMIN' == $session['scope'];
+	}
+	function renderForSiteAdmin($text, $context)
+	{
+		return $this->isSiteAdmin() ? $context->render($text) : '';
 	}
 	function requireSiteAdmin()
 	{
@@ -53,6 +60,10 @@ class BaseResource extends \Tonic\Resource
 	{
 		$blog = $this->container['blog.subdomain'];
 		return isset($blog) && $this->isBlogEventAdmin($blog);
+	}
+	function renderForCurrentBlogEventAdmin($text, $context)
+	{
+		return $this->isCurrentBlogEventAdmin() ? $context->render($text) : '';
 	}
 	function requireCurrentBlogEventAdmin()
 	{
