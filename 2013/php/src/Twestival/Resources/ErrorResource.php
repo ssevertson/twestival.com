@@ -7,8 +7,10 @@ class ErrorResource extends BaseResource
 {
 	/**
 	 * @method get
+	 * @provides text/html
 	 */
-	function html() {
+	function html()
+	{
 		$code = $_GET['code'];
 		if(is_numeric($code))
 		{

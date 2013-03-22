@@ -10,8 +10,10 @@ class GlobalLoginResource extends BaseResource
 {
 	/**
 	 * @method GET
+	 * @provides text/html
 	 */
-	function showLogin() {
+	function showLogin()
+	{
 		if($this->container['session.exists'])
 		{
 			session_start();
@@ -25,8 +27,10 @@ class GlobalLoginResource extends BaseResource
 	
 	/**
 	 * @method POST
+	 * @provides text/html
 	 */
-	function authenticate() {
+	function authenticate()
+	{
 		$loginService = new LoginService($this->container);
 		if($loginService->authenticateSiteAdmin($_POST['username'], $_POST['password']))
 		{

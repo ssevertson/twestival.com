@@ -8,8 +8,10 @@ class BlogIndexResource extends BaseResource
 {
 	/**
 	 * @method get
+	 * @provides text/html
 	 */
-	function html() {
+	function html()
+	{
 		return $this->renderMustacheHeaderFooter('Header');
 	}
 }

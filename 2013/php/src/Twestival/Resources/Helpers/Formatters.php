@@ -30,7 +30,7 @@ class Formatters extends BaseHelper
 	public function _toEuropeanDate($text, $context)
 	{
 		$dateText = $context->render($text);
-		return date('j F Y', strtotime($dateText));
+		return $dateText ? date('j F Y', strtotime($dateText)) : 'TBD';
 	}
 }
 ?>

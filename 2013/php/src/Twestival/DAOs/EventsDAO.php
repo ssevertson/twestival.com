@@ -40,12 +40,11 @@ class EventsDAO extends BaseDAO
 		return floatval($query->fetchColumn());
 	}
 	
-	function getPromotionsForPageSection($pageName, $sectionName) {
+	function getPromotionsForPageSection($pageName, $sectionName, $limit) {
 		$conn = $this->container['connection'];
 		$query = $conn->prepare('
 			SELECT
 				Event.*,
-				EventPromotion.Sequence AS PromotionSequence,
 				EventPromotion.Name AS PromotionName,
 				EventPromotion.ImageFilename AS PromotionImageFilename,
 				Blog.Subdomain
@@ -63,10 +62,13 @@ class EventsDAO extends BaseDAO
 				SitePage.Name = ?
 				AND SitePagePromotionSection.Name = ?
 			ORDER BY
-				EventPromotion.Sequence;
+				EventPromotion.Sequence
+			LIMIT ?;
 		');
 		$query->bindValue(1, $pageName, \PDO::PARAM_STR);
 		$query->bindValue(2, $sectionName, \PDO::PARAM_STR);
+		$query->bindValue(3, $limit, \PDO::PARAM_INT);
+
 		$query->execute();
 		return $query->fetchAll(\PDO::FETCH_OBJ);
 	}
