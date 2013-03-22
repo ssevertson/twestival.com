@@ -53,8 +53,12 @@ catch (Tonic\UnauthorizedException $e)
 catch (Tonic\Exception $e)
 {
 	$container['logger']->addError($e->getMessage());
-	// Redirect to generic error page with $e->getCode() response
 	$response = buildRedirectResponse($request, $baseUri . '/error?code=' . $e->getCode());
+}
+catch (RedirectException $e)
+{
+	$container['logger']->addInfo('Redirecting to ' . $e->getUri());
+	$response = buildRedirectResponse($request, $baseUri . $e->getUri());
 }
 catch (Exception $e)
 {
@@ -117,7 +121,7 @@ function getRequestTonicUri($namespace, $baseUri)
 function buildRedirectResponse($request, $uri)
 {
 	$response = new \Tonic\Response($request);
-	$response->code = \Tonic\Response::TEMPORARYREDIRECT;
+	$response->code = \Tonic\Response::MOVEDPERMANENTLY;
 	$response->Location = $uri;
 	return $response;
 }

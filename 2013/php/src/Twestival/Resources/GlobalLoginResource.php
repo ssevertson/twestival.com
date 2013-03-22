@@ -30,10 +30,7 @@ class GlobalLoginResource extends BaseResource
 		$loginService = new LoginService($this->container);
 		if($loginService->authenticateSiteAdmin($_POST['username'], $_POST['password']))
 		{
-			# TODO: Do something real here - redirect somewhere?
-			return $this->renderMustacheHeaderFooter('Login', array(
-				'LoginType' => 'Success!!!',
-			));
+			throw new \Twestival\RedirectException('/');
 		}
 		else
 		{

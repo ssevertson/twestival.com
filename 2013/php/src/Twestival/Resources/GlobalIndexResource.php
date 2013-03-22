@@ -3,9 +3,9 @@
 use Twestival\Services\GlobalStatsService;
 /**
  * @namespace global
- * @uri /test
+ * @uri /index
  */
-class GlobalHomeResource extends BaseResource
+class GlobalIndexResource extends BaseResource
 {
 	/**
 	 * @method get
