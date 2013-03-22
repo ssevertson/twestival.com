@@ -39,5 +39,36 @@ class EventsDAO extends BaseDAO
 		$query->execute();
 		return floatval($query->fetchColumn());
 	}
+	
+	function getPromotionsForPageSection($pageName, $sectionName) {
+		$conn = $this->container['connection'];
+		$query = $conn->prepare('
+			SELECT
+				Event.*,
+				EventPromotion.Sequence AS PromotionSequence,
+				EventPromotion.Name AS PromotionName,
+				EventPromotion.ImageFilename AS PromotionImageFilename,
+				Blog.Subdomain
+			FROM
+				SitePage
+				INNER JOIN SitePagePromotionSection
+					ON SitePage.SitePageID = SitePagePromotionSection.SitePageID
+				INNER JOIN EventPromotion
+					ON SitePagePromotionSection.PromotionSectionID = EventPromotion.PromotionSectionID
+				INNER JOIN Event
+					ON EventPromotion.EventID = Event.EventID
+				INNER JOIN Blog
+					ON Event.BlogID = Blog.BlogID
+			WHERE
+				SitePage.Name = ?
+				AND SitePagePromotionSection.Name = ?
+			ORDER BY
+				EventPromotion.Sequence;
+		');
+		$query->bindValue(1, $pageName, \PDO::PARAM_STR);
+		$query->bindValue(2, $sectionName, \PDO::PARAM_STR);
+		$query->execute();
+		return $query->fetchAll(\PDO::FETCH_OBJ);
+	}
 }
 ?>

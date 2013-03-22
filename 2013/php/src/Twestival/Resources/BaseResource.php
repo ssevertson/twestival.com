@@ -2,7 +2,7 @@
 
 use Mustache_Engine;
 use Mustache_Loader_FilesystemLoader;
-use Twestival\Services\GlobalStatsService;
+use Twestival\Services\CommonService;
 
 class BaseResource extends \Tonic\Resource
 {
@@ -13,9 +13,11 @@ class BaseResource extends \Tonic\Resource
 	
 	function renderMustacheHeaderFooter($template, $data = array())
 	{
-		$globalStatsService = new GlobalStatsService($this->container);
-		$summaryStats = $globalStatsService->getSummaryStats();
+		$common = new CommonService($this->container);
+		$summaryStats = $common->getSummaryStats();
 		$merged = array_merge($data, $summaryStats);
+		$year = $common->getMostRecentActiveYear();
+		$merged['CurrentYear'] = $year;
 		return $this->renderMustache($template, $merged);
 	}
 	

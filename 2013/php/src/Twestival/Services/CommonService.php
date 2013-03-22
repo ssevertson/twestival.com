@@ -1,8 +1,9 @@
 <?php namespace Twestival\Services;
 
 use Twestival\DAOs\EventsDAO;
+use Twestival\DAOs\YearsDAO;
 
-class GlobalStatsService extends BaseService
+class CommonService extends BaseService
 {
 	function getSummaryStats()
 	{
@@ -12,6 +13,12 @@ class GlobalStatsService extends BaseService
 			'CountryCount' => $events->countEventLocationsByType('COUNTRY'),
 			'DonationTotalUSD' => $events->sumEventDonationTotalUSD()
 		);
+	}
+	
+	function getMostRecentActiveYear()
+	{
+		$years = new YearsDAO($this->container);
+		return $years->getMostRecentActiveYear();
 	}
 }
 ?>

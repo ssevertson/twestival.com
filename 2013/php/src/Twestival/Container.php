@@ -2,12 +2,10 @@
 
 class Container extends \Pimple
 {
-	function __construct($baseDir, $baseUri, $readOnly)
+	function __construct($array)
 	{
-		$this['baseDir'] = $baseDir;
-		$this['configDir'] = $baseDir . '/config';
-		$this['baseUri'] = $baseUri;
-		$this['readOnly'] = $readOnly;
+		parent::__construct($array);
+		$this['configDir'] = $array['baseDir'] . '/config';
 		
 		$this['session.config'] = $this->share(function($c)
 		{
@@ -97,21 +95,6 @@ class Container extends \Pimple
 			}
 		});
 		
-		$this['request.blog.subdomain'] = $this->share(function($c)
-		{
-			$hostname = $_SERVER['HTTP_HOST'];
-			$blogSubdomain = NULL;
-			if(isset($hostname) && substr_count($hostname, '.') >= 2)
-			{
-				$subdomain = substr($hostname, 0, strpos($hostname, '.'));
-				if('www' != $subdomain && 'local' != $subdomain)
-				{
-					$blogSubdomain = $subdomain;
-				}
-			}
-			return $blogSubdomain;
-		});
-		
 		$this['security.scope'] = $this->share(function($c)
 		{
 			$scope = NULL;
@@ -160,19 +143,19 @@ class Container extends \Pimple
 			}
 			else if('EVENT_ADMIN' == $scope)
 			{
-				$securityBlog = $c['security.blog.subdomain'];
-				if(!isset($securityBlog))
+				$securitySubdomain = $c['security.blog.subdomain'];
+				if(!$securitySubdomain)
 				{
 					return false;
 				}
 				
-				$requestBlog = $c['request.blog.subdomain'];
-				if(!isset($requestBlog))
+				$requestSubdomain = $c['request.subdomain'];
+				if(!$requestSubdomain)
 				{
 					return false;
 				}
 				
-				return $securityBlog == $requestBlog;
+				return $securitySubdomain == $requestSubdomain;
 			
 			}
 			return false;

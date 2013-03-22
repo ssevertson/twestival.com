@@ -1,7 +1,7 @@
 {{> HTMLTag }}
 	<head>
 		{{> HeadContent }}
-		<title>Twestival {{Year}}</title>
+		<title>Twestival {{CurrentYear}}</title>
 		
 		<link rel="stylesheet" href="css/home.css" />
 		
@@ -35,21 +35,23 @@
 		{{> Header }}
 		
 		<div id="header-stamps" class="wrapper">
-			<!-- TODO: Make manageable via PHP -->
-			<div class="stamp" id="header-stamp-1">
-				<a href="#">
-					<img src="img/home/stamps/content/stamp-1.jpg" alt="Cracow Event" />
-					<span class="location">
-						Cracow
-					</span>
-					<span class="date">
-						23 November 2013
-					</span>
-				</a>
-			</div>
+			{{# PrimaryPromotions }}
+				<div class="stamp" id="header-stamp-{{Sequence}}">
+					<a href="{{LinkUri}}">
+						<img src="{{ImageUri}}" alt="{{Name}} Event" />
+						<span class="location">
+							{{Name}}
+						</span>
+						<span class="date">
+							{{#format.toEuropeanDate}}{{Date}}{{/format.toEuropeanDate}}
+						</span>
+					</a>
+				</div>
+			{{/ PrimaryPromotions }}
+			<!--
 			<div class="stamp" id="header-stamp-2">
 				<a href="#">
-					<img src="img/home/stamps/content/stamp-2.jpg" alt="Amsterdam Event" />
+					<img src="img/home/promotion/primary/content/stamp-2.jpg" alt="Amsterdam Event" />
 					<span class="location">
 						Amsterdam
 					</span>
@@ -60,7 +62,7 @@
 			</div>
 			<div class="stamp" id="header-stamp-3">
 				<a href="#">
-					<img src="img/home/stamps/content/stamp-3.jpg" alt="Tokyo Event" />
+					<img src="img/home/promotion/primary/content/stamp-3.jpg" alt="Tokyo Event" />
 					<span class="location">
 						Tokyo
 					</span>
@@ -71,7 +73,7 @@
 			</div>
 			<div class="stamp" id="header-stamp-4">
 				<a href="#">
-					<img src="img/home/stamps/content/stamp-4.jpg" alt="Salt Lake City Event" />
+					<img src="img/home/promotion/primary/content/stamp-4.jpg" alt="Salt Lake City Event" />
 					<span class="location">
 						Salt Lake City
 					</span>
@@ -80,6 +82,7 @@
 					</span>
 				</a>
 			</div>
+			-->
 		</div>
 
 		<div id="slides">
@@ -302,7 +305,7 @@
 		
 		<div id="events" class="wrapper">
 			<div class="header">
-				<img src="img/home/events/header.png" alt="Official Events"/>
+				<img src="img/home/promotion/secondary/header.png" alt="Official Events"/>
 			</div>
 			
 			<!-- TODO: Make manageable via PHP -->
@@ -310,28 +313,28 @@
 				<ul id="event-group-1" class="event-group top horizontal">
 					<li id="event-1" class="event left">
 						<a href="#">
-							<span class="logo"><img src="img/home/events/content/event-1.png" alt="Event #1"/></span>
+							<span class="logo"><img src="img/home/promotion/secondary/content/event-1.png" alt="Event #1"/></span>
 							<span class="location">New York</span>
 							<span class="date">23 November 2013</span>
 						</a>
 					</li>
 					<li id="event-2" class="event">
 						<a href="#">
-							<span class="logo"><img src="img/home/events/content/event-2.png" alt="Event #2"/></span>
+							<span class="logo"><img src="img/home/promotion/secondary/content/event-2.png" alt="Event #2"/></span>
 							<span class="location">New York</span>
 							<span class="date">23 November 2013</span>
 						</a>
 					</li>
 					<li id="event-3" class="event">
 						<a href="#">
-							<span class="logo"><img src="img/home/events/content/event-3.png" alt="Event #3"/></span>
+							<span class="logo"><img src="img/home/promotion/secondary/content/event-3.png" alt="Event #3"/></span>
 							<span class="location">New York</span>
 							<span class="date">23 November 2013</span>
 						</a>
 					</li>
 					<li id="event-4" class="event right">
 						<a href="#">
-							<span class="logo"><img src="img/home/events/content/event-4.png" alt="Event #4"/></span>
+							<span class="logo"><img src="img/home/promotion/secondary/content/event-4.png" alt="Event #4"/></span>
 							<span class="location">New York</span>
 							<span class="date">23 November 2013</span>
 						</a>
@@ -340,28 +343,28 @@
 				<ul id="event-group-2" class="event-group horizontal">
 					<li id="event-5" class="event left">
 						<a href="#">
-							<span class="logo"><img src="img/home/events/content/event-5.png" alt="Event #5"/></span>
+							<span class="logo"><img src="img/home/promotion/secondary/content/event-5.png" alt="Event #5"/></span>
 							<span class="location">New York</span>
 							<span class="date">23 November 2013</span>
 						</a>
 					</li>
 					<li id="event-6" class="event">
 						<a href="#">
-							<span class="logo"><img src="img/home/events/content/event-6.png" alt="Event #6"/></span>
+							<span class="logo"><img src="img/home/promotion/secondary/content/event-6.png" alt="Event #6"/></span>
 							<span class="location">New York</span>
 							<span class="date">23 November 2013</span>
 						</a>
 					</li>
 					<li id="event-7" class="event">
 						<a href="#">
-							<span class="logo"><img src="img/home/events/content/event-7.png" alt="Event #7"/></span>
+							<span class="logo"><img src="img/home/promotion/secondary/content/event-7.png" alt="Event #7"/></span>
 							<span class="location">New York</span>
 							<span class="date">23 November 2013</span>
 						</a>
 					</li>
 					<li id="event-8" class="event right">
 						<a href="#">
-							<span class="logo"><img src="img/home/events/content/event-8.png" alt="Event #8"/></span>
+							<span class="logo"><img src="img/home/promotion/secondary/content/event-8.png" alt="Event #8"/></span>
 							<span class="location">New York</span>
 							<span class="date">23 November 2013</span>
 						</a>
@@ -370,21 +373,21 @@
 				<ul id="event-group-3" class="event-group bottom horizontal">
 					<li id="event-9" class="event left">
 						<a href="#">
-							<span class="logo"><img src="img/home/events/content/event-9.png" alt="Event #9"/></span>
+							<span class="logo"><img src="img/home/promotion/secondary/content/event-9.png" alt="Event #9"/></span>
 							<span class="location">New York</span>
 							<span class="date">23 November 2013</span>
 						</a>
 					</li>
 					<li id="event-10" class="event">
 						<a href="#">
-							<span class="logo"><img src="img/home/events/content/event-10.png" alt="Event #10"/></span>
+							<span class="logo"><img src="img/home/promotion/secondary/content/event-10.png" alt="Event #10"/></span>
 							<span class="location">New York</span>
 							<span class="date">23 November 2013</span>
 						</a>
 					</li>
 					<li id="event-11" class="event">
 						<a href="#">
-							<span class="logo"><img src="img/home/events/content/event-11.png" alt="Event #11"/></span>
+							<span class="logo"><img src="img/home/promotion/secondary/content/event-11.png" alt="Event #11"/></span>
 							<span class="location">New York</span>
 							<span class="date">23 November 2013</span>
 						</a>
@@ -394,7 +397,6 @@
 					</li>
 				</ul>
 			</div>
-		</div>
 		</div>
 
 		{{> Footer }}

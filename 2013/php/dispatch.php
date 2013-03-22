@@ -5,9 +5,6 @@ if (!@include('vendor/autoload.php'))
 	die('Could not find autoloader');
 }
 
-$baseDir = realpath(dirname(__FILE__));
-$baseUri = '/2013';
-$namespace = getTonicNamespace();
 
 $app = new Tonic\Application(array(
 	'load' => array(
@@ -16,14 +13,28 @@ $app = new Tonic\Application(array(
 	'mount' => array(
 		'global' => '/global',
 		'blog' => '/blog'),
-	'baseUri' => $baseUri
 ));
+
+$baseDir = realpath(dirname(__FILE__));
+$baseUri = '/2013';
+$hostname = $_SERVER['HTTP_HOST'];
+$domain = getRequestDomain($hostname);
+$subdomain = getRequestSubdomain($hostname);
+$namespace = getTonicNamespace($subdomain);
 
 $request = new Tonic\Request(array(
 	'uri' => getRequestTonicUri($namespace, $baseUri)
 ));
 
-$container = new Twestival\Container($baseDir, $baseUri, $request->method == 'GET');
+$container = new Twestival\Container(array(
+		'baseDir' => $baseDir,
+		'baseUri' => $baseUri,
+		'readOnly' => $request->method == 'GET',
+		'request.protocol' => 'http://',
+		'request.hostname' => $hostname,
+		'request.domain' => $domain,
+		'request.subdomain' => $subdomain
+));
 
 register_shutdown_function(function() use ($container) { handleShutdown($container); });
 set_error_handler(function($type, $message, $file, $line) use ($container) { handleError($container, $type, $message, $file, $line); });
@@ -32,6 +43,7 @@ try
 {
 	$resource = $app->getResource($request);
 	$resource->container = $container;
+	
 	$response = $resource->exec();
 	
 	if($container->offsetExists('connection.transaction.open'))
@@ -43,44 +55,57 @@ try
 catch (Tonic\NotFoundException $e)
 {
 	$container['logger']->addError($e->getMessage());
-	$response = buildRedirectResponse($request, $baseUri . '/error?code=404');
+	$response = buildRedirectResponse($request, $baseUri . '/error?code=404', false);
 }
 catch (Tonic\UnauthorizedException $e)
 {
 	$container['logger']->addError($e->getMessage());
-	$response = buildRedirectResponse($request, $baseUri . '/login');
+	$response = buildRedirectResponse($request, $baseUri . '/login', true);
 }
 catch (Tonic\Exception $e)
 {
 	$container['logger']->addError($e->getMessage());
-	$response = buildRedirectResponse($request, $baseUri . '/error?code=' . $e->getCode());
+	$response = buildRedirectResponse($request, $baseUri . '/error?code=' . $e->getCode(), true);
 }
 catch (RedirectException $e)
 {
 	$container['logger']->addInfo('Redirecting to ' . $e->getUri());
-	$response = buildRedirectResponse($request, $baseUri . $e->getUri());
+	$response = buildRedirectResponse($request, $baseUri . $e->getUri(), $e->getTemporary());
 }
 catch (Exception $e)
 {
 	$container['logger']->addError($e->getMessage());
-	$response = buildRedirectResponse($request, $baseUri . '/error?code=500');
+	$response = buildRedirectResponse($request, $baseUri . '/error?code=500', true);
 }
 
 $response->output();
 
-function getTonicNamespace()
+function getRequestSubdomain($hostname)
 {
-	$namespace = 'global';
-	$hostname = $_SERVER['HTTP_HOST'];
+	$subdomain = NULL;
 	if(isset($hostname) && substr_count($hostname, '.') >= 2)
 	{
 		$subdomain = substr($hostname, 0, strpos($hostname, '.'));
-		if('www' != $subdomain && 'local' != $subdomain)
+		if('www' == $subdomain || 'local' == $subdomain)
 		{
-			$namespace = 'blog';
+			$subdomain = NULL;
 		}
 	}
-	return $namespace;
+	return $subdomain;
+}
+function getRequestDomain($hostname)
+{
+	$domain = $hostname;
+	if(isset($domain) && substr_count($domain, '.') >= 2)
+	{
+		$domain = substr($hostname, strpos($hostname, '.') + 1);
+	}
+	return $domain;
+}
+
+function getTonicNamespace($subdomain)
+{
+	return isset($subdomain) ? 'blog' : 'global';
 }
 
 function getRequestTonicUri($namespace, $baseUri)
@@ -118,10 +143,10 @@ function getRequestTonicUri($namespace, $baseUri)
 	}
 }
 
-function buildRedirectResponse($request, $uri)
+function buildRedirectResponse($request, $uri, $temporary = FALSE)
 {
 	$response = new \Tonic\Response($request);
-	$response->code = \Tonic\Response::MOVEDPERMANENTLY;
+	$response->code = $temporary ? \Tonic\Response::TEMPORARYREDIRECT : \Tonic\Response::MOVEDPERMANENTLY;
 	$response->Location = $uri;
 	return $response;
 }

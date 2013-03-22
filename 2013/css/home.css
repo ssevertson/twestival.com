@@ -7,7 +7,7 @@
 	z-index: 150;
 	width: 173px;
 	height: 164px;
-	background: url('../img/home/stamps/stamp.png') no-repeat;
+	background: url('../img/home/promotion/primary/stamp.png') no-repeat;
 	top: -100px;
 }
 #header-stamps .stamp img {
@@ -313,7 +313,7 @@
 	margin-bottom: 17px;
 }
 #events #event-groups {
-	background: url('../img/home/events/background.png') no-repeat;
+	background: url('../img/home/promotion/secondary/background.png') no-repeat;
 	background-position: center center;
 	height: 589px;
 }
@@ -356,7 +356,7 @@
 #events #event-more a {
 	display: block;
 	position: relative;
-	background: url('../img/home/events/button-events.png') no-repeat;
+	background: url('../img/home/promotion/secondary/button-events.png') no-repeat;
 	width: 178px;
 	height: 122px;
 	text-align: center;

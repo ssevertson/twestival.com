@@ -26,5 +26,11 @@ class Formatters extends BaseHelper
 			$locale['decimal_point'],
 			$locale['thousands_sep']);
 	}
+	
+	public function _toEuropeanDate($text, $context)
+	{
+		$dateText = $context->render($text);
+		return date('j F Y', strtotime($dateText));
+	}
 }
 ?>
