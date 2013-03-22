@@ -4,7 +4,8 @@ use Twestival\DAOs\EventsDAO;
 
 class GlobalStatsService extends BaseService
 {
-	function getSummaryStats() {
+	function getSummaryStats()
+	{
 		$events = new EventsDAO($this->container);
 		return array(
 			'CityCount' => $events->countEventLocationsByType('CITY'),

@@ -2,6 +2,7 @@
 
 use Mustache_Engine;
 use Mustache_Loader_FilesystemLoader;
+use Twestival\Services\GlobalStatsService;
 
 class BaseResource extends \Tonic\Resource
 {
@@ -10,14 +11,22 @@ class BaseResource extends \Tonic\Resource
 		return $this->container['baseUri'] . $path;
 	}
 	
-	function renderMustache($template, $data)
+	function renderMustacheHeaderFooter($template, $data = array())
+	{
+		$globalStatsService = new GlobalStatsService($this->container);
+		$summaryStats = $globalStatsService->getSummaryStats();
+		$merged = array_merge($data, $summaryStats);
+		return $this->renderMustache($template, $merged);
+	}
+	
+	function renderMustache($template, $data = array())
 	{
 		$mustache = new Mustache_Engine(array(
 			'loader' => new Mustache_Loader_FilesystemLoader($this->container['baseDir'] . '/src/Twestival/Views'),
+			'partials_loader' => new Mustache_Loader_FilesystemLoader($this->container['baseDir'] . '/src/Twestival/Views/Partials'),
 			'helpers' => array(
-				'format' => new Helpers\Formatters(),
-				'siteAdmin' => array($this, 'renderForSiteAdmin'),
-				'currentBlogEventAdmin' => array($this, 'renderForCurrentBlogEventAdmin')
+				'format' => new Helpers\Formatters($this->container),
+				'security' => new Helpers\Security($this->container)
 			)
 		));
 		
@@ -27,16 +36,7 @@ class BaseResource extends \Tonic\Resource
 
 	function isSiteAdmin()
 	{
-		if(!$this->container['session.exists'])
-		{
-			return false;
-		}
-		$session = $this->container['session'];
-		return 'SITE_ADMIN' == $session['scope'];
-	}
-	function renderForSiteAdmin($text, $context)
-	{
-		return $this->isSiteAdmin() ? $context->render($text) : '';
+		return $this->container['security.siteAdmin'];
 	}
 	function requireSiteAdmin()
 	{
@@ -46,24 +46,9 @@ class BaseResource extends \Tonic\Resource
 		}
 	}
 	
-	function isBlogEventAdmin($blog)
-	{
-		if(!$this->container['session.exists'])
-		{
-			return false;
-		}
-		$session = $this->container['session'];
-		return 'SITE_ADMIN' == $session['scope']
-				|| ('EVENT_ADMIN' == $session['scope'] && $blog == $session['blog.subdomain']);
-	}
 	function isCurrentBlogEventAdmin()
 	{
-		$blog = $this->container['blog.subdomain'];
-		return isset($blog) && $this->isBlogEventAdmin($blog);
-	}
-	function renderForCurrentBlogEventAdmin($text, $context)
-	{
-		return $this->isCurrentBlogEventAdmin() ? $context->render($text) : '';
+		return $this->container['security.blog.eventAdmin'];
 	}
 	function requireCurrentBlogEventAdmin()
 	{

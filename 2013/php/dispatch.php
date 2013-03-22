@@ -7,6 +7,7 @@ if (!@include('vendor/autoload.php'))
 
 $baseDir = realpath(dirname(__FILE__));
 $baseUri = '/2013';
+$namespace = getTonicNamespace();
 
 $app = new Tonic\Application(array(
 	'load' => array(
@@ -19,10 +20,13 @@ $app = new Tonic\Application(array(
 ));
 
 $request = new Tonic\Request(array(
-	'uri' => getTonicURI($baseUri)
+	'uri' => getRequestTonicUri($namespace, $baseUri)
 ));
 
 $container = new Twestival\Container($baseDir, $baseUri, $request->method == 'GET');
+
+register_shutdown_function(function() use ($container) { handleShutdown($container); });
+set_error_handler(function($type, $message, $file, $line) use ($container) { handleError($container, $type, $message, $file, $line); });
 
 try
 {
@@ -30,7 +34,7 @@ try
 	$resource->container = $container;
 	$response = $resource->exec();
 	
-	if($container['connection.transaction.open'])
+	if($container->offsetExists('connection.transaction.open'))
 	{
 		$connection = $container['connection'];
 		$connection->commit();
@@ -38,29 +42,29 @@ try
 }
 catch (Tonic\NotFoundException $e)
 {
-	// TODO: Log exception and redirect to generic error page with 404 response
-	$response = new Tonic\Response(404, $e->getMessage());
+	$container['logger']->addError($e->getMessage());
+	$response = buildRedirectResponse($request, $baseUri . '/error?code=404');
 }
 catch (Tonic\UnauthorizedException $e)
 {
-	// TODO: Redirect to namespace-relative login page, instead of basic auth
-	$response = new Tonic\Response(401, $e->getMessage());
-	$response->wwwAuthenticate = 'Basic realm="My Realm"';
+	$container['logger']->addError($e->getMessage());
+	$response = buildRedirectResponse($request, $baseUri . '/login');
 }
 catch (Tonic\Exception $e)
 {
-	// Log exception and redirect to generic error page with $e->getCode() response
-	$response = new Tonic\Response($e->getCode(), $e->getMessage());
+	$container['logger']->addError($e->getMessage());
+	// Redirect to generic error page with $e->getCode() response
+	$response = buildRedirectResponse($request, $baseUri . '/error?code=' . $e->getCode());
 }
 catch (Exception $e)
 {
-	// Log exception and redirect to generic error page
+	$container['logger']->addError($e->getMessage());
+	$response = buildRedirectResponse($request, $baseUri . '/error?code=500');
 }
 
 $response->output();
 
-
-function getTonicURI($baseUri)
+function getTonicNamespace()
 {
 	$namespace = 'global';
 	$hostname = $_SERVER['HTTP_HOST'];
@@ -72,7 +76,11 @@ function getTonicURI($baseUri)
 			$namespace = 'blog';
 		}
 	}
-	
+	return $namespace;
+}
+
+function getRequestTonicUri($namespace, $baseUri)
+{
 	$uri = '';
 	if(isset($_SERVER['REDIRECT_URL']))
 	{
@@ -95,6 +103,37 @@ function getTonicURI($baseUri)
 		$uri = substr($uri, strlen($baseUri));
 	}
 	
-	return '/' . $namespace . $uri;
+	if($uri == '/error')
+	{
+		# Generic error handler without namespace
+		return $uri;
+	}
+	else
+	{
+		return '/' . $namespace . $uri;
+	}
 }
 
+function buildRedirectResponse($request, $uri)
+{
+	$response = new \Tonic\Response($request);
+	$response->code = \Tonic\Response::TEMPORARYREDIRECT;
+	$response->Location = $uri;
+	return $response;
+}
+
+function handleShutdown($container) {
+	$error = error_get_last();
+	if($error !== NULL)
+	{
+		if($error['type'] == E_ERROR || $error['type'] == E_PARSE)
+		{
+			handleError($container, $error['type'], $error['message'], $error['file'], $error['line']);
+		}
+	}
+}
+
+function handleError($container, $type, $message, $file, $line)
+{
+	$container['logger']->addError("Error $type: $message ($file:$line)");
+}

@@ -2,10 +2,10 @@
 
 use Twestival\Services\GlobalStatsService;
 /**
- * @namespace global
- * @uri /header
+ * @namespace blog
+ * @uri /test
  */
-class HeaderResource extends BaseResource
+class BlogHomeResource extends BaseResource
 {
 	/**
 	 * @method get

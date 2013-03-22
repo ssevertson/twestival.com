@@ -2,6 +2,12 @@
 
 class BaseHelper
 {
+	protected $container;
+	function __construct($container)
+	{
+		$this->container = $container;
+	}
+	
 	public function __isset($key)
 	{
 		return method_exists($this, '_'.$key);

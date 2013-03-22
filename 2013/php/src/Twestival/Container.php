@@ -29,7 +29,7 @@ class Container extends \Pimple
 			
 			session_set_cookie_params(0, '/', $domain);
 			session_start();
-			return $_SESSION;
+			return new Session();
 		});
 		$this['session.exists'] = $this->share(function($c)
 		{
@@ -49,13 +49,13 @@ class Container extends \Pimple
 		
 		$this['logger.config'] = $this->share(function($c)
 		{
-			return require $c['configDir'] . '/logging.php';
+			return require $c['configDir'] . '/logger.php';
 		});
 		$this['logger'] = $this->share(function($c)
 		{
 			$config = $c['logger.config'];
 			
-			$logger = new \Monolog\Logger($c['channel']);
+			$logger = new \Monolog\Logger($config['channel']);
 			$logger->pushHandler(new \Monolog\Handler\RotatingFileHandler(
 					$config['path'] . '/' . $config['file'],
 					0,
@@ -97,7 +97,7 @@ class Container extends \Pimple
 			}
 		});
 		
-		$this['blog.subdomain'] = $this->share(function($c)
+		$this['request.blog.subdomain'] = $this->share(function($c)
 		{
 			$hostname = $_SERVER['HTTP_HOST'];
 			$blogSubdomain = NULL;
@@ -110,6 +110,78 @@ class Container extends \Pimple
 				}
 			}
 			return $blogSubdomain;
+		});
+		
+		$this['security.scope'] = $this->share(function($c)
+		{
+			$scope = NULL;
+			if($c['session.exists'])
+			{
+				$session = $c['session'];
+				if($session->offsetExists('scope'))
+				{
+					$scope = $session['scope'];
+				}
+			}
+			return $scope;
+		});
+		$this['security.user.id'] = $this->share(function($c)
+		{
+			$userID = NULL;
+			if($c['session.exists'])
+			{
+				$session = $c['session'];
+				if($session->offsetExists('user.id'))
+				{
+					$userID = $session['user.id'];
+				}
+			}
+			return $userID;
+		});
+		$this['security.blog.subdomain'] = $this->share(function($c)
+		{
+			$subdomain = NULL;
+			if($c['session.exists'])
+			{
+				$session = $c['session'];
+				if($session->offsetExists('subdomain'))
+				{
+					$subdomain = $session['blog.subdomain'];
+				}
+			}
+			return $subdomain;
+		});
+		$this['security.blog.eventAdmin'] = $this->share(function($c)
+		{
+			$scope = $c['security.scope'];
+			if('SITE_ADMIN' == $scope)
+			{
+				return true;
+			}
+			else if('EVENT_ADMIN' == $scope)
+			{
+				$securityBlog = $c['security.blog.subdomain'];
+				if(!isset($securityBlog))
+				{
+					return false;
+				}
+				
+				$requestBlog = $c['request.blog.subdomain'];
+				if(!isset($requestBlog))
+				{
+					return false;
+				}
+				
+				return $securityBlog == $requestBlog;
+			
+			}
+			return false;
+		});
+		
+		$this['security.siteAdmin'] = $this->share(function($c)
+		{
+			$scope = $c['security.scope'];
+			return 'SITE_ADMIN' == $scope;
 		});
 	}
 };
