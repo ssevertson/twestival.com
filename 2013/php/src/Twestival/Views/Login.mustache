@@ -3,7 +3,7 @@
 		{{> HeadContent }}
 		<title>Twestival {{CurrentYear}} {{LoginType}} Login</title>
 		
-		<link rel="stylesheet" href="css/login.css" />
+		<link rel="stylesheet" href="css/input-form.css" />
 	</head>
 	<body id="login">
 		{{> Header }}
@@ -11,10 +11,21 @@
 		<div class="wrapper">
 			<h1>{{LoginType}} Login</h1>
 			
-			<form action="login" method="POST">
-				<input type="text" name="username"/><br/>
-				<input type="password" name="password"/><br/>
-				<input type="submit" value="Login"/><br/>
+			<form action="login" method="POST" class="input">
+				<fieldset>
+					<div class="legend">Account</div>
+					<div class="body" style="margin-top: 9px;">
+			
+						<label for="username">Username</label><br/>
+						<input type="text" name="Username" id="username" style="width:300px;"/><br/>
+
+						<label for="password">Password</label><br/>
+						<input type="password" name="Password" id="password" style="width:300px;"/><br/>
+
+						<input type="submit" value="Login" id="input-submit-button"/>
+						
+					</div>
+				</fieldset>
 			</form>
 		</div>
 

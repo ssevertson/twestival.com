@@ -55,7 +55,7 @@ form.input input[type="radio"] {
 	margin-right: 8px;
 	margin-bottom: 24px;
 }
-form.input input[type="text"], form.input textarea {
+form.input input[type="text"], form.input input[type="password"], form.input textarea {
 	border: 1px solid #DCDCDC;
 	margin-top: 4px;
 	padding: 5px 4px 3px 4px;
