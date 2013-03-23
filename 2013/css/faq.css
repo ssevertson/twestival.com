@@ -1,17 +1,18 @@
-.faqs{
-	width: 640px;
+#faq .faqs {
+	width: 622px;
 	float: left;
 	padding-right: 15px;
 }
-.faqs dt, .faqs dd{
-	margin: 10px 0px;
-}
-.faqs dt{
+#faq .faqs h2 {
+	margin: 32px 0px 3px 0px;
 	font-family: 'Melbourne-Bold';
+	font-weight: normal;
 	font-size: 24px;
+	letter-spacing: -0.1px;
 }
-.faqs dd{
+#faq .faqs p {
+	margin: 0px 0px 16px 0px;
 	font-family: 'Lato';
 	font-size: 14px;
-	line-height: 25px;
+	line-height: 22px;
 }
