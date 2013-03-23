@@ -6,10 +6,8 @@ class Container extends \Pimple
 	{
 		parent::__construct($array);
 		
-		// Pimple passes a copy, not a reference to factory methods; needed to allow state tracking in some factories
-		$writeable =& $this;
-		
 		$this['configDir'] = $array['baseDir'] . '/config';
+		$this['viewDir'] = $array['baseDir'] . '/src/Twestival/Views';
 		
 		$this['session.config'] = $this->share(function($c)
 		{
@@ -70,7 +68,7 @@ class Container extends \Pimple
 			$configFile = $c['configDir'] . ($c['readOnly'] ? '/database_ro.php' : '/database_rw.php');
 			return require $configFile;
 		});
-		$this['connection'] = $this->share(function($c) use(&$writeable)
+		$this['connection'] = $this->share(function($c)
 		{
 			$readOnly = $c['readOnly'];
 			$config = $c['connection.config'];
@@ -85,11 +83,11 @@ class Container extends \Pimple
 						\PDO::ATTR_PERSISTENT => false,
 						\PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES utf8'
 					));
-				$writeable['connection.open'] = TRUE;
+				$c['connection.open'] = TRUE;
 				
 				if(!$readOnly)
 				{
-					$writeable['connection.transaction.open'] = $connection->beginTransaction();
+					$c['connection.transaction.open'] = $connection->beginTransaction();
 				}
 				return $connection;
 			}
@@ -170,6 +168,76 @@ class Container extends \Pimple
 		{
 			$scope = $c['security.scope'];
 			return 'SITE_ADMIN' == $scope;
+		});
+		
+		
+		
+		$this['service.common'] = $this->share(function($c)
+		{
+			return new \Twestival\Services\CommonService($c);
+		});
+		$this['service.login'] = $this->share(function($c)
+		{
+			return new \Twestival\Services\LoginService($c);
+		});
+		$this['service.page'] = $this->share(function($c)
+		{
+			return new \Twestival\Services\PageService($c);
+		});
+		$this['service.promotion'] = $this->share(function($c)
+		{
+			return new \Twestival\Services\PromotionService($c);
+		});
+		
+
+		$this['dao.events.admins'] = $this->share(function($c)
+		{
+			return new \Twestival\DAOs\EventAdminsDAO($c);
+		});
+		$this['dao.site.admins'] = $this->share(function($c)
+		{
+			return new \Twestival\DAOs\SiteAdminsDAO($c);
+		});
+		$this['dao.events'] = $this->share(function($c)
+		{
+			return new \Twestival\DAOs\EventsDAO($c);
+		});
+		$this['dao.pages'] = $this->share(function($c)
+		{
+			return new \Twestival\DAOs\PagesDAO($c);
+		});
+		$this['dao.years'] = $this->share(function($c)
+		{
+			return new \Twestival\DAOs\YearsDAO($c);
+		});
+		
+		$this['helper.format'] = $this->share(function($c)
+		{
+			return new \Twestival\Resources\Helpers\Formatters($c);
+		});
+		$this['helper.security'] = $this->share(function($c)
+		{
+			return new \Twestival\Resources\Helpers\Security($c);
+		});
+		
+		$this['mustache.loader.view'] = $this->share(function($c)
+		{
+			return new \Mustache_Loader_FilesystemLoader($c['viewDir']);
+		});
+		$this['mustache.loader.partial'] = $this->share(function($c)
+		{
+			return new \Mustache_Loader_FilesystemLoader($c['viewDir'] . '/Partials');
+		});
+		$this['mustache.engine'] = $this->share(function($c)
+		{
+			return new \Mustache_Engine(array(
+				'loader' => $c['mustache.loader.view'],
+				'partials_loader' => $c['mustache.loader.partial'],
+				'helpers' => array(
+						'format' => $c['helper.format'],
+						'security' => $c['helper.security']
+				)
+			));
 		});
 	}
 };

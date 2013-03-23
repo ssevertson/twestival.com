@@ -7,7 +7,7 @@ class CommonService extends BaseService
 {
 	function getSummaryStats()
 	{
-		$events = new EventsDAO($this->container);
+		$events = $this->container['dao.events'];
 		return array(
 			'CityCount' => $events->countEventLocationsByType('CITY'),
 			'CountryCount' => $events->countEventLocationsByType('COUNTRY'),
@@ -17,7 +17,7 @@ class CommonService extends BaseService
 	
 	function getMostRecentActiveYear()
 	{
-		$years = new YearsDAO($this->container);
+		$years = $this->container['dao.years'];
 		return $years->getMostRecentActiveYear();
 	}
 }

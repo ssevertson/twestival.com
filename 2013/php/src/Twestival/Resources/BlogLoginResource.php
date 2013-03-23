@@ -31,7 +31,7 @@ class BlogLoginResource extends BaseResource
 	 */
 	function authenticate()
 	{
-		$loginService = new LoginService($this->container);
+		$loginService = $this->container['service.login'];
 		if($loginService->authenticateEventAdmin($_POST['Username'], $_POST['Password'], $this->container['request.blog.subdomain']))
 		{
 			throw new \Twestival\RedirectException('/');

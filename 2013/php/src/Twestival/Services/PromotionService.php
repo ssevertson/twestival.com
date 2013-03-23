@@ -13,7 +13,7 @@ class PromotionService extends BaseService
 		$baseUri = $this->container['baseUri'];
 		$imagePath = $baseUri . '/img/' . strtolower($pageName) . '/promotion/' . strtolower($sectionName) . '/content';
 
-		$events = new EventsDAO($this->container);
+		$events = $this->container['dao.events'];;
 		$eventPromotions = array();
 		foreach ($events->getPromotionsForPageSection($pageName, $sectionName, $count) as $eventPromotion)
 		{
@@ -43,7 +43,7 @@ class PromotionService extends BaseService
 	
 	function getPageSections()
 	{
-		$pages = new PagesDAO($this->container);
+		$pages = $this->container['dao.pages'];;
 		return $pages->getPagePromotionSections();
 	}
 }

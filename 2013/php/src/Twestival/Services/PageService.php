@@ -7,17 +7,17 @@ class PageService extends BaseService
 {
 	function getPageContents()
 	{
-		$pages = new PagesDAO($this->container);
+		$pages = $this->container['dao.pages'];
 		return $pages->getPageContents();
 	}
 	function getPageContent($pageName, $contentName)
 	{
-		$pages = new PagesDAO($this->container);
+		$pages = $this->container['dao.pages'];
 		return $pages->getPageContent($pageName, $contentName);
 	}
 	function updatePageContent($pageName, $contentName, $html)
 	{
-		$pages = new PagesDAO($this->container);
+		$pages = $this->container['dao.pages'];
 		$pages->updatePageContent($pageName, $contentName, $html);
 	}
 }

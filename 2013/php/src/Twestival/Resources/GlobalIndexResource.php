@@ -13,7 +13,7 @@ class GlobalIndexResource extends BaseResource
 	 */
 	function html()
 	{
-		$promotions = new PromotionService($this->container);
+		$promotions = $this->container['service.promotion'];
 		$primaryPromotions = $promotions->getForPageSection('HOME', 'PRIMARY', 4, FALSE);
 		$secondaryPromotions = $promotions->getForPageSection('HOME', 'SECONDARY', 11, TRUE);
 		

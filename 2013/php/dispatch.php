@@ -48,8 +48,7 @@ try
 	
 	if($container->offsetExists('connection.transaction.open') && $container['connection.transaction.open'])
 	{
-		$connection = $container['connection'];
-		$connection->commit();
+		$container['connection']->commit();
 	}
 }
 catch (Tonic\NotFoundException $e)
@@ -69,6 +68,11 @@ catch (Tonic\Exception $e)
 }
 catch (Twestival\RedirectException $e)
 {
+	if($container->offsetExists('connection.transaction.open') && $container['connection.transaction.open'])
+	{
+		$container['connection']->commit();
+	}
+	
 	$container['logger']->addInfo('Redirecting to ' . $e->getUri());
 	$response = buildRedirectResponse($request, $baseUri . $e->getUri(), $e->getTemporary());
 }

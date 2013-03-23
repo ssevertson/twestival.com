@@ -17,10 +17,8 @@ class GlobalAdminPageContentResource extends BaseResource
 	 */
 	function showEditor($pageName, $sectionName)
 	{
-		$pages = new PageService($this->container);
-		
 		return $this->renderMustacheHeaderFooter('Editable/' . strtoupper($pageName), array(
-				'PageContent' => $pages->getPageContent($pageName, $sectionName),
+				'PageContent' => $this->container['service.page']->getPageContent($pageName, $sectionName),
 				'Editable' => TRUE
 		));
 	}
@@ -32,9 +30,7 @@ class GlobalAdminPageContentResource extends BaseResource
 	 */
 	function save($pageName, $sectionName)
 	{
-		$pages = new PageService($this->container);
-	
-		$pages->updatePageContent($pageName, $sectionName, $_POST['Content']);
+		$this->container['service.page']->updatePageContent($pageName, $sectionName, $_POST['Content']);
 		
 		throw new \Twestival\RedirectException('/admin');
 	}

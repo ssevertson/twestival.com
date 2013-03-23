@@ -7,7 +7,7 @@ class LoginService extends BaseService
 {
 	function authenticateSiteAdmin($username, $password)
 	{
-		$admin = new SiteAdminsDAO($this->container);
+		$admin = $this->container['dao.site.admins'];
 		$userID = $admin->authenticate($username, $password);
 		
 		if($userID)
@@ -23,7 +23,7 @@ class LoginService extends BaseService
 	
 	function authenticateEventAdmin($username, $password, $blogSubdomain)
 	{
-		$admin = new EventAdminsDAO($this->container);
+		$admin = $this->container['dao.events.admins'];
 		$userID = $admin->authenticate($username, $password, $blogSubdomain);
 		
 		if($userID)

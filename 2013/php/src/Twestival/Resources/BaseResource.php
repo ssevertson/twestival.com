@@ -8,29 +8,20 @@ class BaseResource extends \Tonic\Resource
 {
 	function renderMustacheHeaderFooter($template, $data = array())
 	{
-		$common = new CommonService($this->container);
+		$common = $this->container['service.common'];
 		$summaryStats = $common->getSummaryStats();
 		
 		$merged = array_merge($data, $summaryStats);
 		
 		$merged['CurrentYear'] = $common->getMostRecentActiveYear();
-		$merged['BaseUri'] = $this->container['baseUri'];
 		
 		return $this->renderMustache($template, $merged);
 	}
 	
 	function renderMustache($template, $data = array())
 	{
-		$mustache = new Mustache_Engine(array(
-			'loader' => new Mustache_Loader_FilesystemLoader($this->container['baseDir'] . '/src/Twestival/Views'),
-			'partials_loader' => new Mustache_Loader_FilesystemLoader($this->container['baseDir'] . '/src/Twestival/Views/Partials'),
-			'helpers' => array(
-				'format' => new Helpers\Formatters($this->container),
-				'security' => new Helpers\Security($this->container)
-			)
-		));
-		
-		return $mustache->loadTemplate($template)->render($data);
+		$data['BaseUri'] = $this->container['baseUri'];
+		return $this->container['mustache.engine']->loadTemplate($template)->render($data);
 	}
 	
 

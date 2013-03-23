@@ -31,7 +31,7 @@ class GlobalLoginResource extends BaseResource
 	 */
 	function authenticate()
 	{
-		$loginService = new LoginService($this->container);
+		$loginService = $this->container['service.login'];
 		if($loginService->authenticateSiteAdmin($_POST['Username'], $_POST['Password']))
 		{
 			throw new \Twestival\RedirectException('/admin');
