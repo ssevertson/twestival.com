@@ -3,5 +3,14 @@
 class RedirectException extends \Exception
 {
     protected $uri  = '/';
-    protected $temporary = TRUE;
+    protected $temporary = FALSE;
+    
+    function getUri()
+    {
+    	return $this->uri;
+    } 
+	function getTemporary()
+	{
+		return $this->temporary;
+	} 
 }

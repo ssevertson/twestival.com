@@ -60,14 +60,14 @@ catch (Tonic\NotFoundException $e)
 catch (Tonic\UnauthorizedException $e)
 {
 	$container['logger']->addError($e->getMessage());
-	$response = buildRedirectResponse($request, $baseUri . '/login', true);
+	$response = buildRedirectResponse($request, $baseUri . '/login', false);
 }
 catch (Tonic\Exception $e)
 {
 	$container['logger']->addError($e->getMessage());
 	$response = buildRedirectResponse($request, $baseUri . '/error?code=' . $e->getCode(), true);
 }
-catch (RedirectException $e)
+catch (Twestival\RedirectException $e)
 {
 	$container['logger']->addInfo('Redirecting to ' . $e->getUri());
 	$response = buildRedirectResponse($request, $baseUri . $e->getUri(), $e->getTemporary());

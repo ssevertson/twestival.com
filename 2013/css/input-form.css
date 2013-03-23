@@ -4,12 +4,12 @@
 	width: 805px;
 }
 
-form.involve {
+form.input {
 	font-family: 'Lato';
 	font-size: 14px
 }
 
-form.involve fieldset {
+form.input fieldset {
 	background: url('../img/common/sidebar/background.png');
 	border: 1px solid #DCDCDC;
 	margin-top: 64px;
@@ -17,7 +17,7 @@ form.involve fieldset {
 	padding: 22px 36px 26px 36px;
 	text-align: center;
 }
-form.involve fieldset .legend {
+form.input fieldset .legend {
 	border: 1px solid #DCDCDC;
 	background: #ffffff;
 	font-family: 'Melbourne-Bold';
@@ -33,49 +33,49 @@ form.involve fieldset .legend {
 	text-align: center;
 	text-transform: uppercase;
 }
-form.involve fieldset .body {
+form.input fieldset .body {
 	text-align: left;
 	position: relative;
 	top: -16px;
 	margin-bottom: -16px;
 }
-form.involve label {
+form.input label {
 	padding-top: 8px;
 	padding-left: 4px;
 	display: inline-block;
 }
-form.involve select {
+form.input select {
 	border: 1px solid #DCDCDC;
 	margin-top: 4px;
 }
-form.invovle input, form.invovle select, form.involve textarea {
+form.invovle input, form.invovle select, form.input textarea {
 	display: block;
 }
-form.involve input[type="radio"] {
+form.input input[type="radio"] {
 	margin-right: 8px;
 	margin-bottom: 24px;
 }
-form.involve input[type="text"], form.involve textarea {
+form.input input[type="text"], form.input textarea {
 	border: 1px solid #DCDCDC;
 	margin-top: 4px;
 	padding: 5px 4px 3px 4px;
 }
-form.involve .before-field {
+form.input .before-field {
 	float: left;
 	margin: 5px 2px 0px 4px;
 }
-form.involve .inline {
+form.input .inline {
 	float: left;
 	margin-right: 10px;
 }
-form.involve .symbols {
+form.input .symbols {
 	margin-top: 24px;
 }
-form.involve a {
+form.input a {
 	color: #50B1BD;
 }
 
-form.involve input#involve-submit-button {
+form.input input#input-submit-button {
 	background: url('../img/common/button/button-green.png') no-repeat;
 	width: 270px;
 	height: 70px;
