@@ -80,6 +80,7 @@ a:link, a:visited, a:hover, a:active {
 }
 
 input, select {
+	background-color: #FBFAF6;
 	color: #444444;
 	border: medium none;
 }

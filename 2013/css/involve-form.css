@@ -1,4 +1,4 @@
-#register .intro {
+.intro {
 	font-family: 'Lato';
 	font-size: 14px;
 	width: 805px;
@@ -44,7 +44,11 @@ form.involve label {
 	padding-left: 4px;
 	display: inline-block;
 }
-form.invovle input {
+form.involve select {
+	border: 1px solid #DCDCDC;
+	margin-top: 4px;
+}
+form.invovle input, form.invovle select, form.involve textarea {
 	display: block;
 }
 form.involve input[type="radio"] {
@@ -55,7 +59,6 @@ form.involve input[type="text"], form.involve textarea {
 	border: 1px solid #DCDCDC;
 	margin-top: 4px;
 	padding: 5px 4px 3px 4px;
-	display: block;
 }
 form.involve .before-field {
 	float: left;
@@ -84,10 +87,3 @@ form.involve input#involve-submit-button {
 	letter-spacing: 1px;
 	margin-top: 60px;
 }
-
-select#evenlist{
-	width: 160px;
-	border:1px solid #ccc;
-	margin: 5px 0 0 0;
-}
- 
