@@ -32,13 +32,9 @@ class BlogLoginResource extends BaseResource
 	function authenticate()
 	{
 		$loginService = new LoginService($this->container);
-		if($loginService->authenticateEventAdmin($_POST['username'], $_POST['password'], $this->container['request.blog.subdomain']))
+		if($loginService->authenticateEventAdmin($_POST['Username'], $_POST['Password'], $this->container['request.blog.subdomain']))
 		{
-			# TODO: Do something real here - redirect somewhere?
-			return $this->renderMustache('Login', array(
-				'BodyID' => 'login',
-				'LoginType' => 'Success!!!',
-			));
+			throw new \Twestival\RedirectException('/');
 		}
 		else
 		{

@@ -1,0 +1,40 @@
+{{> HTMLTag }}
+	<head>
+		{{> HeadContent }}
+		<title>Twestival {{CurrentYear}} Admin</title>
+		
+		<link rel="stylesheet" href="css/input-form.css" />
+		<link rel="stylesheet" href="css/admin.css" />
+	</head>
+	<body id="admin">
+		{{> Header }}
+		
+		<div class="wrapper">
+			<h1>Admin</h1>
+			
+			<h2>Event Promotions</h2>
+			<ul class="links">
+				{{#PageSections}}
+					<li>
+						<a href="admin/event-promotions/{{#format.toLowerCase}}{{PageName}}{{/format.toLowerCase}}/{{#format.toLowerCase}}{{SectionName}}{{/format.toLowerCase}}">
+							{{#format.toTitleCase}}{{PageName}}{{/format.toTitleCase}}: {{#format.toTitleCase}}{{SectionName}}{{/format.toTitleCase}}
+						</a>
+					</li>
+				{{/PageSections}}
+			</ul>
+			
+			<h2>Edit Content</h2>
+			<ul class="links">
+				{{#PageContents}}
+					<li>
+						<a href="admin/page-content/{{#format.toLowerCase}}{{PageName}}{{/format.toLowerCase}}/{{#format.toLowerCase}}{{ContentName}}{{/format.toLowerCase}}">
+							{{#format.toTitleCase}}{{PageName}}{{/format.toTitleCase}}: {{#format.toTitleCase}}{{ContentName}}{{/format.toTitleCase}}
+						</a>
+					</li>
+				{{/PageContents}}
+			</ul>
+		</div>
+		
+		{{> Footer }}
+	</body>
+</html>

@@ -36,8 +36,8 @@ $container = new Twestival\Container(array(
 		'request.subdomain' => $subdomain
 ));
 
-register_shutdown_function(function() use ($container) { handleShutdown($container); });
-set_error_handler(function($type, $message, $file, $line) use ($container) { handleError($container, $type, $message, $file, $line); });
+register_shutdown_function(function() use (&$container) { handleShutdown($container); });
+set_error_handler(function($type, $message, $file, $line) use (&$container) { handleError($container, $type, $message, $file, $line); });
 
 try
 {
@@ -46,7 +46,7 @@ try
 	
 	$response = $resource->exec();
 	
-	if($container->offsetExists('connection.transaction.open'))
+	if($container->offsetExists('connection.transaction.open') && $container['connection.transaction.open'])
 	{
 		$connection = $container['connection'];
 		$connection->commit();
@@ -166,3 +166,5 @@ function handleError($container, $type, $message, $file, $line)
 {
 	$container['logger']->addError("Error $type: $message ($file:$line)");
 }
+
+?>

@@ -5,6 +5,10 @@ class Container extends \Pimple
 	function __construct($array)
 	{
 		parent::__construct($array);
+		
+		// Pimple passes a copy, not a reference to factory methods; needed to allow state tracking in some factories
+		$writeable =& $this;
+		
 		$this['configDir'] = $array['baseDir'] . '/config';
 		
 		$this['session.config'] = $this->share(function($c)
@@ -63,12 +67,13 @@ class Container extends \Pimple
 		
 		$this['connection.config'] = $this->share(function($c)
 		{
-			return $c['connection.config'];
+			$configFile = $c['configDir'] . ($c['readOnly'] ? '/database_ro.php' : '/database_rw.php');
+			return require $configFile;
 		});
-		$this['connection'] = $this->share(function($c)
+		$this['connection'] = $this->share(function($c) use(&$writeable)
 		{
 			$readOnly = $c['readOnly'];
-			$config = require $c['configDir'] . ($readOnly ? '/database_ro.php' : '/database_rw.php');
+			$config = $c['connection.config'];
 			try
 			{
 				$connection = new \PDO(
@@ -80,11 +85,11 @@ class Container extends \Pimple
 						\PDO::ATTR_PERSISTENT => false,
 						\PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES utf8'
 					));
-				$c['connection.open'] = TRUE;
+				$writeable['connection.open'] = TRUE;
+				
 				if(!$readOnly)
 				{
-					$connection->beginTransaction();
-					$c['connection.transaction.open'] = TRUE;
+					$writeable['connection.transaction.open'] = $connection->beginTransaction();
 				}
 				return $connection;
 			}

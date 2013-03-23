@@ -2,7 +2,8 @@
 
 class EventAdminsDAO extends BaseDAO
 {
-	function authenticate($username, $password, $blogSubdomain) {
+	function authenticate($username, $password, $blogSubdomain)
+	{
 		$conn = $this->container['connection'];
 		$query = $conn->prepare('
 			SELECT

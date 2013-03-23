@@ -2,7 +2,8 @@
 
 class YearsDAO extends BaseDAO
 {
-	function getMostRecentActiveYear() {
+	function getMostRecentActiveYear()
+	{
 		$conn = $this->container['connection'];
 		$query = $conn->prepare('
 			SELECT

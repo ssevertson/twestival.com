@@ -2,7 +2,8 @@
 
 class SiteAdminsDAO extends BaseDAO
 {
-	function authenticate($username, $password) {
+	function authenticate($username, $password)
+	{
 		$conn = $this->container['connection'];
 		$query = $conn->prepare('
 			SELECT

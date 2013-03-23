@@ -6,18 +6,16 @@ use Twestival\Services\CommonService;
 
 class BaseResource extends \Tonic\Resource
 {
-	protected function getRelativeUri($path)
-	{
-		return $this->container['baseUri'] . $path;
-	}
-	
 	function renderMustacheHeaderFooter($template, $data = array())
 	{
 		$common = new CommonService($this->container);
 		$summaryStats = $common->getSummaryStats();
+		
 		$merged = array_merge($data, $summaryStats);
-		$year = $common->getMostRecentActiveYear();
-		$merged['CurrentYear'] = $year;
+		
+		$merged['CurrentYear'] = $common->getMostRecentActiveYear();
+		$merged['BaseUri'] = $this->container['baseUri'];
+		
 		return $this->renderMustache($template, $merged);
 	}
 	

@@ -32,9 +32,9 @@ class GlobalLoginResource extends BaseResource
 	function authenticate()
 	{
 		$loginService = new LoginService($this->container);
-		if($loginService->authenticateSiteAdmin($_POST['username'], $_POST['password']))
+		if($loginService->authenticateSiteAdmin($_POST['Username'], $_POST['Password']))
 		{
-			throw new \Twestival\RedirectException('/');
+			throw new \Twestival\RedirectException('/admin');
 		}
 		else
 		{

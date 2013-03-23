@@ -29,8 +29,24 @@ class Formatters extends BaseHelper
 	
 	public function _toEuropeanDate($text, $context)
 	{
-		$dateText = $context->render($text);
-		return $dateText ? date('j F Y', strtotime($dateText)) : 'TBD';
+		$rendered = $context->render($text);
+		return $rendered ? date('j F Y', strtotime($rendered)) : 'TBD';
+	}
+	
+	public function _toTitleCase($text, $context)
+	{
+		$rendered = $context->render($text);
+		return ucwords(strtolower($rendered));
+	}
+	public function _toLowerCase($text, $context)
+	{
+		$rendered = $context->render($text);
+		return strtolower($rendered);
+	}
+	public function _toUpperCase($text, $context)
+	{
+		$rendered = $context->render($text);
+		return strtoupper($rendered);
 	}
 }
 ?>

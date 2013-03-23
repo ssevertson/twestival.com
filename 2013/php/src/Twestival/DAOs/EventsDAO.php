@@ -2,7 +2,8 @@
 
 class EventsDAO extends BaseDAO
 {
-	function countEventLocationsByType($locationType) {
+	function countEventLocationsByType($locationType)
+	{
 		$conn = $this->container['connection'];
 		$query = $conn->prepare('
 			SELECT
@@ -24,7 +25,8 @@ class EventsDAO extends BaseDAO
 		return intval($query->fetchColumn());
 	}
 	
-	function sumEventDonationTotalUSD() {
+	function sumEventDonationTotalUSD()
+	{
 		$conn = $this->container['connection'];
 		$query = $conn->prepare('
 			SELECT
@@ -40,7 +42,8 @@ class EventsDAO extends BaseDAO
 		return floatval($query->fetchColumn());
 	}
 	
-	function getPromotionsForPageSection($pageName, $sectionName, $limit) {
+	function getPromotionsForPageSection($pageName, $sectionName, $limit)
+	{
 		$conn = $this->container['connection'];
 		$query = $conn->prepare('
 			SELECT

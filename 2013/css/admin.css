@@ -1,0 +1,23 @@
+ul.links {
+	font-family: 'Lato';
+	font-size: 13px;
+	margin: 0px 0px;
+}
+
+form.editable .action {
+	font-size: 14px;
+	font-family: 'Melbourne-Bold';
+	padding: 8px 8px 4px 8px;
+	margin: 12px 12px 12px 0px;
+	text-transform: uppercase;
+}
+
+form.editable {
+	width: 635px;
+}
+
+body.cke_editable {
+	margin: 12px;
+	background-color: #FBFAF6;
+	background-image: none !important;
+}

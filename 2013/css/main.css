@@ -79,9 +79,11 @@ a:link, a:visited, a:hover, a:active {
 	text-decoration: none;
 }
 
-input, select {
+input[type="text"], input[type="password"], textarea, select {
 	background-color: #FBFAF6;
 	color: #444444;
+}
+input, textarea, select {
 	border: medium none;
 }
 .wrapper {
@@ -114,6 +116,13 @@ h1 {
 	font-size: 30px;
 	margin-top: 50px;
 	margin-bottom: 20px;
+}
+h2 {
+	font-family: 'Melbourne-Bold';
+	font-weight: normal;
+	font-size: 22px;
+	margin-top: 20px;
+	margin-bottom: 0px;
 }
 
 /* Header */

@@ -1,6 +1,7 @@
 <?php namespace Twestival\Services;
 
 use Twestival\DAOs\EventsDAO;
+use Twestival\DAOs\PagesDAO;
 
 class PromotionService extends BaseService
 {
@@ -38,6 +39,12 @@ class PromotionService extends BaseService
 			}
 		}
 		return $eventPromotions;
+	}
+	
+	function getPageSections()
+	{
+		$pages = new PagesDAO($this->container);
+		return $pages->getPagePromotionSections();
 	}
 }
 ?>
