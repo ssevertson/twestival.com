@@ -1,23 +1,66 @@
-.box-block{
+#involve .type {
 	border: 1px solid #d3d2d1;
 	background: url('../img/common/sidebar/background.png');
-	padding: 22px 18px;
-	font-family: 'Lato';
-	font-size: 16px;
-	overflow: hidden;
+	padding: 27px 18px;
 	margin: 20px 0;
+	position: relative;
 }
-.box-block img{
+#involve .type img.photo {
 	float: left;
 	margin-right: 20px;
+	margin-top: 6px;
 }
-.box-block p{
-	margin: 0;
-}
-.box-block p span{
+#involve .type .caption {
+	display: block;
 	font-weight: normal;
 	color: #50b1bd;
 	font-family: 'Melbourne-Bold';
 	font-size: 24px;
-
 }
+#involve .type p {
+	font-family: 'Lato';
+	font-size: 16px;
+	line-height: 24px;
+	padding: 4px 280px 0px 206px;
+	margin: 0px;
+}
+#involve .type .button {
+	position: absolute;
+	display: block;
+	bottom: 0px;
+	right: -12px;
+	width: 270px;
+	height: 70px;
+	font-family: 'Melbourne';
+	font-weight: bold;
+	font-size: 15px;
+	text-align: center;
+	text-transform: uppercase;
+	padding-top: 27px;
+}
+
+#involve .type #involve-button-organize {
+	background: url('../img/involve/button-organize.png') no-repeat;
+}
+#involve .type #involve-button-volunteer {
+	background: url('../img/involve/button-volunteer.png') no-repeat;
+}
+#involve .type #involve-button-sponsor {
+	background: url('../img/involve/button-sponsor.png') no-repeat;
+}
+#involve .type #involve-button-read {
+	background: url('../img/involve/button-read.png') no-repeat;
+}
+
+#involve .type #involve-social {
+	position: absolute;
+	display: block;
+	top: 38px;
+	right: 46px;
+	width: 174px;
+	height: 70px;
+}
+#involve .type #involve-social li {
+	margin: 0px 14px 13px 0px;
+}
+
