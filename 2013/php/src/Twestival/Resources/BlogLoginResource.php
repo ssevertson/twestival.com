@@ -1,7 +1,5 @@
 <?php namespace Twestival\Resources;
 
-use Twestival\Services\LoginService;
-
 /**
  * @namespace blog
  * @uri /login

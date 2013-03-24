@@ -87,3 +87,6 @@ form.input input#input-submit-button {
 	letter-spacing: 1px;
 	margin-top: 60px;
 }
+form.input img.image-field {
+	margin-top: 4px;
+}

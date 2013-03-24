@@ -1,9 +1,5 @@
 <?php namespace Twestival\Resources;
 
-use Mustache_Engine;
-use Mustache_Loader_FilesystemLoader;
-use Twestival\Services\CommonService;
-
 class BaseResource extends \Tonic\Resource
 {
 	function renderMustacheHeaderFooter($template, $data = array())
@@ -47,6 +43,19 @@ class BaseResource extends \Tonic\Resource
 		{
 			throw new \Tonic\UnauthorizedException;
 		}
+	}
+	
+	function hashToList($grouped)
+	{
+		$array = array();
+		foreach($grouped as $key => $value)
+		{
+			array_push($array, array(
+			'Key' => $key,
+			'Value' => $value
+			));
+		}
+		return $array;
 	}
 }
 ?>

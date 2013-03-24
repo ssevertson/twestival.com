@@ -1,8 +1,5 @@
 <?php namespace Twestival\Services;
 
-use Twestival\DAOs\EventsDAO;
-use Twestival\DAOs\PagesDAO;
-
 class PageService extends BaseService
 {
 	function getPageContents()
@@ -19,6 +16,16 @@ class PageService extends BaseService
 	{
 		$pages = $this->container['dao.pages'];
 		$pages->updatePageContent($pageName, $contentName, $html);
+	}
+	function getPageSections()
+	{
+		$pages = $this->container['dao.pages'];;
+		return $pages->getPagePromotionSections();
+	}
+	function getPageSection($pageName, $sectionName)
+	{
+		$pages = $this->container['dao.pages'];;
+		return $pages->getPagePromotionSection($pageName, $sectionName);
 	}
 }
 ?>

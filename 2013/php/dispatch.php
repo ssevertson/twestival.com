@@ -12,7 +12,7 @@ $app = new Tonic\Application(array(
 	),
 	'mount' => array(
 		'global' => '/global',
-		'blog' => '/blog'),
+		'blog' => '/blog')
 ));
 
 $baseDir = realpath(dirname(__FILE__));
@@ -23,7 +23,8 @@ $subdomain = getRequestSubdomain($hostname);
 $namespace = getTonicNamespace($subdomain);
 
 $request = new Tonic\Request(array(
-	'uri' => getRequestTonicUri($namespace, $baseUri)
+	'uri' => getRequestTonicUri($namespace, $baseUri),
+	'uriMethodOverride' => TRUE
 ));
 
 $container = new Twestival\Container(array(
@@ -78,7 +79,7 @@ catch (Twestival\RedirectException $e)
 }
 catch (Exception $e)
 {
-	$container['logger']->addError($e->getMessage());
+	$container['logger']->addError($e->getMessage() . ':' . $e->getTraceAsString());
 	$response = buildRedirectResponse($request, $baseUri . '/error?code=500', true);
 }
 

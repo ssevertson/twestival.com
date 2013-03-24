@@ -34,10 +34,10 @@
 						<input type="submit" class="action" value="Save"/>
 						<input type="button" class="action" value="Cancel" onclick="history.go(-1);"/>
 					</form>
-					
-					<h2>Current Content</h2>
 				{{/Editable}}
-				{{{PageContent.HTML}}}
+				{{^Editable}}
+					{{{PageContent.HTML}}}
+				{{/Editable}}
 			</div>
 			
 			<div id="sidebars">

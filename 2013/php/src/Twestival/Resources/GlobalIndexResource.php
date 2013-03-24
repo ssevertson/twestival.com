@@ -1,6 +1,5 @@
 <?php namespace Twestival\Resources;
 
-use Twestival\Services\PromotionService;
 /**
  * @namespace global
  * @uri /index
@@ -14,8 +13,8 @@ class GlobalIndexResource extends BaseResource
 	function html()
 	{
 		$promotions = $this->container['service.promotion'];
-		$primaryPromotions = $promotions->getForPageSection('HOME', 'PRIMARY', 4, FALSE);
-		$secondaryPromotions = $promotions->getForPageSection('HOME', 'SECONDARY', 11, TRUE);
+		$primaryPromotions = $promotions->getList('HOME', 'PRIMARY', FALSE);
+		$secondaryPromotions = $promotions->getList('HOME', 'SECONDARY', TRUE);
 		
 		return $this->renderMustacheHeaderFooter('GlobalIndex', array(
 			'PrimaryPromotions' => $primaryPromotions,

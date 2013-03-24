@@ -4,14 +4,6 @@ ul.links {
 	margin: 0px 0px;
 }
 
-form.editable .action {
-	font-size: 14px;
-	font-family: 'Melbourne-Bold';
-	padding: 8px 8px 4px 8px;
-	margin: 12px 12px 12px 0px;
-	text-transform: uppercase;
-}
-
 form.editable {
 	width: 635px;
 }
@@ -20,4 +12,56 @@ body.cke_editable {
 	margin: 12px;
 	background-color: #FBFAF6;
 	background-image: none !important;
+}
+
+table.managed-list td, table.managed-list th {
+	font-family: 'Lato';
+	font-size: 15px;
+	padding: 6px;
+	margin: 0px;
+	border-bottom: 1px solid #CCCCCC;
+	font-weight: normal;
+}
+
+form .image-upload {
+	position: relative;
+	overflow: hidden;
+	display: inline-block;
+	font-family: 'Melbourne-Bold';
+	font-size: 14px;
+	margin: 12px 12px 12px 0px;
+	padding: 8px 8px 4px;
+	text-transform: uppercase;
+	color: #222222;
+	background-color: #dcdcdc;
+	width: auto;
+}
+
+form .image-upload:hover {
+	background-color: #f7f6f6;
+}
+
+form .image-upload input {
+	border: 1px solid red;
+	position: absolute;
+	top: 0;
+	right: 0;
+	margin: 0;
+	opacity: 0;
+	filter: alpha(opacity=0);
+	transform: translate(-300px, 0) scale(4);
+	direction: ltr;
+	cursor: pointer;
+}
+
+/* Fix for IE 6: */
+* html form .image-upload {
+  line-height: 24px;
+  margin: 1px -3px 0 0;
+}
+
+/* Fix for IE 7: */
+* + html form .image-upload {
+  padding: 2px 15px;
+  margin: 1px 0 0 0;
 }

@@ -1,9 +1,5 @@
 <?php namespace Twestival\Resources;
 
-use \Twestival\Services\PromotionService;
-use \Twestival\Services\PageService;
-
-
 /**
  * @namespace global
  * @uri /admin/page-content/{pageName}/{contentName}
@@ -15,10 +11,10 @@ class GlobalAdminPageContentResource extends BaseResource
 	 * @provides text/html
 	 * @requireSiteAdmin
 	 */
-	function showEditor($pageName, $sectionName)
+	function showEditor($pageName, $contentName)
 	{
 		return $this->renderMustacheHeaderFooter('Editable/' . ucwords(strtolower($pageName)), array(
-				'PageContent' => $this->container['service.page']->getPageContent($pageName, $sectionName),
+				'PageContent' => $this->container['service.page']->getPageContent($pageName, $contentName),
 				'Editable' => TRUE
 		));
 	}
@@ -28,9 +24,9 @@ class GlobalAdminPageContentResource extends BaseResource
 	 * @provides text/html
 	 * @requireSiteAdmin
 	 */
-	function save($pageName, $sectionName)
+	function save($pageName, $contentName)
 	{
-		$this->container['service.page']->updatePageContent($pageName, $sectionName, $_POST['Content']);
+		$this->container['service.page']->updatePageContent($pageName, $contentName, $_POST['Content']);
 		
 		throw new \Twestival\RedirectException('/admin');
 	}

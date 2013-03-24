@@ -1,8 +1,5 @@
 <?php namespace Twestival\Services;
 
-use Twestival\DAOs\SiteAdminsDAO;
-use Twestival\DAOs\EventAdminsDAO;
-
 class LoginService extends BaseService
 {
 	function authenticateSiteAdmin($username, $password)

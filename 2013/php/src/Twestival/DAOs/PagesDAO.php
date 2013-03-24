@@ -10,7 +10,10 @@ class PagesDAO extends BaseDAO
 				SitePage.SitePageID,
 				SitePage.Name AS PageName,
 				SitePagePromotionSection.PromotionSectionID,
-				SitePagePromotionSection.Name AS SectionName
+				SitePagePromotionSection.Name AS SectionName,
+				SitePagePromotionSection.MaxEvents,
+				SitePagePromotionSection.ImageWidth,
+				SitePagePromotionSection.ImageHeight
 			FROM
 				SitePage
 				INNER JOIN SitePagePromotionSection
@@ -20,7 +23,32 @@ class PagesDAO extends BaseDAO
 				SitePagePromotionSection.Name;
 		');
 		$query->execute();
-		return $query->fetchAll(\PDO::FETCH_OBJ);
+		return $query->fetchAll(\PDO::FETCH_ASSOC);
+	}
+	function getPagePromotionSection($pageName, $sectionName)
+	{
+		$conn = $this->container['connection'];
+		$query = $conn->prepare('
+			SELECT
+				SitePage.SitePageID,
+				SitePage.Name AS PageName,
+				SitePagePromotionSection.PromotionSectionID,
+				SitePagePromotionSection.Name AS SectionName,
+				SitePagePromotionSection.MaxEvents,
+				SitePagePromotionSection.ImageWidth,
+				SitePagePromotionSection.ImageHeight
+			FROM
+				SitePage
+				INNER JOIN SitePagePromotionSection
+					ON SitePage.SitePageID = SitePagePromotionSection.SitePageID
+			WHERE
+				SitePage.Name = ?
+				AND SitePagePromotionSection.Name = ?;
+		');
+		$query->bindValue(1, $pageName, \PDO::PARAM_STR);
+		$query->bindValue(2, $sectionName, \PDO::PARAM_STR);
+		$query->execute();
+		return $query->fetch(\PDO::FETCH_ASSOC);
 	}
 	function getPageContents()
 	{
@@ -40,7 +68,7 @@ class PagesDAO extends BaseDAO
 				SiteContent.Name;
 		');
 		$query->execute();
-		return $query->fetchAll(\PDO::FETCH_OBJ);
+		return $query->fetchAll(\PDO::FETCH_ASSOC);
 	}
 	function getPageContent($pageName, $contentName)
 	{
@@ -63,14 +91,15 @@ class PagesDAO extends BaseDAO
 		$query->bindValue(1, $pageName, \PDO::PARAM_STR);
 		$query->bindValue(2, $contentName, \PDO::PARAM_STR);
 		$query->execute();
-		return $query->fetch(\PDO::FETCH_OBJ);
+		return $query->fetch(\PDO::FETCH_ASSOC);
 	}
 	function updatePageContent($pageName, $contentName, $html)
 	{
 		$conn = $this->container['connection'];
 		$query = $conn->prepare('
 			UPDATE
-				SitePage, SiteContent
+				SitePage,
+				SiteContent
 			SET
 				SiteContent.HTML = ?
 			WHERE

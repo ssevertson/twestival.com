@@ -1,8 +1,5 @@
 <?php namespace Twestival\Resources;
 
-use \Twestival\Services\PromotionService;
-use \Twestival\Services\PageService;
-
 
 /**
  * @namespace global
@@ -18,7 +15,7 @@ class GlobalAdminIndexResource extends BaseResource
 	function showMenu()
 	{
 		return $this->renderMustacheHeaderFooter('GlobalAdminIndex', array(
-				'PageSections' => $this->container['service.promotion']->getPageSections(),
+				'PageSections' => $this->container['service.page']->getPageSections(),
 				'PageContents' => $this->container['service.page']->getPageContents()
 		));
 	}

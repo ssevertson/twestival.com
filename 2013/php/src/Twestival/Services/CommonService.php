@@ -1,8 +1,5 @@
 <?php namespace Twestival\Services;
 
-use Twestival\DAOs\EventsDAO;
-use Twestival\DAOs\YearsDAO;
-
 class CommonService extends BaseService
 {
 	function getSummaryStats()
@@ -18,7 +15,7 @@ class CommonService extends BaseService
 	function getMostRecentActiveYear()
 	{
 		$years = $this->container['dao.years'];
-		return $years->getMostRecentActiveYear();
+		return 2011; //$years->getMostRecentActiveYear();
 	}
 }
 ?>
