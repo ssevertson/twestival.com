@@ -32,7 +32,14 @@ class GlobalLoginResource extends BaseResource
 		$loginService = $this->container['service.login'];
 		if($loginService->authenticateSiteAdmin($_POST['Username'], $_POST['Password']))
 		{
-			throw new \Twestival\RedirectException('/admin');
+			if(isset($_COOKIE['URI_POST_LOGIN']))
+			{
+				throw new \Twestival\RedirectException($_COOKIE['URI_POST_LOGIN']);
+			}
+			else
+			{
+				throw new \Twestival\RedirectException('/admin');
+			}
 		}
 		else
 		{

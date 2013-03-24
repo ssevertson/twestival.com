@@ -10,9 +10,14 @@
 		{{> Header }}
 		
 		<div class="wrapper">
-			<h1>Admin</h1>
-			
-			<h2>Event Promotions: {{#format.toTitleCase}}{{PageName}}{{/format.toTitleCase}}: {{#format.toTitleCase}}{{SectionName}}{{/format.toTitleCase}}</h2>
+			<h1>
+				<a href="admin">Site Admin</a>:
+				Event Promotions:
+				<a href="admin/event-promotions/{{#format.toLowerCase}}{{PageName}}{{/format.toLowerCase}}/{{#format.toLowerCase}}{{SectionName}}{{/format.toLowerCase}}">
+					{{#format.toTitleCase}}{{PageName}}{{/format.toTitleCase}}:
+					{{#format.toTitleCase}}{{SectionName}}{{/format.toTitleCase}}
+				</a>
+			</h1>
 			
 			<table class="managed-list">
 				{{#EventPromotions}}

@@ -3,20 +3,14 @@
 class RedirectException extends \Exception
 {
     protected $uri;
-    protected $temporary;
     
-	function __construct($uri = '/', $temporary = FALSE)
+	function __construct($uri = '/')
 	{
 		$this->uri = $uri;
-		$this->temporary = $temporary;
 	}
     
     function getUri()
     {
     	return $this->uri;
     } 
-	function getTemporary()
-	{
-		return $this->temporary;
-	} 
 }

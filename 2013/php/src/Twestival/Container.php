@@ -34,7 +34,11 @@ class Container extends \Pimple
 		$this['session.exists'] = $this->share(function($c)
 		{
 			$config = $c['session.config'];
-			$sessionName = $config['name'];
+			$sessionName = NULL;
+			if(isset($config['name']))
+			{
+				$sessionName = $config['name'];
+			}
 			if(!isset($sessionName))
 			{
 				$sessionName = ini_get('session.name');

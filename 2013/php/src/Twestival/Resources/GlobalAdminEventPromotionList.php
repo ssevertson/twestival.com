@@ -20,6 +20,21 @@ class GlobalAdminEventPromotionListResource extends BaseResource
 		$eventPromotions = $this->container['service.promotion']->getList($pageName, $sectionName, TRUE);
 		$eventPromotions[0]['First'] = TRUE;
 		$eventPromotions[count($eventPromotions) - 1]['Last'] = TRUE;
+		
+		// Sequences are assigned by PromotionService, but we only want add links to create the *next* valid sequence
+		$maxValidSequence = 0;
+		foreach($eventPromotions as &$eventPromotion)
+		{
+			if($eventPromotion['Name'])
+			{
+				$maxValidSequence = $eventPromotion['Sequence'];
+			}
+			else
+			{
+				$eventPromotion['Sequence'] = $maxValidSequence + 1;
+			}
+		}
+		
 		return $this->renderMustacheHeaderFooter('GlobalAdminEventPromotionList', array(
 				'PageName' => $pageName,
 				'SectionName' => $sectionName,

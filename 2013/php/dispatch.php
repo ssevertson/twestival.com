@@ -20,17 +20,20 @@ $baseUri = '/2013';
 $hostname = $_SERVER['HTTP_HOST'];
 $domain = getRequestDomain($hostname);
 $subdomain = getRequestSubdomain($hostname);
+$uri = getRequestUri();
 $namespace = getTonicNamespace($subdomain);
 
 $request = new Tonic\Request(array(
-	'uri' => getRequestTonicUri($namespace, $baseUri),
+	'uri' => getTonicUri($uri, $namespace, $baseUri),
 	'uriMethodOverride' => TRUE
 ));
+
+$isGet = $request->method == 'GET';
 
 $container = new Twestival\Container(array(
 		'baseDir' => $baseDir,
 		'baseUri' => $baseUri,
-		'readOnly' => $request->method == 'GET',
+		'readOnly' => $isGet,
 		'request.protocol' => 'http://',
 		'request.hostname' => $hostname,
 		'request.domain' => $domain,
@@ -55,17 +58,21 @@ try
 catch (Tonic\NotFoundException $e)
 {
 	$container['logger']->addError($e->getMessage());
-	$response = buildRedirectResponse($request, $baseUri . '/error?code=404', false);
+	$response = buildRedirectResponse($request, $baseUri . '/error?code=404', $isGet);
 }
 catch (Tonic\UnauthorizedException $e)
 {
 	$container['logger']->addError($e->getMessage());
-	$response = buildRedirectResponse($request, $baseUri . '/login', false);
+	if($isGet)
+	{
+		setcookie('URI_POST_LOGIN', $uri, 0, '/', $domain, false, true);
+	}
+	$response = buildRedirectResponse($request, $baseUri, '/login', $isGet);
 }
 catch (Tonic\Exception $e)
 {
 	$container['logger']->addError($e->getMessage());
-	$response = buildRedirectResponse($request, $baseUri . '/error?code=' . $e->getCode(), true);
+	$response = buildRedirectResponse($request, $baseUri, '/error?code=' . $e->getCode(), $isGet);
 }
 catch (Twestival\RedirectException $e)
 {
@@ -75,12 +82,12 @@ catch (Twestival\RedirectException $e)
 	}
 	
 	$container['logger']->addInfo('Redirecting to ' . $e->getUri());
-	$response = buildRedirectResponse($request, $baseUri . $e->getUri(), $e->getTemporary());
+	$response = buildRedirectResponse($request, $baseUri, $e->getUri(), $isGet);
 }
 catch (Exception $e)
 {
 	$container['logger']->addError($e->getMessage() . ':' . $e->getTraceAsString());
-	$response = buildRedirectResponse($request, $baseUri . '/error?code=500', true);
+	$response = buildRedirectResponse($request, $baseUri, '/error?code=500', $isGet);
 }
 
 $response->output();
@@ -113,7 +120,7 @@ function getTonicNamespace($subdomain)
 	return isset($subdomain) ? 'blog' : 'global';
 }
 
-function getRequestTonicUri($namespace, $baseUri)
+function getRequestUri()
 {
 	$uri = '';
 	if(isset($_SERVER['REDIRECT_URL']))
@@ -131,7 +138,11 @@ function getRequestTonicUri($namespace, $baseUri)
 		// use PHP_SELF from Apache environment
 		$uri = substr($_SERVER['PHP_SELF'], strlen($_SERVER['SCRIPT_NAME']));
 	}
-	
+	return $uri;
+}
+
+function getTonicUri($uri, $namespace, $baseUri)
+{
 	if($baseUri && substr($uri, 0, strlen($baseUri)) == $baseUri)
 	{
 		$uri = substr($uri, strlen($baseUri));
@@ -148,8 +159,12 @@ function getRequestTonicUri($namespace, $baseUri)
 	}
 }
 
-function buildRedirectResponse($request, $uri, $temporary = FALSE)
+function buildRedirectResponse($request, $baseUri, $uri, $temporary = FALSE)
 {
+	if($baseUri && substr($uri, 0, strlen($baseUri)) != $baseUri)
+	{
+		$uri = $baseUri . $uri;
+	}
 	$response = new \Tonic\Response($request);
 	$response->code = $temporary ? \Tonic\Response::TEMPORARYREDIRECT : \Tonic\Response::MOVEDPERMANENTLY;
 	$response->Location = $uri;

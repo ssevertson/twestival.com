@@ -54,7 +54,7 @@ textarea {
 	color: #000;
 	padding: 0.2em 0;
 }
-form label.required:after {
+form label.required:after, span.required:after {
 	content: ' *';
 	font-weight: bold;
 	color: #e64d45;

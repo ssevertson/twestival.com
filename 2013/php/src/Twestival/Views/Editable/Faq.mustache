@@ -20,7 +20,12 @@
 		{{> Header }}
 		
 		<div class="wrapper">
-			<h1>Frequently Asked Questions</h1>
+			{{#Editable}}
+				<h1><a href="admin">Site Admin</a>: Frequently Asked Questions</h1>
+			{{/Editable}}
+			{{^Editable}}
+				<h1>Frequently Asked Questions</h1>
+			{{/Editable}}
 			
 			<div class="faqs">
 				{{#Editable}}
@@ -29,7 +34,18 @@
 							{{PageContent.HTML}}
 						</textarea>
 						<script type="text/javascript">
-							CKEDITOR.replace('edit-content', { contentsCss: ['//fonts.googleapis.com/css?family=Lato', 'css/main.css', 'ckeditor/contents.css', 'css/faq.css', 'css/admin.css'], height: 350, bodyClass: 'faqs' });
+							CKEDITOR.replace('edit-content', {
+									contentsCss: [
+											'//fonts.googleapis.com/css?family=Lato',
+											'css/main.css',
+											'ckeditor/contents.css',
+											'css/faq.css',
+											'css/admin.css'
+									],
+									height: 350,
+									bodyClass: 'faqs',
+									format_tags: 'h2;p'
+							});
 						</script>
 						<input type="submit" class="action" value="Save"/>
 						<input type="button" class="action" value="Cancel" onclick="history.go(-1);"/>
