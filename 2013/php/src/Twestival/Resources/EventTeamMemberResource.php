@@ -3,25 +3,18 @@
 use Twestival\Services\EventTeamMemberService;
 /**
  * @namespace global
- * @uri /eventteammembers
- * @uri /eventteammembers/:id
+ * @uri /eventteammembers/{eventID}
 
  */
 class EventTeamMemberResource extends BaseResource
 {
 	/**
 	 * @method get
-     * @param  int $anEventID
-     * @return str
+	 * @provides application/json
 	 */
-	function html($anEventID = '') {
-		$eventteammemberService = new EventTeamMemberService($this->container);
-		
-		if ($anEventID == '')
-			return $eventteammemberService->getEventTeamMembers();
-		else {
-			return $eventteammemberService->getEventTeamMember($anEventID);
-		}
+	function json($eventID) {
+		$teamMembers = $this->container['service.event.teamMembers'];
+		return json_encode($teamMembers->getEventTeamMembers($eventID));
 	}
 
 }

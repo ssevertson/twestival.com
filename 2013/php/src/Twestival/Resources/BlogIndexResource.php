@@ -23,9 +23,9 @@ class BlogIndexResource extends BaseResource
 		$offset = ($page - 1) * BlogIndexResource::BLOG_POSTS_PER_PAGE;
 		$postCount = $this->container['service.blog.post']->getPostCount($subdomain);
 		$data['Pages'] = array(
-			'Page' => $page,
-			'PageNext' => $postCount > ($offset + BlogIndexResource::BLOG_POSTS_PER_PAGE),
-			'PagePrevious' => ($page > 1)
+				'Page' => $page,
+				'PageNext' => $postCount > ($offset + BlogIndexResource::BLOG_POSTS_PER_PAGE),
+				'PagePrevious' => ($page > 1)
 		);
 		
 		$data['BlogPosts'] = $this->container['service.blog.post']->getPosts(
@@ -36,7 +36,10 @@ class BlogIndexResource extends BaseResource
 		$data['EventCharities'] = $this->container['service.event.charity']->getCharities(
 				$data['EventID']);
 		
-		// TODO: Add EventTeamMembers, EventSponsors to object model
+		$data['EventTeamMembers'] = $this->container['service.event.teamMembers']->getEventTeamMembers(
+				$data['EventID']);
+		
+		// TODO: Add EventSponsors to object model
 		
 		return $this->renderMustacheHeaderFooter('Blog/Index',
 				$data);
