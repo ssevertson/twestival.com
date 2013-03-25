@@ -14,5 +14,51 @@ class EventService extends BaseService
 	{
 		return $this->container['dao.events']->findPriorRelatedToRegistration($registrationID);
 	}
+	
+	function getDefaultEventSettings($year, $registration)
+	{
+		$name = isset($registration['PreferredTwestivalName'])
+		? $registration['PreferredTwestivalName']
+		: 'Twestival ' . $registration['City'] . ' ' . $year;
+	
+		$relatedBlogID = 0;
+		$relatedEvents = $this->findPriorRelatedToRegistration($registration['RegistrationID']);
+		if($relatedEvents)
+		{
+			$relatedBlogID = $relatedEvents[0]['BlogID'];
+		}
+	
+		$blogSubdomain = strtolower($registration['City']);
+	
+		return array(
+				'Name' => $name,
+				'Description' => 'Uses social media for social good by connecting communities to highlight a greater cause and have a fun event.',
+				'TwitterName' => $registration['TwitterName'],
+				'OrganizerEmailAddress' => $registration['EmailAddress'],
+				'BlogID' => $relatedBlogID,
+				'BlogSubdomain' => $blogSubdomain
+		);
+	}
+	
+	function create($registrationID, $blogID, $currentYear, $name, $description, $twitterName, $organizerEmailAddress, $imageFilename)
+	{
+		$eventID = $this->container['dao.events']->create(
+				$registrationID,
+				$blogID,
+				$currentYear,
+				$name,
+				$description,
+				$twitterName,
+				$organizerEmailAddress,
+				$imageFilename);
+		
+		// TODO: Create EventAdmin
+		// TODO: Create EventTeamMember
+		
+		// TODO: Email notification to $oranizerEmailAddress, with direct link to admin (http://$$subdomain.twestival.com/admin)
+		
+		
+		return $eventID;
+	}
 }
 ?>

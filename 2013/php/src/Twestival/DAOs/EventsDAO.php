@@ -153,7 +153,7 @@ class EventsDAO extends BaseDAO
 			FROM
 				Registration
 				INNER JOIN Event
-					ON Registration.Year > Event.Year
+					ON Registration.Year >= Event.Year
 					AND (
 						double_metaphone(Registration.City) = (
 							SELECT double_metaphone(Location.Name)
@@ -163,19 +163,44 @@ class EventsDAO extends BaseDAO
 							AND Location.Type = \'CITY\'
 							WHERE Event.EventID = EventLocation.EventID
 						)
+						OR double_metaphone(Registration.City) = (
+							SELECT double_metaphone(Blog.Subdomain)
+							FROM Blog
+							WHERE Event.BlogID = Blog.BlogID
+						)
 						OR double_metaphone(Registration.EmailAddress) = double_metaphone(Event.OrganizerEmailAddress)
 						OR double_metaphone(REPLACE(LOWER(Registration.PreferredTwestivalName), \'twestival\', \'\')) = double_metaphone(REPLACE(LOWER(Event.Name), \'twestival\', \'\'))
 					)
 			WHERE
 				Registration.RegistrationID = ?
-				AND Event.Active = TRUE
 			ORDER BY
+				Event.Year DESC,
 				Event.Name;
 		');
 		$query->bindValue(1, intval($registrationID), \PDO::PARAM_INT);
 		
 		$query->execute();
 		return $query->fetchAll(\PDO::FETCH_ASSOC);
+	}
+	
+	function create($registrationID, $blogID, $currentYear, $name, $description, $twitterName, $organizerEmailAddress, $imageFilename)
+	{
+		$conn = $this->container['connection'];
+		$query = $conn->prepare('
+			INSERT INTO Event (RegistrationID, BlogID, Year, Name, Description, TwitterName, OrganizerEmailAddress, ImageFilename)
+			VALUES (?, ?, ?, ?, ?, ?, ?, ?);
+		');
+		$query->bindValue(1, intval($registrationID), \PDO::PARAM_INT);
+		$query->bindValue(2, intval($blogID), \PDO::PARAM_INT);
+		$query->bindValue(3, intval(year), \PDO::PARAM_INT);
+		$query->bindValue(4, $this->trimToNull($name), \PDO::PARAM_STR);
+		$query->bindValue(5, $this->trimToNull($description), \PDO::PARAM_STR);
+		$query->bindValue(6, $this->trimToNull($twitterName), \PDO::PARAM_STR);
+		$query->bindValue(7, $this->trimToNull($organizerEmailAddress), \PDO::PARAM_STR);
+		$query->bindValue(8, $this->trimToNull($imageFilename), \PDO::PARAM_STR);
+	
+		$query->execute();
+		return $conn->lastInsertId();
 	}
 }
 ?>

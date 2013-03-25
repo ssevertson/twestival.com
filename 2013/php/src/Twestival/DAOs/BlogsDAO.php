@@ -65,5 +65,46 @@ class BlogsDAO extends BaseDAO
 		$query->execute();
 		return $query->fetch(\PDO::FETCH_ASSOC);
 	}
+	
+	function findUnassignedForActiveYear()
+	{
+		$conn = $this->container['connection'];
+		$query = $conn->prepare('
+				SELECT DISTINCT
+					Blog.*
+				FROM
+					Blog
+				WHERE
+					Blog.Active = TRUE
+					AND NOT EXISTS (
+						SELECT 1
+						FROM Event
+						INNER JOIN Year
+							ON Event.Year = Year.Year
+						WHERE
+							Blog.BlogID = Event.BlogID
+							AND Event.Active = TRUE
+							AND Year.Active = TRUE
+					)
+				ORDER BY
+					Blog.Subdomain;
+		');
+		
+		$query->execute();
+		return $query->fetchAll(\PDO::FETCH_ASSOC);
+	}
+	
+	function create($subdomain)
+	{
+		$conn = $this->container['connection'];
+		$query = $conn->prepare('
+			INSERT INTO Blog (Subdomain)
+			VALUES (?);
+		');
+		$query->bindValue(8, $this->trimToNull($subdomain), \PDO::PARAM_STR);
+		
+		$query->execute();
+		return $conn->lastInsertId();
+	}
 }
 ?>

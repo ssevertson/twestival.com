@@ -22,7 +22,7 @@ class RegistrationsDAO extends BaseDAO
 		$query->bindValue(11, $this->trimToNull($comment), \PDO::PARAM_STR);
 		
 		$query->execute();
-		return $query->rowCount();
+		return $conn->lastInsertId();
 	}
 	
 	function items($year, $approvalStatus)
@@ -71,7 +71,7 @@ class RegistrationsDAO extends BaseDAO
 				Registration
 			SET
 				Registration.ApprovalStatus = ?
-			WHERE(Year, ReRegistration, Name, TwitterName, EmailAddress, City, StateProvince, Country, PreferredTwestivalName, CharityDescription, Comment)
+			WHERE
 				Registration.RegistrationID = ?;
 		');
 		$query->bindValue(1, $this->trimToNull($approvalStatus), \PDO::PARAM_STR);

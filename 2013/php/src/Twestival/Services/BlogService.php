@@ -14,5 +14,13 @@ class BlogService extends BaseService
 		$blog['Event'] = $this->container['dao.events']->get($blog['EventID']);
 		return $blog;
 	}
+	function getUnassigned()
+	{
+		return $this->container['dao.blogs']->findUnassignedForActiveYear();
+	}
+	function create($subdomain)
+	{
+		return $this->container['dao.blogs']->create($subdomain);
+	}
 }
 ?>

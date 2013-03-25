@@ -1,0 +1,105 @@
+{{> HTMLTag }}
+	<head>
+		{{> HeadContent }}
+		<title>Twestival {{CurrentYear}} Admin</title>
+		
+		<link rel="stylesheet" href="css/input-form.css" />
+		<link rel="stylesheet" href="css/admin.css" />
+		
+		<script src="//ajax.microsoft.com/ajax/jquery.validate/1.11.0/jquery.validate.min.js"></script>
+		<script>window.jQuery.validator || document.write('<script src="js/vendor/jquery.validate-1.11.0.min.js"><\/script>')</script>
+	</head>
+	<body id="admin">
+		{{> Header }}
+		
+		<div class="wrapper">
+			<h1>
+				<a href="admin">Site Admin</a>:
+				<a href="admin/registration">Registration</a>:
+				{{#Registration}}
+					{{TwitterName}} / {{#format.toLocation}}{{City}}, {{StateProvince}}, {{Country}}{{/format.toLocation}}
+				{{/Registration}}
+			</h1>
+			
+			{{#Event}}
+				<form class="input" id="form-registration-event" action="admin/registration/{{#Registration}}{{RegistrationID}}{{/Registration}}/event!PUT" method="POST">
+					<fieldset>
+						<div class="legend">Event Details</div>
+						<div class="body">
+							<label for="name" class="required">Twestival Name</label><br/>
+							<input type="text" name="Name" id="name" style="width:504px;" class="required" maxlength="50" value="{{Name}}"/><br/>
+						
+							<label for="description">Description</label><br/>
+							<textarea name="Description" id="description" rows="2" style="width:504px;">{{Description}}</textarea><br/>
+														
+							<label for="twitter-name" class="required">Twitter Name</label><br/>
+							<div class="before-field">@</div><input type="text" name="TwitterName" id="twitter-name" style="width: 186px;" class="required" maxlength="15" value=""/><br/>
+							
+							<label for="organizer-email-address" class="required">Organizer Email Address</label><br/>
+							<input type="text" name="OrganizerEmailAddress" id="organizer-email-address" style="width:504px;" class="required email" maxlength="100"/ value="{{OrganizerEmailAddress}}"><br/>
+							
+							<label for="blogID" class="required">Existing Blog</label><br/>
+							<select id="blog-existing" name="BlogID" class="required">
+								<option value="-">--New Blog--</option>
+								{{#AvailableBlogs}}
+								 	<option value="{{BlogID}}" {{#Selected}}selected="selected"{{/Selected}}>{{Subdomain}}</option>
+								{{/AvailableBlogs}}
+							</select><br/>
+							<label for="blog-new">New Blog</label><br/>
+							<input type="text" name="BlogSubdomain" id="blog-new" style="width:180px;" value="{{^BlogID}}{{BlogSubdomain}}{{/BlogID}}" maxlength="50"/><br/>
+						</div>
+					</fieldset>
+					<input type="submit" class="action"  value="Create"/>
+					<input type="button" class="action" value="Cancel" name="Cancel" onclick="history.go(-1);"/>
+					<script type="text/javascript">
+						jQuery.validator.addMethod(
+								'noSpace',
+								function(value, element) { 
+									return !/\s/.test(value);
+								},
+								'This field cannot contain spaces'
+						);
+						
+						var validator = $("#form-registration-event").validate({
+							ignore: '.ignore',
+							errorPlacement: function(error, element) {
+								var target = element.prevAll('br:first');
+								if(target.length) {
+									error.insertAfter(element.prevAll('br:first'));
+								} else {
+									error.insertBefore(element);
+								}
+							},
+							success: function(error) {
+								error.remove();
+							},
+							rules: {
+								TwitterName: {
+									noSpace: true
+								},
+								Description: {
+									maxlength: 2000
+								},
+								BlogSubdomain: {
+									required: function(element) {
+										return $("#blog-existing").val() == '-';
+									}
+								}
+							}
+						});
+						$('#blog-new').keypress(function(element) {
+							$('#blog-existing').val('-');
+						});
+						$('#blog-existing').blur(function(element) {
+							if($('#blog-existing').val() != '-') {
+								$('#blog-new').val('');
+							};
+						});
+					</script>
+				</form>
+			{{/Event}}
+		</div>
+		
+		{{> Footer }}
+	</body>
+</html>

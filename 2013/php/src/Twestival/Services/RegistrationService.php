@@ -30,6 +30,13 @@ class RegistrationService extends BaseService
 				'Denied'
 		);
 	}
+	function approve($registrationID)
+	{
+		$this->container['dao.registrations']->setApprovalStatus(
+				$registrationID,
+				'Approved'
+		);
+	}
 	
 	function getNewForCurrentYear()
 	{

@@ -42,12 +42,12 @@ class GlobalAdminRegistrationItemResource extends BaseResource
 		{
 			case 'APPROVE':
 				// Further data needed before creating Event
-				throw new \Twestival\RedirectException("/admin/registration/" . intval($registrationID) . "/event");
+				throw new \Twestival\RedirectException("/admin/registration/$registrationID/event");
 			case 'DENY':
 				$this->container['service.registration']->deny(intval($registrationID));
-				throw new \Twestival\RedirectException("/admin/registration");
+				throw new \Twestival\RedirectException('/admin/registration');
 			default:
-				throw new \Twestival\RedirectException("/admin/registration");
+				throw new \Twestival\RedirectException('/admin/registration');
 		}
 	}
 }

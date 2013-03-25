@@ -34,7 +34,7 @@ class GlobalRegisterResource extends BaseResource
 			$_POST['Comment']
 		);
 		
-		throw new \Twestival\RedirectException("/thanks/register");
+		throw new \Twestival\RedirectException('/thanks/register');
 	}
 }
 ?>

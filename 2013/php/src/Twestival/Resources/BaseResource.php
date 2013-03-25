@@ -76,9 +76,10 @@ class BaseResource extends \Tonic\Resource
 			if($target == $value[$field])
 			{
 				$value['Selected'] = TRUE;
-				return;
+				return TRUE;
 			}
 		}
+		return FALSE;
 	}
 }
 ?>
