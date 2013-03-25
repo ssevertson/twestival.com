@@ -1,7 +1,11 @@
 ul.links {
 	font-family: 'Lato';
-	font-size: 13px;
-	margin: 0px 0px;
+	font-size: 15px;
+	margin: 0px;
+}
+a.view-all {
+	font-size:15px;
+	font-style: italic;
 }
 
 form.editable {
@@ -14,13 +18,37 @@ body.cke_editable {
 	background-image: none !important;
 }
 
-table.managed-list td, table.managed-list th {
+table.list td, table.list th {
 	font-family: 'Lato';
 	font-size: 15px;
 	padding: 6px;
 	margin: 0px;
 	border-bottom: 1px solid #CCCCCC;
 	font-weight: normal;
+	text-align: left;
+}
+table.list thead th {
+	font-weight: bold;
+}
+table.list tbody .symbol {
+	text-align: center;
+}
+table.list tbody tr:hover {
+	background-color: #f7f6f6;
+}
+
+table.detail td, table.detail th {
+	font-family: 'Lato';
+	font-size: 15px;
+	padding: 6px;
+	margin: 0px;
+	font-weight: normal;
+	text-align: left;
+	vertical-align: top;
+}
+table.detail th {
+	font-weight: bold;
+	white-space: nowrap;
 }
 
 form .image-upload {

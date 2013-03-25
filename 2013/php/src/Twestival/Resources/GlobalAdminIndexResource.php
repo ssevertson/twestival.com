@@ -14,9 +14,10 @@ class GlobalAdminIndexResource extends BaseResource
 	 */
 	function showMenu()
 	{
-		return $this->renderMustacheHeaderFooter('GlobalAdminIndex', array(
+		return $this->renderMustacheHeaderFooter('Global/Admin/Index', array(
 				'PageSections' => $this->container['service.page']->getPageSections(),
-				'PageContents' => $this->container['service.page']->getPageContents()
+				'PageContents' => $this->container['service.page']->getPageContents(),
+				'Registrations' => $this->container['service.registration']->getNewForCurrentYear()
 		));
 	}
 }

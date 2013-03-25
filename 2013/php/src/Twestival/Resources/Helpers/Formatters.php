@@ -32,6 +32,11 @@ class Formatters extends BaseHelper
 		$rendered = $context->render($text);
 		return $rendered ? date('j F Y', strtotime($rendered)) : 'TBD';
 	}
+	public function _to24HourTime($text, $context)
+	{
+		$rendered = $context->render($text);
+		return $rendered ? date('H:i T', strtotime($rendered)) : 'TBD';
+	}
 	
 	public function _toTitleCase($text, $context)
 	{
@@ -47,6 +52,17 @@ class Formatters extends BaseHelper
 	{
 		$rendered = $context->render($text);
 		return strtoupper($rendered);
+	}
+	public function _toLocation($text, $context)
+	{
+		$rendered = $context->render($text);
+		return preg_replace('/, , /', ', ', $rendered);
+	}
+	
+	public function _toUrlQuery($text, $context)
+	{
+		$rendered = $context->render($text);
+		return urlencode($rendered);
 	}
 }
 ?>

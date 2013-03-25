@@ -6,5 +6,9 @@ class EventService extends BaseService
 	{
 		return $this->container['dao.events']->itemsByLocationName($year, 'CONTINENT');
 	}
+	function findPriorRelatedToRegistration($registrationID)
+	{
+		return $this->container['dao.events']->findPriorRelatedToRegistration($registrationID);
+	}
 }
 ?>

@@ -52,7 +52,7 @@ class EventPromotionsDAO extends BaseDAO
 		');
 		$query->bindValue(1, $pageName, \PDO::PARAM_STR);
 		$query->bindValue(2, $sectionName, \PDO::PARAM_STR);
-		$query->bindValue(3, $limit, \PDO::PARAM_INT);
+		$query->bindValue(3, intval($limit), \PDO::PARAM_INT);
 
 		$query->execute();
 		return $query->fetchAll(\PDO::FETCH_ASSOC);
@@ -79,7 +79,7 @@ class EventPromotionsDAO extends BaseDAO
 		');
 		$query->bindValue(1, $pageName, \PDO::PARAM_STR);
 		$query->bindValue(2, $sectionName, \PDO::PARAM_STR);
-		$query->bindValue(3, $sequence, \PDO::PARAM_INT);
+		$query->bindValue(3, intval($sequence), \PDO::PARAM_INT);
 	
 		$query->execute();
 		return $query->fetch(\PDO::FETCH_ASSOC);
@@ -104,14 +104,14 @@ class EventPromotionsDAO extends BaseDAO
 				SitePage.Name = ?
 				AND SitePagePromotionSection.Name = ?;
 		');
-		$query->bindValue(1, $eventID, \PDO::PARAM_INT);
+		$query->bindValue(1, intval($eventID), \PDO::PARAM_INT);
 		$query->bindValue(2, $name, \PDO::PARAM_STR);
 		$query->bindValue(3, $imageFilename, \PDO::PARAM_STR);
-		$query->bindValue(4, $sequence, \PDO::PARAM_INT);
+		$query->bindValue(4, intval($sequence), \PDO::PARAM_INT);
 		$query->bindValue(5, $pageName, \PDO::PARAM_STR);
 		$query->bindValue(6, $sectionName, \PDO::PARAM_STR);
 	
-		return $query->execute();
+		$query->execute();
 		return $query->rowCount();
 	}
 	function update($pageName, $sectionName, $sequence, $eventID, $name, $imageFilename)
@@ -133,14 +133,14 @@ class EventPromotionsDAO extends BaseDAO
 				AND SitePagePromotionSection.Name = ?
 				AND EventPromotion.Sequence = ?;
 		');
-		$query->bindValue(1, $eventID, \PDO::PARAM_INT);
+		$query->bindValue(1, intval($eventID), \PDO::PARAM_INT);
 		$query->bindValue(2, $name, \PDO::PARAM_STR);
 		$query->bindValue(3, $imageFilename, \PDO::PARAM_STR);
 		$query->bindValue(4, $pageName, \PDO::PARAM_STR);
 		$query->bindValue(5, $sectionName, \PDO::PARAM_STR);
-		$query->bindValue(6, $sequence, \PDO::PARAM_INT);
+		$query->bindValue(6, intval($sequence), \PDO::PARAM_INT);
 	
-		return $query->execute();
+		$query->execute();
 		return $query->rowCount();
 	}
 
@@ -163,9 +163,9 @@ class EventPromotionsDAO extends BaseDAO
 		');
 		$query->bindValue(1, $pageName, \PDO::PARAM_STR);
 		$query->bindValue(2, $sectionName, \PDO::PARAM_STR);
-		$query->bindValue(3, $sequence, \PDO::PARAM_INT);
+		$query->bindValue(3, intval($sequence), \PDO::PARAM_INT);
 	
-		return $query->execute();
+		$query->execute();
 		return $query->rowCount();
 	}
 	
@@ -186,10 +186,10 @@ class EventPromotionsDAO extends BaseDAO
 				AND SitePagePromotionSection.Name = ?
 				AND EventPromotion.Sequence = ?;
 		');
-		$query->bindValue(1, $newSequence, \PDO::PARAM_INT);
+		$query->bindValue(1, intval($newSequence), \PDO::PARAM_INT);
 		$query->bindValue(2, $pageName, \PDO::PARAM_STR);
 		$query->bindValue(3, $sectionName, \PDO::PARAM_STR);
-		$query->bindValue(4, $sequence, \PDO::PARAM_INT);
+		$query->bindValue(4, intval($sequence), \PDO::PARAM_INT);
 	
 		$query->execute();
 		return $query->rowCount();

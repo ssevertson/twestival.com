@@ -1,0 +1,27 @@
+{{> HTMLTag }}
+	<head>
+		{{> HeadContent }}
+		<title>Twestival {{CurrentYear}}: Register</title>
+		
+		<link rel="stylesheet" href="css/input-form.css" />
+	</head>
+	<body id="home">
+		{{> Header }}
+
+			<div class="wrapper">
+				<h1>Your Request Has Been Submitted</h1>
+				
+				<!-- Stupid hack - use form/fieldset to get appropriate trim -->
+				<form id="form-register" class="input" >
+					<fieldset>
+						<div class="legend">Thank You</div>
+						<div class="body">
+							{{{Message}}}
+						</div>
+					</fieldset>
+				</form>
+			</div>
+
+		{{> Footer }}
+	</body>
+</html>

@@ -18,13 +18,13 @@ class GlobalAdminEventPromotionItemResource extends BaseResource
 	function showEditor($pageName, $sectionName, $sequence)
 	{
 		$eventPromotion = $this->container['service.promotion']->get($pageName, $sectionName, intval($sequence));
-		$currentYear = $this->container['service.common']->getMostRecentActiveYear();
+		$currentYear = $this->container['service.year']->getMostRecentActiveYear();
 		
-		$continents = $this->container['service.events']->getByContinent($currentYear);
+		$continents = $this->container['service.event']->getByContinent($currentYear);
 		$this->selectEvent($eventPromotion['EventID'], $continents);
 		$eventPromotion['Continents'] = $this->hashToList($continents);
 		
-		return $this->renderMustacheHeaderFooter('GlobalAdminEventPromotionEdit', 
+		return $this->renderMustacheHeaderFooter('Global/Admin/EventPromotion/Edit', 
 				$eventPromotion
 		);
 	}

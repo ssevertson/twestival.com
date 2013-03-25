@@ -16,7 +16,7 @@ class GlobalIndexResource extends BaseResource
 		$primaryPromotions = $promotions->getList('HOME', 'PRIMARY', FALSE);
 		$secondaryPromotions = $promotions->getList('HOME', 'SECONDARY', TRUE);
 		
-		return $this->renderMustacheHeaderFooter('GlobalIndex', array(
+		return $this->renderMustacheHeaderFooter('Global/Index', array(
 			'PrimaryPromotions' => $primaryPromotions,
 			'SecondaryPromotionsRow1' => $this->toRow($secondaryPromotions, 0, 3),
 			'SecondaryPromotionsRow2' => $this->toRow($secondaryPromotions, 4, 7),

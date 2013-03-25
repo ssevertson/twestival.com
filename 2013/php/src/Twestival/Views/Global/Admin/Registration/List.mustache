@@ -1,0 +1,82 @@
+{{> HTMLTag }}
+	<head>
+		{{> HeadContent }}
+		<title>Twestival {{CurrentYear}} Admin</title>
+		
+		<link rel="stylesheet" href="css/input-form.css" />
+		<link rel="stylesheet" href="css/admin.css" />
+	</head>
+	<body id="admin">
+		{{> Header }}
+		
+		<div class="wrapper">
+			<h1>
+				<a href="admin">Site Admin</a>:
+				Registration
+			</h1>
+			
+			<form class="input" id="form-registrations" method="GET">
+				<div class="inline">
+					<label for="year">Year</label><br/>
+					<select id="year" name="Year">
+						{{#Years}}
+							<option {{#Selected}}selected="selected"{{/Selected}}>{{Year}}</option>
+						{{/Years}}
+					</select><br/>
+				</div>
+				<div class="inline">
+					<label for="status">Status</label><br/>
+					<select id="status" name="Status">
+						{{#Statuses}}
+							<option {{#Selected}}selected="selected"{{/Selected}}>{{Value}}</option>
+						{{/Statuses}}
+					</select><br/>
+				</div>
+				<div class="inline">
+					<input type="submit" class="action" value="Show"/>
+				</div>
+				
+				<div class="clearfix"></div>
+			</form>
+			
+			<table class="list">
+				<thead>
+					<tr>
+						<th>ReReg?</th>
+						<th>Twitter Name</th>
+						<th>Location</th>
+						<th colspan="3">Submitted</th>
+					</tr>
+				</thead>
+				<tbody>
+					{{#Registrations}}
+						<tr>
+							<td class="symbol">
+								{{#ReRegistration}}✓{{/ReRegistration}}
+							</td>
+							<td>
+								<a href="admin/registration/{{RegistrationID}}">
+									{{TwitterName}}
+								</a>
+							</td>
+							<th>
+								<a href="admin/registration/{{RegistrationID}}">
+									{{#format.toLocation}}{{City}}, {{StateProvince}}, {{Country}}{{/format.toLocation}}
+								</a>
+							</th>
+							<td>
+								{{#format.toEuropeanDate}}{{Created}}{{/format.toEuropeanDate}}
+							</td>
+							<td>@</td>
+							<td>
+								{{#format.to24HourTime}}{{Created}}{{/format.to24HourTime}}
+							</td>
+						</tr>
+					{{/Registrations}}
+				</tbody>
+			</table>
+		</div>
+		
+		{{> Footer }}
+	</body>
+</html>

@@ -4,12 +4,11 @@ class BaseResource extends \Tonic\Resource
 {
 	function renderMustacheHeaderFooter($template, $data = array())
 	{
-		$common = $this->container['service.common'];
-		$summaryStats = $common->getSummaryStats();
+		$summaryStats = $this->container['service.common']->getSummaryStats();
 		
 		$merged = array_merge($data, $summaryStats);
 		
-		$merged['CurrentYear'] = $common->getMostRecentActiveYear();
+		$merged['CurrentYear'] = $this->container['service.year']->getMostRecentActiveYear();
 		
 		return $this->renderMustache($template, $merged);
 	}
@@ -45,10 +44,10 @@ class BaseResource extends \Tonic\Resource
 		}
 	}
 	
-	function hashToList($grouped)
+	function hashToList($hash)
 	{
 		$array = array();
-		foreach($grouped as $key => $value)
+		foreach($hash as $key => $value)
 		{
 			array_push($array, array(
 			'Key' => $key,
@@ -56,6 +55,30 @@ class BaseResource extends \Tonic\Resource
 			));
 		}
 		return $array;
+	}
+	
+	function valuesToHashes($values)
+	{
+		$array = array();
+		foreach($values as $value)
+		{
+			array_push($array, array(
+				'Value' => $value
+			));
+		}
+		return $array;
+	}
+	
+	function selectByField($target, $field, &$values)
+	{
+		foreach($values as &$value)
+		{
+			if($target == $value[$field])
+			{
+				$value['Selected'] = TRUE;
+				return;
+			}
+		}
 	}
 }
 ?>

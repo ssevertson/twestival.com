@@ -7,5 +7,13 @@ class BaseDAO
 	{
 		$this->container = $container;
 	}
+	
+	function trimToNull($value) {
+		$value = trim($value);
+		return $value ? $value : NULL;
+	}
+	function toBoolean($value) {
+		return $value ? TRUE : FALSE;
+	}
 }
 ?>

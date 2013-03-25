@@ -33,6 +33,44 @@
 					</li>
 				{{/PageContents}}
 			</ul>
+			
+			<h2>Pending Registrations <a href="admin/registration" class="view-all">(View All)</a></h2>
+			<table class="list">
+				<thead>
+					<tr>
+						<th>ReReg?</th>
+						<th>Twitter Name</th>
+						<th>Location</th>
+						<th colspan="3">Submitted</th>
+					</tr>
+				</thead>
+				<tbody>
+					{{#Registrations}}
+						<tr>
+							<td class="symbol">
+								{{#ReRegistration}}✓{{/ReRegistration}}
+							</td>
+							<td>
+								<a href="admin/registration/{{RegistrationID}}">
+									{{TwitterName}}
+								</a>
+							</td>
+							<th>
+								<a href="admin/registration/{{RegistrationID}}">
+									{{#format.toLocation}}{{City}}, {{StateProvince}}, {{Country}}{{/format.toLocation}}
+								</a>
+							</th>
+							<td>
+								{{#format.toEuropeanDate}}{{Created}}{{/format.toEuropeanDate}}
+							</td>
+							<td>@</td>
+							<td>
+								{{#format.to24HourTime}}{{Created}}{{/format.to24HourTime}}
+							</td>
+						</tr>
+					{{/Registrations}}
+				</tbody>
+			</table>
 		</div>
 		
 		{{> Footer }}

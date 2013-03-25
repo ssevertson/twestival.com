@@ -180,6 +180,10 @@ class Container extends \Pimple
 		{
 			return new \Twestival\Services\CommonService($c);
 		});
+		$this['service.year'] = $this->share(function($c)
+		{
+			return new \Twestival\Services\YearService($c);
+		});
 		$this['service.login'] = $this->share(function($c)
 		{
 			return new \Twestival\Services\LoginService($c);
@@ -192,9 +196,17 @@ class Container extends \Pimple
 		{
 			return new \Twestival\Services\PromotionService($c);
 		});
-		$this['service.events'] = $this->share(function($c)
+		$this['service.event'] = $this->share(function($c)
 		{
 			return new \Twestival\Services\EventService($c);
+		});
+		$this['service.registration'] = $this->share(function($c)
+		{
+			return new \Twestival\Services\RegistrationService($c);
+		});
+		$this['service.thankyou'] = $this->share(function($c)
+		{
+			return new \Twestival\Services\ThankYouService($c);
 		});
 		
 
@@ -221,6 +233,10 @@ class Container extends \Pimple
 		$this['dao.years'] = $this->share(function($c)
 		{
 			return new \Twestival\DAOs\YearsDAO($c);
+		});
+		$this['dao.registrations'] = $this->share(function($c)
+		{
+			return new \Twestival\DAOs\RegistrationsDAO($c);
 		});
 		
 		$this['helper.format'] = $this->share(function($c)

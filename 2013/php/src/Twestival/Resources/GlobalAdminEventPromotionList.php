@@ -35,7 +35,7 @@ class GlobalAdminEventPromotionListResource extends BaseResource
 			}
 		}
 		
-		return $this->renderMustacheHeaderFooter('GlobalAdminEventPromotionList', array(
+		return $this->renderMustacheHeaderFooter('Global/Admin/EventPromotion/List', array(
 				'PageName' => $pageName,
 				'SectionName' => $sectionName,
 				'EventPromotions' => $eventPromotions

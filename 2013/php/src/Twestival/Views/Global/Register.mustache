@@ -1,0 +1,120 @@
+{{> HTMLTag }}
+	<head>
+		{{> HeadContent }}
+		<title>Twestival {{CurrentYear}}: Register</title>
+		
+		<link rel="stylesheet" href="css/input-form.css" />
+		
+		<script src="//ajax.microsoft.com/ajax/jquery.validate/1.11.0/jquery.validate.min.js"></script>
+		<script>window.jQuery.validator || document.write('<script src="js/vendor/jquery.validate-1.11.0.min.js"><\/script>')</script>
+	</head>
+	<body id="home">
+		{{> Header }}
+
+			<div class="wrapper">
+				<h1>Register</h1>
+				
+				<div class="intro">
+					<p>Forming a team of volunteers to host a Twestival in your community is an incredible opportunity to work closely with others to make a real difference for a local cause you believe in. It can also be tremendous fun!</p>
+	
+					<p>To get started, fill out the form below and someone from our global orientation team will be in touch with more information, including a handbook and the contact details of an experienced Twestival organizer who can answer any questions that come up.</p>
+	
+					<p>Just remember, all events are to be 100% volunteer-run, and 100% of ticket sales and donations go directly to the charitable project you select. To get all the details of how Twestival works and what it means to be a local organizer, <a href="faq">please read our FAQ.</a></p>
+				</div>
+				
+				<form id="form-register" class="input" method="post">
+					<fieldset>
+						<div class="legend">Registration Type</div>
+						<div class="body">
+							<input type="radio" name="ReRegistration" id="reregistration_true" value="true" class="required" />
+							<label for="reregistration_true">I helped organize the previous Twestival and would like to re-register my city.</label><br/>
+							<input type="radio" name="ReRegistration" id="reregistration_false" value="false" class="required" />
+							<label for="reregistration_false">I have a team together and would like to register to host a Twestival.</label><br/>
+						</div>
+					</fieldset>
+					<fieldset>
+						<div class="legend">Contact Information</div>
+						<div class="body" style="margin-top: 9px;">
+							<label for="name" class="required">Full Name</label><br/>
+							<input type="text" name="Name" id="name" style="width:504px;" class="required" maxlength="100"/><br/>
+							
+							<label for="twitter-name" class="required">Twitter Name</label><br/>
+							<div class="before-field">@</div><input type="text" name="TwitterName" id="twitter-name" style="width: 186px;" class="required" maxlength="15"/><br/>
+							
+							<label for="email-address" class="required">Email Address</label><br/>
+							<input type="text" name="EmailAddress" id="email-address" style="width:504px;" class="required email" maxlength="100"/><br/>
+							
+							<div class="inline">
+								<label for="city" class="required">City</label><br/>
+								<input type="text" name="City" id="city" style="width:160px;" class="required" maxlength="100"/><br/>
+							</div>
+							<div class="inline">
+								<label for="state-province">Province / State</label><br/>
+								<input type="text" name="StateProvince" id="state-province" style="width:160px;" maxlength="50"/><br/>
+							</div>
+							<div class="inline">
+								<label for="country" class="required">Country</label><br/>
+								<input type="text" name="Country" id="country" style="width:160px;" class="required" maxlength="50"/><br/>
+							</div>
+							<div class="clearfix"></div>
+							
+							<label for="twestival-name">Preferred Twestival Name (if different from City name)</label><br/>
+							<input type="text" name="PreferredTwestivalName" id="twestival-name" style="width:504px;" maxlength="50"/><br/>
+							
+							<label for="charity">If you have a local charity that you are interested in supporting, please describe.</label><br/>
+							<textarea name="CharityDescription" id="charity" rows="2" style="width:504px;"></textarea><br/>
+	
+							<label for="comment">Comment</label><br/>
+							<textarea name="Comment" id="comment" rows="2" style="width:504px;"></textarea><br/>
+	
+							<input type="checkbox" name="Acknowledge" id="acknowledge" class="required"/>
+							<label for="acknowledge" class="required">Click here to confirm that you have <a href="disclaimer" target="_blank">read and agree to our terms</a></label><br/>
+							
+							<div class="symbols">
+								<span class="required"></span> required fields<br/>
+							</div>
+							
+							<input type="submit" value="Submit" id="input-submit-button"/>
+						</div>
+					</fieldset>
+					<script type="text/javascript">
+						jQuery.validator.addMethod(
+								'noSpace',
+								function(value, element) { 
+									return !/\s/.test(value);
+								},
+								'This field cannot contain spaces'
+						);
+						
+						var validator = $("#form-register").validate({
+							ignore: '.ignore',
+							errorPlacement: function(error, element) {
+								var target = element.prevAll('br:first');
+								if(target.length) {
+									error.insertAfter(element.prevAll('br:first'));
+								} else {
+									error.insertBefore(element);
+								}
+							},
+							success: function(error) {
+								error.remove();
+							},
+							rules: {
+								TwitterName: {
+									noSpace: true
+								},
+								CharityDescription: {
+									maxlength: 2000
+								},
+								Comment: {
+									maxlength: 2000
+								}
+							}
+						});
+					</script>
+				</form>
+			</div>
+
+		{{> Footer }}
+	</body>
+</html>

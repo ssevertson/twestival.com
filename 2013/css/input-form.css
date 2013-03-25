@@ -48,17 +48,18 @@ form.input select {
 	border: 1px solid #DCDCDC;
 	margin-top: 4px;
 }
-form.invovle input, form.invovle select, form.input textarea {
-	display: block;
-}
 form.input input[type="radio"] {
 	margin-right: 8px;
 	margin-bottom: 24px;
 }
-form.input input[type="text"], form.input input[type="password"], form.input textarea {
+form.input input[type="text"], form.input input[type="password"], form.input select, form.input textarea {
+	display: block;
 	border: 1px solid #DCDCDC;
 	margin-top: 4px;
 	padding: 5px 4px 3px 4px;
+}
+form.input select {
+	padding: 0px;
 }
 form.input .before-field {
 	float: left;
@@ -67,6 +68,10 @@ form.input .before-field {
 form.input .inline {
 	float: left;
 	margin-right: 10px;
+}
+form.input .inline .action {
+	margin-top: 28px;
+	margin-bottom: 0px;
 }
 form.input .symbols {
 	margin-top: 24px;
