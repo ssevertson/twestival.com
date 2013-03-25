@@ -230,7 +230,7 @@ $json = json_decode($homepage);
 					echo("<!-- IF -->");
 					echo("<a href=\"#\" class=\"subject\"><!-- href = PostURL -->"); echo($json[$count]->Title); echo("</a>");
 				
-					echo("<div class=\"date\">April 5th, 2011</div>");
+					echo("<div class=\"date\">"); echo($json[$count]->BlogPostCreated); echo("<!--April 5th, 2011--> </div>");
 					echo("<a href=\"comment\" class=\"comment-link\">Comment</a>");
 				
 					echo("<div class=\"body\">");

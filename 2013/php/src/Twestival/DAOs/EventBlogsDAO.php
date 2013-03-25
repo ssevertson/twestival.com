@@ -9,7 +9,7 @@ class EventBlogsDAO extends BaseDAO
   		// Define and perform the SQL SELECT query
   		$sql = "SELECT *
 FROM `Event` INNER JOIN Blog ON `Event`.BlogID = Blog.BlogID
-	 INNER JOIN BlogPost ON Blog.BlogID = BlogPost.BlogID
+	 INNER JOIN BlogPost ON Blog.BlogID = BlogPost.BlogID,
 	 INNER JOIN EventCharity ON `Event`.EventID = EventCharity.EventID";
   		$result = $conn->query($sql);
 
@@ -38,7 +38,8 @@ FROM `Event` INNER JOIN Blog ON `Event`.BlogID = Blog.BlogID
   		// Define and perform the SQL SELECT query
   		$sql = "SELECT *, 
 			EventCharity.`Name` AS EventCharityName,
-			EventCharity.`URL` AS EventCharityURL
+			EventCharity.`URL` AS EventCharityURL,
+			BlogPost.`Created` AS BlogPostCreated
 			FROM `Event` INNER JOIN Blog ON `Event`.BlogID = Blog.BlogID
 	 		INNER JOIN BlogPost ON Blog.BlogID = BlogPost.BlogID
 	 		INNER JOIN EventCharity ON `Event`.EventID = EventCharity.EventID WHERE Event.EventID = " . $anEventID . " ORDER BY BlogPost.Created DESC";
