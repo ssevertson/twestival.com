@@ -2,49 +2,68 @@
 
 class BlogsDAO extends BaseDAO
 {
-	function getBlogs() {
-	
-		$output = "";
+	function items($year)
+	{
 		$conn = $this->container['connection'];
-  		// Define and perform the SQL SELECT query
-  		$sql = "SELECT * FROM `Blog`";
-  		$result = $conn->query($sql);
-
-  		// If the SQL query is succesfully performed ($result not false)
-  		if($result !== false) {
-    		$cols = $result->columnCount();           // Number of returned columns
-
-    		// Parse the result set
-    		$i = 0;
-    		foreach($result as $row) {
-    			$i++;
-    			//print_r($row);
-    			$output = $output . $i . " ";
-    		}
-  		}
-		return ($output);
+		$query = $conn->prepare('
+				SELECT
+					Blog.*
+				FROM
+					Event
+					INNER JOIN Blog
+						ON Event.BlogID = Blog.BlogID
+				WHERE
+					Event.Active = TRUE
+					AND Blog.Active = TRUE
+					AND Event.Year = ?
+				ORDER BY
+					Blog.Subdomain;
+		');
+		$query->bindValue(1, intval($year), \PDO::PARAM_INT);
+		
+		$query->execute();
+		return $query->fetchAll(\PDO::FETCH_ASSOC);
 	}
 
-	function getBlog($aBlogID) {
-	
-		$output = "";
+	function getBySubdomain($subdomain)
+	{
 		$conn = $this->container['connection'];
-  		// Define and perform the SQL SELECT query
-  		$sql = "SELECT * FROM `Blog` WHERE BlogID = " . $aBlogID;
-  		
-  		$result = $conn->query($sql);
-
-  		// If the SQL query is succesfully performed ($result not false)
-  		if($result !== false) {
-    		$cols = $result->columnCount();           // Number of returned columns
-
-    		// Parse the result set
-    		foreach($result as $row) {
-    			//print_r($row);
-    			$output = $output . json_decode($row);
-    		}
-  		}
-		return ($output);
+		$query = $conn->prepare('
+				SELECT
+					Blog.*
+				FROM
+					Event
+					INNER JOIN Blog
+						ON Event.BlogID = Blog.BlogID
+				WHERE
+					Event.Active = TRUE
+					AND Blog.Active = TRUE
+					AND Blog.Subdomain = ?;
+		');
+		$query->bindValue(1, $subdomain, \PDO::PARAM_STR);
+		
+		$query->execute();
+		return $query->fetch(\PDO::FETCH_ASSOC);
+	}
+	function getByID($blogID)
+	{
+		$conn = $this->container['connection'];
+		$query = $conn->prepare('
+				SELECT
+					Blog.*
+				FROM
+					Event
+					INNER JOIN Blog
+						ON Event.BlogID = Blog.BlogID
+				WHERE
+					Event.Active = TRUE
+					AND Blog.Active = TRUE
+					AND Blog.BlogID = ?;
+		');
+		$query->bindValue(1, intval($blogID), \PDO::PARAM_INT);
+	
+		$query->execute();
+		return $query->fetch(\PDO::FETCH_ASSOC);
 	}
 }
 ?>

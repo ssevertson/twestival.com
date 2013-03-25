@@ -4,14 +4,17 @@ use Twestival\DAOs\BlogsDAO;
 
 class BlogService extends BaseService
 {
-	function getBlogs() {
-		$blogs = new BlogsDAO($this->container);
-		return $blogs->getBlogs();
+	function getBlogs($year)
+	{
+		return $this->container['dao.blogs']->items($year);
 	}
-
-	function getBlog($aBlogID = '') {
-		$blogs = new BlogsDAO($this->container);
-		return $blogs->getBlog($aBlogID);
+	function getById($blogID)
+	{
+		return $this->container['dao.blogs']->getByID($blogID);
+	}
+	function getBySubdomain($subdomain)
+	{
+		return $this->container['dao.blogs']->getBySubdomain($subdomain);
 	}
 }
 ?>

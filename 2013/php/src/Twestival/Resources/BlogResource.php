@@ -4,23 +4,31 @@ use Twestival\Services\BlogService;
 /**
  * @namespace global
  * @uri /blog
- * @uri /blog/:id
+ * @uri /blog/{blogIDOrSubdomain}
 
  */
 class BlogResource extends BaseResource
 {
 	/**
 	 * @method get
-     * @param  int $aBlogID
-     * @return str
+	 * @provides application/json
 	 */
-	function html($aBlogID = '') {
-		$blogService = new BlogService($this->container);
+	function json($blogIDOrSubdomain = '')
+	{
+		$blogs = $this->container['service.blog'];
 		
-		if ($aBlogID == '')
-			return $blogService->getBlogs();
-		else {
-			return $blogService->getBlog($aBlogID);
+		if(!$blogIDOrSubdomain)
+		{
+			$currentYear = $this->container['service.year']->getMostRecentActiveYear();
+			return json_encode($blogs->getBlogs($currentYear));
+		}
+		else if(is_numeric($blogIDOrSubdomain))
+		{
+			return json_encode($blogs->getById(intval($blogIDOrSubdomain)));
+		}
+		else
+		{
+			return json_encode($blogs->getBySubdomain($blogIDOrSubdomain));
 		}
 	}
 

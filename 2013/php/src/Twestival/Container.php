@@ -208,6 +208,10 @@ class Container extends \Pimple
 		{
 			return new \Twestival\Services\ThankYouService($c);
 		});
+		$this['service.blog'] = $this->share(function($c)
+		{
+			return new \Twestival\Services\BlogService($c);
+		});
 		
 
 		$this['dao.events.admins'] = $this->share(function($c)
@@ -237,6 +241,10 @@ class Container extends \Pimple
 		$this['dao.registrations'] = $this->share(function($c)
 		{
 			return new \Twestival\DAOs\RegistrationsDAO($c);
+		});
+		$this['dao.blogs'] = $this->share(function($c)
+		{
+			return new \Twestival\DAOs\BlogsDAO($c);
 		});
 		
 		$this['helper.format'] = $this->share(function($c)
