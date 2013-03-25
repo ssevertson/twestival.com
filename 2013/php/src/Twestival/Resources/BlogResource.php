@@ -1,5 +1,5 @@
-
 <?php namespace Twestival\Resources;
+
 use Twestival\Services\BlogService;
 /**
  * @namespace global

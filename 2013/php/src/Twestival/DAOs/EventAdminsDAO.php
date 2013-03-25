@@ -17,16 +17,37 @@ class EventAdminsDAO extends BaseDAO
 				INNER JOIN Year
 					ON Event.Year = Year.Year
 			WHERE
-				EventAdmin.Username = ?
+				Blog.Active = TRUE
+				AND Year.Active = TRUE
+				AND EventAdmin.Username = ?
 				AND EventAdmin.Password = UPPER(SHA1(CONCAT(?, EventAdmin.Salt)))
-				AND Blog.Subdomain = ?
-				AND Year.Active = TRUE;
+				AND Blog.Subdomain = ?;
 		');
 		$query->bindValue(1, $username, \PDO::PARAM_STR);
-		$query->bindValue(1, $password, \PDO::PARAM_STR);
-		$query->bindValue(1, $blogSubdomain, \PDO::PARAM_STR);
+		$query->bindValue(2, $password, \PDO::PARAM_STR);
+		$query->bindValue(3, $blogSubdomain, \PDO::PARAM_STR);
 		$query->execute();
 		return intval($query->fetchColumn());
+	}
+	
+	function create($eventID, $username, $password, $salt)
+	{
+		$conn = $this->container['connection'];
+		$query = $conn->prepare('
+			INSERT INTO EventAdmin(EventID, Username, Password, Salt)
+			SELECT
+				?,
+				?,
+				UPPER(SHA1(CONCAT(?, ?))),
+				?;
+		');
+		$query->bindValue(1, intval($eventID), \PDO::PARAM_INT);
+		$query->bindValue(2, $this->trimToNull($username), \PDO::PARAM_STR);
+		$query->bindValue(3, $password, \PDO::PARAM_STR);
+		$query->bindValue(4, $salt, \PDO::PARAM_STR);
+		$query->bindValue(5, $salt, \PDO::PARAM_STR);
+		$query->execute();
+		return $conn->lastInsertId();
 	}
 }
 ?>

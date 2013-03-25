@@ -245,5 +245,51 @@
             "microframework",
             "rest"
         ]
+    },
+    {
+        "name": "roderik/pwgen-php",
+        "version": "0.1.3",
+        "version_normalized": "0.1.3.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/roderik/pwgen-php",
+            "reference": "0.1.3"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://github.com/roderik/pwgen-php/zipball/0.1.3",
+            "reference": "0.1.3",
+            "shasum": ""
+        },
+        "require": {
+            "php": ">=5.3.3"
+        },
+        "time": "2012-09-26 06:12:57",
+        "type": "library",
+        "installation-source": "dist",
+        "autoload": {
+            "psr-0": {
+                "PWGen": ""
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "GPL"
+        ],
+        "authors": [
+            {
+                "name": "Theodore Ts'o",
+                "email": "tytso@alum.mit.edu"
+            },
+            {
+                "name": "Superwayne",
+                "email": "superwayne@superwayne.org"
+            }
+        ],
+        "description": "pwgen-php is a simple PHP class which aims to clone the GNU pwgen functionality.",
+        "keywords": [
+            "generator",
+            "password"
+        ]
     }
 ]

@@ -10,6 +10,7 @@ return array(
     'Tonic' => $vendorDir . '/peej/tonic/src/',
     'Psr\\Log\\' => $vendorDir . '/psr/log/',
     'Pimple' => $vendorDir . '/pimple/pimple/lib/',
+    'PWGen' => $vendorDir . '/roderik/pwgen-php/',
     'Mustache' => $vendorDir . '/mustache/mustache/src/',
     'Monolog' => $vendorDir . '/monolog/monolog/src/',
 );

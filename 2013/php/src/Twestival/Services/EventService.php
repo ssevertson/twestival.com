@@ -52,10 +52,23 @@ class EventService extends BaseService
 				$organizerEmailAddress,
 				$imageFilename);
 		
-		// TODO: Create EventAdmin
-		// TODO: Create EventTeamMember
+
+		$registration = $this->container['service.registration']->get($registrationID);
 		
-		// TODO: Email notification to $oranizerEmailAddress, with direct link to admin (http://$$subdomain.twestival.com/admin)
+		$password = NULL;
+		$this->container['service.login']->createEventAdmin(
+				$eventID,
+				$registration['TwitterName'],
+				$password
+		);
+		
+		$this->container['service.event.teamMember']->save(
+				$eventID,
+				1,
+				$registration['TwitterName']
+		);
+		
+		// TODO: Email notification to $oranizerEmailAddress, with direct link to admin (http://$$subdomain.twestival.com/admin), and generated username/password
 		
 		
 		return $eventID;

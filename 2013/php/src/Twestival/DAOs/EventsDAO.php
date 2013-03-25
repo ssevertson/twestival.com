@@ -183,7 +183,7 @@ class EventsDAO extends BaseDAO
 		return $query->fetchAll(\PDO::FETCH_ASSOC);
 	}
 	
-	function create($registrationID, $blogID, $currentYear, $name, $description, $twitterName, $organizerEmailAddress, $imageFilename)
+	function create($registrationID, $blogID, $year, $name, $description, $twitterName, $organizerEmailAddress, $imageFilename)
 	{
 		$conn = $this->container['connection'];
 		$query = $conn->prepare('
@@ -192,7 +192,7 @@ class EventsDAO extends BaseDAO
 		');
 		$query->bindValue(1, intval($registrationID), \PDO::PARAM_INT);
 		$query->bindValue(2, intval($blogID), \PDO::PARAM_INT);
-		$query->bindValue(3, intval(year), \PDO::PARAM_INT);
+		$query->bindValue(3, intval($year), \PDO::PARAM_INT);
 		$query->bindValue(4, $this->trimToNull($name), \PDO::PARAM_STR);
 		$query->bindValue(5, $this->trimToNull($description), \PDO::PARAM_STR);
 		$query->bindValue(6, $this->trimToNull($twitterName), \PDO::PARAM_STR);

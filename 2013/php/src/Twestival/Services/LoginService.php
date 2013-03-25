@@ -34,5 +34,23 @@ class LoginService extends BaseService
 		
 		return $userID;
 	}
+	
+	private function generatePassword()
+	{
+		$generator = new \PWGen();
+		return $generator->generate();
+	}
+	
+	function createEventAdmin($eventID, $username, &$password = '')
+	{
+		if(!$password)
+		{
+			$password = $this->generatePassword();
+		}
+		
+		$salt = substr(md5(rand()), 0, 16);
+		
+		return $this->container['dao.event.admins']->create($eventID, $username, $password, $salt);
+	}
 }
 ?>

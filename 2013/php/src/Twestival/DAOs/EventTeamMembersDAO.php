@@ -9,12 +9,9 @@ class EventTeamMembersDAO extends BaseDAO
 			SELECT
 				EventTeamMember.*
 			FROM
-				Event
-				INNER JOIN EventTeamMember
-					ON Event.EventID = EventTeamMember.EventID
+				EventTeamMember
 			WHERE
-				Event.Active = TRUE
-				AND EventTeamMember.EventID = ?
+				EventTeamMember.EventID = ?
 			ORDER BY
 				EventTeamMember.Sequence;
 		');
@@ -23,6 +20,25 @@ class EventTeamMembersDAO extends BaseDAO
 		$query->execute();
 		return $query->fetchAll(\PDO::FETCH_ASSOC);
 	}
+	function get($eventID, $sequence)
+	{
+		$conn = $this->container['connection'];
+		$query = $conn->prepare('
+			SELECT
+				EventTeamMember.*
+			FROM
+				EventTeamMember
+			WHERE
+				EventTeamMember.EventID = ?
+				AND EventTeamMember.Sequence = ?;
+		');
+		$query->bindValue(1, intval($eventID), \PDO::PARAM_INT);
+		$query->bindValue(2, intval($sequence), \PDO::PARAM_INT);
+		
+		$query->execute();
+		return $query->fetchAll(\PDO::FETCH_ASSOC);
+	}
+	
 	
 	function create($eventID, $sequence, $twitterName)
 	{
@@ -37,6 +53,26 @@ class EventTeamMembersDAO extends BaseDAO
 		
 		$query->execute();
 		return $conn->lastInsertId();
+	}
+
+	function update($eventID, $sequence, $twitterName)
+	{
+		$conn = $this->container['connection'];
+		$query = $conn->prepare('
+			UPDATE
+				EventTeamMember
+			SET
+				EventTeamMember.TwitterName = ?
+			WHERE
+				EventTeamMember.EventID = ?
+				AND EventTeamMember.Sequence = ?;
+		');
+		$query->bindValue(1, $this->trimToNull($twitterName), \PDO::PARAM_STR);
+		$query->bindValue(2, intval($eventID), \PDO::PARAM_INT);
+		$query->bindValue(3, intval($sequence), \PDO::PARAM_INT);
+	
+		$query->execute();
+		return $query->rowCount();
 	}
 }
 ?>
