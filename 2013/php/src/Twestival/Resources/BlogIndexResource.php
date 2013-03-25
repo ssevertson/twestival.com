@@ -36,10 +36,11 @@ class BlogIndexResource extends BaseResource
 		$data['EventCharities'] = $this->container['service.event.charity']->getCharities(
 				$data['EventID']);
 		
-		$data['EventTeamMembers'] = $this->container['service.event.teamMembers']->getEventTeamMembers(
+		$data['EventTeamMembers'] = $this->container['service.event.teamMember']->getTeamMembers(
 				$data['EventID']);
 		
-		// TODO: Add EventSponsors to object model
+		$data['EventSponsors'] = $this->container['service.event.sponsor']->getSponsors(
+				$data['EventID']);
 		
 		return $this->renderMustacheHeaderFooter('Blog/Index',
 				$data);
