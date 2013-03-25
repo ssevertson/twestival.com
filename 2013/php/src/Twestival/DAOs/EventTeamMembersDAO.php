@@ -2,62 +2,41 @@
 
 class EventTeamMembersDAO extends BaseDAO
 {
-	function getEventTeamMembers() {
-	
-		$output = "";
+	function items($eventID)
+	{
 		$conn = $this->container['connection'];
-  		// Define and perform the SQL SELECT query
-  		$sql = "SELECT *
-FROM `Event` INNER JOIN Blog ON `Event`.BlogID = Blog.BlogID
-	 INNER JOIN BlogPost ON Blog.BlogID = BlogPost.BlogID
-	 INNER JOIN EventCharity ON `Event`.EventID = EventCharity.EventID";
-  		$result = $conn->query($sql);
-
-  		// If the SQL query is succesfully performed ($result not false)
-  		if($result !== false) {
-    		$cols = $result->columnCount();           // Number of returned columns
-
-    		// Parse the result set
-    		$output = "[";
-    		foreach($result as $row) {
-    			$output = $output . json_encode($row);
-    			
-    			$output = $output . ",";
-    		}
-    		
-    		$output = substr($output,0,strlen($output) - 1);
-    		$output = $output . "]";
-  		}
-		return ($output);
+		$query = $conn->prepare('
+			SELECT
+				EventTeamMember.*
+			FROM
+				Event
+				INNER JOIN EventTeamMember
+					ON Event.EventID = EventTeamMember.EventID
+			WHERE
+				Event.Active = TRUE
+				AND EventTeamMember.EventID = ?
+			ORDER BY
+				EventTeamMember.Sequence;
+		');
+		$query->bindValue(1, intval($eventID), \PDO::PARAM_INT);
+		
+		$query->execute();
+		return $query->fetchAll(\PDO::FETCH_ASSOC);
 	}
-
-	function getEventTeamMember($anEventID) {
 	
-		$output = "";
+	function create($eventID, $sequence, $twitterName)
+	{
 		$conn = $this->container['connection'];
-  		// Define and perform the SQL SELECT query
-  		$sql = "SELECT *
-			FROM EventTeamMember
-			WHERE EventID = " . $anEventID;
-  		
-  		$result = $conn->query($sql);
-
-  		// If the SQL query is succesfully performed ($result not false)
-  		if($result !== false) {
-    		$cols = $result->columnCount();           // Number of returned columns
-
-    		// Parse the result set
-    		$output = "[";
-    		foreach($result as $row) {
-    			$output = $output . json_encode($row);
-    			
-    			$output = $output . ",";
-    		}
-    		
-    		$output = substr($output,0,strlen($output) - 1);
-    		$output = $output . "]";
-  		}
-		return ($output);
+		$query = $conn->prepare('
+			INSERT INTO EventTeamMember(EventID, Sequence, TwitterName)
+			VALUES (?, ?, ?);
+		');
+		$query->bindValue(1, intval($eventID), \PDO::PARAM_INT);
+		$query->bindValue(2, intval($sequence), \PDO::PARAM_INT);
+		$query->bindValue(3, $this->trimToNull($twitterName), \PDO::PARAM_STR);
+		
+		$query->execute();
+		return $conn->lastInsertId();
 	}
 }
 ?>
