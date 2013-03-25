@@ -26,5 +26,29 @@ class GlobalAdminRegistrationItemResource extends BaseResource
 				$registration
 		);
 	}
+	
+	/**
+	 * @method put
+	 * @provides text/html
+	 * @requireSiteAdmin
+	 */
+	function changeApprovalStatus($registrationID)
+	{
+		$approvalStatus = isset($_POST['ApprovalStatus'])
+				? $_POST['ApprovalStatus']
+				: '';
+		
+		switch(strtoupper($approvalStatus))
+		{
+			case 'APPROVE':
+				// Further data needed before creating Event
+				throw new \Twestival\RedirectException("/admin/registration/" . intval($registrationID) . "/event");
+			case 'DENY':
+				$this->container['service.registration']->deny(intval($registrationID));
+				throw new \Twestival\RedirectException("/admin/registration");
+			default:
+				throw new \Twestival\RedirectException("/admin/registration");
+		}
+	}
 }
 ?>

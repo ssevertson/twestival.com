@@ -62,5 +62,23 @@ class RegistrationsDAO extends BaseDAO
 		$query->execute();
 		return $query->fetch(\PDO::FETCH_ASSOC);
 	}
+	
+	function setApprovalStatus($registrationID, $approvalStatus)
+	{
+		$conn = $this->container['connection'];
+		$query = $conn->prepare('
+			UPDATE
+				Registration
+			SET
+				Registration.ApprovalStatus = ?
+			WHERE(Year, ReRegistration, Name, TwitterName, EmailAddress, City, StateProvince, Country, PreferredTwestivalName, CharityDescription, Comment)
+				Registration.RegistrationID = ?;
+		');
+		$query->bindValue(1, $this->trimToNull($approvalStatus), \PDO::PARAM_STR);
+		$query->bindValue(2, intval($registrationID), \PDO::PARAM_INT);
+		
+		$query->execute();
+		return $query->rowCount();
+	}
 }
 ?>

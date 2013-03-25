@@ -23,6 +23,14 @@ class RegistrationService extends BaseService
 		// TODO: Email notification to registration@twestival.com, with direct link to entry (/admin/registration/{RegistrationID})
 	}
 	
+	function deny($registrationID)
+	{
+		$this->container['dao.registrations']->setApprovalStatus(
+				$registrationID,
+				'Denied'
+		);
+	}
+	
 	function getNewForCurrentYear()
 	{
 		$currentYear = $this->container['service.year']->getMostRecentActiveYear();

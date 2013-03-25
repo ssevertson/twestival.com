@@ -32,7 +32,18 @@ class Formatters extends BaseHelper
 		$rendered = $context->render($text);
 		return $rendered ? date('j F Y', strtotime($rendered)) : 'TBD';
 	}
-	public function _to24HourTime($text, $context)
+	public function _toLongEuropeanDate($text, $context)
+	{
+		$rendered = $context->render($text);
+		return $rendered ? date('l, j F Y', strtotime($rendered)) : 'Comming Soon';
+	}
+	public function _removeSeconds($text, $context)
+	{
+		$rendered = $context->render($text);
+		$value = preg_replace('/:[0-9][0-9]$/', '', $rendered);
+		return $value;
+	}
+	public function _to24HourTimeWithZone($text, $context)
 	{
 		$rendered = $context->render($text);
 		return $rendered ? date('H:i T', strtotime($rendered)) : 'TBD';
@@ -56,7 +67,8 @@ class Formatters extends BaseHelper
 	public function _toLocation($text, $context)
 	{
 		$rendered = $context->render($text);
-		return preg_replace('/, , /', ', ', $rendered);
+		$value = preg_replace('/, , /', ', ', $rendered);
+		return ($value != ', ') ? $value : 'Unknown';
 	}
 	
 	public function _toUrlQuery($text, $context)

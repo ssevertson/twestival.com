@@ -42,6 +42,77 @@ class EventsDAO extends BaseDAO
 		return floatval($query->fetchColumn());
 	}
 	
+	function items($year, $active)
+	{
+		$conn = $this->container['connection'];
+		$query = $conn->prepare('
+				SELECT
+					Event.*,
+					(
+						SELECT Location.Name
+						FROM EventLocation
+						INNER JOIN Location
+						ON EventLocation.LocationID = Location.LocationID
+						WHERE EventLocation.EventID = Event.EventID
+						AND Location.Type = \'CONTINENT\'
+					) As LocationContinent,
+					(
+						SELECT Location.Name
+						FROM EventLocation
+						INNER JOIN Location
+						ON EventLocation.LocationID = Location.LocationID
+						WHERE EventLocation.EventID = Event.EventID
+						AND Location.Type = \'COUNTRY\'
+					) As LocationCountry,
+					(
+						SELECT Location.Name
+						FROM EventLocation
+						INNER JOIN Location
+						ON EventLocation.LocationID = Location.LocationID
+						WHERE EventLocation.EventID = Event.EventID
+						AND Location.Type = \'STATE_PROVINCE\'
+					) As LocationStateProvince,
+					(
+						SELECT Location.Name
+						FROM EventLocation
+						INNER JOIN Location
+						ON EventLocation.LocationID = Location.LocationID
+						WHERE EventLocation.EventID = Event.EventID
+						AND Location.Type = \'CITY\'
+					) As LocationCity
+				FROM
+					Event
+				WHERE
+					Event.Year = ?
+					AND Event.Active = ?
+				ORDER BY
+					Event.Name;
+		');
+		$query->bindValue(1, intval($year), \PDO::PARAM_INT);
+		$query->bindValue(2, $this->toBoolean($active), \PDO::PARAM_INT);
+	
+		$query->execute();
+		return $query->fetchAll(\PDO::FETCH_ASSOC);
+	}
+	
+	function get($eventID)
+	{
+		$conn = $this->container['connection'];
+		$query = $conn->prepare('
+				SELECT
+					Event.*
+				FROM
+					Event
+				WHERE
+					Event.EventID = ?
+				ORDER BY
+					Event.Name;
+		');
+		$query->bindValue(1, intval($eventID), \PDO::PARAM_INT);
+	
+		$query->execute();
+		return $query->fetchAll(\PDO::FETCH_ASSOC);
+	}
 	
 	function itemsByLocationName($year, $locationType)
 	{
@@ -49,14 +120,11 @@ class EventsDAO extends BaseDAO
 		$query = $conn->prepare('
 			SELECT
 				COALESCE((
-					SELECT
-						Location.Name
-					FROM
-						EventLocation
+						SELECT Location.Name
+						FROM EventLocation
 						INNER JOIN Location
-							ON EventLocation.LocationID = Location.LocationID
-					WHERE
-						EventLocation.EventID = Event.EventID
+						ON EventLocation.LocationID = Location.LocationID
+						WHERE EventLocation.EventID = Event.EventID
 						AND Location.Type = ?
 				), \'Unknown\') As LocationName,
 				Event.*

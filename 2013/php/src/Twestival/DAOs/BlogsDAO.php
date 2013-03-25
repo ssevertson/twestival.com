@@ -2,66 +2,66 @@
 
 class BlogsDAO extends BaseDAO
 {
-	function items($year)
+	function items()
 	{
 		$conn = $this->container['connection'];
 		$query = $conn->prepare('
-				SELECT
-					Blog.*
+				SELECT DISTINCT
+					Blog.*,
+					Event.EventID,
+					EXISTS (
+						SELECT 1
+						FROM Event
+						INNER JOIN Year
+							ON Event.Year = Year.Year
+						WHERE
+							Blog.BlogID = Event.BlogID
+							AND Event.Active = TRUE
+							AND Year.Active = TRUE
+					) AS EventYearActive
 				FROM
-					Event
-					INNER JOIN Blog
-						ON Event.BlogID = Blog.BlogID
+					Blog
+					INNER JOIN Event
+						ON Blog.BlogID = Event.BlogID
 				WHERE
-					Event.Active = TRUE
-					AND Blog.Active = TRUE
-					AND Event.Year = ?
+					Blog.Active = TRUE
+					AND Event.Active = TRUE
 				ORDER BY
 					Blog.Subdomain;
 		');
-		$query->bindValue(1, intval($year), \PDO::PARAM_INT);
 		
 		$query->execute();
 		return $query->fetchAll(\PDO::FETCH_ASSOC);
 	}
 
-	function getBySubdomain($subdomain)
+	function get($subdomain)
 	{
 		$conn = $this->container['connection'];
 		$query = $conn->prepare('
-				SELECT
-					Blog.*
+				SELECT DISTINCT
+					Blog.*,
+					Event.EventID,
+					EXISTS (
+						SELECT 1
+						FROM Event
+						INNER JOIN Year
+							ON Event.Year = Year.Year
+						WHERE
+							Blog.BlogID = Event.BlogID
+							AND Event.Active = TRUE
+							AND Year.Active = TRUE
+					) AS EventYearActive
 				FROM
-					Event
-					INNER JOIN Blog
-						ON Event.BlogID = Blog.BlogID
+					Blog
+					INNER JOIN Event
+						ON Blog.BlogID = Event.BlogID
 				WHERE
-					Event.Active = TRUE
-					AND Blog.Active = TRUE
+					Blog.Active = TRUE
+					AND Event.Active = TRUE
 					AND Blog.Subdomain = ?;
 		');
 		$query->bindValue(1, $subdomain, \PDO::PARAM_STR);
 		
-		$query->execute();
-		return $query->fetch(\PDO::FETCH_ASSOC);
-	}
-	function getByID($blogID)
-	{
-		$conn = $this->container['connection'];
-		$query = $conn->prepare('
-				SELECT
-					Blog.*
-				FROM
-					Event
-					INNER JOIN Blog
-						ON Event.BlogID = Blog.BlogID
-				WHERE
-					Event.Active = TRUE
-					AND Blog.Active = TRUE
-					AND Blog.BlogID = ?;
-		');
-		$query->bindValue(1, intval($blogID), \PDO::PARAM_INT);
-	
 		$query->execute();
 		return $query->fetch(\PDO::FETCH_ASSOC);
 	}

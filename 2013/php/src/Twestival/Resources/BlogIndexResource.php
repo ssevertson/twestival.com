@@ -6,13 +6,40 @@
  */
 class BlogIndexResource extends BaseResource
 {
+	const BLOG_POSTS_PER_PAGE = 10;
 	/**
 	 * @method get
 	 * @provides text/html
 	 */
 	function html()
 	{
-		return $this->renderMustacheHeaderFooter('Header');
+		$subdomain = $this->container['request.subdomain'];
+		
+		$data = $this->container['service.blog']->getBySubdomain($subdomain);
+
+		$page = isset($_GET['Page'])
+				? intval($_GET['Page'])
+				: 1;
+		$offset = ($page - 1) * BlogIndexResource::BLOG_POSTS_PER_PAGE;
+		$postCount = $this->container['service.blog.post']->getPostCount($subdomain);
+		$data['Pages'] = array(
+			'Page' => $page,
+			'PageNext' => $postCount > ($offset + BlogIndexResource::BLOG_POSTS_PER_PAGE),
+			'PagePrevious' => ($page > 1)
+		);
+		
+		$data['BlogPosts'] = $this->container['service.blog.post']->getPosts(
+				$subdomain,
+				BlogIndexResource::BLOG_POSTS_PER_PAGE,
+				$offset);
+		
+		$data['EventCharities'] = $this->container['service.event.charity']->getCharities(
+				$data['EventID']);
+		
+		// TODO: Add EventTeamMembers, EventSponsors to object model
+		
+		return $this->renderMustacheHeaderFooter('Blog/Index',
+				$data);
 	}
 }
 ?>

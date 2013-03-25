@@ -24,7 +24,7 @@
 				{{TwitterName}} / {{#format.toLocation}}{{City}}, {{StateProvince}}, {{Country}}{{/format.toLocation}}
 			</h1>
 			
-			<form class="input" id="form-registration">
+			<form class="input" id="form-registration" action="admin/registration/{{RegistrationID}}!PUT" method="POST">
 				<fieldset>
 					<div class="legend">Details</div>
 					<div class="body">
@@ -117,8 +117,8 @@
 						</table>
 					</div>
 				</fieldset>
-				<input type="submit" class="action" name="status" value="Approve" onclick="alert('Not Implemented Yet'); return false;"/>
-				<input type="submit" class="action" name="status" value="Deny" onclick="alert('Not Implemented Yet'); return false;"/>
+				<input type="submit" class="action" name="ApprovalStatus" value="Approve"/>
+				<input type="submit" class="action" name="ApprovalStatus" value="Deny" onclick="return confirm('Are you sure you want to deny this registration? If so, you must email the reason(s) for denial to {{EmailAddress}} within 4 hours.');"/>
 				<input type="button" class="action" value="Cancel" onclick="history.go(-1);"/>
 			</form>
 		</div>

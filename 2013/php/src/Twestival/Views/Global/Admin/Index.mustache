@@ -34,7 +34,13 @@
 				{{/PageContents}}
 			</ul>
 			
-			<h2>Pending Registrations <a href="admin/registration" class="view-all">(View All)</a></h2>
+			<h2>Manage</h2>
+			<ul class="links">
+				<li><a href="admin/registration">Registrations</a></li>
+				<li><a href="admin/event">Events</a></li>
+			</ul>
+			
+			<h2>Pending Registrations</h2>
 			<table class="list">
 				<thead>
 					<tr>
@@ -65,7 +71,7 @@
 							</td>
 							<td>@</td>
 							<td>
-								{{#format.to24HourTime}}{{Created}}{{/format.to24HourTime}}
+								{{#format.to24HourTimeWithZone}}{{Created}}{{/format.to24HourTimeWithZone}}
 							</td>
 						</tr>
 					{{/Registrations}}

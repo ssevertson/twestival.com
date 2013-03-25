@@ -20,7 +20,7 @@ class LoginService extends BaseService
 	
 	function authenticateEventAdmin($username, $password, $blogSubdomain)
 	{
-		$admin = $this->container['dao.events.admins'];
+		$admin = $this->container['dao.event.admins'];
 		$userID = $admin->authenticate($username, $password, $blogSubdomain);
 		
 		if($userID)

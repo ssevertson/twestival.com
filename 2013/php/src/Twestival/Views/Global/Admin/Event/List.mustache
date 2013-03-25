@@ -12,10 +12,10 @@
 		<div class="wrapper">
 			<h1>
 				<a href="admin">Site Admin</a>:
-				Registrations
+				Events
 			</h1>
 			
-			<form class="input" id="form-registrations" method="GET">
+			<form class="input" id="form-events" method="GET">
 				<div class="inline">
 					<label for="year">Year</label><br/>
 					<select id="year" name="Year">
@@ -25,11 +25,10 @@
 					</select><br/>
 				</div>
 				<div class="inline">
-					<label for="status">Status</label><br/>
-					<select id="status" name="Status">
-						{{#Statuses}}
-							<option {{#Selected}}selected="selected"{{/Selected}}>{{Value}}</option>
-						{{/Statuses}}
+					<label for="active">Active</label><br/>
+					<select id=""active"" name="Active">
+						<option value="true" {{#Active}}selected="selected"{{/Active}}>Yes</option>
+						<option value="false" {{^Active}}selected="selected"{{/Active}}>No</option>
 					</select><br/>
 				</div>
 				<div class="inline">
@@ -42,37 +41,29 @@
 			<table class="list">
 				<thead>
 					<tr>
-						<th>ReReg?</th>
-						<th>Twitter Name</th>
+						<th>Name</th>
 						<th>Location</th>
-						<th colspan="3">Submitted</th>
+						<th>Date</th>
 					</tr>
 				</thead>
 				<tbody>
-					{{#Registrations}}
+					{{#Events}}
 						<tr>
-							<td class="symbol">
-								{{#ReRegistration}}✓{{/ReRegistration}}
-							</td>
 							<td>
-								<a href="admin/registration/{{RegistrationID}}">
-									{{TwitterName}}
+								<a href="admin/event/{{EventID}}">
+									{{Name}}
 								</a>
 							</td>
 							<th>
-								<a href="admin/registration/{{RegistrationID}}">
-									{{#format.toLocation}}{{City}}, {{StateProvince}}, {{Country}}{{/format.toLocation}}
+								<a href="admin/event/{{EventID}}">
+									{{#format.toLocation}}{{LocationCity}}, {{LocationStateProvince}}, {{LocationCountry}}{{/format.toLocation}}
 								</a>
 							</th>
 							<td>
-								{{#format.toEuropeanDate}}{{Created}}{{/format.toEuropeanDate}}
-							</td>
-							<td>@</td>
-							<td>
-								{{#format.to24HourTimeWithZone}}{{Created}}{{/format.to24HourTimeWithZone}}
+								{{#format.toEuropeanDate}}{{Date}}{{/format.toEuropeanDate}}
 							</td>
 						</tr>
-					{{/Registrations}}
+					{{/Events}}
 				</tbody>
 			</table>
 		</div>
