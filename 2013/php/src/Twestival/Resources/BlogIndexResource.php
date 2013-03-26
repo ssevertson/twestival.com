@@ -28,7 +28,12 @@ class BlogIndexResource extends BaseResource
 				'PagePrevious' => ($page > 1)
 		);
 		
-		$data['Event'] = $this->container['service.event']->getEvent($data['EventID']);
+		$event = $this->container['service.event']->getEvent($data['EventID']);
+		if($event['FundraisingGoalUSD'])
+		{
+			$event['FundraisingGoalRatio'] = $event['DonationTotalUSD'] / $event['FundraisingGoalUSD'];
+		}
+		$data['Event'] = $event;
 		
 		$data['BlogPosts'] = $this->container['service.blog.post']->getPosts(
 				$subdomain,

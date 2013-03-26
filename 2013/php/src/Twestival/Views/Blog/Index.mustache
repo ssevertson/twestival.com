@@ -35,8 +35,8 @@
 		
 		<div class="clearfix"></div>
 		
-		<div class="wrapper">
-			{{#Event}}
+		{{#Event}}
+			<div class="wrapper">
 				<div id="event">
 					<div class="info">
 						<div class="name">{{Name}}</div>
@@ -59,7 +59,7 @@
 						</div>
 					</div>
 					<div class="stamp">
-						<div class="logo"><img src="img/event/content/event-logo-1.png" alt=""/><!-- src = DB: Event.ImageFilename --></div>
+						<div class="logo"><img src="{{ImageUri}}" alt="{{Name}} Logo"/></div>
 						<div class="overlay"><img src="img/blog/event/logo-overlay.png" alt="Official Event"/></div>
 					</div>
 					<div class="clearfix"></div>
@@ -103,33 +103,34 @@
 						<li><a href="https://twitter.com/share?text={{#format.toUrlQuery}}{{TwitterShareMessage}}{{/format.toUrlQuery}}"><img src="img/blog/event/button-tweet.png" alt="Tweet This"/></a></li>
 					</ul>
 				</div>
-			{{/Event}}
 			
-			<div id="fundraising">
-				<div class="caption">Help to aim at the goal!</div>
-				<div class="goal"><!-- DB: Event.FundraisingGoalUSD -->$33,940</div>
-				<div class="graph">
-					<div class="progress" style="width: 16.97%"><!-- style width = (DB: Event.DonationTotalUSD / Event.FundraisingGoalUSD) * 100 (Max: 100) --></div>
-				</div>
-				<div class="donated" style="margin-left: 16.97%"><!-- style margin-left = (DB: Event.DonationTotalUSD / Event.FundraisingGoalUSD) * 100 (Max: 90) --><!-- DB: Event.DonationTotalUSD -->$2,000</div>
-				<!--  DB: IF Event.AttendURL IS NOT NULL -->
-					<div class="button attend">
-						<a href="#"><!-- href = DB: Event.AttendURL -->Attend</a>
+				<div id="fundraising">
+					<div class="caption">Help to aim at the goal!</div>
+					<div class="goal">{{#format.toUSDollars}}{{FundraisingGoalUSD}}{{/format.toUSDollars}}</div>
+					<div class="graph">
+						<div class="progress" style="width: {{#format.toPercentageMax}}{{FundraisingGoalRatio}},100{{/format.toPercentageMax}};"></div>
 					</div>
-				<!-- /DB: IF -->
-				<!-- DB: IF Event.DonateURL IS NOT NULL -->
-					<div class="button donate">
-						<a href="#"><!-- href = DB: Event.DonateURL -->Donate</a>
+					<div class="donated" style="margin-left: {{#format.toPercentageMax}}{{FundraisingGoalRatio}},90{{/format.toPercentageMax}};">{{#format.toUSDollars}}{{DonationTotalUSD}}{{/format.toUSDollars}}</div>
+					{{#AttendUri}}
+						<div class="button attend">
+							<a href="{{AttendUri}}">Attend</a>
+						</div>
+					{{/AttendUri}}
+					{{#DonateUri}}
+						<div class="button donate">
+							<a href="{{DonateUri}}">Donate</a>
+						</div>
+					{{/DonateUri}}
+					<div class="description">
+						<span class="event">{{Name}}</span>
+						{{Description}}
 					</div>
-				<!-- DB: IF -->
-				<div class="description">
-					<span class="event"><!-- DB: Event.Name -->Twestival Kuala Lumpr</span>
-					<!--  DB: Event.Description -->&reg; (or Twitter Festival) uses social media for social good by connecting communities on a single day to highlight a greater cause and have a fun event.
 				</div>
 			</div>
-		</div>
+			
+			<div class="clearfix"></div>
+		{{/Event}}
 		
-		<div class="clearfix"></div>
 		
 		<div class="wrapper content">
 			<div id="blog-posts">

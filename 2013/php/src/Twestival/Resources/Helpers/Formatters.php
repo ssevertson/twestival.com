@@ -119,6 +119,22 @@ class Formatters extends BaseHelper
 		}
 		return floor(floatval($rendered) * 100) . '%';
 	}
+	public function _toPercentageMax($text, $context)
+	{
+		$rendered = $context->render($text);
+		if(!$rendered)
+		{
+			$rendered = '0,100';
+		}
+		$parts = preg_split('/\s,\s/', $rendered, 2);
+		$value = floatval($parts[0]) * 100;
+		$max = (count($parts) == 2) ? floatval($parts[1]) : 100;
+		if($value > $max)
+		{
+			$value = $max;
+		}
+		return floor($value) . '%';
+	}
 	
 	public function _toTitleCase($text, $context)
 	{
