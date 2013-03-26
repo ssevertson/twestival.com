@@ -1,10 +1,11 @@
 {
 	"require": {
-		"peej/tonic": "v3.1",
+		"peej/tonic": "~3.1",
 		"mustache/mustache": "2.1.*",
 		"pimple/pimple": "1.0.*",
 		"monolog/monolog": "1.4.*",
-		"roderik/pwgen-php": "0.1.*"
+		"roderik/pwgen-php": "0.1.*",
+		"guzzle/guzzle": "~3.3.1"
 	},
 	"autoload": {
 		"psr-0": {"Twestival": "src/"}

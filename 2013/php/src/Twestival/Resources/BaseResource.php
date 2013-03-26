@@ -76,10 +76,47 @@ class BaseResource extends \Tonic\Resource
 			if($target == $value[$field])
 			{
 				$value['Selected'] = TRUE;
-				return TRUE;
+				return $value;
 			}
 		}
-		return FALSE;
+		return NULL;
+	}
+	
+	function selectByFieldFuzzy($target, $field, &$values)
+	{
+		$foundInsensitive = NULL;
+		$foundMetaphone = NULL;
+		$targetInsensitive = strtolower($target);
+		$targetMetaphone = metaphone($target);
+		foreach($values as &$value)
+		{
+			$fieldValue = $value[$field];
+			if($target == $fieldValue)
+			{
+				// Case-insensitive match preferred; bail out
+				$value['Selected'] = TRUE;
+				return $value;
+			}
+			else if($targetInsensitive == strtolower($fieldValue))
+			{
+				$foundInsensitive = &$value;
+			}
+			else if($targetMetaphone == metaphone($fieldValue))
+			{
+				$foundMetaphone = &$value;
+			}
+		}
+		if($foundInsensitive)
+		{
+			$foundInsensitive['Selected'] = TRUE;
+			return $foundInsensitive;
+		}
+		else if($foundMetaphone)
+		{
+			$foundMetaphone['Selected'] = TRUE;
+			return $foundMetaphone;
+		}
+		return NULL;
 	}
 }
 ?>

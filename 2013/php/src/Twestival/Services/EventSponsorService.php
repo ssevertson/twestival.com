@@ -9,6 +9,11 @@ class EventSponsorService extends BaseService
 		return $this->container['dao.event.sponsors']->items($eventID);
 	}
 	
+	function countSponsors($eventID)
+	{
+		return $this->container['dao.event.sponsors']->count($eventID);
+	}
+	
 	function save($eventID, $sequence, $name, $uri, $imageFilename)
 	{
 		$sponsors = $this->container['dao.event.sponsors'];

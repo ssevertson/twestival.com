@@ -174,6 +174,16 @@ class Container extends \Pimple
 			return 'SITE_ADMIN' == $scope;
 		});
 		
+		$this['geonames.config'] = $this->share(function($c)
+		{
+			$configFile = $c['configDir'] . '/geonames.php';
+			return require $configFile;
+		});
+		$this['geonames.client'] = $this->share(function($c)
+		{
+			$config = $c['geonames.config'];
+			return new \Guzzle\Http\Client('http://api.geonames.org', $config);
+		});
 		
 		
 		$this['service.common'] = $this->share(function($c)
@@ -228,7 +238,10 @@ class Container extends \Pimple
 		{
 			return new \Twestival\Services\EventSponsorService($c);
 		});
-		
+		$this['service.location'] = $this->share(function($c)
+		{
+			return new \Twestival\Services\LocationService($c);
+		});		
 
 		$this['dao.event.admins'] = $this->share(function($c)
 		{
@@ -277,6 +290,14 @@ class Container extends \Pimple
 		$this['dao.event.sponsors'] = $this->share(function($c)
 		{
 			return new \Twestival\DAOs\EventSponsorsDAO($c);
+		});
+		$this['dao.locations'] = $this->share(function($c)
+		{
+			return new \Twestival\DAOs\LocationsDAO($c);
+		});
+		$this['dao.event.locations'] = $this->share(function($c)
+		{
+			return new \Twestival\DAOs\EventLocationsDAO($c);
 		});
 		
 		

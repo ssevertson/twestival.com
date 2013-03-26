@@ -8,9 +8,12 @@ $baseDir = dirname($vendorDir);
 return array(
     'Twestival' => $baseDir . '/src/',
     'Tonic' => $vendorDir . '/peej/tonic/src/',
+    'Symfony\\Component\\EventDispatcher\\' => $vendorDir . '/symfony/event-dispatcher/',
     'Psr\\Log\\' => $vendorDir . '/psr/log/',
     'Pimple' => $vendorDir . '/pimple/pimple/lib/',
     'PWGen' => $vendorDir . '/roderik/pwgen-php/',
     'Mustache' => $vendorDir . '/mustache/mustache/src/',
     'Monolog' => $vendorDir . '/monolog/monolog/src/',
+    'Guzzle\\Tests' => $vendorDir . '/guzzle/guzzle/tests/',
+    'Guzzle' => $vendorDir . '/guzzle/guzzle/src/',
 );

@@ -6,25 +6,41 @@ class Formatters extends BaseHelper
 
 	public function _toUSD($text, $context)
 	{
+		$rendered = $context->render($text);
+		if(!$rendered)
+		{
+			$rendered = '0';
+		}
 		setlocale(LC_ALL, self::US_LOCALE);
 		return money_format('%.2n', floatval($context->render($text)));
 	}
 	
 	public function _toUSDollars($text, $context)
 	{
+		$rendered = $context->render($text);
+		if(!$rendered)
+		{
+			$rendered = '0';
+		}
 		setlocale(LC_ALL, self::US_LOCALE);
-		return money_format('%.0n', floatval($context->render($text)));
+		return money_format('%.0n', floatval($rendered));
 	}
 	
 	public function _toUSInteger($text, $context)
 	{
+		$rendered = $context->render($text);
+		if(!$rendered)
+		{
+			$rendered = '0';
+		}
+		
 		setlocale(LC_ALL, self::US_LOCALE);
 		$locale = localeconv();
 		return number_format(
-			intval($context->render($text)),
-			0,
-			$locale['decimal_point'],
-			$locale['thousands_sep']);
+				intval($rendered),
+				0,
+				$locale['decimal_point'],
+				$locale['thousands_sep']);
 	}
 	
 	public function _toEuropeanDate($text, $context)
@@ -47,6 +63,61 @@ class Formatters extends BaseHelper
 	{
 		$rendered = $context->render($text);
 		return $rendered ? date('H:i T', strtotime($rendered)) : 'TBD';
+	}
+	public function _toHumanElapsedTime($text, $context)
+	{
+		$rendered = $context->render($text);
+		if(!$rendered)
+		{
+			return 'TBD';
+		}
+		return $this->formatHumanElapsedTime(abs(time() - strtotime($rendered)));
+	}
+	private function formatHumanElapsedTime($elapsed)
+	{
+		if($elapsed == 0)
+		{
+			return 'Now';
+		}
+		
+		$units = array (
+				31536000 => 'year',
+				2592000 => 'month',
+				604800 => 'week',
+				86400 => 'day',
+				3600 => 'hour',
+				60 => 'minute',
+				1 => 'second'
+		);
+		
+		setlocale(LC_ALL, self::US_LOCALE);
+		$locale = localeconv();
+		
+		$absElapsed = abs($elapsed);
+		foreach ($units as $seconds => $unit)
+		{
+			if ($absElapsed < $seconds) continue;
+			
+			$decimals = ($seconds >= 2592000);
+			$rawCount = $absElapsed / $seconds;
+			$formattedCount = number_format(
+					$rawCount,
+					$decimals,
+					$locale['decimal_point'],
+					$locale['thousands_sep']);
+			$formattedCount = preg_replace('/\.0/', '', $formattedCount);
+			
+			return $formattedCount . ' '. $unit . (($rawCount > 1) ? 's' : '') . ($elapsed > 0 ? ' ago' : ' to go');
+		}
+	}
+	public function _toPercentage($text, $context)
+	{
+		$rendered = $context->render($text);
+		if(!$rendered)
+		{
+			$rendered = '0';
+		}
+		return floor(floatval($rendered) * 100) . '%';
 	}
 	
 	public function _toTitleCase($text, $context)

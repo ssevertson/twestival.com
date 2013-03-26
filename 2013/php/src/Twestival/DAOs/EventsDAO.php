@@ -18,7 +18,7 @@ class EventsDAO extends BaseDAO
 					ON EventLocation.LocationID = Location.LocationID
 			WHERE
 				Year.Active = TRUE
-				AND Location.Type = ?
+				AND Location.Type = UPPER(?)
 		');
 		$query->bindValue(1, $locationType, \PDO::PARAM_STR);
 		$query->execute();
@@ -79,9 +79,12 @@ class EventsDAO extends BaseDAO
 						ON EventLocation.LocationID = Location.LocationID
 						WHERE EventLocation.EventID = Event.EventID
 						AND Location.Type = \'CITY\'
-					) As LocationCity
+					) As LocationCity,
+					Blog.Subdomain AS BlogSubdomain
 				FROM
 					Event
+					INNER JOIN Blog
+						ON Event.BlogID = Blog.BlogID
 				WHERE
 					Event.Year = ?
 					AND Event.Active = ?
@@ -100,9 +103,44 @@ class EventsDAO extends BaseDAO
 		$conn = $this->container['connection'];
 		$query = $conn->prepare('
 				SELECT
-					Event.*
+					Event.*,
+					(
+						SELECT Location.Name
+						FROM EventLocation
+						INNER JOIN Location
+						ON EventLocation.LocationID = Location.LocationID
+						WHERE EventLocation.EventID = Event.EventID
+						AND Location.Type = \'CONTINENT\'
+					) As LocationContinent,
+					(
+						SELECT Location.Name
+						FROM EventLocation
+						INNER JOIN Location
+						ON EventLocation.LocationID = Location.LocationID
+						WHERE EventLocation.EventID = Event.EventID
+						AND Location.Type = \'COUNTRY\'
+					) As LocationCountry,
+					(
+						SELECT Location.Name
+						FROM EventLocation
+						INNER JOIN Location
+						ON EventLocation.LocationID = Location.LocationID
+						WHERE EventLocation.EventID = Event.EventID
+						AND Location.Type = \'STATE_PROVINCE\'
+					) As LocationStateProvince,
+					(
+						SELECT Location.Name
+						FROM EventLocation
+						INNER JOIN Location
+						ON EventLocation.LocationID = Location.LocationID
+						WHERE EventLocation.EventID = Event.EventID
+						AND Location.Type = \'CITY\'
+					) As LocationCity,
+				Blog.Subdomain AS BlogSubdomain
 				FROM
 					Event
+					INNER JOIN Blog
+						ON Event.BlogID = Blog.BlogID
 				WHERE
 					Event.EventID = ?
 				ORDER BY
@@ -111,7 +149,7 @@ class EventsDAO extends BaseDAO
 		$query->bindValue(1, intval($eventID), \PDO::PARAM_INT);
 	
 		$query->execute();
-		return $query->fetchAll(\PDO::FETCH_ASSOC);
+		return $query->fetch(\PDO::FETCH_ASSOC);
 	}
 	
 	function itemsByLocationName($year, $locationType)
@@ -127,9 +165,12 @@ class EventsDAO extends BaseDAO
 						WHERE EventLocation.EventID = Event.EventID
 						AND Location.Type = ?
 				), \'Unknown\') As LocationName,
-				Event.*
+				Event.*,
+				Blog.Subdomain AS BlogSubdomain
 			FROM
 				Event
+				INNER JOIN Blog
+					ON Event.BlogID = Blog.BlogID
 			WHERE
 				Event.Year = ?
 				AND Event.Active = TRUE
@@ -201,6 +242,26 @@ class EventsDAO extends BaseDAO
 	
 		$query->execute();
 		return $conn->lastInsertId();
+	}
+	
+	function updateEventAdminFields($eventID, $active, $name)
+	{
+		$conn = $this->container['connection'];
+		$query = $conn->prepare('
+			UPDATE
+				Event
+			SET
+				Event.Active = ?,
+				Event.Name = ?
+			WHERE
+				Event.EventID = ?;
+		');
+		$query->bindValue(1, $this->toBoolean($active), \PDO::PARAM_INT);
+		$query->bindValue(2, $this->trimToNull($name), \PDO::PARAM_STR);
+		$query->bindValue(3, intval($eventID), \PDO::PARAM_INT);
+		
+		$query->execute();
+		return $query->rowCount();
 	}
 }
 ?>

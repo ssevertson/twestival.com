@@ -101,7 +101,7 @@ class BlogsDAO extends BaseDAO
 			INSERT INTO Blog (Subdomain)
 			VALUES (?);
 		');
-		$query->bindValue(8, $this->trimToNull($subdomain), \PDO::PARAM_STR);
+		$query->bindValue(1, $this->trimToNull($subdomain), \PDO::PARAM_STR);
 		
 		$query->execute();
 		return $conn->lastInsertId();

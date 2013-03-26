@@ -20,6 +20,22 @@ class EventTeamMembersDAO extends BaseDAO
 		$query->execute();
 		return $query->fetchAll(\PDO::FETCH_ASSOC);
 	}
+	function count($eventID)
+	{
+		$conn = $this->container['connection'];
+		$query = $conn->prepare('
+			SELECT
+				COUNT(*)
+			FROM
+				EventTeamMember
+			WHERE
+				EventTeamMember.EventID = ?;
+		');
+		$query->bindValue(1, intval($eventID), \PDO::PARAM_INT);
+	
+		$query->execute();
+		return intval($query->fetchColumn());
+	}
 	function get($eventID, $sequence)
 	{
 		$conn = $this->container['connection'];

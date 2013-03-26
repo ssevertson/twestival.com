@@ -22,6 +22,9 @@ class GlobalAdminRegistrationItemResource extends BaseResource
 		
 		$registration['RelatedEvents'] = $relatedEvents;
 		$registration['HasRelatedEvents'] = !empty($relatedEvents);
+		
+		$registration['ApprovalStatusNew'] = $registration['ApprovalStatus'] == 'New' ? TRUE : FALSE;
+		
 		return $this->renderMustacheHeaderFooter('Global/Admin/Registration/View', 
 				$registration
 		);

@@ -117,8 +117,10 @@
 						</table>
 					</div>
 				</fieldset>
-				<input type="submit" class="action" name="ApprovalStatus" value="Approve"/>
-				<input type="submit" class="action" name="ApprovalStatus" value="Deny" onclick="return confirm('Are you sure you want to deny this registration? If so, you must email the reason(s) for denial to {{EmailAddress}} within 4 hours.');"/>
+				{{#ApprovalStatusNew}}
+					<input type="submit" class="action" name="ApprovalStatus" value="Approve"/>
+					<input type="submit" class="action" name="ApprovalStatus" value="Deny" onclick="return confirm('Are you sure you want to deny this registration? If so, you must email the reason(s) for denial to {{EmailAddress}} within 4 hours.');"/>
+				{{/ApprovalStatusNew}}
 				<input type="button" class="action" value="Cancel" onclick="history.go(-1);"/>
 			</form>
 		</div>

@@ -64,22 +64,36 @@
 						<div class="overlay"><img src="img/blog/event/logo-overlay.png" alt="Official Event"/></div>
 					</div>
 					<div class="clearfix"></div>
-					<!-- Vertical aligning of unknown image sizes. http://giveupandusetables.com/ -->
-					<table class="charity">
-						<tbody>
-							<tr>
-								<td class="logo">
-									<a href="#"><!-- href = DB: EventCharity.URL -->
-										<img src="img/event/content/charity-logo-1.png" alt=""/><!-- src = DB: EventCharity.ImageFilename -->
-									</a>
-								</td>
-								<td class="description">
-									<div class="caption">Charity</div>
-									<div class="name"><a href="#"><!-- href = DB: EventCharity.URL -->Pertubuhan Masyarakat Prihatin<!-- DB: EventCharity.Name --></a></div>
-								</td>
-							</tr>
-						</tbody>
-					</table>
+					{{#EventCharities}}
+						<!-- Vertical aligning of unknown image sizes. http://giveupandusetables.com/ -->
+						<table class="charity">
+							<tbody>
+								<tr>
+									<td class="logo">
+										{{#ImageUri}}
+											{{#Uri}}
+												<a href="Uri"><img src="{{ImageUri}}" alt=""/></a>
+											{{/Uri}}
+											{{^Uri}}
+												<img src="{{ImageUri}}" alt=""/>
+											{{/Uri}}
+										{{/ImageUri}}
+									</td>
+									<td class="description">
+										<div class="caption">Charity</div>
+										<div class="name">
+											{{#Uri}}
+												<a href="{{Uri}}">{{Name}}</a>
+											{{/Uri}}
+											{{^Uri}}
+												{{Name}}
+											{{/Uri}}
+										</div>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					{{/EventCharities}}
 					<a class="contact" href="mailto:"><!-- href = 'mailto:' + DB: Event.OrganizerEmailAddress -->Contact Organizer</a>
 					<ul class="social-media horizontal">
 						<li><a href="#"><!--  href = 'https://twitter.com/' + DB: Event.TwitterName --><img src="img/blog/event/button-twitter.png" alt="Twitter"/></a></li>

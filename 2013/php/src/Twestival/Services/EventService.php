@@ -2,17 +2,64 @@
 
 class EventService extends BaseService
 {
+	const BASE_URI_TWITTER = 'https://twitter.com/';
+	
 	function getByContinent($year)
 	{
-		return $this->container['dao.events']->itemsByLocationName($year, 'CONTINENT');
+		$events = $this->container['dao.events']->itemsByLocationName($year, 'CONTINENT');
+		$this->addUrisToEvents($events);
+		return ;
 	}
+	function getEvent($eventId)
+	{
+		$event = $this->container['dao.events']->get($eventId);
+		$this->addUrisToEvent($event);
+		return $event;
+	}
+
 	function getEvents($year, $active)
 	{
-		return $this->container['dao.events']->items($year, $active);
+		$events = $this->container['dao.events']->items($year, $active);
+		$this->addUrisToEvents($events);
+		return $events;
 	}
 	function findPriorRelatedToRegistration($registrationID)
 	{
-		return $this->container['dao.events']->findPriorRelatedToRegistration($registrationID);
+		$events = $this->container['dao.events']->findPriorRelatedToRegistration($registrationID);
+		$this->addUrisToEvents($events);
+		return $events;
+	}
+	
+	private function addUrisToEvents(&$events)
+	{
+		foreach($events as $event)
+		{
+			$this->addUrisToEvent($event);
+		}
+	}
+	private function addUrisToEvent(&$event)
+	{
+		$event['TwitterUri'] = EventService::BASE_URI_TWITTER . $event['TwitterName'];
+		$event['BlogUri'] = 'http://' 
+				. $event['BlogSubdomain']
+				. '.' 
+				. $this->container['request.domain']
+				. $this->container['baseUri'];
+		$event['ImageUri'] = $this->getImageUri($event['ImageFilename']);
+	}
+	function getImagePath()
+	{
+		return 'img/blog/event/content';
+	}
+	function getImageUri($imageFilename = '')
+	{
+		return $this->container['request.protocol']
+		. $this->container['request.hostname']
+		. $this->container['baseUri']
+		. '/'
+		. $this->getImagePath()
+		. '/'
+		. $imageFilename;
 	}
 	
 	function getDefaultEventSettings($year, $registration)
@@ -28,7 +75,7 @@ class EventService extends BaseService
 			$relatedBlogID = $relatedEvents[0]['BlogID'];
 		}
 	
-		$blogSubdomain = strtolower($registration['City']);
+		$blogSubdomain = preg_replace('/\s/', '', strtolower($registration['City']));
 	
 		return array(
 				'Name' => $name,
@@ -40,7 +87,7 @@ class EventService extends BaseService
 		);
 	}
 	
-	function create($registrationID, $blogID, $currentYear, $name, $description, $twitterName, $organizerEmailAddress, $imageFilename)
+	function create($registrationID, $blogID, $currentYear, $name, $description, $twitterName, $organizerEmailAddress, $imageFilename, $locationID)
 	{
 		$eventID = $this->container['dao.events']->create(
 				$registrationID,
@@ -68,10 +115,23 @@ class EventService extends BaseService
 				$registration['TwitterName']
 		);
 		
+		$this->container['service.location']->saveEventLocationCity(
+				$eventID,
+				$locationID);
+		
 		// TODO: Email notification to $oranizerEmailAddress, with direct link to admin (http://$$subdomain.twestival.com/admin), and generated username/password
 		
 		
 		return $eventID;
+	}
+	
+	function saveSiteAdminFields($eventID, $active, $name)
+	{
+		$this->container['dao.events']->updateEventAdminFields(
+				$eventID,
+				$active,
+				$name
+		);
 	}
 }
 ?>

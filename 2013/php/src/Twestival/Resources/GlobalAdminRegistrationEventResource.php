@@ -30,6 +30,12 @@ class GlobalAdminRegistrationEventResource extends BaseResource
 		}
 		$event['AvailableBlogs'] = $blogs;
 		
+		$event['PossibleCities'] = $this->container['service.location']->searchForCity(
+				$registration['City'],
+				$registration['StateProvince'],
+				$registration['Country']
+		);
+		
 		return $this->renderMustacheHeaderFooter('Global/Admin/Registration/Event', array(
 				'Registration' => $registration,
 				'Event' => $event
@@ -66,7 +72,8 @@ class GlobalAdminRegistrationEventResource extends BaseResource
 			$_POST['Description'],
 			$_POST['TwitterName'],
 			$_POST['OrganizerEmailAddress'],
-			'default.png'
+			'default.png',
+			$_POST['LocationID']
 		);
 		
 		

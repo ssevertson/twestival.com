@@ -49,6 +49,17 @@
 							<input type="text" name="BlogSubdomain" id="blog-new" style="width:180px;" value="{{^BlogID}}{{BlogSubdomain}}{{/BlogID}}" maxlength="50"/><br/>
 						</div>
 					</fieldset>
+					<fieldset>
+						<div class="legend">Location</div>
+						<div class="body">
+							<label for="location-id" class="required">Location</label><br/>
+							{{#PossibleCities}}
+								<input type="radio" name="ReRegistration" id="location-id-{{LocationID}}" value="true" class="required" />
+								<label for="location-id-{{LocationID}}">{{Name}}</label>
+								(<a href="https://maps.google.com/?q={{Latitude}},{{Longitude}}&z=5" target="_blank">Map</a>)<br/>
+							{{/PossibleCities}}
+						</div>
+					</fieldset>
 					<input type="submit" class="action"  value="Create"/>
 					<input type="button" class="action" value="Cancel" name="Cancel" onclick="history.go(-1);"/>
 					<script type="text/javascript">
@@ -81,6 +92,7 @@
 									maxlength: 2000
 								},
 								BlogSubdomain: {
+									noSpace: true,
 									required: function(element) {
 										return $("#blog-existing").val() == '-';
 									}
