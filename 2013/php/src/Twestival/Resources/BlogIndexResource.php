@@ -28,6 +28,8 @@ class BlogIndexResource extends BaseResource
 				'PagePrevious' => ($page > 1)
 		);
 		
+		$data['Event'] = $this->container['service.event']->getEvent($data['EventID']);
+		
 		$data['BlogPosts'] = $this->container['service.blog.post']->getPosts(
 				$subdomain,
 				BlogIndexResource::BLOG_POSTS_PER_PAGE,

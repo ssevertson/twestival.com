@@ -11,7 +11,6 @@ class BlogService extends BaseService
 	function getBySubdomain($subdomain)
 	{
 		$blog = $this->container['dao.blogs']->get($subdomain);
-		$blog['Event'] = $this->container['dao.events']->get($blog['EventID']);
 		return $blog;
 	}
 	function getUnassigned()
@@ -21,6 +20,22 @@ class BlogService extends BaseService
 	function create($subdomain)
 	{
 		return $this->container['dao.blogs']->create($subdomain);
+	}
+	
+	private function addUrisToBlogs(&$blogs)
+	{
+		foreach($blogs as $blog)
+		{
+			$this->addUrisToBlog($blog);
+		}
+	}
+	private function addUrisToBlog(&$blog)
+	{
+		$blog['BlogUri'] = 'http://'
+				. $event['BlogSubdomain']
+				. '.'
+						. $this->container['request.domain']
+						. $this->container['baseUri'];
 	}
 }
 ?>

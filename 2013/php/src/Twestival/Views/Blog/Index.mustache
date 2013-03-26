@@ -93,14 +93,14 @@
 							</tbody>
 						</table>
 					{{/EventCharities}}
-					<a class="contact" href="mailto:"><!-- href = 'mailto:' + DB: Event.OrganizerEmailAddress -->Contact Organizer</a>
+					<a class="contact" href="mailto:{{#format.toUrlQuery}}{{OrganizerEmailAddress}}{{/format.toUrlQuery}}">Contact Organizer</a>
 					<ul class="social-media horizontal">
-						<li><a href="#"><!--  href = 'https://twitter.com/' + DB: Event.TwitterName --><img src="img/blog/event/button-twitter.png" alt="Twitter"/></a></li>
-						<!-- DB: IF Event.FacebookURL IS NOT NULL -->
-							<li><a href="#"><!--  href = DB: Event.FacebookURL --><img src="img/blog/event/button-facebook.png" alt="Facebook"/></a></li>
-						<!-- DB: IF -->
-						<li><a href="mailto:?body="><!-- href = 'mailto:body=' + URLEncode('http://' + DB: Blog.Subdomain + '.twestival.com/') --><img src="img/blog/event/button-mail.png" alt="Email Link"/></a></li>
-						<li><a href="#"><!-- href = 'https://twitter.com/share?text=' + URLEncode(DB: Event.TwitterShareMessage) --><img src="img/blog/event/button-tweet.png" alt="Tweet This"/></a></li>
+						<li><a href="{{TwitterUri}}"><img src="img/blog/event/button-twitter.png" alt="Twitter"/></a></li>
+						{{#FacebookUri}}
+							<li><a href="{{FacebookUri}}"><img src="img/blog/event/button-facebook.png" alt="Facebook"/></a></li>
+						{{/FacebookUri}}}
+						<li><a href="mailto:?body={{#format.toUrlQuery}}{{BlogUri}}{{/format.toUrlQuery}}"><img src="img/blog/event/button-mail.png" alt="Email Link"/></a></li>
+						<li><a href="https://twitter.com/share?text={{#format.toUrlQuery}}{{TwitterShareMessage}}{{/format.toUrlQuery}}"><img src="img/blog/event/button-tweet.png" alt="Tweet This"/></a></li>
 					</ul>
 				</div>
 			{{/Event}}
