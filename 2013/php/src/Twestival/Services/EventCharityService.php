@@ -13,7 +13,7 @@ class EventCharityService extends BaseService
 	
 	private function addUrisToCharities(&$charities)
 	{
-		foreach($charities as $charity)
+		foreach($charities as &$charity)
 		{
 			$this->addUrisToCharity($charity);
 		}
@@ -24,7 +24,7 @@ class EventCharityService extends BaseService
 	}
 	function getImagePath()
 	{
-		return 'img/blog/event/content';
+		return 'img/event/content';
 	}
 	function getImageUri($imageFilename = '')
 	{

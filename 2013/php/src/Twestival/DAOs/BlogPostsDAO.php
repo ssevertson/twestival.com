@@ -7,7 +7,8 @@ class BlogPostsDAO extends BaseDAO
 		$conn = $this->container['connection'];
 		$query = $conn->prepare('
 			SELECT
-				BlogPost.*
+				BlogPost.*,
+				Blog.Subdomain AS BlogSubdomain
 			FROM
 				Blog
 				INNER JOIN BlogPost
@@ -51,7 +52,8 @@ class BlogPostsDAO extends BaseDAO
 		$conn = $this->container['connection'];
 		$query = $conn->prepare('
 			SELECT
-				BlogPost.*
+				BlogPost.*,
+				Blog.Subdomain AS BlogSubdomain
 			FROM
 				Blog
 				INNER JOIN BlogPost

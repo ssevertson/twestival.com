@@ -24,7 +24,7 @@ class BlogService extends BaseService
 	
 	private function addUrisToBlogs(&$blogs)
 	{
-		foreach($blogs as $blog)
+		foreach($blogs as &$blog)
 		{
 			$this->addUrisToBlog($blog);
 		}
@@ -32,10 +32,10 @@ class BlogService extends BaseService
 	private function addUrisToBlog(&$blog)
 	{
 		$blog['BlogUri'] = 'http://'
-				. $event['BlogSubdomain']
+				. $blog['BlogSubdomain']
 				. '.'
-						. $this->container['request.domain']
-						. $this->container['baseUri'];
+				. $this->container['request.domain']
+				. $this->container['baseUri'];
 	}
 }
 ?>

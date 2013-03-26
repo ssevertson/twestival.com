@@ -34,6 +34,7 @@ class GlobalLoginResource extends BaseResource
 		{
 			if(isset($_COOKIE['URI_POST_LOGIN']))
 			{
+				setcookie('URI_POST_LOGIN', FALSE, 0, '/', $this->container['request.domain'], false, true);
 				throw new \Twestival\RedirectException($_COOKIE['URI_POST_LOGIN']);
 			}
 			else

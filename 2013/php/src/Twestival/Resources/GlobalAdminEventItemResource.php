@@ -21,6 +21,8 @@ class GlobalAdminEventItemResource extends BaseResource
 		
 		$event = $this->container['service.event']->getEvent($eventID);
 		
+		$event['EventCharities'] = $this->container['service.event.charity']->getCharities($eventID);
+
 		$event['EventTeamMemberCount'] = $this->container['service.event.teamMember']->countTeamMembers($eventID);
 		if($event['EventTeamMemberCount'] > 1)
 		{

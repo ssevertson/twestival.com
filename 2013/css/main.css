@@ -350,7 +350,7 @@ form input[type="submit"].action, form input[type="button"].action {
 
 /* Social Media Share */
 .social-media-share {
-	margin-top: 36px;
+	margin: 36px 0px 72px 0px;
 	float: right;
 }
 .social-media-share .share {

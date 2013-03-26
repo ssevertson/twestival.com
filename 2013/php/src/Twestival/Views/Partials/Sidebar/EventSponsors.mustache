@@ -1,0 +1,21 @@
+<div id="event-sponsors" class="sidebar">
+	<div class="title">Sponsors</div>
+	<div class="body">
+		<!-- Vertical and horizontal aligning of unknown image sizes. http://giveupandusetables.com/ -->
+		<table>
+			<tbody>
+				{{#EventSponsorRows}}
+					<tr>
+						{{#.}}
+							<td>
+								<a href="{{Uri}}">
+									<img src="{{ImageUri}}" alt="{{Name}}"/>
+								</a>
+							</td>
+						{{/.}}
+					</tr>
+				{{/EventSponsorRows}}
+			</tbody>
+		</table>
+	</div>
+</div>

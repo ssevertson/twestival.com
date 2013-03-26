@@ -77,6 +77,22 @@
 										</td>
 									</tr>
 									<tr>
+										<th>Charity</th>
+										<td class="check">{{#EventCharities}}{{#Name}}✓{{/Name}}{{/EventCharities}}</td>
+										<td>
+											{{#EventCharities}}
+												{{#Name}}
+													{{#Uri}}
+														<a href="{{Uri}}" target="_blank">{{Name}}</a>
+													{{/Uri}}
+													{{^Uri}}
+														{{Name}}
+													{{/Uri}}
+												{{/Name}}
+											{{/EventCharities}}
+										</td>
+									</tr>
+									<tr>
 										<th>Location</th>
 										<td class="check">{{#LocationName}}✓{{/LocationName}}</td>
 										<td>

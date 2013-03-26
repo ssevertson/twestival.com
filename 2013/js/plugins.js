@@ -21,4 +21,7 @@
     }
 }());
 
-// Place any jQuery/helper plugins in here.
+// Hide broken images
+$("img").error(function(){
+    $(this).hide();
+});

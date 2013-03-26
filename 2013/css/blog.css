@@ -288,6 +288,9 @@ form#blog-posts .action {
 	text-align: center;
 	padding: 8px 0px;
 }
+#event-sponsors img {
+	max-width: 120px;
+}
 
 #event-team.sidebar {
 	padding: 16px 10px 12px 10px;
@@ -301,4 +304,17 @@ form#blog-posts .action {
 	-webkit-border-radius: 3px;
 	-moz-border-radius: 3px;
 	border-radius: 4px;
+}
+
+
+.pagination {
+	font-family: 'Lato';
+	font-size: 16px;
+	margin-bottom: 80px;
+}
+.pagination.older {
+	float: left;
+}
+.pagination.newer {
+	float: right;
 }

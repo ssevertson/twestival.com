@@ -1,0 +1,15 @@
+<div id="event-team" class="sidebar">
+	<div class="title">The Team</div>
+	<div class="body">
+		<ul class="horizontal">
+			{{#EventTeamMembers}}
+				<li>
+					<a href="https://twitter.com/{{TwitterName}}">
+						<img src="https://api.twitter.com/1/users/profile_image?screen_name={{TwitterName}}&size=normal" alt="{{TwitterName}}"/>
+					</a>
+				</li>
+			{{/EventTeamMembers}}
+		</ul>
+		<div class="clearfix"></div>
+	</div>
+</div>

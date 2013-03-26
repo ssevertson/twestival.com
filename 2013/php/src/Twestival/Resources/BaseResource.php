@@ -118,5 +118,33 @@ class BaseResource extends \Tonic\Resource
 		}
 		return NULL;
 	}
+	
+	function toGrid(&$array, $columns)
+	{
+		$rows = array(array());
+		$column = 0;
+	
+		foreach($array as &$item)
+		{
+			if($column >= $columns)
+			{
+				$column = 0;
+				array_push($rows, array());
+			}
+			
+			array_push($rows[count($rows) - 1], &$item);
+				
+			if($column == 0)
+			{
+				$item['GridPosition'] = 'left';
+			}
+			$column++;
+			if($column == $columns)
+			{
+				$item['GridPosition'] = 'right';
+			}
+		}
+		return $rows;
+	}
 }
 ?>

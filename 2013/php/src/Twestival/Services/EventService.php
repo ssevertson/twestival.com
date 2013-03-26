@@ -32,7 +32,7 @@ class EventService extends BaseService
 	
 	private function addUrisToEvents(&$events)
 	{
-		foreach($events as $event)
+		foreach($events as &$event)
 		{
 			$this->addUrisToEvent($event);
 		}
@@ -49,7 +49,7 @@ class EventService extends BaseService
 	}
 	function getImagePath()
 	{
-		return 'img/blog/event/content';
+		return 'img/event/content';
 	}
 	function getImageUri($imageFilename = '')
 	{

@@ -33,6 +33,9 @@
 	<body id="blog">
 		{{> Header }}
 		
+		{{#security.currentBlogEventAdmin}}
+			Foo
+		{{/security.currentBlogEventAdmin}}
 		<div class="clearfix"></div>
 		
 		{{#Event}}
@@ -134,219 +137,64 @@
 		
 		<div class="wrapper content">
 			<div id="blog-posts">
-				<div class="post" id="post-3"><!-- id = 'post-' + BlogPost.PostID -->
-					<!-- Define: PostURL = 'http://' + DB: Blog.Subdomain + '.twestival.com/blog-entry/' + DB: DB: BlogPost.PostID + '/' + ToSafePageName(BlogPost.Subject) + '.html' -->
-					<!-- IF authenticated for current Blog -->
-						<!-- Define: EditURL = 'http://' + DB: Blog.Subdomain + '.twestival.com/blog-entry/' + DB: DB: BlogPost.PostID + '?action=edit' -->
-						<a href="#" class="edit"><!-- href = EditURL -->Edit</a>
-					<!-- IF -->
-					<a href="#" class="subject"><!-- href = PostURL -->TWESTIVAL KL: What YOU helped raise!</a>
-				
-					<div class="date">April 5th, 2011</div>
-					<a href="comment" class="comment-link">Comment</a>
-				
-					<div class="body">
-						<p>Its finally over. After weeks of planning, Twestival KL was held in Finnegans Irish Bars and Restaurants in Midvalley. It was a night of hanging out with old and new friends, entertained by some of the best acts in the country and of course, raising money for Pertubuhan Kasyarakat PRIHATIN in Kota Bharu, a NGO caring for single mothers and kids living with HIV/AIDS.</p>
-				
-						<p>The next week or so was filled with auctions where there was some competitive bidding over items liek a White Bold 3 (thanks to Digi) and BMW Driver's training. It was all in good fun, all the while remembering that there are others less fortunate than us who we can help and do something about.</p>
-				
-						<p>And help we did.</p>
-				
-						<p>The humble target to raise was RM12,000. Our ticket sales, TShirt/Notebook Sales + Additional Donations put us at RM11,000. Then MDec stepped in and decided to lend a helping hand by matching our ticket sales with RM5,000. The collection was now at RM16,000 but it did not stop there. Thanks to YOUR generosity, we managed to raise a whopping RM 10,000 from all the auctions. TOTAL AMOUNT RAISED = RM26,000!!</p>
-				
-						<p>We thank all of our generous sponsors (please click their logos on the right to visit their sites!), all our supporters and of course every single person who came for our event, who couldn't attend but donated through ammado and everyone who participated in the auction. Thank you very much for the support!</p>
-				
-						<p>It does not stop here. Dr. Zahrin, the Administrative Director of PRIHATIn is comming down to Kuala Lumpur next week for a meeting with the Malasian Aids Counsil and we are hoping to arrange a brief meeting with him for a chat so keep following us for updates on our Twitter handle @TwestivalKL. All the donations received will be</p>
-					</div>
+				{{#BlogPosts}}
+					<div class="clearfix"></div>
+					<div class="post" id="post-{{PostID}}">
+						{{#security.currentBlogEventAdmin}}
+							<a href="{{BlogPostUri}}" class="edit">Edit</a>
+						{{/security.currentBlogEventAdmin}}
+						<a href="{{BlogPostPermalinkUri}}" class="subject">{{Title}}</a>
 					
-					<div class="social-media-share">
-						<a class="share share-facebook" href="#"><!-- href = 'http://www.facebook.com/sharer.php?u=' + URLEncode(PostURL) -->
-							<span class="accessible-text">Facebook Share Count: </span>
-							<span class="count" id="share-facebook-count-3"><!-- id = 'share-facebook-count-' + BlogPost.PostID --></span>
-						</a>
-						<a class="share share-twitter" href="#"><!-- href = 'http://twitter.com/share?text=' + URLEncode(PostURL) -->
-							<span class="accessible-text">Twitter Share Count: </span>
-							<span class="count" id="share-twitter-count-3"><!-- id = 'share-twitterk-count-' + BlogPost.PostID --></span>
-						</a>
-						<a class="share share-pinterest" href="#"><!-- href = 'http://pinterest.com/pin/create/button/?url=' + URLEncode(PostURL) + '&media=' + URLEncode('Waiting on requirements')  + '&description=' + URLEncode(BlogPost.Subject) -->
-							<span class="accessible-text">Pinterest Pin Count: </span>
-							<span class="count" id="share-pinterest-count-3"><!-- id = 'share-pinterest-count-' + BlogPost.PostID --></span>
-						</a>
-						<a class="share share-googleplus" href="#"><!-- href = 'https://plus.google.com/share?url=' + URLEncode(PostURL) -->
-							<span class="accessible-text">Google+ Share Count: </span>
-							<span class="count" id="share-googleplus-count-3"><!-- id = 'share-googleplus-count-' + BlogPost.PostID --></span>
-						</a>
-						<a class="share share-email" href="mailto:?body="><!-- href = 'mailto:?body=' + URLEncode(PostURL) -->
-							<span class="accessible-text">Email Link</span>
-							<span class="count" id="share-email-count-3"><!-- id = 'share-email-count-' + BlogPost.PostID --></span>
-						</a>
-						<script type="text/javascript">
-							loadSocialMediaCounts(3 /* Post.PostID */, 'http://www.twestival.com/' /* PostURL */)
-						</script>
+						<div class="date">April 5th, 2011</div>
+						
+						<!-- TODO: Implement comments -->
+						<a href="comment" class="comment-link">Comment</a>
+					
+						<div class="body">
+							{{{Content}}}
+						</div>
+						
+						<div class="social-media-share">
+							<a class="share share-facebook" href="http://www.facebook.com/sharer.php?u={{#format.toUrlQuery}}{{BlogPostShareUri}}{{/format.toUrlQuery}}">
+								<span class="accessible-text">Facebook Share Count: </span>
+								<span class="count" id="share-facebook-count-{{PostID}}"></span>
+							</a>
+							<a class="share share-twitter" href="http://twitter.com/share?text={{#format.toUrlQuery}}{{BlogPostShareUri}}{{/format.toUrlQuery}}">
+								<span class="accessible-text">Twitter Share Count: </span>
+								<span class="count" id="share-twitter-count-{{PostID}}"></span>
+							</a>
+							<a class="share share-pinterest" href="http://pinterest.com/pin/create/button/?url={{#format.toUrlQuery}}{{BlogPostShareUri}}{{/format.toUrlQuery}}&media={{#format.toUrlQuery}}{{Event.ImageUri}}{{/format.toUrlQuery}}&description={{#format.toUrlQuery}}{{Title}}{{/format.toUrlQuery}}">
+								<span class="accessible-text">Pinterest Pin Count: </span>
+								<span class="count" id="share-pinterest-count-{{PostID}}"></span>
+							</a>
+							<a class="share share-googleplus" href="https://plus.google.com/share?url={{#format.toUrlQuery}}{{BlogPostShareUri}}{{/format.toUrlQuery}}">
+								<span class="accessible-text">Google+ Share Count: </span>
+								<span class="count" id="share-googleplus-count-{{PostID}}"></span>
+							</a>
+							<a class="share share-email" href="mailto:?subject={{#format.toUrlQuery}}{{Title}}{{/format.toUrlQuery}}body={{#format.toUrlQuery}}{{BlogPostShareUri}}{{/format.toUrlQuery}}>">
+								<span class="accessible-text">Email Link</span>
+								<span class="count" id="share-email-count-{{PostID}}"></span>
+							</a>
+							<script type="text/javascript">
+								loadSocialMediaCounts({{PostID}}, '{{BlogPostShareUri}}');
+							</script>
+						</div>
 					</div>
-				</div>
+				{{/BlogPosts}}
+				<div class="clearfix"></div>
+				
+				{{#Pages.Older}}
+					<a href="{{BlogUri}}?Page={{.}}" class="pagination older">← Older Posts</a>
+				{{/Pages.Older}}
+				{{#Pages.Newer}}
+					<a href="{{BlogUri}}?Page={{.}}" class="pagination newer">Newer Posts →</a>
+				{{/Pages.Newer}}
 			</div>
 			<div id="sidebars">
-				<div id="sidebar-twitter" class="sidebar">
-					<div class="title">@nyctwestival<!-- DB: Event.TwitterName --></div>
-					<div class="body">
-					<a class="twitter-timeline" data-dnt="true" href="https://twitter.com/itswendylou"  data-widget-id="310550464611622912">Tweets by @itswendylou</a>
-<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
-					
-						<!-- 
-						<script type="text/javascript">
-							new TWTR.Widget({
-								version: 2,
-								type: 'profile',
-								interval: 5000,
-								title: '',
-								subject: '',
-								width: 270,
-								height: 166,
-								theme: {
-									shell: {
-										background: 'transparent',
-										color: '#444444'
-									},
-									tweets: {
-										background: 'transparent',
-										color: '#444444',
-										links: '#34747c'
-									}
-								},
-								features: {
-									scrollbar: false,
-									loop: true,
-									live: true,
-									hashtags: true,
-									timestamp: true,
-									avatars: true,
-									toptweets: true,
-									behavior: 'default'
-								}
-							}).render().setUser('nyctwestival' /* DB: Event.TwitterName */).start();
-						</script>
-						-->
-						<noscript>
-							<a href="https://twitter.com/search?q=%40nyctwestival"><!-- href = 'https://twitter.com/search?q=%40' + DB: Event.TwitterName -->See @nyctwestival<!-- DB: Event.TwitterName --> Tweets</a>
-						</noscript>
-						<div class="fadeout"></div>
-					</div>
-				</div>
-				<div id="event-sponsors" class="sidebar">
-					<div class="title">Sponsors</div>
-					<div class="body">
-						<!-- Vertical and horizontal aligning of unknown image sizes. http://giveupandusetables.com/ -->
-						<table>
-							<tbody>
-								<tr>
-									<td>
-										<a href="#"><!-- href = DB: EventSponsor.URL -->
-											<img src="img/event/content/sponsor-1.png" alt="Sponsor 1"/><!-- src = DB: EventSponsor.ImageFilename, alt = DB: EventSponsor.Name -->
-										</a>
-									</td>
-									<td>
-										<a href="#"><!-- href = DB: EventSponsor.URL -->
-											<img src="img/event/content/sponsor-2.png" alt="Sponsor 2"/><!-- src = DB: EventSponsor.ImageFilename, alt = DB: EventSponsor.Name -->
-										</a>
-									</td>
-								</tr>
-								<tr>
-									<td>
-										<a href="#"><!-- href = DB: EventSponsor.URL -->
-											<img src="img/event/content/sponsor-3.png" alt="Sponsor 3"/><!-- src = DB: EventSponsor.ImageFilename, alt = DB: EventSponsor.Name -->
-										</a>
-									</td>
-									<td>
-										<a href="#"><!-- href = DB: EventSponsor.URL -->
-											<img src="img/event/content/sponsor-4.png" alt="Sponsor 4"/><!-- src = DB: EventSponsor.ImageFilename, alt = DB: EventSponsor.Name -->
-										</a>
-									</td>
-								</tr>
-								<tr>
-									<td>
-										<a href="#"><!-- href = DB: EventSponsor.URL -->
-											<img src="img/event/content/sponsor-5.png" alt="Sponsor 5"/><!-- src = DB: EventSponsor.ImageFilename, alt = DB: EventSponsor.Name -->
-										</a>
-									</td>
-									<td></td>
-								</tr>
-							</tbody>
-						</table>
-					</div>
-				</div>
-				<div id="event-team" class="sidebar">
-					<div class="title">The Team</div>
-					<div class="body">
-						<ul class="horizontal">
-							<li>
-								<a href="https://twitter.com/GeekDadAVL"><!-- href = DB: EventTeamMember.TwitterName -->
-									<img src="https://api.twitter.com/1/users/profile_image?screen_name=GeekDadAVL&size=normal" alt="GeekDadAVL"/><!-- src = 'https://api.twitter.com/1/users/profile_image?size=normal&screen_name=' + EventTeamMember.TwitterName, alt = EventTeamMember.TwitterName -->
-								</a>
-							</li>
-							<li>
-								<a href="https://twitter.com/ItsWendyLou"><!-- href = DB: EventTeamMember.TwitterName -->
-									<img src="https://api.twitter.com/1/users/profile_image?screen_name=ItsWendyLou&size=normal" alt="ItsWendyLou"/><!-- src = 'https://api.twitter.com/1/users/profile_image?size=normal&screen_name=' + EventTeamMember.TwitterName, alt = EventTeamMember.TwitterName -->
-								</a>
-							</li>
-							<li>
-								<a href="https://twitter.com/GeekDadAVL"><!-- href = DB: EventTeamMember.TwitterName -->
-									<img src="https://api.twitter.com/1/users/profile_image?screen_name=GeekDadAVL&size=normal" alt="GeekDadAVL"/><!-- src = 'https://api.twitter.com/1/users/profile_image?size=normal&screen_name=' + EventTeamMember.TwitterName, alt = EventTeamMember.TwitterName -->
-								</a>
-							</li>
-							<li>
-								<a href="https://twitter.com/ItsWendyLou"><!-- href = DB: EventTeamMember.TwitterName -->
-									<img src="https://api.twitter.com/1/users/profile_image?screen_name=ItsWendyLou&size=normal" alt="ItsWendyLou"/><!-- src = 'https://api.twitter.com/1/users/profile_image?size=normal&screen_name=' + EventTeamMember.TwitterName, alt = EventTeamMember.TwitterName -->
-								</a>
-							</li>
-							<li>
-								<a href="https://twitter.com/GeekDadAVL"><!-- href = DB: EventTeamMember.TwitterName -->
-									<img src="https://api.twitter.com/1/users/profile_image?screen_name=GeekDadAVL&size=normal" alt="GeekDadAVL"/><!-- src = 'https://api.twitter.com/1/users/profile_image?size=normal&screen_name=' + EventTeamMember.TwitterName, alt = EventTeamMember.TwitterName -->
-								</a>
-							</li>
-							<li>
-								<a href="https://twitter.com/ItsWendyLou"><!-- href = DB: EventTeamMember.TwitterName -->
-									<img src="https://api.twitter.com/1/users/profile_image?screen_name=ItsWendyLou&size=normal" alt="ItsWendyLou"/><!-- src = 'https://api.twitter.com/1/users/profile_image?size=normal&screen_name=' + EventTeamMember.TwitterName, alt = EventTeamMember.TwitterName -->
-								</a>
-							</li>
-						</ul>
-						<div class="clearfix"></div>
-					</div>
-				</div>
-				<div id="global-blog" class="sidebar">
-					<div class="title">Global Stories</div>
-					<div class="body">
-						<ul></ul>
-						<script type="text/javascript">
-							// twestival.tumblr.com is not returning any posts, so use staff.tumblr.com as a temporary stand-in
-							$.getJSON('http://api.tumblr.com/v2/blog/staff.tumblr.com/posts/text?callback=?',
-									{
-										api_key: '3QS3yzIDSOfn2gZ0Tl8tItq5dcoBRDMhfL5O1pryvkcMDn3186',
-										limit: 4
-									},
-									function(response) {
-										var target = $('#global-blog .body ul');
-										for(var i = 0; i < response.response.posts.length; i++) {
-											var post = response.response.posts[i];
-											target
-													.append($('<li/>')
-															.append($('<a/>', {href: post.post_url, target: '_blank'})
-																	.append(
-																			post.title
-																			|| post.slug
-																					.replace(/-/g, ' ')
-																					.replace(/\w\S*/g, function(txt){ return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase(); })
-																	)
-															)
-													);
-										};
-									});
-						</script>
-						<noscript>
-							<a href="http://twestival.tumblr.com">See recent Twestival Tumblr Stories</a>
-						</noscript>
-					</div>
-				</div>
+				{{> Sidebar/EventTwitter }}
+				{{> Sidebar/EventSponsors }}
+				{{> Sidebar/EventTeamMembers }}
+				{{> Sidebar/GlobalTumblr }}
 			</div>
 		</div>
 

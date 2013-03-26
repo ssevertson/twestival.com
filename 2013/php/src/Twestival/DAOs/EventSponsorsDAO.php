@@ -7,11 +7,14 @@ class EventSponsorsDAO extends BaseDAO
 		$conn = $this->container['connection'];
 		$query = $conn->prepare('
 			SELECT
-				EventSponsor.*
+				EventSponsor.*,
+				Event.Year <= 2011 AS Legacy
 			FROM
-				EventSponsor
+				Event
+				INNER JOIN EventSponsor
+					ON Event.EventID = EventSponsor.EventID
 			WHERE
-				EventSponsor.EventID = ?
+				Event.EventID = ?
 			ORDER BY
 				EventSponsor.Sequence;
 		');
@@ -41,11 +44,14 @@ class EventSponsorsDAO extends BaseDAO
 		$conn = $this->container['connection'];
 		$query = $conn->prepare('
 			SELECT
-				EventSponsor.*
+				EventSponsor.*,
+				Event.Year <= 2011 AS Legacy
 			FROM
-				EventSponsor
+				Event
+				INNER JOIN EventSponsor
+					ON Event.EventID = EventSponsor.EventID
 			WHERE
-				EventSponsor.EventID = ?
+				Event.EventID = ?
 				AND EventTeamMember.Sequence = ?;
 		');
 		$query->bindValue(1, intval($eventID), \PDO::PARAM_INT);
