@@ -44,13 +44,12 @@
 							{{#format.toLongEuropeanDate}}{{Date}}{{/format.toLongEuropeanDate}}{{#StartTime}}, {{#format.removeSeconds}}{{.}}{{/format.removeSeconds}}{{/StartTime}}{{#EndTime}} - {{#format.removeSeconds}}{{.}}{{/format.removeSeconds}}{{/EndTime}}
 						</div>
 						<div class="location">
-							{{#LocationURL}}
-								<a href="{{.}}">
-							{{/LocationURL}}
-							{{LocationName}}
-							{{#LocationURL}}
-								</a>
-							{{/LocationURL}}
+							{{#LocationUri}}
+								<a href="{{.}}">{{LocationName}}</a>
+							{{/LocationUri}}
+							{{^LocationUri}}
+								{{LocationName}}
+							{{/LocationUri}}
 							{{#LocationAddress1}}
 								<div class="address">{{.}}</div>
 							{{/LocationAddress1}}
@@ -72,10 +71,10 @@
 									<td class="logo">
 										{{#ImageUri}}
 											{{#Uri}}
-												<a href="Uri"><img src="{{ImageUri}}" alt=""/></a>
+												<a href="Uri"><img src="{{ImageUri}}" alt="{{Name}} Logo"/></a>
 											{{/Uri}}
 											{{^Uri}}
-												<img src="{{ImageUri}}" alt=""/>
+												<img src="{{ImageUri}}" alt="{{Name}} Logo"/>
 											{{/Uri}}
 										{{/ImageUri}}
 									</td>
