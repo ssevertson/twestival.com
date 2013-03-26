@@ -1,0 +1,97 @@
+{{#Event}}
+	<div class="clearfix"></div>
+
+	<div class="wrapper">
+		<div id="event">
+			<div class="info">
+				<div class="name">{{Name}}</div>
+				<div class="datetime">
+					{{#format.toLongEuropeanDate}}{{Date}}{{/format.toLongEuropeanDate}}{{#StartTime}}, {{#format.removeSeconds}}{{.}}{{/format.removeSeconds}}{{/StartTime}}{{#EndTime}} - {{#format.removeSeconds}}{{.}}{{/format.removeSeconds}}{{/EndTime}}
+				</div>
+				<div class="location">
+					{{#LocationUri}}
+						<a href="{{.}}">{{LocationName}}</a>
+					{{/LocationUri}}
+					{{^LocationUri}}
+						{{LocationName}}
+					{{/LocationUri}}
+					{{#LocationAddress1}}
+						<div class="address">{{.}}</div>
+					{{/LocationAddress1}}
+					{{#LocationAddress2}}
+						<div class="address">{{.}}</div>
+					{{/LocationAddress2}}
+				</div>
+			</div>
+			<div class="stamp">
+				<div class="logo"><img src="{{ImageUri}}" alt="{{Name}} Logo"/></div>
+				<div class="overlay"><img src="img/blog/event/logo-overlay.png" alt="Official Event"/></div>
+			</div>
+			<div class="clearfix"></div>
+			{{#EventCharities}}
+				<!-- Vertical aligning of unknown image sizes. http://giveupandusetables.com/ -->
+				<table class="charity">
+					<tbody>
+						<tr>
+							<td class="logo">
+								{{#ImageUri}}
+									{{#Uri}}
+										<a href="Uri"><img src="{{ImageUri}}" alt="{{Name}} Logo"/></a>
+									{{/Uri}}
+									{{^Uri}}
+										<img src="{{ImageUri}}" alt="{{Name}} Logo"/>
+									{{/Uri}}
+								{{/ImageUri}}
+							</td>
+							<td class="description">
+								<div class="caption">Charity</div>
+								<div class="name">
+									{{#Uri}}
+										<a href="{{Uri}}">{{Name}}</a>
+									{{/Uri}}
+									{{^Uri}}
+										{{Name}}
+									{{/Uri}}
+								</div>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			{{/EventCharities}}
+			<a class="contact" href="mailto:{{#format.toUrlQuery}}{{OrganizerEmailAddress}}{{/format.toUrlQuery}}">Contact Organizer</a>
+			<ul class="social-media horizontal">
+				<li><a href="{{TwitterUri}}"><img src="img/blog/event/button-twitter.png" alt="Twitter"/></a></li>
+				{{#FacebookUri}}
+					<li><a href="{{FacebookUri}}"><img src="img/blog/event/button-facebook.png" alt="Facebook"/></a></li>
+				{{/FacebookUri}}}
+				<li><a href="mailto:?body={{#format.toUrlQuery}}{{BlogUri}}{{/format.toUrlQuery}}"><img src="img/blog/event/button-mail.png" alt="Email Link"/></a></li>
+				<li><a href="https://twitter.com/share?text={{#format.toUrlQuery}}{{TwitterShareMessage}}{{/format.toUrlQuery}}"><img src="img/blog/event/button-tweet.png" alt="Tweet This"/></a></li>
+			</ul>
+		</div>
+	
+		<div id="fundraising">
+			<div class="caption">Help to aim at the goal!</div>
+			<div class="goal">{{#format.toUSDollars}}{{FundraisingGoalUSD}}{{/format.toUSDollars}}</div>
+			<div class="graph">
+				<div class="progress" style="width: {{#format.toPercentageMax}}{{FundraisingGoalRatio}},100{{/format.toPercentageMax}};"></div>
+			</div>
+			<div class="donated" style="margin-left: {{#format.toPercentageMax}}{{FundraisingGoalRatio}},90{{/format.toPercentageMax}};">{{#format.toUSDollars}}{{DonationTotalUSD}}{{/format.toUSDollars}}</div>
+			{{#AttendUri}}
+				<div class="button attend">
+					<a href="{{AttendUri}}">Attend</a>
+				</div>
+			{{/AttendUri}}
+			{{#DonateUri}}
+				<div class="button donate">
+					<a href="{{DonateUri}}">Donate</a>
+				</div>
+			{{/DonateUri}}
+			<div class="description">
+				<span class="event">{{Name}}</span>
+				{{Description}}
+			</div>
+		</div>
+	</div>
+	
+	<div class="clearfix"></div>
+{{/Event}}
