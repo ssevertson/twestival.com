@@ -134,7 +134,7 @@ class BaseResource extends \Tonic\Resource
 				array_push($rows, array());
 			}
 			
-			array_push($rows[count($rows) - 1], &$item);
+			array_push($rows[count($rows) - 1], $item);
 				
 			if($column == 0)
 			{
