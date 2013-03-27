@@ -19,12 +19,19 @@ $baseDir = realpath(dirname(__FILE__));
 $baseUri = '/2013';
 $hostname = $_SERVER['HTTP_HOST'];
 $domain = getRequestDomain($hostname);
-$subdomain = getRequestSubdomain($hostname);
+$globalSubdomain = 'www';
+$subdomain = getRequestSubdomain($hostname, $globalSubdomain);
 $uri = getRequestUri();
-$namespace = getTonicNamespace($subdomain);
+$tonicUri = getTonicUri(
+		$uri,
+		getTonicNamespace($subdomain),
+		$baseUri,
+		array(
+				'/error',
+				'/logout'));
 
 $request = new Tonic\Request(array(
-	'uri' => getTonicUri($uri, $namespace, $baseUri),
+	'uri' => $tonicUri,
 	'uriMethodOverride' => TRUE
 ));
 
@@ -38,6 +45,7 @@ $container = new Twestival\Container(array(
 		'request.hostname' => $hostname,
 		'request.domain' => $domain,
 		'request.subdomain' => $subdomain,
+		'request.subdomain.global' => $globalSubdomain,
 		'request.uri' => 'http://' . $hostname . $uri
 ));
 
@@ -93,13 +101,13 @@ catch (Exception $e)
 
 $response->output();
 
-function getRequestSubdomain($hostname)
+function getRequestSubdomain($hostname, $globalSubdomain)
 {
 	$subdomain = NULL;
 	if(isset($hostname) && substr_count($hostname, '.') >= 2)
 	{
 		$subdomain = substr($hostname, 0, strpos($hostname, '.'));
-		if('www' == $subdomain || 'local' == $subdomain)
+		if($globalSubdomain == $subdomain || 'local' == $subdomain)
 		{
 			$subdomain = NULL;
 		}
@@ -142,14 +150,14 @@ function getRequestUri()
 	return $uri;
 }
 
-function getTonicUri($uri, $namespace, $baseUri)
+function getTonicUri($uri, $namespace, $baseUri, $sharedUris)
 {
 	if($baseUri && substr($uri, 0, strlen($baseUri)) == $baseUri)
 	{
 		$uri = substr($uri, strlen($baseUri));
 	}
 	
-	if(in_array($uri, array('/error', '/logout')))
+	if(in_array($uri, $sharedUris))
 	{
 		# Generic error handler without namespace
 		return $uri;

@@ -13,6 +13,11 @@ class BaseResource extends \Tonic\Resource
 	{
 		$data['BaseUri'] = $this->container['baseUri'];
 		$data['RequestUri'] = $this->container['request.uri'];
+		$data['GlobalUri'] = 'http://'
+				. $this->container['request.subdomain.global'] 
+				. '.'
+				. $this->container['request.domain']
+				. $this->container['baseUri'];
 		return $this->container['mustache.engine']->loadTemplate($template)->render($data);
 	}
 	
