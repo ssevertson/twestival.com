@@ -4,6 +4,19 @@
 		<title>Twestival {{CurrentYear}}: Our Story</title>
 		
 		<link rel="stylesheet" href="css/ourstory.css" />
+		
+		<!-- Pretty Photo -->
+		<link rel="stylesheet" href="css/vendor/prettyphoto.css" />
+		<script src="js/vendor/prettyphoto.jquery-3.1.5.min.js"></script>
+		
+		<script type="text/javascript">
+			$(document).ready(function() {
+				$("a[rel^='prettyPhoto']").prettyPhoto({
+					social_tools: false,
+					theme: 'light_square'
+				});
+			});
+		</script>
 	</head>
 	<body id="ourstory">
 		{{> Header }}
