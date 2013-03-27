@@ -5,7 +5,7 @@ class BaseBlogResource extends BaseResource
 	function renderMustacheHeaderFooter($template, $data = array())
 	{
 		$data['Event'] = $this->container['service.event']->getEvent($data['EventID']);
-		if($event['FundraisingGoalUSD'])
+		if($data['Event']['FundraisingGoalUSD'])
 		{
 			$data['Event']['FundraisingGoalRatio'] = $data['Event']['DonationTotalUSD'] / $data['Event']['FundraisingGoalUSD'];
 		}

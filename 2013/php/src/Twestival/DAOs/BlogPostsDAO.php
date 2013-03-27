@@ -47,7 +47,7 @@ class BlogPostsDAO extends BaseDAO
 		return intval($query->fetchColumn());
 	}
 	
-	function get($subdomain, $blogPostID)
+	function get($subdomain, $postID)
 	{
 		$conn = $this->container['connection'];
 		$query = $conn->prepare('
@@ -64,10 +64,56 @@ class BlogPostsDAO extends BaseDAO
 				AND BlogPost.PostID = ?;
 		');
 		$query->bindValue(1, $subdomain, \PDO::PARAM_STR);
-		$query->bindValue(2, intval($blogPostID), \PDO::PARAM_INT);
+		$query->bindValue(2, intval($postID), \PDO::PARAM_INT);
 		
 		$query->execute();
 		return $query->fetch(\PDO::FETCH_ASSOC);
+	}
+	
+	function update($subdomain, $postID, $title, $content)
+	{
+		$conn = $this->container['connection'];
+		$query = $conn->prepare('
+			UPDATE
+				BlogPost,
+				Blog
+			SET
+				BlogPost.Title = ?,
+				BlogPost.Content = ?
+			WHERE
+				BlogPost.BlogID = Blog.BlogID
+				AND Blog.Subdomain = ?
+				AND BlogPost.PostID = ?;
+		');
+		$query->bindValue(1, $this->trimToNull($title), \PDO::PARAM_STR);
+		$query->bindValue(2, $this->trimToNull($content), \PDO::PARAM_STR);
+		$query->bindValue(3, $this->trimToNull($subdomain), \PDO::PARAM_STR);
+		$query->bindValue(4, intval($postID), \PDO::PARAM_INT);
+		
+		$query->execute();
+		return $query->rowCount();
+	}
+	
+	function create($subdomain, $title, $content)
+	{
+		$conn = $this->container['connection'];
+		$query = $conn->prepare('
+			INSERT INTO BlogPost (BlogID, Title, Content)
+			SELECT
+				Blog.BlogID,
+				?,
+				?
+			FROM
+				Blog
+			WHERE
+				Blog.Subdomain = ?;
+		');
+		$query->bindValue(1, $this->trimToNull($title), \PDO::PARAM_STR);
+		$query->bindValue(2, $this->trimToNull($content), \PDO::PARAM_STR);
+		$query->bindValue(3, $this->trimToNull($subdomain), \PDO::PARAM_STR);
+	
+		$query->execute();
+		return $conn->lastInsertId();
 	}
 }
 ?>

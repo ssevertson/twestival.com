@@ -162,10 +162,11 @@ function getTonicUri($uri, $namespace, $baseUri)
 
 function buildRedirectResponse($request, $baseUri, $uri, $temporary = FALSE)
 {
-	if($baseUri && substr($uri, 0, strlen($baseUri)) != $baseUri)
+	if(!strpos($uri, '//') && $baseUri && substr($uri, 0, strlen($baseUri)) != $baseUri)
 	{
 		$uri = $baseUri . $uri;
 	}
+	
 	$response = new \Tonic\Response($request);
 	$response->code = $temporary ? \Tonic\Response::TEMPORARYREDIRECT : \Tonic\Response::MOVEDPERMANENTLY;
 	$response->Location = $uri;

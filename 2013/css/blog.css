@@ -18,7 +18,7 @@ ul#blog-admin li {
 	content: '\0000a0>\0000a0';
 }
 
-#breadcrumbs .current {
+#breadcrumbs li.current a {
 	color: #34747c;
 }
 #breadcrumbs .current:after {
@@ -225,7 +225,7 @@ ul#blog-admin li {
 	margin-top: 20px;
 	font-family: 'Lato' !important;
 }
-#blog-posts .post .subject {
+#blog-posts .post .title {
 	display: block;
 	font-weight: bold;
 	font-size: 24px;

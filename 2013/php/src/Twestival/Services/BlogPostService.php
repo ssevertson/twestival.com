@@ -10,15 +10,24 @@ class BlogPostService extends BaseService
 		$this->addUrisToBlogPosts($posts);
 		return $posts;
 	}
-	function getPost($subdomain, $blogPostID)
+	function getPost($subdomain, $postID)
 	{
-		$post = $this->container['dao.blog.posts']->get($subdomain, $blogPostID);
+		$post = $this->container['dao.blog.posts']->get($subdomain, $postID);
 		$this->addUrisToBlogPost($post);
 		return $post;
 	}
 	function getPostCount($subdomain)
 	{
 		return $this->container['dao.blog.posts']->count($subdomain);
+	}
+	
+	function update($subdomain, $postID, $title, $content)
+	{
+		return $this->container['dao.blog.posts']->update($subdomain, $postID, $title, $content);
+	}
+	function create($subdomain, $title, $content)
+	{
+		return $this->container['dao.blog.posts']->create($subdomain, $title, $content);
 	}
 
 	private function addUrisToBlogPosts(&$posts)

@@ -1,0 +1,47 @@
+{{> HTMLTag }}
+	<head>
+		{{> HeadContent }}
+		{{> Blog/HeadContent }}
+		<title>Twestival {{CurrentYear}}: {{#Event}}{{Name}}{{/Event}}</title>
+		<script src="ckeditor/ckeditor.js"></script>
+	</head>
+	<body id="blog">
+		{{> Header }}
+		{{> Blog/Header}}
+		
+		{{> Blog/Event }}
+		
+		<div class="wrapper content">
+			{{#BlogPost}}
+				<form action="{{RequestUri}}!{{SaveMethod}}" method="POST" id="blog-posts" class="edit">
+					<div class="post" id="post-{{PostID}}">
+						<label for="blog-post-title" class="required">Title</label>
+						<input type="text" id="blog-post-subject" class="title" name="Title" value="{{Title}}"/>
+					
+						<label for="blog-post-content" class="required">Content</label>
+						<textarea id="blog-post-content" name="Content" class="body">
+							{{Content}}
+						</textarea>
+						<script type="text/javascript">
+							CKEDITOR.replace('blog-post-content', { contentsCss: ['//fonts.googleapis.com/css?family=Lato', 'css/blog-ckeditor-contents.css'], height: 350 });
+						</script>
+					</div>
+					<input type="submit" class="action" value="Post"/>
+					<input type="button" class="action" value="Cancel" onclick="history.go(-1);"/>
+					
+					<div class="symbols">
+						<span class="required"></span> required fields<br/>
+					</div>
+				</form>
+			{{/BlogPost}}
+			<div id="sidebars">
+				{{> Sidebar/EventTwitter }}
+				{{> Sidebar/EventSponsors }}
+				{{> Sidebar/EventTeamMembers }}
+				{{> Sidebar/GlobalTumblr }}
+			</div>
+		</div>
+
+		{{> Footer }}
+	</body>
+</html>

@@ -2,16 +2,16 @@
 
 /**
  * @namespace blog
- * @uri /post/{postID}
  * @uri /post/{postID}/{title}
+ * @uri /blog-entry/{postID}/{title}
  */
-class BlogItemResource extends BaseBlogResource
+class BlogViewResource extends BaseBlogResource
 {
 	/**
 	 * @method get
 	 * @provides text/html
 	 */
-	function html($blogID)
+	function html($postID)
 	{
 		$subdomain = $this->container['request.subdomain'];
 		
@@ -19,7 +19,7 @@ class BlogItemResource extends BaseBlogResource
 
 		$data['BlogPost'] = $this->container['service.blog.post']->getPost(
 				$subdomain,
-				intval($blogID));
+				intval($postID));
 		
 		return $this->renderMustacheHeaderFooter('Blog/View',
 				$data);
