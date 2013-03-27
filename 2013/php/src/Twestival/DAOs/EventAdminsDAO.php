@@ -23,9 +23,9 @@ class EventAdminsDAO extends BaseDAO
 				AND EventAdmin.Password = UPPER(SHA1(CONCAT(?, EventAdmin.Salt)))
 				AND Blog.Subdomain = ?;
 		');
-		$query->bindValue(1, $username, \PDO::PARAM_STR);
-		$query->bindValue(2, $password, \PDO::PARAM_STR);
-		$query->bindValue(3, $blogSubdomain, \PDO::PARAM_STR);
+		$query->bindValue(1, $this->trimToNull($username), \PDO::PARAM_STR);
+		$query->bindValue(2, $this->trimToNull($password), \PDO::PARAM_STR);
+		$query->bindValue(3, $this->trimToNull($blogSubdomain), \PDO::PARAM_STR);
 		$query->execute();
 		return intval($query->fetchColumn());
 	}

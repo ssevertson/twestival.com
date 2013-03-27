@@ -29,6 +29,10 @@ class BlogPostService extends BaseService
 	{
 		return $this->container['dao.blog.posts']->create($subdomain, $title, $content);
 	}
+	function delete($subdomain, $postID)
+	{
+		return $this->container['dao.blog.posts']->delete($subdomain, $postID);
+	}
 
 	private function addUrisToBlogPosts(&$posts)
 	{

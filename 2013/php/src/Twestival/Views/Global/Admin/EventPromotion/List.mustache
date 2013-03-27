@@ -26,16 +26,14 @@
 							<td class="symbol">
 								{{^First}}
 									<form action="admin/event-promotions/{{#format.toLowerCase}}{{PageName}}{{/format.toLowerCase}}/{{#format.toLowerCase}}{{SectionName}}{{/format.toLowerCase}}/{{Sequence}}" method="POST" class="rest-link">
-										<input type="hidden" name="Operation" value="↑"/>
-										<input type="submit" value="↑"/>
+										<input type="submit" name="Operation" value="↑"/>
 									</form>
 								{{/First}}
 							</td>
 							<td class="symbol">
 								{{^Last}}
 									<form action="admin/event-promotions/{{#format.toLowerCase}}{{PageName}}{{/format.toLowerCase}}/{{#format.toLowerCase}}{{SectionName}}{{/format.toLowerCase}}/{{Sequence}}" method="POST" class="rest-link">
-										<input type="hidden" name="Operation" value="↓"/>
-										<input type="submit" value="↓"/>
+										<input type="submit" name="Operation" value="↓"/>
 									</form>
 								{{/Last}}
 							</td>

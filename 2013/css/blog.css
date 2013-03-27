@@ -252,11 +252,20 @@ ul#blog-admin li {
 #blog-posts .post .body p {
 	margin: 28px 0px;
 }
-#blog-posts .post a.edit {
-	color: #52c5d7;
+#blog-posts .post .commands {
 	float: right;
 	margin-top: 8px;
+}
+#blog-posts .post .commands form {
+	margin: 0px;
+	padding: 0px;
+	display: inline;
+}
+#blog-posts .post .command {
+	color: #52c5d7;
+	font-family: 'Lato';
 	font-size: 14px;
+	margin-left: 10px;
 }
 #blog-posts .social-media-share {
 	float: left;

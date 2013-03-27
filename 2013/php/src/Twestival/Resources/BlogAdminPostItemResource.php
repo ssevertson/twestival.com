@@ -4,7 +4,7 @@
  * @namespace blog
  * @uri /post/{postID}
  */
-class BlogAdminPostEditResource extends BaseBlogResource
+class BlogAdminPostItemResource extends BaseBlogResource
 {
 	/**
 	 * @method get
@@ -49,6 +49,24 @@ class BlogAdminPostEditResource extends BaseBlogResource
 				$postID);
 		
 		throw new \Twestival\RedirectException($post['BlogPostPermalinkUri']);
+	}
+
+	/**
+	 * @method delete
+	 * @provides text/html
+	 * @requireCurrentBlogEventAdmin
+	 */
+	function delete($postID)
+	{
+		$subdomain = $this->container['request.subdomain'];
+		$postID = intval($postID);
+	
+		$this->container['service.blog.post']->delete(
+				$subdomain,
+				$postID
+		);
+	
+		throw new \Twestival\RedirectException('/');
 	}
 }
 ?>

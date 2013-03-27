@@ -115,5 +115,25 @@ class BlogPostsDAO extends BaseDAO
 		$query->execute();
 		return $conn->lastInsertId();
 	}
+	function delete($subdomain, $postID)
+	{
+		$conn = $this->container['connection'];
+		$query = $conn->prepare('
+			DELETE FROM
+				BlogPost
+			USING
+				BlogPost,
+				Blog
+			WHERE
+				BlogPost.BlogID = Blog.BlogID
+				AND Blog.Subdomain = ?
+				AND BlogPost.PostID = ?;
+		');
+		$query->bindValue(1, $this->trimToNull($subdomain), \PDO::PARAM_STR);
+		$query->bindValue(2, intval($postID), \PDO::PARAM_INT);
+	
+		$query->execute();
+		return $conn->lastInsertId();
+	}
 }
 ?>

@@ -15,10 +15,8 @@
 				{{#BlogPost}}
 					<div class="clearfix"></div>
 					<div class="post" id="post-{{PostID}}">
-						{{#security.currentBlogEventAdmin}}
-							<a href="{{BlogPostUri}}" class="edit">Edit</a>
-						{{/security.currentBlogEventAdmin}}
-						
+						{{> Blog/PostCommands}}
+
 						<a href="{{BlogPostPermalinkUri}}" class="title">{{Title}}</a>
 						<div class="date">{{#format.toEuropeanDate}}{{Created}}{{/format.toEuropeanDate}}</div>
 						<a href="#disqus_thread" class="comment-link">Comment</a>
@@ -27,7 +25,7 @@
 							{{{Content}}}
 						</div>
 						
-						{{>Blog/SharePost}}
+						{{> Blog/SharePost}}
 						
 						<div id="disqus_thread"></div>
 						<script type="text/javascript">

@@ -72,7 +72,7 @@ catch (Tonic\NotFoundException $e)
 catch (Tonic\UnauthorizedException $e)
 {
 	$container['logger']->addError($e->getMessage());
-	if($isGet)
+	if($isGet && substr_compare($tonicUri, '/login', -6, 6))
 	{
 		setcookie('URI_POST_LOGIN', $uri, 0, '/', $domain, false, true);
 	}
