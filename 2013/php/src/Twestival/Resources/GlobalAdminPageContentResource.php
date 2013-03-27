@@ -13,7 +13,7 @@ class GlobalAdminPageContentResource extends BaseResource
 	 */
 	function showEditor($pageName, $contentName)
 	{
-		return $this->renderMustacheHeaderFooter('Global/Editable/' . ucwords(strtolower($pageName)), array(
+		return $this->renderMustacheHeaderFooter('Global/Admin/Editable/' . ucwords(strtolower($pageName)), array(
 				'PageContent' => $this->container['service.page']->getPageContent($pageName, $contentName),
 				'Editable' => TRUE
 		));

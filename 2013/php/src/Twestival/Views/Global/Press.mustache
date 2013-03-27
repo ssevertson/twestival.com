@@ -1,0 +1,30 @@
+{{> HTMLTag }}
+	<head>
+		{{> HeadContent }}
+		<title>Twestival {{CurrentYear}} FAQs</title>
+		
+		<link rel="stylesheet" href="css/press.css" />
+	</head>
+	<body id="press">
+		{{> Header }}
+		
+		<div class="wrapper">
+			<h1>Press</h1>
+			
+			<div class="coverage">
+				{{{PageContent.HTML}}}
+			</div>
+		
+			<div id="sidebars">
+				{{> Sidebar/GlobalPressDownload }}
+				{{> Sidebar/GlobalPressContact }}
+			</div>
+			
+			<div class="clearfix"></div>
+			
+			{{>Share}}
+		</div>
+
+		{{> Footer }}
+	</body>
+</html>

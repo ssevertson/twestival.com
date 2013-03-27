@@ -1,0 +1,33 @@
+.coverage {
+	width: 622px;
+	float: left;
+	padding-right: 15px;
+}
+.coverage h2 {
+	margin: 32px 0px 3px 0px;
+	font-family: 'Melbourne-Bold';
+	font-weight: normal;
+	font-size: 24px;
+	letter-spacing: -0.1px;
+}
+.coverage p {
+	margin: 0px 0px 16px 0px;
+	font-family: 'Lato';
+	font-size: 14px;
+	line-height: 22px;
+}
+
+.sidebar ul {
+	list-style-type: none;
+	margin: 0px;
+	padding: 0px;
+	font-family: 'Lato';
+	font-size: 13px;
+}
+.sidebar ul li {
+	margin: 10px 8px 16px 8px;
+}
+.sidebar #sidebar-contact a {
+	color: #50B1BD;
+	font-weight: bold;
+}
