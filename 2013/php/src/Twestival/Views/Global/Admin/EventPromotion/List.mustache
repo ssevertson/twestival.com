@@ -47,7 +47,7 @@
 							<td class="symbol">
 								{{#Name}}
 									<form action="admin/event-promotions/{{#format.toLowerCase}}{{PageName}}{{/format.toLowerCase}}/{{#format.toLowerCase}}{{SectionName}}{{/format.toLowerCase}}/{{Sequence}}!DELETE" method="POST" class="rest-link">
-										<input type="submit" value="⊠"/>
+										<input type="submit" value="⊠" onclick="return confirm('Are you sure you wish to delete this promotion?');"/>
 									</form>
 								{{/Name}}
 								{{^Name}}
