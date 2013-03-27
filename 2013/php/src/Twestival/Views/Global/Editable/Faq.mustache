@@ -9,202 +9,48 @@
 		<script type="text/javascript" src="//widgets.twimg.com/j/2/widget.js"></script>
 		<link href="//widgets.twimg.com/j/2/widget.css" type="text/css" rel="stylesheet"/>
 		
-		{{#Editable}}
-			<link rel="stylesheet" href="css/admin.css" />
-			
-			<!-- CKEditor -->
-			<script src="ckeditor/ckeditor.js"></script>
-		{{/Editable}}
+		<link rel="stylesheet" href="css/admin.css" />
+		
+		<!-- CKEditor -->
+		<script src="ckeditor/ckeditor.js"></script>
 	</head>
 	<body id="faq">
 		{{> Header }}
 		
 		<div class="wrapper">
-			{{#Editable}}
-				<h1><a href="admin">Site Admin</a>: Frequently Asked Questions</h1>
-			{{/Editable}}
-			{{^Editable}}
-				<h1>Frequently Asked Questions</h1>
-			{{/Editable}}
+			<h1><a href="admin">Site Admin</a>: Frequently Asked Questions</h1>
 			
 			<div class="faqs">
-				{{#Editable}}
-					<form method="POST" class="editable">
-						<textarea id="edit-content" name="Content" class="body">
-							{{PageContent.HTML}}
-						</textarea>
-						<script type="text/javascript">
-							CKEDITOR.replace('edit-content', {
-									contentsCss: [
-											'//fonts.googleapis.com/css?family=Lato',
-											'css/main.css',
-											'ckeditor/contents.css',
-											'css/faq.css',
-											'css/admin.css'
-									],
-									height: 350,
-									bodyClass: 'faqs',
-									format_tags: 'h2;p'
-							});
-						</script>
-						<input type="submit" class="action" value="Save"/>
-						<input type="button" class="action" value="Cancel" onclick="history.go(-1);"/>
-					</form>
-				{{/Editable}}
-				{{^Editable}}
-					{{{PageContent.HTML}}}
-				{{/Editable}}
+				<form method="POST" class="editable">
+					<textarea id="edit-content" name="Content" class="body">
+						{{PageContent.HTML}}
+					</textarea>
+					<script type="text/javascript">
+						CKEDITOR.replace('edit-content', {
+								contentsCss: [
+										'//fonts.googleapis.com/css?family=Lato',
+										'css/main.css',
+										'ckeditor/contents.css',
+										'css/faq.css',
+										'css/admin.css'
+								],
+								height: 350,
+								bodyClass: 'faqs',
+								format_tags: 'h2;p'
+						});
+					</script>
+					<input type="submit" class="action" value="Save"/>
+					<input type="button" class="action" value="Cancel" onclick="history.go(-1);"/>
+				</form>
 			</div>
 			
 			<div id="sidebars">
-				<div id="global-blog" class="sidebar">
-					<div class="title">Global Stories</div>
-					<div class="body">
-						<ul></ul>
-						<script type="text/javascript">
-							// twestival.tumblr.com is not returning any posts, so use staff.tumblr.com as a temporary stand-in
-							$.getJSON('http://api.tumblr.com/v2/blog/staff.tumblr.com/posts/text?callback=?',
-									{
-										api_key: '3QS3yzIDSOfn2gZ0Tl8tItq5dcoBRDMhfL5O1pryvkcMDn3186',
-										limit: 4
-									},
-									function(response) {
-										var target = $('#global-blog .body ul');
-										for(var i = 0; i < response.response.posts.length; i++) {
-											var post = response.response.posts[i];
-											target
-													.append($('<li/>')
-															.append($('<a/>', {href: post.post_url, target: '_blank'})
-																	.append(
-																			post.title
-																			|| post.slug
-																					.replace(/-/g, ' ')
-																					.replace(/\w\S*/g, function(txt){ return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase(); })
-																	)
-															)
-													);
-										};
-									});
-						</script>
-						<noscript>
-							<a href="http://twestival.tumblr.com">See recent Twestival Tumblr Stories</a>
-						</noscript>
-					</div>
-				</div>
-				<div id="sidebar-twitter" class="sidebar">
-					<div class="title">Tweets</div>
-					<div class="body">
-						<script type="text/javascript">
-							new TWTR.Widget({
-								version: 2,
-								type: 'search',
-								search: 'twestival',
-								interval: 5000,
-								title: '',
-								subject: '',
-								width: 270,
-								height: 260,
-								theme: {
-									shell: {
-										background: 'transparent',
-										color: '#444444'
-									},
-									tweets: {
-										background: 'transparent',
-										color: '#444444',
-										links: '#34747c'
-									}
-								},
-								features: {
-									scrollbar: false,
-									loop: true,
-									live: true,
-									hashtags: true,
-									timestamp: true,
-									avatars: true,
-									toptweets: true,
-									behavior: 'default'
-								}
-							}).render().start();
-						</script>
-						<noscript>
-							<a href="https://twitter.com/search?q=%40nyctwestival"><!-- href = 'https://twitter.com/search?q=%40' + DB: Event.TwitterName -->See @nyctwestival<!-- DB: Event.TwitterName --> Tweets</a>
-						</noscript>
-						<div class="fadeout"></div>
-					</div>
-				</div>
-				<div id="sidebar-instagram" class="sidebar">
-					<div class="title">Photos</div>
-					<div class="body" id="sidebar-instagram-body">
-					</div>
-					<script type="text/javascript">
-						$.getJSON('https://api.instagram.com/v1/tags/twestival/media/recent?callback=?',
-								{
-									client_id: '170979fa018b4752977f4b7c15d7c7fd',
-									count: 8
-								},
-								function(response) {
-									var target = $('#sidebar-instagram-body');
-									for(var i = 0; i < response.data.length; i++) {
-										var item = response.data[i];
-										target
-												.append($('<a/>', {href: item.link, target: '_blank'})
-														.append($('<img/>', {src: item.images.thumbnail.url, alt: item.caption.text})));
-									};
-								});
-					</script>
-					<noscript>
-						<a href="http://instagram.com/tags/twestival/feed/recent.rss">See recent #twestival Instagrams</a>
-					</noscript>
-				</div>
+				{{>Sidebar/GlobalTumblr}}
+				{{>Sidebar/GlobalTwitter}}
+				{{>Sidebar/GlobalInstagram}}
 			</div>
 			
 			<div class="clearfix"></div>
-			
-			<div class="social-media-share">
-				<a class="share share-facebook" href="#"><!-- href = 'http://www.facebook.com/sharer.php?u=' + URLEncode(PageURL) -->
-					<span class="accessible-text">Facebook Share Count: </span>
-					<span class="count" id="share-facebook-count-page"></span>
-				</a>
-				<a class="share share-twitter" href="#"><!-- href = 'http://twitter.com/share?text=' + URLEncode(PageURL) -->
-					<span class="accessible-text">Twitter Share Count: </span>
-					<span class="count" id="share-twitter-count-page"></span>
-				</a>
-				<a class="share share-pinterest" href="#"><!-- href = 'http://pinterest.com/pin/create/button/?url=' + URLEncode(PageURL) + '&media=' + URLEncode('Waiting on requirements')  + '&description=' + URLEncode(BlogPost.Subject) -->
-					<span class="accessible-text">Pinterest Pin Count: </span>
-					<span class="count" id="share-pinterest-count-page"></span>
-				</a>
-				<a class="share share-googleplus" href="#"><!-- href = 'https://plus.google.com/share?url=' + URLEncode(PageURL) -->
-					<span class="accessible-text">Google+ Share Count: </span>
-					<span class="count" id="share-googleplus-count-page"></span>
-				</a>
-				<a class="share share-linkedin" href="#"><!-- href = 'http://www.linkedin.com/shareArticle?mini=true&source=Twestival&url=' + URLEncode(PageURL) -->
-					<span class="accessible-text">LinkedIn Share Count: </span>
-					<span class="count" id="share-linkedin-count-page"></span>
-				</a>
-				<a class="share share-email" href="mailto:?body="><!-- href = 'mailto:?body=' + URLEncode(PageURL) -->
-					<span class="accessible-text">Email Link</span>
-					<span class="count" id="share-email-count-page"></span>
-				</a>
-				<script type="text/javascript">
-					var loadSocialMediaCountsForPage = function(response) {
-						$('#share-facebook-count-page').text(response.Facebook.share_count).fadeIn();
-						$('#share-twitter-count-page').text(response.Twitter).fadeIn();
-						$('#share-pinterest-count-page').text(response.Pinterest).fadeIn();
-						$('#share-googleplus-count-page').text(response.GooglePlusOne).fadeIn();
-						$('#share-linkedin-count-page').text(response.LinkedIn).fadeIn();
-					};
-					$.ajax({
-						dataType: 'jsonp',
-						url: '//' + (location.protocol == 'https:' ? 'sharedcount.appspot' : 'api.sharedcount') + '.com',
-						data: {
-							url: 'http://www.twestival.com/' /* PageURL */
-						},
-						cache: true,
-						jsonpCallback: 'loadSocialMediaCountsForPage'
-					});
-				</script>
-			</div>
 		</div>
 
 		{{> Footer }}

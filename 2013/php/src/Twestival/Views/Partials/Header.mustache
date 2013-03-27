@@ -1,6 +1,8 @@
 <div id="header">
 	<div class="wrapper">
-		<img class="logo" src="img/common/header/logo.png" alt="TWESTIVAL: tweet. meet. give."/>
+		<a href="index">
+			<img class="logo" src="img/common/header/logo.png" alt="TWESTIVAL: tweet. meet. give."/>
+		</a>
 		<div class="menu">
 			<ul class="horizontal">
 				<li><a href="our_story">Our Story</a></li>
@@ -20,9 +22,17 @@
 				</a>
 			</div>
 			<ul class="stats">
-				<li id="stats-cities">{{#format.toUSInteger}}{{CityCount}}{{/format.toUSInteger}} cities</li>
-				<li id="stats-countries">{{#format.toUSInteger}}{{CountryCount}}{{/format.toUSInteger}} countries</li>
-				<li id="stats-total">{{#format.toUSDollars}}{{DonationTotalUSD}}{{/format.toUSDollars}} raised</li>
+				<li id="stats-cities">
+					{{#SummaryStats.CityCount}}{{#format.toUSInteger}}{{.}}{{/format.toUSInteger}}{{/SummaryStats.CityCount}}
+					{{^SummaryStats.CityCount}} 0 {{/SummaryStats.CityCount}}
+					cities
+				</li>
+				<li id="stats-countries">
+					{{#SummaryStats.CountryCount}}{{#format.toUSInteger}}{{.}}{{/format.toUSInteger}}{{/SummaryStats.CountryCount}}
+					{{^SummaryStats.CountryCount}} 0 {{/SummaryStats.CountryCount}}
+					countries
+				</li>
+				<li id="stats-total">{{#format.toUSDollars}}{{SummaryStats.DonationTotalUSD}}{{/format.toUSDollars}} raised</li>
 			</ul>
 			<form action="search" method="GET" class="search">
 				<label class="accessible-text" for="search-query">Find a Twestival</label>

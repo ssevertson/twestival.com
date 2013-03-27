@@ -4,7 +4,7 @@
  * @namespace blog
  * @uri /index
  */
-class BlogIndexResource extends BaseResource
+class BlogIndexResource extends BaseBlogResource
 {
 	const BLOG_POSTS_PER_PAGE = 3;
 	/**
@@ -36,24 +36,10 @@ class BlogIndexResource extends BaseResource
 		}
 		$data['Pages'] = $pages;
 		
-		$event = $this->container['service.event']->getEvent($data['EventID']);
-		if($event['FundraisingGoalUSD'])
-		{
-			$event['FundraisingGoalRatio'] = $event['DonationTotalUSD'] / $event['FundraisingGoalUSD'];
-		}
-		$data['Event'] = $event;
-		
 		$data['BlogPosts'] = $this->container['service.blog.post']->getPosts(
 				$subdomain,
 				BlogIndexResource::BLOG_POSTS_PER_PAGE,
 				$offset);
-		
-		$data['EventCharities'] = $this->container['service.event.charity']->getCharities($data['EventID']);
-		
-		$data['EventTeamMembers'] = $this->container['service.event.teamMember']->getTeamMembers($data['EventID']);
-		
-		$eventSponsors = $this->container['service.event.sponsor']->getSponsors($data['EventID']);
-		$data['EventSponsorRows'] = $this->toGrid($eventSponsors, 2);
 		
 		return $this->renderMustacheHeaderFooter('Blog/Index',
 				$data);

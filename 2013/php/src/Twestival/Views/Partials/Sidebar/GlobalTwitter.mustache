@@ -1,0 +1,42 @@
+<div id="sidebar-twitter" class="sidebar">
+	<div class="title">Tweets</div>
+	<div class="body">
+		<script type="text/javascript">
+			new TWTR.Widget({
+				version: 2,
+				type: 'search',
+				search: 'twestival',
+				interval: 5000,
+				title: '',
+				subject: '',
+				width: 270,
+				height: 260,
+				theme: {
+					shell: {
+						background: 'transparent',
+						color: '#444444'
+					},
+					tweets: {
+						background: 'transparent',
+						color: '#444444',
+						links: '#34747c'
+					}
+				},
+				features: {
+					scrollbar: false,
+					loop: true,
+					live: true,
+					hashtags: true,
+					timestamp: true,
+					avatars: true,
+					toptweets: true,
+					behavior: 'default'
+				}
+			}).render().start();
+	</script>
+	<noscript>
+		<a href="https://twitter.com/search?q=%40nyctwestival"><!-- href = 'https://twitter.com/search?q=%40' + DB: Event.TwitterName -->See @nyctwestival<!-- DB: Event.TwitterName --> Tweets</a>
+		</noscript>
+		<div class="fadeout"></div>
+	</div>
+</div>

@@ -61,10 +61,10 @@ class BlogPostsDAO extends BaseDAO
 			WHERE
 				Blog.ACTIVE = TRUE
 				AND Blog.Subdomain = ?
-				AND BlogPost.BlogPostID = ?;
+				AND BlogPost.PostID = ?;
 		');
 		$query->bindValue(1, $subdomain, \PDO::PARAM_STR);
-		$query->bindValue(1, intval($blogPostID), \PDO::PARAM_INT);
+		$query->bindValue(2, intval($blogPostID), \PDO::PARAM_INT);
 		
 		$query->execute();
 		return $query->fetch(\PDO::FETCH_ASSOC);

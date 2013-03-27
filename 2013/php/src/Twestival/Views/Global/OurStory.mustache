@@ -1,0 +1,90 @@
+{{> HTMLTag }}
+	<head>
+		{{> HeadContent }}
+		<title>Twestival {{CurrentYear}}: Our Story</title>
+		
+		<link rel="stylesheet" href="css/ourstory.css" />
+	</head>
+	<body id="ourstory">
+		{{> Header }}
+
+		<div class="wrapper">
+			<h1>The Twestival Story</h1>
+			<div class="video-block">
+				<div id="involve-video-story">
+					<iframe width="560" height="315" src="http://www.youtube.com/embed/wg2w2EMIWTM?wmode=opaque&rel=0" frameborder="0" allowfullscreen>
+						<a href="https://www.youtube.com/watch?v=wg2w2EMIWTM">Watch Twestival introduction</a>
+					</iframe>
+				</div>
+				<div class="twestival-story">
+					<div class="heading">Twestival is the largest grassroots social media fundraising initiative in the world.</div>
+					We are a global movement that uses social media for social good, empowering communities around the world to organize one-of-a-kind offline events in support of a great local cause of their choice.<br/>
+					All events are 100% volunteer-run, and all ticket sales and donations go directly to the projects they support.
+				</div>
+			</div>
+			<div class="notice">
+				Since 2009, Twestival has raised {{#format.toUSMillions}}{{RunningStats.DonationTotalUSD}}{{/format.toUSMillions}} million in support of {{RunningStats.CharityCount}} charities — <a href="stats-scoreboard">and counting.</a>
+			</div>
+			<div class="timeline">
+				<div class="block pull-left first">
+					<div class="date pull-right">Today</div>
+					<div class="info">
+						<a href="http://www.youtube.com/watch?v=wg2w2EMIWTM&rel=0" rel="prettyPhoto" title=""><img src="img/ourstory/content/placeholder.jpg"/></a>
+						Twestival relaunches for 2013 as a year-long campaign that opens local organizers to host an event on any date they choose.
+					</div>
+				</div>
+				<div class="block pull-right">
+					<div class="date pull-left">24 March 2011</div>
+					<div class="info">
+						<a href="http://www.youtube.com/watch?v=5vacUs8ukI8" rel="prettyPhoto" title=""><img src="img/ourstory/content/2011-03.jpg"/></a>
+						Twestival Local coordinates events in 175 cities on the same day, raising $565,000 for local causes.
+					</div>
+				</div>
+				<div class="block pull-left">
+					<div class="date pull-right">October 2010</div>
+					<div class="info">
+						<a href="http://www.youtube.com/watch?v=XYhXU7Ee_PI" rel="prettyPhoto" title=""><img src="img/ourstory/content/2010-10.jpg"/></a>
+						Founder Amanda Rose travels with Concern Worldwide to Liberia to see a school being built with Twestival support.
+					</div>
+				</div>
+				<div class="block pull-right">
+					<div class="date pull-left">25 March 2010</div>
+					<div class="info">
+						<a href="http://www.youtube.com/watch?v=wg2w2EMIWTM" rel="prettyPhoto" title=""><img src="img/ourstory/content/2010-03.jpg"/></a>
+						175 cities around the world raise a total of $405,538 in support of Concern Worldwide’s comprehensive education programmes helping impoverished communities in Liberia, Haiti, Burundi, Malawi and Mozambique.
+					</div>
+				</div>
+				<div class="block pull-left">
+					<div class="date pull-right">10-13 September 2009</div>
+					<div class="info">
+						<a href="http://www.youtube.com/watch?v=jjvgd606wN4" rel="prettyPhoto" title=""><img src="img/ourstory/content/2009-09.jpg"/></a>
+						155 cities host Twestival Local events, raising $400,000 over the weekend for local causes.
+					</div>
+				</div>
+				<div class="block pull-right">
+					<div class="date pull-left">April 2009</div>
+					<div class="info">
+						<a href="http://www.youtube.com/watch?v=QX1XaqUew1E" rel="prettyPhoto" title=""><img src="img/ourstory/content/2009-04.jpg"/></a>
+						Founder Amanda Rose joins charity: water in Ethiopia to drill the first of 50 wells that Twestival events funded.
+					</div>
+				</div>
+				<div class="block pull-left">
+					<div class="date pull-right">12 February 2009</div>
+					<div class="info">
+						<a href="http://www.youtube.com/watch?v=6QW_gChHL3E" rel="prettyPhoto" title=""><img src="img/ourstory/content/2009-02.jpg"/></a>
+						The first Twestival Global takes place in 202 cities worldwide, raising $264,000 in support of charity: water’s mission to provide clean drinking water to the world’s poor.
+					</div>
+				</div>
+				<div class="block pull-right">
+					<div class="date pull-left">25 September 2008</div>
+					<div class="info">
+						<a href="http://www.youtube.com/watch?v=KslU5v8U5aE" rel="prettyPhoto" title=""><img src="img/ourstory/content/2008-09.jpg"/></a>
+						The first-ever Harvest Twestival takes place in London: a 250-person Twitter meet-up in Trafalgar Square that raises £1000 and collects 14 boxes of canned goods in support of nearby homeless shelter, The Connection.
+					</div>
+				</div>
+			</div>
+		</div>
+
+		{{> Footer }}
+	</body>
+</html>

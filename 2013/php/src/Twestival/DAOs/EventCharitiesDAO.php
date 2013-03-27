@@ -23,5 +23,24 @@ class EventCharitiesDAO extends BaseDAO
 		$query->execute();
 		return $query->fetchAll(\PDO::FETCH_ASSOC);
 	}
+	
+	function countRunningEventCharities($baselineYear)
+	{
+		$conn = $this->container['connection'];
+		$query = $conn->prepare('
+			SELECT
+				COUNT(*)
+			FROM
+				Event
+				INNER JOIN EventCharity
+					ON Event.EventID = EventCharity.EventID
+			WHERE
+				Event.Year >= ?;
+		');
+		$query->bindValue(1, intval($baselineYear), \PDO::PARAM_INT);
+		
+		$query->execute();
+		return intval($query->fetchColumn());
+	}
 }
 ?>

@@ -1,0 +1,24 @@
+<div id="sidebar-instagram" class="sidebar">
+	<div class="title">Photos</div>
+	<div class="body" id="sidebar-instagram-body">
+	</div>
+	<script type="text/javascript">
+		$.getJSON('https://api.instagram.com/v1/tags/twestival/media/recent?callback=?',
+				{
+					client_id: '170979fa018b4752977f4b7c15d7c7fd',
+					count: 8
+				},
+				function(response) {
+					var target = $('#sidebar-instagram-body');
+					for(var i = 0; i < response.data.length; i++) {
+						var item = response.data[i];
+						target
+								.append($('<a/>', {href: item.link, target: '_blank'})
+										.append($('<img/>', {src: item.images.thumbnail.url, alt: item.caption.text})));
+					};
+				});
+	</script>
+	<noscript>
+		<a href="http://instagram.com/tags/twestival/feed/recent.rss">See recent #twestival Instagrams</a>
+	</noscript>
+</div>

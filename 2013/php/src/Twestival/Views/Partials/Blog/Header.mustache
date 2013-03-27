@@ -1,0 +1,15 @@
+<div class="wrapper">
+	<ul id="breadcrumbs" class="horizontal">
+		<li><a href="events">Official Events</a></li>
+		<li class="current">{{Event.Name}}</li>
+	</ul>
+	{{#security.currentBlogEventAdmin}}
+		<ul id="blog-admin" class="horizontal links">
+			<li><a href="admin">Settings</a></li>
+			<li><a href="post">New Blog Post</a></li>
+			<li><a href="logout">Log Out</a></li>
+		</ul>
+	{{/security.currentBlogEventAdmin}}
+</div>
+
+<div class="clearfix"></div>

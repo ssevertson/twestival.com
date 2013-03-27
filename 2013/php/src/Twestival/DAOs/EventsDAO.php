@@ -42,6 +42,24 @@ class EventsDAO extends BaseDAO
 		return floatval($query->fetchColumn());
 	}
 	
+	function sumRunningEventDonationTotalUSD($baselineYear)
+	{
+		$conn = $this->container['connection'];
+		$query = $conn->prepare('
+			SELECT
+				SUM(Event.DonationTotalUSD)
+			FROM
+				Event
+			WHERE
+				Event.Year >= ?;
+		');
+		
+		$query->bindValue(1, intval($baselineYear), \PDO::PARAM_INT);
+		
+		$query->execute();
+		return floatval($query->fetchColumn());
+	}
+	
 	function items($year, $active)
 	{
 		$conn = $this->container['connection'];
@@ -72,19 +90,21 @@ class EventsDAO extends BaseDAO
 						WHERE EventLocation.EventID = Event.EventID
 						AND Location.Type = \'STATE_PROVINCE\'
 					) As LocationStateProvince,
-					(
-						SELECT Location.Name
-						FROM EventLocation
-						INNER JOIN Location
-						ON EventLocation.LocationID = Location.LocationID
-						WHERE EventLocation.EventID = Event.EventID
-						AND Location.Type = \'CITY\'
-					) As LocationCity,
+					Location.Name AS LocationCity,
+					Location.Latitude AS LocationLatitude,
+					Location.Longitude AS LocationLongitude,
 					Blog.Subdomain AS BlogSubdomain
 				FROM
 					Event
 					INNER JOIN Blog
 						ON Event.BlogID = Blog.BlogID
+					LEFT JOIN (
+						EventLocation
+						INNER JOIN Location
+							ON EventLocation.LocationID = Location.LocationID
+							AND Location.Type = \'CITY\'
+					)
+						ON Event.EventID = EventLocation.EventID
 				WHERE
 					Event.Year = ?
 					AND Event.Active = ?
@@ -128,19 +148,21 @@ class EventsDAO extends BaseDAO
 						WHERE EventLocation.EventID = Event.EventID
 						AND Location.Type = \'STATE_PROVINCE\'
 					) As LocationStateProvince,
-					(
-						SELECT Location.Name
-						FROM EventLocation
-						INNER JOIN Location
-						ON EventLocation.LocationID = Location.LocationID
-						WHERE EventLocation.EventID = Event.EventID
-						AND Location.Type = \'CITY\'
-					) As LocationCity,
-				Blog.Subdomain AS BlogSubdomain
+					Location.Name AS LocationCity,
+					Location.Latitude AS LocationLatitude,
+					Location.Longitude AS LocationLongitude,
+					Blog.Subdomain AS BlogSubdomain
 				FROM
 					Event
 					INNER JOIN Blog
 						ON Event.BlogID = Blog.BlogID
+					LEFT JOIN (
+						EventLocation
+						INNER JOIN Location
+							ON EventLocation.LocationID = Location.LocationID
+							AND Location.Type = \'CITY\'
+					)
+						ON Event.EventID = EventLocation.EventID
 				WHERE
 					Event.EventID = ?
 				ORDER BY
@@ -156,27 +178,61 @@ class EventsDAO extends BaseDAO
 	{
 		$conn = $this->container['connection'];
 		$query = $conn->prepare('
-			SELECT
-				COALESCE((
+				SELECT
+					COALESCE((
+							SELECT Location.Name
+							FROM EventLocation
+							INNER JOIN Location
+							ON EventLocation.LocationID = Location.LocationID
+							WHERE EventLocation.EventID = Event.EventID
+							AND Location.Type = ?
+					), \'Unknown\') As LocationName,
+					Event.*,
+					(
 						SELECT Location.Name
 						FROM EventLocation
 						INNER JOIN Location
 						ON EventLocation.LocationID = Location.LocationID
 						WHERE EventLocation.EventID = Event.EventID
-						AND Location.Type = ?
-				), \'Unknown\') As LocationName,
-				Event.*,
-				Blog.Subdomain AS BlogSubdomain
-			FROM
-				Event
-				INNER JOIN Blog
-					ON Event.BlogID = Blog.BlogID
-			WHERE
-				Event.Year = ?
-				AND Event.Active = TRUE
-			ORDER BY
-				LocationName,
-				Event.Name
+						AND Location.Type = \'CONTINENT\'
+					) As LocationContinent,
+					(
+						SELECT Location.Name
+						FROM EventLocation
+						INNER JOIN Location
+						ON EventLocation.LocationID = Location.LocationID
+						WHERE EventLocation.EventID = Event.EventID
+						AND Location.Type = \'COUNTRY\'
+					) As LocationCountry,
+					(
+						SELECT Location.Name
+						FROM EventLocation
+						INNER JOIN Location
+						ON EventLocation.LocationID = Location.LocationID
+						WHERE EventLocation.EventID = Event.EventID
+						AND Location.Type = \'STATE_PROVINCE\'
+					) As LocationStateProvince,
+					Location.Name AS LocationCity,
+					Location.Latitude AS LocationLatitude,
+					Location.Longitude AS LocationLongitude,
+					Blog.Subdomain AS BlogSubdomain
+				FROM
+					Event
+					INNER JOIN Blog
+						ON Event.BlogID = Blog.BlogID
+					LEFT JOIN (
+						EventLocation
+						INNER JOIN Location
+							ON EventLocation.LocationID = Location.LocationID
+							AND Location.Type = \'CITY\'
+					)
+						ON Event.EventID = EventLocation.EventID
+				WHERE
+					Event.Year = ?
+					AND Event.Active = TRUE
+				ORDER BY
+					LocationName,
+					Event.Name;
 		');
 		$query->bindValue(1, $locationType, \PDO::PARAM_STR);
 		$query->bindValue(2, intval($year), \PDO::PARAM_INT);

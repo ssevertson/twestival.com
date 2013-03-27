@@ -37,7 +37,8 @@ $container = new Twestival\Container(array(
 		'request.protocol' => 'http://',
 		'request.hostname' => $hostname,
 		'request.domain' => $domain,
-		'request.subdomain' => $subdomain
+		'request.subdomain' => $subdomain,
+		'request.uri' => 'http://' . $hostname . $uri
 ));
 
 register_shutdown_function(function() use (&$container) { handleShutdown($container); });
@@ -71,7 +72,7 @@ catch (Tonic\UnauthorizedException $e)
 }
 catch (Tonic\Exception $e)
 {
-	$container['logger']->addError($e->getMessage());
+	$container['logger']->addError($e->getMessage() . ':' . $e->getTraceAsString());
 	$response = buildRedirectResponse($request, $baseUri, '/error?code=' . $e->getCode(), $isGet);
 }
 catch (Twestival\RedirectException $e)

@@ -1,0 +1,174 @@
+{{> HTMLTag }}
+	<head>
+		{{> HeadContent }}
+		<title>Twestival {{CurrentYear}}: Official Events</title>
+		
+		<link rel="stylesheet" href="css/events.css" />
+
+		<!-- Google Maps -->		
+   		<script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false"></script>
+   		
+   		<!-- Twitter -->
+		<script type="text/javascript" src="//widgets.twimg.com/j/2/widget.js"></script>
+		<link href="//widgets.twimg.com/j/2/widget.css" type="text/css" rel="stylesheet"/>
+	</head>
+	<body id="events">
+		{{> Header }}
+
+		<div class="white-bar">
+			<div class="clearfix"></div>
+			<div class="wrapper">
+				<h1>Official Events</h1>
+			</div>
+		
+			<div id="map"></div>
+			<div id="map-loading"><img src="img/common/loading.gif" alt="Loading"/></div>
+			<script type="text/javascript">
+				function initializeMap() {
+	  				var styles = [
+							{
+		  						"featureType": "landscape.natural.landcover",
+		  						"elementType": "geometry.fill",
+		  						stylers: [
+		  							{ "color": "#a0e6ed" },
+		  							{ "saturation": 100 },
+		  							{ "visibility": "on" }
+		  						]
+							}, {
+								"featureType": "water",
+								"stylers": [
+		  							{ "color": "#ffffff" }
+								]
+							}, {
+								featureType: "all",
+								elementType: "labels",
+								stylers: [
+		  							{ visibility: "off" }
+								]
+							}, {
+								featureType: "administrative",
+								elementType: "geometry",
+								stylers: [
+		  							{ visibility: "off" }
+								]
+	  					}
+	  				];
+					
+	  				var styledMap = new google.maps.StyledMapType(styles,
+							{name: "Twestival Map"});
+					
+	  				var mapOptions = {
+							zoom: 2,
+							center: new google.maps.LatLng(42.0, 10.0),
+							mapTypeControlOptions: {
+		 				 		mapTypeIds: [google.maps.MapTypeId.ROADMAP, 'map_style']
+							},
+							disableDefaultUI: true,
+							scrollwheel: false,
+							draggable: false
+	  				};
+					
+	  				var map = new google.maps.Map(document.getElementById('map'), mapOptions);
+					
+	 		 		map.mapTypes.set('map_style', styledMap);
+	  				map.setMapTypeId('map_style');
+	  				
+					var pin = {
+						url: 'img/events/pin.png',
+						anchor: new google.maps.Point(5, 17)};
+
+					var geocode_result_handler = function(results, status, url) {
+						if(status == google.maps.GeocoderStatus.OK) { 
+							var marker = new google.maps.Marker({ 
+								map: map, 
+								position: results[0].geometry.location,
+								flat: true,
+								title: results[0].formatted_address,
+								icon: pin,
+								url: url});
+							google.maps.event.addListener(marker, 'click', function() {
+								window.location.href = this.url;
+							});
+						};
+					};
+					
+					var locs = [];
+					{{#Continents}}
+						{{#Events}}
+							{{#LocationLatitude}}
+								locs.push({ pos: new google.maps.LatLng({{LocationLatitude}}, {{LocationLongitude}}), name: '{{Name}}', url: '{{BlogUri}}'});
+							{{/LocationLatitude}}
+						{{/Events}}
+					{{/Continents}}
+					
+					var timer = setInterval(function() {
+						if(locs.length > 0) {
+							var random = parseInt(Math.random() * locs.length);
+							var loc = locs[random];
+							locs.splice(random, 1);
+							
+							var marker = new google.maps.Marker({ 
+								map: map, 
+								position: loc.pos,
+								flat: true,
+								title: loc.name,
+								icon: pin,
+								url: loc.url});
+							google.maps.event.addListener(marker, 'click', function() {
+								window.location.href = this.url;
+							});
+						} else {
+							clearInterval(timer);
+						};
+					}, 100);
+					
+					google.maps.event.addListenerOnce(map, 'idle', function() {
+						$('#map-loading').fadeOut();
+					});
+				};
+				google.maps.event.addDomListener(window, 'load', initializeMap);
+	  		</script>
+	  	</div>
+		
+		<div class="wrapper">
+			<div id="event-list">
+				{{#Continents}}
+					<div class="continent">
+						<div class="caption">
+							<div class="name">{{Continent}}</div>
+							<div class="stats">
+								{{#format.toUSInteger}}{{CountryCount}}{{/format.toUSInteger}} countries,
+								{{#format.toUSInteger}}{{CityCount}}{{/format.toUSInteger}} cities
+							</div>
+							<div class="clearfix"></div>
+						</div>
+						<ul class="events">
+							{{#Events}}
+								<li>
+									<span class="location">
+										<a href="{{BlogUri}}" class="blog">
+											{{#format.toLocation}}{{LocationCity}}, {{LocationStateProvince}}, {{LocationCountry}}{{/format.toLocation}}
+										</a>,
+									</span>
+									<a href="{{TwitterUri}}">@{{TwitterName}}</a>
+								</li>
+							{{/Events}}
+						</ul>
+					</div>
+				{{/Continents}}
+			</div>
+		
+			<div id="sidebars">
+				{{>Sidebar/GlobalTumblr}}
+				{{>Sidebar/GlobalTwitter}}
+				{{>Sidebar/GlobalInstagram}}
+			</div>
+			
+			<div class="clearfix"></div>
+			
+			{{>Share}}
+		</div>
+		
+		{{> Footer }}
+	</body>
+</html>

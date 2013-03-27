@@ -1,0 +1,40 @@
+<div class="social-media-share">
+	<a class="share share-facebook" href="http://www.facebook.com/sharer.php?u={{#format.toUrlQuery}}{{RequestUri}}{{/format.toUrlQuery}}">
+		<span class="accessible-text">Facebook Share Count: </span>
+		<span class="count" id="share-facebook-count-page"></span>
+	</a>
+	<a class="share share-twitter" href="http://twitter.com/share?text={{#format.toUrlQuery}}{{RequestUri}}{{/format.toUrlQuery}}">
+		<span class="accessible-text">Twitter Share Count: </span>
+		<span class="count" id="share-twitter-count-page"></span>
+	</a>
+	<a class="share share-googleplus" href="https://plus.google.com/share?url={{#format.toUrlQuery}}{{RequestUri}}{{/format.toUrlQuery}}">
+		<span class="accessible-text">Google+ Share Count: </span>
+		<span class="count" id="share-googleplus-count-page"></span>
+	</a>
+	<a class="share share-linkedin" href="http://www.linkedin.com/shareArticle?mini=true&source=Twestival&url={{#format.toUrlQuery}}{{RequestUri}}{{/format.toUrlQuery}}">
+		<span class="accessible-text">LinkedIn Share Count: </span>
+		<span class="count" id="share-linkedin-count-page"></span>
+	</a>
+	<a class="share share-email" href="mailto:?body={{#format.toUrlQuery}}{{BlogPostShareUri}}{{/format.toUrlQuery}}">
+		<span class="accessible-text">Email Link</span>
+		<span class="count" id="share-email-count-page"></span>
+	</a>
+	<script type="text/javascript">
+		var loadSocialMediaCountsForPage = function(response) {
+			$('#share-facebook-count-page').text(response.Facebook.share_count).fadeIn();
+			$('#share-twitter-count-page').text(response.Twitter).fadeIn();
+			$('#share-googleplus-count-page').text(response.GooglePlusOne).fadeIn();
+			$('#share-linkedin-count-page').text(response.LinkedIn).fadeIn();
+			$('#share-linkedin-count-page').text(response.LinkedIn).fadeIn();
+		};
+		$.ajax({
+			dataType: 'jsonp',
+			url: '//' + (location.protocol == 'https:' ? 'sharedcount.appspot' : 'api.sharedcount') + '.com',
+			data: {
+				url: '{{RequestUri}}'
+			},
+			cache: true,
+			jsonpCallback: 'loadSocialMediaCountsForPage'
+		});
+	</script>
+</div>

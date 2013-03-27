@@ -2,7 +2,11 @@
 
 class CommonService extends BaseService
 {
-	function getSummaryStats()
+	const BASELINE_YEAR = 2013;
+	const BASLINE_DONATION_TOTAL = 1750000;
+	const BASLINE_CHARITY_COUNT = 285;
+	
+	function getActiveYearSummaryStats()
 	{
 		$events = $this->container['dao.events'];
 		return array(
@@ -16,6 +20,14 @@ class CommonService extends BaseService
 	{
 		$years = $this->container['dao.years'];
 		return 2011; //$years->getMostRecentActiveYear();
+	}
+
+	function getRunningSummaryStats()
+	{
+		return array(
+			'CharityCount' => CommonService::BASLINE_CHARITY_COUNT + $this->container['dao.event.charities']->countRunningEventCharities(CommonService::BASELINE_YEAR),
+			'DonationTotalUSD' => CommonService::BASLINE_DONATION_TOTAL + $this->container['dao.events']->sumRunningEventDonationTotalUSD(CommonService::BASELINE_YEAR)
+		);
 	}
 }
 ?>

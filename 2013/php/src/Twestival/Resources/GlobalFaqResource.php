@@ -12,7 +12,7 @@ class GlobalFaqResource extends BaseResource
 	 */
 	function html()
 	{
-		return $this->renderMustacheHeaderFooter('Global/Editable/Faq', array(
+		return $this->renderMustacheHeaderFooter('Global/Faq', array(
 			'PageContent' => $this->container['service.page']->getPageContent('FAQ', 'BODY')
 		));
 	}

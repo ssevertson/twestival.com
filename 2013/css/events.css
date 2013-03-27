@@ -27,9 +27,11 @@
 	z-index: 200;
 }
 
-#events .continent {
+#events #event-list {
 	width: 590px;
 	float: left;
+}
+#events .continent {
 	margin-top: 46px;
 	margin-left: 6px;
 }

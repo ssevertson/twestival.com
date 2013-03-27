@@ -21,13 +21,7 @@ class Container extends \Pimple
 				ini_set('session.' . $key, $value);
 			}
 			
-			$domain = $_SERVER['HTTP_HOST'];
-			if(isset($hostname) && substr_count($hostname, '.') >= 2)
-			{
-				$domain = substr($domain, strpos($hostname, '.'));
-			}
-			
-			session_set_cookie_params(0, '/', $domain);
+			session_set_cookie_params(0, '/', $c['request.domain']);
 			session_start();
 			return new Session();
 		});

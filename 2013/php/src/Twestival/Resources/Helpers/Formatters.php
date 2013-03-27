@@ -26,6 +26,17 @@ class Formatters extends BaseHelper
 		return money_format('%.0n', floatval($rendered));
 	}
 	
+	public function _toUSMillions($text, $context)
+	{
+		$rendered = $context->render($text);
+		if(!$rendered)
+		{
+			$rendered = '0';
+		}
+		setlocale(LC_ALL, self::US_LOCALE);
+		return money_format('%.2n', floatval($rendered) / 1000000);
+	}
+	
 	public function _toUSInteger($text, $context)
 	{
 		$rendered = $context->render($text);

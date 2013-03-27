@@ -4,18 +4,15 @@ class BaseResource extends \Tonic\Resource
 {
 	function renderMustacheHeaderFooter($template, $data = array())
 	{
-		$summaryStats = $this->container['service.common']->getSummaryStats();
-		
-		$merged = array_merge($data, $summaryStats);
-		
-		$merged['CurrentYear'] = $this->container['service.year']->getMostRecentActiveYear();
-		
-		return $this->renderMustache($template, $merged);
+		$data['CurrentYear'] = $this->container['service.year']->getMostRecentActiveYear();
+		$data['SummaryStats'] = $this->container['service.common']->getActiveYearSummaryStats();
+		return $this->renderMustache($template, $data);
 	}
 	
 	function renderMustache($template, $data = array())
 	{
 		$data['BaseUri'] = $this->container['baseUri'];
+		$data['RequestUri'] = $this->container['request.uri'];
 		return $this->container['mustache.engine']->loadTemplate($template)->render($data);
 	}
 	

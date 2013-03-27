@@ -6,9 +6,12 @@ class EventService extends BaseService
 	
 	function getByContinent($year)
 	{
-		$events = $this->container['dao.events']->itemsByLocationName($year, 'CONTINENT');
-		$this->addUrisToEvents($events);
-		return ;
+		$grouped = $this->container['dao.events']->itemsByLocationName($year, 'CONTINENT');
+		foreach($grouped as $continent => &$events)
+		{
+			$this->addUrisToEvents($events);
+		}
+		return $grouped;
 	}
 	function getEvent($eventId)
 	{

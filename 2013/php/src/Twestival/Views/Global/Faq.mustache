@@ -1,0 +1,35 @@
+{{> HTMLTag }}
+	<head>
+		{{> HeadContent }}
+		<title>Twestival {{CurrentYear}} FAQs</title>
+		
+		<link rel="stylesheet" href="css/faq.css" />
+		
+		<!-- Twitter -->
+		<script type="text/javascript" src="//widgets.twimg.com/j/2/widget.js"></script>
+		<link href="//widgets.twimg.com/j/2/widget.css" type="text/css" rel="stylesheet"/>
+	</head>
+	<body id="faq">
+		{{> Header }}
+		
+		<div class="wrapper">
+			<h1>Frequently Asked Questions</h1>
+			
+			<div class="faqs">
+				{{{PageContent.HTML}}}
+			</div>
+			
+			<div id="sidebars">
+				{{>Sidebar/GlobalTumblr}}
+				{{>Sidebar/GlobalTwitter}}
+				{{>Sidebar/GlobalInstagram}}
+			</div>
+			
+			<div class="clearfix"></div>
+			
+			{{>Share}}
+		</div>
+
+		{{> Footer }}
+	</body>
+</html>

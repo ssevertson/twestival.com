@@ -4,6 +4,15 @@
 	margin-top: 10px;
 	letter-spacing: 0.5px;
 }
+#blog-admin {
+	float: right;
+	margin-right: 220px;
+	font-family: 'Melbourne';
+	font-size: 15px;
+}
+ul#blog-admin li {
+	margin-left: 12px;
+}
 
 #breadcrumbs li:after {
 	content: '\0000a0>\0000a0';
