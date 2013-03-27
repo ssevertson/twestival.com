@@ -1,0 +1,30 @@
+.partner-group {
+	background: url('../img/common/sidebar/background.png');
+	border: 1px solid #DCDCDC;
+	margin-top: 25px;
+	margin-bottom: 36px;
+	padding: 16px;
+	text-align: center;
+}
+.partner-group .title {
+	border: 1px solid #DCDCDC;
+	background: #ffffff;
+	font-family: 'Melbourne-Bold';
+	font-size: 24px;
+	letter-spacing: 0.5px;
+	color: #50B1BD;
+	
+	display: inline-block;
+	position: relative;
+	top: -32px;
+	margin: 0px auto;
+	padding: 7px 40px 3px 40px;
+	text-align: center;
+	text-transform: uppercase;
+}
+.partner-group .body {
+	text-align: left;
+	position: relative;
+	top: -16px;
+	margin-bottom: -16px;
+}
