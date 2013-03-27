@@ -24,7 +24,7 @@
 				</div>
 			</div>
 			<div class="stamp">
-				<div class="logo"><img src="{{ImageUri}}" alt="{{Name}} Logo"/></div>
+				<div class="logo">{{#ImageUri}}<img src="{{ImageUri}}" alt="{{Name}} Logo"/>{{/ImageUri}}</div>
 				<div class="overlay"><img src="img/blog/event/logo-overlay.png" alt="Official Event"/></div>
 			</div>
 			<div class="clearfix"></div>
@@ -36,10 +36,10 @@
 							<td class="logo">
 								{{#ImageUri}}
 									{{#Uri}}
-										<a href="Uri"><img src="{{ImageUri}}" alt="{{Name}} Logo"/></a>
+										<a href="Uri"><img src="{{ImageUri}}" alt=""/></a>
 									{{/Uri}}
 									{{^Uri}}
-										<img src="{{ImageUri}}" alt="{{Name}} Logo"/>
+										<img src="{{ImageUri}}" alt=""/>
 									{{/Uri}}
 								{{/ImageUri}}
 							</td>

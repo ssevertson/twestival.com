@@ -149,7 +149,7 @@ function getTonicUri($uri, $namespace, $baseUri)
 		$uri = substr($uri, strlen($baseUri));
 	}
 	
-	if($uri == '/error')
+	if(in_array($uri, array('/error', '/logout')))
 	{
 		# Generic error handler without namespace
 		return $uri;

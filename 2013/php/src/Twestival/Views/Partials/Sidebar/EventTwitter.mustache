@@ -1,41 +1,43 @@
-<div id="sidebar-twitter" class="sidebar">
-	<div class="title">@{{Event.TwitterName}}</div>
-	<div class="body">
-		<script type="text/javascript">
-			new TWTR.Widget({
-				version: 2,
-				type: 'profile',
-				interval: 5000,
-				title: '',
-				subject: '',
-				width: 270,
-				height: 166,
-				theme: {
-					shell: {
-						background: 'transparent',
-						color: '#444444'
+{{#Event.TwitterName}}
+	<div id="sidebar-twitter" class="sidebar">
+		<div class="title">@{{Event.TwitterName}}</div>
+		<div class="body">
+			<script type="text/javascript">
+				new TWTR.Widget({
+					version: 2,
+					type: 'profile',
+					interval: 5000,
+					title: '',
+					subject: '',
+					width: 270,
+					height: 166,
+					theme: {
+						shell: {
+							background: 'transparent',
+							color: '#444444'
+						},
+						tweets: {
+							background: 'transparent',
+							color: '#444444',
+							links: '#34747c'
+						}
 					},
-					tweets: {
-						background: 'transparent',
-						color: '#444444',
-						links: '#34747c'
+					features: {
+						scrollbar: false,
+						loop: true,
+						live: true,
+						hashtags: true,
+						timestamp: true,
+						avatars: true,
+						toptweets: true,
+						behavior: 'default'
 					}
-				},
-				features: {
-					scrollbar: false,
-					loop: true,
-					live: true,
-					hashtags: true,
-					timestamp: true,
-					avatars: true,
-					toptweets: true,
-					behavior: 'default'
-				}
-			}).render().setUser('{{Event.TwitterName}}').start();
-		</script>
-		<noscript>
-			<a href="https://twitter.com/search?q=%40{{Event.TwitterName}}">See @{{Event.TwitterName}} Tweets</a>
-		</noscript>
-		<div class="fadeout"></div>
+				}).render().setUser('{{Event.TwitterName}}').start();
+			</script>
+			<noscript>
+				<a href="https://twitter.com/search?q=%40{{Event.TwitterName}}">See @{{Event.TwitterName}} Tweets</a>
+			</noscript>
+			<div class="fadeout"></div>
+		</div>
 	</div>
-</div>
+{{/Event.TwitterName}}

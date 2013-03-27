@@ -25,24 +25,27 @@ class Container extends \Pimple
 			session_start();
 			return new Session();
 		});
-		$this['session.exists'] = $this->share(function($c)
+		$this['session.cookie'] = $this->share(function($c)
 		{
 			$config = $c['session.config'];
-			$sessionName = NULL;
+			$cookieName = NULL;
 			if(isset($config['name']))
 			{
-				$sessionName = $config['name'];
+				$cookieName = $config['name'];
 			}
 			if(!isset($sessionName))
 			{
-				$sessionName = ini_get('session.name');
+				$cookieName = ini_get('session.name');
 			}
 			if(!isset($sessionName))
 			{
-				$sessionName = 'PHPSESSID';
+				$cookieName = 'PHPSESSID';
 			}
-			
-			return isset($_COOKIE[$sessionName]);
+			return $cookieName;	
+		});
+		$this['session.exists'] = $this->share(function($c)
+		{
+			return isset($_COOKIE[$c['session.cookie']]);
 		});
 		
 		$this['logger.config'] = $this->share(function($c)

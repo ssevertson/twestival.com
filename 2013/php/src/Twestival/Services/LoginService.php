@@ -2,6 +2,16 @@
 
 class LoginService extends BaseService
 {
+	function logout()
+	{
+		if($this->container['session.exists'])
+		{
+			session_start();
+			session_destroy();
+			setcookie($this->container['session.cookie'], FALSE, 0, '/', $this->container['request.domain'], false, true);
+		}
+	}
+	
 	function authenticateSiteAdmin($username, $password)
 	{
 		$admin = $this->container['dao.site.admins'];
