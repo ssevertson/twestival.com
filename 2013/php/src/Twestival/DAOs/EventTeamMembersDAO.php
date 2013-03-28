@@ -58,7 +58,7 @@ class EventTeamMembersDAO extends BaseDAO
 	}
 	
 	
-	function create($eventID, $sequence, $twitterName, $imageFilename)
+	function create($eventID, $twitterName, $imageFilename)
 	{
 		$conn = $this->container['connection'];
 		$query = $conn->prepare('

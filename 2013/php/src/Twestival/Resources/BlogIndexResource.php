@@ -15,7 +15,7 @@ class BlogIndexResource extends BaseBlogResource
 	{
 		$subdomain = $this->container['request.subdomain'];
 		
-		$data = $this->container['service.blog']->getBySubdomain($subdomain);
+		$blog = $this->container['service.blog']->getBySubdomain($subdomain);
 
 		$page = isset($_GET['Page'])
 				? intval($_GET['Page'])
@@ -34,15 +34,15 @@ class BlogIndexResource extends BaseBlogResource
 		{
 			$pages['Newer'] = ($page - 1);
 		}
-		$data['Pages'] = $pages;
+		$blog['Pages'] = $pages;
 		
-		$data['BlogPosts'] = $this->container['service.blog.post']->getPosts(
+		$blog['BlogPosts'] = $this->container['service.blog.post']->getPosts(
 				$subdomain,
 				BlogIndexResource::BLOG_POSTS_PER_PAGE,
 				$offset);
 		
 		return $this->renderMustacheHeaderFooter('Blog/Index',
-				$data);
+				$blog);
 	}
 }
 ?>

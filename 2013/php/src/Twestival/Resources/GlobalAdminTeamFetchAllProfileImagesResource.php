@@ -4,7 +4,7 @@
  * @namespace global
  * @uri /admin/event/team/fetch-all-profile-images
  */
-class GlobalAdminTeamIFetchAllProfileImagesResource extends BaseBlogResource
+class GlobalAdminTeamFetchAllProfileImagesResource extends BaseBlogResource
 {
 	/**
 	 * @method post

@@ -1,0 +1,98 @@
+{{> HTMLTag }}
+	<head>
+		{{> HeadContent }}
+		<title>Twestival {{CurrentYear}} Admin: Charity</title>
+		
+		<link rel="stylesheet" href="css/blog.css" />
+		<link rel="stylesheet" href="css/input-form.css" />
+		<link rel="stylesheet" href="css/admin.css" />
+		
+		<script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.2/jquery-ui.min.js"></script>
+		<script>window.jQuery.Widget || document.write('<script src="js/vendor/jqueryui-1.10.2.min.js"><\/script>')</script>
+		
+		<script src="//ajax.microsoft.com/ajax/jquery.validate/1.11.0/jquery.validate.min.js"></script>
+		<script>window.jQuery.validator || document.write('<script src="js/vendor/jquery.validate-1.11.0.min.js"><\/script>')</script>
+		
+		<script src="js/vendor/jquery.fileupload-7.4.1.js" type="text/javascript"></script>
+	</head>
+	<body id="admin">
+		{{> Header }}
+		{{> Blog/Header}}
+		
+		<div class="wrapper">
+			<h1>
+				<a href="admin">Blog Admin</a>:
+				Charity
+			</h1>
+			
+			{{#Event.Charities}}
+				<form class="input" id="form-charity" enctype="multipart/form-data" method="post" action="admin/charity{{#CharityID}}/{{.}}{{/CharityID}}!PUT">
+					<fieldset>
+						<div class="legend">Details</div>
+						<div class="body">
+							<label for="name" class="required">Name</label><br/>
+							<input type="text" name="Name" id="name" value="{{Name}}" style="width:504px;" class="required"/><br/>
+							
+							<label for="uri">URL</label><br/>
+							<input type="text" name="Uri" id=""uri"" value="{{Uri}}" style="width:504px;"/><br/>
+							
+							<label for="image">Image</label><br/>
+							<input type="hidden" id="image-filename" name="ImageFilename" value="{{ImageFilename}}"/>
+							<img id="image-preview" class="image-field" src="{{ImageUri}}" {{^ImageUri}}style="display: none;"{{/ImageUri}}/>
+							<div id="image-errors" class="error"></div>
+							<div class="image-upload">
+								<span>Upload</span>
+								<input id="image" type="file" name="Image" data-url="admin/charity/image"/>
+							</div>
+						</div>
+					</fieldset>
+					<script type="text/javascript">
+						var validator = $("#form-charity").validate({
+							ignore: '.ignore',
+							errorPlacement: function(error, element) {
+								error.insertBefore(element);
+							},
+							success: function(error) {
+								error.remove();
+							}
+						});
+						
+						$(function () {
+							$('#image').fileupload({
+								dataType: 'json',
+								add: function (e, data) {
+									$("#image-errors").html('');
+									$('#image-preview').attr('src', 'img/common/loading.gif');
+									$('#image-preview').show();
+									data.submit();
+								},
+								done: function (e, data) {
+									var image = data.result.Image;
+									$('#image-preview').hide();
+									if(image.Errors) {
+										validator.showErrors({'ImageFilename': image.Errors.join('<br/>')});
+									} else {
+										validator.reset();
+										$('#image-preview').attr('src', image.Uri);
+										$('#image-filename').val(image.Filename);
+										$('#image-preview').show();
+									}
+									console.log(data.result);
+								}
+							});
+						});
+					</script>
+					
+					<div class="symbols">
+						<span class="required"></span> required fields<br/>
+					</div>
+	
+					<input type="submit" class="action" value="Save"/>
+					<input type="button" class="action" value="Cancel" onclick="history.go(-1);"/>
+				</form>
+			{{/Event.Charities}}
+		</div>
+		
+		{{> Footer }}
+	</body>
+</html>

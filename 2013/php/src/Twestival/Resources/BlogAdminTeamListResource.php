@@ -24,5 +24,22 @@ class BlogAdminTeamListResource extends BaseBlogResource
 		return $this->renderMustacheHeaderFooter('Blog/Admin/Team/List',
 				$blog);
 	}
+	
+
+	/**
+	 * @method put
+	 * @provides text/html
+	 * @requireCurrentBlogEventAdmin
+	 */
+	function create()
+	{
+		$blog = $this->container['service.blog']->getBySubdomain($this->container['request.subdomain']);
+	
+		$this->container['service.event.teamMember']->create(
+				$blog['EventID'],
+				$_POST['TwitterName']);
+	
+		throw new \Twestival\RedirectException("/admin/team");
+	}
 }
 ?>

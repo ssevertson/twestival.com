@@ -14,7 +14,30 @@ class BlogAdminTeamItemResource extends BaseBlogResource
 	function showEditor($eventTeamMemberID)
 	{
 		$blog = $this->container['service.blog']->getBySubdomain($this->container['request.subdomain']);
+		
+		$teamMember = $this->container['service.event.teamMember']->getTeamMember(
+				$blog['EventID'],
+				intval($eventTeamMemberID));
+		$blog['Event']['TeamMembers'] = array($teamMember);
+		
 		return $this->renderMustacheHeaderFooter('Blog/Admin/Team/Edit', $blog);
+	}
+	
+	/**
+	 * @method put
+	 * @provides text/html
+	 * @requireCurrentBlogEventAdmin
+	 */
+	function update($eventTeamMemberID)
+	{
+		$blog = $this->container['service.blog']->getBySubdomain($this->container['request.subdomain']);
+	
+		$this->container['service.event.teamMember']->update(
+				$blog['EventID'],
+				intval($eventTeamMemberID),
+				$_POST['TwitterName']);
+	
+		throw new \Twestival\RedirectException("/admin/team");
 	}
 	
 	/**

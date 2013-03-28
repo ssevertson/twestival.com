@@ -218,7 +218,7 @@ class Upload
 				$maxImageHeight = $dimensions['maxImageHeight'];
 				if($maxImageHeight && $height > $maxImageHeight)
 				{
-					array_push($errors, "Image $fileName height is too large: height must be less than maxImageHeight, but is $height pixels.");
+					array_push($errors, "Image $fileName height is too large: height must be less than $maxImageHeight, but is $height pixels.");
 				}
 			}
 		}
