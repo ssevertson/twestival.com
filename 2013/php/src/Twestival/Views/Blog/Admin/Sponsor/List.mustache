@@ -1,0 +1,69 @@
+{{> HTMLTag }}
+	<head>
+		{{> HeadContent }}
+		<title>Twestival {{CurrentYear}} Admin: Sponsors</title>
+		
+		<link rel="stylesheet" href="css/blog.css" />
+		<link rel="stylesheet" href="css/admin.css" />
+	</head>
+	<body id="admin">
+		{{> Header }}
+		{{> Blog/Header}}
+		
+		<div class="wrapper">
+			<h1>
+				<a href="admin">Blog Admin</a>:
+				Sponsors
+			</h1>
+			
+			<table class="list">
+				<tbody>
+					{{#Event.Sponsors}}
+						<tr>
+							<td class="symbol">
+								{{^First}}
+									<form action="admin/sponsor/{{SponsorID}}" method="POST" class="rest-link">
+										<input type="submit" name="Operation" value="↑"/>
+									</form>
+								{{/First}}
+							</td>
+							<td class="symbol">
+								{{^Last}}
+									<form action="admin/sponsor/{{SponsorID}}" method="POST" class="rest-link">
+										<input type="submit" name="Operation" value="↓"/>
+									</form>
+								{{/Last}}
+							</td>
+							<th>
+								<a href="admin/sponsor/{{SponsorID}}">
+									{{Name}}
+								</a>
+							</th>
+							<th>
+								<a href="admin/sponsor/{{SponsorID}}">
+									<img src="{{ImageUri}}" alt="{{Name}}" style="max-width: 48px; max-height: 48px;"/>
+								</a>
+							</th>
+							<td class="symbol">
+								<form action="admin/sponsor/{{SponsorID}}!DELETE" method="POST" class="rest-link">
+									<input type="submit" value="⊠" onclick="return confirm('Are you sure you wish to delete this sponsor member?');"/>
+								</form>
+							</td>
+						</tr>
+					{{/Event.Sponsors}}
+					<tr>
+						<td class="symbol"></td>
+						<td class="symbol"></td>
+						<th></th>
+						<th></th>
+						<td class="symbol">
+							<a href="admin/sponsor/0">⊞</a>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+		
+		{{> Footer }}
+	</body>
+</html>

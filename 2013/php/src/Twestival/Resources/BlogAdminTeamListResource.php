@@ -21,8 +21,7 @@ class BlogAdminTeamListResource extends BaseBlogResource
 		$teamMembers[0]['First'] = TRUE;
 		$teamMembers[count($teamMembers) - 1]['Last'] = TRUE;
 		
-		return $this->renderMustacheHeaderFooter('Blog/Admin/Team/List',
-				$blog);
+		return $this->renderMustacheHeaderFooter('Blog/Admin/Team/List', $blog);
 	}
 	
 

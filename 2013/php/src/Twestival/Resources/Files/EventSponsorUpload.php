@@ -1,12 +1,12 @@
 <?php namespace Twestival\Resources\Files;
 
-class EventCharityUpload extends Upload
+class EventSponsorUpload extends Upload
 {
 	function __construct($container, $fields)
 	{
-		$eventSponsors = $container['service.event.charity'];
-		$path = $container['baseDir'] . '/../' . $eventSponsors->getImagePath() . '/' . \Twestival\Services\EventCharityService::IMAGE_FILENAME_PREFIX;
-		$uri = $eventSponsors->getImageUri();
+		$eventCharities = $container['service.event.charity'];
+		$path = $container['baseDir'] . '/../' . $eventCharities->getImagePath() . '/' . \Twestival\Services\EventSponsorService::IMAGE_FILENAME_PREFIX;
+		$uri = $eventCharities->getImageUri();
 		
 		parent::__construct($path, $uri, $fields);
 

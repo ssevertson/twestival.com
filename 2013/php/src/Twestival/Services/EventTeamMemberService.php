@@ -2,6 +2,7 @@
 
 class EventTeamMemberService extends BaseService
 {
+	const MAX_SEQUENCE = 255;
 	const IMAGE_FILENAME_PREFIX = 'team-';
 	const DEFAULT_IMAGE_FILENAME = 'team-default.png';
 	const DEFAULT_IMAGE_EXTENSION = 'jpg';
@@ -86,9 +87,9 @@ class EventTeamMemberService extends BaseService
 		$teamMember = $this->getTeamMember($eventID, $eventTeamMemberID);
 		$sequence = $teamMember['Sequence'];
 		
-		$teamMembers->updateSequence($eventID, $sequence, PromotionService::MAX_SEQUENCE);
+		$teamMembers->updateSequence($eventID, $sequence, EventTeamMemberService::MAX_SEQUENCE);
 		$teamMembers->updateSequence($eventID, $sequence + $offset, $sequence);
-		$teamMembers->updateSequence($eventID, PromotionService::MAX_SEQUENCE, $sequence + $offset);
+		$teamMembers->updateSequence($eventID, EventTeamMemberService::MAX_SEQUENCE, $sequence + $offset);
 	}
 	
 	private function addUrisToTeamMembers(&$teamMembers)
@@ -120,7 +121,7 @@ class EventTeamMemberService extends BaseService
 	function delete($eventID, $eventTeamMemberID)
 	{
 		$teamMembers = $this->container['dao.event.teamMembers'];
-		$teamMember = $this->getTeamMember($eventID, $eventTeamMemberID);
+		$teamMember = $teamMembers->get($eventID, $eventTeamMemberID);
 		$sequence = $teamMember['Sequence'];
 		
 		$teamMembers->delete($eventID, $eventTeamMemberID);
