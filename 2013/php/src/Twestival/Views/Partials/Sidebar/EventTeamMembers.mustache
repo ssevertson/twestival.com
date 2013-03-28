@@ -2,13 +2,13 @@
 	<div class="title">The Team</div>
 	<div class="body">
 		<ul class="horizontal">
-			{{#EventTeamMembers}}
+			{{#Event.TeamMembers}}
 				<li>
 					<a href="https://twitter.com/{{TwitterName}}">
 						<img src="https://api.twitter.com/1/users/profile_image?screen_name={{TwitterName}}&size=normal" alt="{{TwitterName}}"/>
 					</a>
 				</li>
-			{{/EventTeamMembers}}
+			{{/Event.TeamMembers}}
 		</ul>
 		<div class="clearfix"></div>
 	</div>

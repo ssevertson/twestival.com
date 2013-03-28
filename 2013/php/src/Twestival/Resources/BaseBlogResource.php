@@ -4,18 +4,18 @@ class BaseBlogResource extends BaseResource
 {
 	function renderMustacheHeaderFooter($template, $data = array())
 	{
-		$data['Event'] = $this->container['service.event']->getEvent($data['EventID']);
-		if($data['Event']['FundraisingGoalUSD'])
+		if($data['Event'])
 		{
-			$data['Event']['FundraisingGoalRatio'] = $data['Event']['DonationTotalUSD'] / $data['Event']['FundraisingGoalUSD'];
+			$event = &$data['Event'];
+			if($event['FundraisingGoalUSD'])
+			{
+				$event['FundraisingGoalRatio'] = $event['DonationTotalUSD'] / $event['FundraisingGoalUSD'];
+			}
+			if($event['Sponsors'])
+			{
+				$event['SponsorRows'] = $this->toGrid($event['Sponsors'], 2);
+			}
 		}
-		
-		$data['EventCharities'] = $this->container['service.event.charity']->getCharities($data['EventID']);
-		
-		$data['EventTeamMembers'] = $this->container['service.event.teamMember']->getTeamMembers($data['EventID']);
-		
-		$eventSponsors = $this->container['service.event.sponsor']->getSponsors($data['EventID']);
-		$data['EventSponsorRows'] = $this->toGrid($eventSponsors, 2);
 		
 		return parent::renderMustacheHeaderFooter($template, $data);
 	}

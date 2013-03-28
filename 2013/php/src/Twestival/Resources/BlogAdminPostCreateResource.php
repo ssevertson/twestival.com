@@ -13,15 +13,13 @@ class BlogAdminPostCreateResource extends BaseBlogResource
 	 */
 	function showEditor()
 	{
-		$subdomain = $this->container['request.subdomain'];
-		
-		$data = $this->container['service.blog']->getBySubdomain($subdomain);
+		$blog = $this->container['service.blog']->getBySubdomain($this->container['request.subdomain']);
 
-		$data['BlogPost'] = array('NotEmpty' => TRUE);
-		$data['SaveMethod'] = 'POST';
+		$blog['BlogPost'] = array('NotEmpty' => TRUE);
+		$blog['SaveMethod'] = 'POST';
 		
 		return $this->renderMustacheHeaderFooter('Blog/Admin/Post/Edit',
-				$data);
+				$blog);
 	}
 	
 	/**
@@ -31,16 +29,16 @@ class BlogAdminPostCreateResource extends BaseBlogResource
 	 */
 	function save()
 	{
-		$subdomain = $this->container['request.subdomain'];
+		$blog = $this->container['service.blog']->getBySubdomain($this->container['request.subdomain']);
 		
 		$postID = $this->container['service.blog.post']->create(
-				$subdomain,
+				$blog['Subdomain'],
 				$_POST['Title'],
 				$_POST['Content']
 		);
 		
 		$post = $this->container['service.blog.post']->getPost(
-				$subdomain,
+				$blog['Subdomain'],
 				$postID);
 		
 		throw new \Twestival\RedirectException($post['BlogPostPermalinkUri']);

@@ -2,38 +2,6 @@
 
 class BlogsDAO extends BaseDAO
 {
-	function items()
-	{
-		$conn = $this->container['connection'];
-		$query = $conn->prepare('
-				SELECT DISTINCT
-					Blog.*,
-					Event.EventID,
-					EXISTS (
-						SELECT 1
-						FROM Event
-						INNER JOIN Year
-							ON Event.Year = Year.Year
-						WHERE
-							Blog.BlogID = Event.BlogID
-							AND Event.Active = TRUE
-							AND Year.Active = TRUE
-					) AS EventYearActive
-				FROM
-					Blog
-					INNER JOIN Event
-						ON Blog.BlogID = Event.BlogID
-				WHERE
-					Blog.Active = TRUE
-					AND Event.Active = TRUE
-				ORDER BY
-					Blog.Subdomain;
-		');
-		
-		$query->execute();
-		return $query->fetchAll(\PDO::FETCH_ASSOC);
-	}
-
 	function get($subdomain)
 	{
 		$conn = $this->container['connection'];
@@ -58,7 +26,10 @@ class BlogsDAO extends BaseDAO
 				WHERE
 					Blog.Active = TRUE
 					AND Event.Active = TRUE
-					AND Blog.Subdomain = ?;
+					AND Blog.Subdomain = ?
+				ORDER BY
+					Event.Year DESC
+				LIMIT 1;
 		');
 		$query->bindValue(1, $subdomain, \PDO::PARAM_STR);
 		

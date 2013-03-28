@@ -1,7 +1,5 @@
 <?php namespace Twestival\Services;
 
-use Twestival\DAOs\BlogsDAO;
-
 class EventCharityService extends BaseService
 {
 	function getCharities($eventID)

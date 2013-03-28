@@ -3,6 +3,7 @@
 class EventService extends BaseService
 {
 	const BASE_URI_TWITTER = 'https://twitter.com/';
+	const DEFAULT_IMAGE_FILENAME = 'event-default.png';
 	
 	function getByContinent($year)
 	{
@@ -90,7 +91,7 @@ class EventService extends BaseService
 		);
 	}
 	
-	function create($registrationID, $blogID, $currentYear, $name, $description, $twitterName, $organizerEmailAddress, $imageFilename, $locationID)
+	function create($registrationID, $blogID, $currentYear, $name, $description, $twitterName, $organizerEmailAddress, $locationID)
 	{
 		$eventID = $this->container['dao.events']->create(
 				$registrationID,
@@ -100,7 +101,7 @@ class EventService extends BaseService
 				$description,
 				$twitterName,
 				$organizerEmailAddress,
-				$imageFilename);
+				EventService::DEFAULT_IMAGE_FILENAME);
 		
 
 		$registration = $this->container['service.registration']->get($registrationID);

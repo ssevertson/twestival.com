@@ -72,7 +72,6 @@ class GlobalAdminRegistrationEventResource extends BaseResource
 			$_POST['Description'],
 			$_POST['TwitterName'],
 			$_POST['OrganizerEmailAddress'],
-			'default.png',
 			$_POST['LocationID']
 		);
 		

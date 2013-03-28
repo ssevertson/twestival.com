@@ -1,7 +1,5 @@
 <?php namespace Twestival\Services;
 
-use Twestival\DAOs\EventTeamSponsorsDAO;
-
 class EventSponsorService extends BaseService
 {
 	function getSponsors($eventID)

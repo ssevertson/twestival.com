@@ -47,7 +47,8 @@ class GlobalAdminEventItemResource extends BaseResource
 			$event['FundraisingGoalRatio'] = $event['DonationTotalUSD'] / $event['FundraisingGoalUSD'];
 		}
 		
-		if($event['ImageFilename'] != 'default.png')
+		
+		if($event['ImageFilename'] != \Twestival\Services\EventService::DEFAULT_IMAGE_FILENAME)
 		{
 			$event['ImageNonDefault'] = TRUE;
 		}

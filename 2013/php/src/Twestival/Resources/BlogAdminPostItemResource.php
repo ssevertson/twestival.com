@@ -13,18 +13,14 @@ class BlogAdminPostItemResource extends BaseBlogResource
 	 */
 	function showEditor($postID)
 	{
-		$subdomain = $this->container['request.subdomain'];
-		$postID = intval($postID);
+		$blog = $this->container['service.blog']->getBySubdomain($this->container['request.subdomain']);
 		
-		$data = $this->container['service.blog']->getBySubdomain($subdomain);
-
-		$data['BlogPost'] = $this->container['service.blog.post']->getPost(
-				$subdomain,
-				$postID);
-		$data['SaveMethod'] = 'PUT';
+		$blog['BlogPost'] = $this->container['service.blog.post']->getPost(
+				$blog['Subdomain'],
+				intval($postID));
+		$blog['SaveMethod'] = 'PUT';
 		
-		return $this->renderMustacheHeaderFooter('Blog/Admin/Post/Edit',
-				$data);
+		return $this->renderMustacheHeaderFooter('Blog/Admin/Post/Edit', $blog);
 	}
 	
 	/**

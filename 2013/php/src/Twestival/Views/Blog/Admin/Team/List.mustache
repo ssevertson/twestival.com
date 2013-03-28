@@ -1,0 +1,74 @@
+{{> HTMLTag }}
+	<head>
+		{{> HeadContent }}
+		<title>Twestival {{CurrentYear}} Admin: Team</title>
+		
+		<link rel="stylesheet" href="css/input-form.css" />
+		<link rel="stylesheet" href="css/admin.css" />
+	</head>
+	<body id="admin">
+		{{> Header }}
+		
+		<div class="wrapper">
+			<h1>
+				<a href="admin">Blog Admin</a>:
+				Team
+			</h1>
+			
+			<table class="list">
+				<tbody>
+					{{#Event.TeamMembers}}
+						<tr>
+							<td class="symbol">
+								{{^First}}
+									<form action="admin/team/{{EventTeamMemberID}}" method="POST" class="rest-link">
+										<input type="submit" name="Operation" value="↑"/>
+									</form>
+								{{/First}}
+							</td>
+							<td class="symbol">
+								{{^Last}}
+									<form action="admin/team/{{EventTeamMemberID}}" method="POST" class="rest-link">
+										<input type="submit" name="Operation" value="↓"/>
+									</form>
+								{{/Last}}
+							</td>
+							<th>
+								<a href="admin/team/{{EventTeamMemberID}}">
+									{{TwitterName}}
+								</a>
+							</th>
+							<th>
+								<a href="admin/team/{{EventTeamMemberID}}">
+									<img src="{{ImageUri}}" alt="{{TwitterName}}"/>
+								</a>
+							</th>
+							<td class="symbol">
+								<form action="admin/team/{{EventTeamMemberID}}" method="POST" class="rest-link">
+									<input type="submit" name="Operation" value="⟳"/>
+								</form>
+							</td>
+							<td class="symbol">
+								<form action="admin/team/{{EventTeamMemberID}}!DELETE" method="POST" class="rest-link">
+									<input type="submit" value="⊠" onclick="return confirm('Are you sure you wish to delete this team member?');"/>
+								</form>
+							</td>
+						</tr>
+					{{/Event.TeamMembers}}
+					<tr>
+						<td class="symbol"></td>
+						<td class="symbol"></td>
+						<th></th>
+						<th></th>
+						<td class="symbol"></td>
+						<td class="symbol">
+							<a href="admin/team/0">⊞</a>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+		
+		{{> Footer }}
+	</body>
+</html>

@@ -1,0 +1,38 @@
+{{> HTMLTag }}
+	<head>
+		{{> HeadContent }}
+		<title>Twestival {{CurrentYear}}: {{#Event}}{{Name}}{{/Event}}: Admin</title>
+		<link rel="stylesheet" href="css/blog.css" />
+		<link rel="stylesheet" href="css/admin.css" />
+	</head>
+	<body id="blog">
+		{{> Header }}
+		{{> Blog/Header}}
+		
+		<div class="wrapper">
+			<h1><a href="admin">Blog Admin</a></h1>
+			
+			<h2>Event Information</h2>
+			<ul class="links">
+				<li>
+					<a href="admin/event">Event</a>
+				</li>
+				<li>
+					<a href="admin/charity">Charity</a>
+				</li>
+			</ul>
+			
+			<h2>Sidebars</h2>
+			<ul class="links">
+				<li>
+					<a href="admin/sponsor">Sponsors</a>
+				</li>
+				<li>
+					<a href="admin/team">Team Members</a>
+				</li>
+			</ul>
+		</div>
+
+		{{> Footer }}
+	</body>
+</html>

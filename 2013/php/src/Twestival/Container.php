@@ -181,7 +181,20 @@ class Container extends \Pimple
 			$config = $c['geonames.config'];
 			return new \Guzzle\Http\Client('http://api.geonames.org', $config);
 		});
-		
+		$this['twitter.twestival.config'] = $this->share(function($c)
+		{
+			$configFile = $c['configDir'] . '/twitter_twestival.php';
+			return require $configFile;
+		});
+		$this['twitter.twestival.client'] = $this->share(function($c)
+		{
+			$config = $c['twitter.twestival.config'];
+			$client = new \Guzzle\Http\Client('https://api.twitter.com/{version}', array(
+					'version' => '1.1'
+			));
+			$client->addSubscriber(new \Guzzle\Plugin\Oauth\OauthPlugin($config));
+			return $client;
+		});
 		
 		$this['service.common'] = $this->share(function($c)
 		{

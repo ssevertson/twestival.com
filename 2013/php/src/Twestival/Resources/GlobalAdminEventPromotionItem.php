@@ -49,7 +49,7 @@ class GlobalAdminEventPromotionItemResource extends BaseResource
 	 * @provides text/html
 	 * @requireSiteAdmin
 	 */
-	function move($pageName, $sectionName, $sequence)
+	function modify($pageName, $sectionName, $sequence)
 	{
 		if($_POST['Operation'] == '↑')
 		{

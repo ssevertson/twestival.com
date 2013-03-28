@@ -1,7 +1,5 @@
 <?php namespace Twestival\Services;
 
-use Twestival\DAOs\EventTeamSponsorsDAO;
-
 class LocationService extends BaseService
 {
 	function searchForCity($city, $stateProvince, $country, $count=10)

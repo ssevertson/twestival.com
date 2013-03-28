@@ -4,19 +4,20 @@ use Twestival\DAOs\BlogsDAO;
 
 class BlogService extends BaseService
 {
-	function getBlogs()
-	{
-		return $this->container['dao.blogs']->items();
-	}
 	function getBySubdomain($subdomain)
 	{
 		$blog = $this->container['dao.blogs']->get($subdomain);
+		$this->addUrisToBlog($blog);
+		$this->addDetailsToBlog($blog);
 		return $blog;
 	}
 	function getUnassigned()
 	{
-		return $this->container['dao.blogs']->findUnassignedForActiveYear();
+		$blogs = $this->container['dao.blogs']->findUnassignedForActiveYear();
+		$this->addUrisToBlogs($blogs);
+		return $blogs;
 	}
+	
 	function create($subdomain)
 	{
 		return $this->container['dao.blogs']->create($subdomain);
@@ -32,10 +33,20 @@ class BlogService extends BaseService
 	private function addUrisToBlog(&$blog)
 	{
 		$blog['BlogUri'] = 'http://'
-				. $blog['BlogSubdomain']
+				. $blog['Subdomain']
 				. '.'
 				. $this->container['request.domain']
 				. $this->container['baseUri'];
+	}
+	
+	private function addDetailsToBlog(&$blog)
+	{
+		$eventID = $blog['EventID'];
+		$event = $this->container['service.event']->getEvent($eventID);
+		$event['Charities'] = $this->container['service.event.charity']->getCharities($eventID);
+		$event['TeamMembers'] = $this->container['service.event.teamMember']->getTeamMembers($eventID);
+		$event['Sponsors'] = $this->container['service.event.sponsor']->getSponsors($eventID);
+		$blog['Event'] = $event;
 	}
 }
 ?>
