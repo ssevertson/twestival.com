@@ -27,4 +27,36 @@
 	position: relative;
 	top: -16px;
 	margin-bottom: -16px;
+	text-align: center;
+	
+}
+
+.partners {
+	width: 100%;
+}
+.partners .logos {
+	vertical-align: middle;
+}
+.partners td {
+	width: 33%;
+}
+.partners .captions {
+	vertical-align: top;
+	font-family: 'Lato';
+	font-size: 13px;
+}
+.partners .captions .caption {
+	padding: 16px 36px 32px 36px;
+}
+
+#partners-sponsor {
+	display: block;
+	width: 868px;
+	padding: 30px;
+	margin: 0px auto;
+	background-color: #58c3d1;
+	font-family: 'Lato';
+	font-weight: bold;
+	font-size: 22px;
+	color: #ffffff;
 }
