@@ -4,6 +4,7 @@ class EventService extends BaseService
 {
 	const BASE_URI_TWITTER = 'https://twitter.com/';
 	const DEFAULT_IMAGE_FILENAME = 'event-default.png';
+	const IMAGE_FILENAME_PREFIX = 'event-';
 	
 	function getByContinent($year)
 	{
@@ -129,9 +130,17 @@ class EventService extends BaseService
 		return $eventID;
 	}
 	
+	function saveEventAdminFields($eventID, $fundraisingGoalUsd, $donationTotalUSD, $attendUri, $donateUri, $description, $date, $startTime, $endTime,
+			$locationName, $locationAddress1, $locationAddress2, $locationUri, $organizerEmailAddress, $twitterName, $facebookUri, $twitterShareMessage)
+	{
+		return $this->container['dao.events']->updateEventAdminFields(
+				$eventID, $fundraisingGoalUsd, $donationTotalUSD, $attendUri, $donateUri, $description, $date, $startTime, $endTime,
+				$locationName, $locationAddress1, $locationAddress2, $locationUri, $organizerEmailAddress, $twitterName, $facebookUri, $twitterShareMessage);
+	}
+	
 	function saveSiteAdminFields($eventID, $active, $name)
 	{
-		$this->container['dao.events']->updateEventAdminFields(
+		$this->container['dao.events']->updateSiteAdminFields(
 				$eventID,
 				$active,
 				$name

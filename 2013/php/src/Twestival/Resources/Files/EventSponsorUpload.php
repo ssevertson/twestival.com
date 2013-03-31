@@ -4,7 +4,7 @@ class EventSponsorUpload extends Upload
 {
 	function __construct($container, $fields)
 	{
-		$eventCharities = $container['service.event.charity'];
+		$eventCharities = $container['service.event.sponsors'];
 		$path = $container['baseDir'] . '/../' . $eventCharities->getImagePath() . '/' . \Twestival\Services\EventSponsorService::IMAGE_FILENAME_PREFIX;
 		$uri = $eventCharities->getImageUri();
 		

@@ -300,7 +300,7 @@ class EventsDAO extends BaseDAO
 		return $conn->lastInsertId();
 	}
 	
-	function updateEventAdminFields($eventID, $active, $name)
+	function updateSiteAdminFields($eventID, $active, $name)
 	{
 		$conn = $this->container['connection'];
 		$query = $conn->prepare('
@@ -319,5 +319,56 @@ class EventsDAO extends BaseDAO
 		$query->execute();
 		return $query->rowCount();
 	}
+	
+	function updateEventAdminFields($eventID, $fundraisingGoalUsd, $donationTotalUSD, $attendUri, $donateUri, $description, $date, $startTime, $endTime,
+			$locationName, $locationAddress1, $locationAddress2, $locationUri, $organizerEmailAddress, $twitterName, $facebookUri, $twitterShareMessage)
+	{
+		$conn = $this->container['connection'];
+		$query = $conn->prepare('
+			UPDATE
+				Event
+			SET
+				Event.FundraisingGoalUSD = ?,
+				Event.DonationTotalUSD = ?,
+				Event.AttendUri = ?,
+				Event.DonateUri = ?,
+				Event.Description = ?,
+				Event.Date = ?,
+				Event.StartTime = ?,
+				Event.EndTime = ?,
+				Event.LocationName = ?,
+				Event.LocationAddress1 = ?,
+				Event.LocationAddress2 = ?,
+				Event.LocationUri = ?,
+				Event.OrganizerEmailAddress = ?,
+				Event.TwitterName = ?,
+				Event.FacebookUri = ?,
+				Event.TwitterShareMessage = ?
+			WHERE
+				Event.EventID = ?;
+		');
+		$query->bindValue(1, intval($fundraisingGoalUsd), \PDO::PARAM_INT);
+		$query->bindValue(2, intval($donationTotalUSD), \PDO::PARAM_INT);
+		$query->bindValue(3, $this->trimToNull($attendUri), \PDO::PARAM_STR);
+		$query->bindValue(4, $this->trimToNull($donateUri), \PDO::PARAM_STR);
+		$query->bindValue(5, $this->trimToNull($description), \PDO::PARAM_STR);
+		$query->bindValue(6, $this->trimToNull($date), \PDO::PARAM_STR);
+		$query->bindValue(7, $this->trimToNull($startTime), \PDO::PARAM_STR);
+		$query->bindValue(8, $this->trimToNull($endTime), \PDO::PARAM_STR);
+		$query->bindValue(9, $this->trimToNull($endTime), \PDO::PARAM_STR);
+		$query->bindValue(10, $this->trimToNull($locationName), \PDO::PARAM_STR);
+		$query->bindValue(11, $this->trimToNull($locationAddress1), \PDO::PARAM_STR);
+		$query->bindValue(12, $this->trimToNull($locationAddress2), \PDO::PARAM_STR);
+		$query->bindValue(13, $this->trimToNull($locationUri), \PDO::PARAM_STR);
+		$query->bindValue(14, $this->trimToNull($organizerEmailAddress), \PDO::PARAM_STR);
+		$query->bindValue(15, $this->trimToNull($twitterName), \PDO::PARAM_STR);
+		$query->bindValue(16, $this->trimToNull($facebookUri), \PDO::PARAM_STR);
+		$query->bindValue(17, intval($eventID), \PDO::PARAM_INT);
+		
+		$query->execute();
+		return $query->rowCount();
+		
+	}
+	
 }
 ?>
