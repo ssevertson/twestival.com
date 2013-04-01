@@ -6,7 +6,7 @@ class RegistrationService extends BaseService
 	{
 		$currentYear = $this->container['service.year']->getMostRecentActiveYear();
 		
-		$this->container['dao.registrations']->create(
+		$registrationID = $this->container['dao.registrations']->create(
 			$currentYear,
 			$reRegistration,
 			$name,
@@ -20,7 +20,35 @@ class RegistrationService extends BaseService
 			$comment
 		);
 		
-		// TODO: Email notification to registration@twestival.com, with direct link to entry (/admin/registration/{RegistrationID})
+		$this->container['email.mailer']->send(
+				$this->container['email.message']
+						->setSubject('Twestival Registration Confirmation')
+						->setBody(
+								$this->container['mustache.engine']->loadTemplate('Email/RegistrationConfirmation')->render()
+						)
+						->setTo(array(
+								$emailAddress => $name
+						))
+		);
+		$this->container['email.mailer']->send(
+				$this->container['email.message']
+				->setSubject('New Registration')
+				->setBody(
+						$this->container['mustache.engine']->loadTemplate('Email/RegistrationCreated')->render(array(
+								'Name' => $name,
+								'TwitterName' => $twitterName,
+								'City' => $city,
+								'StateProvince' => $stateProvince,
+								'Country' => $country,
+								'Uri' => 'http://' . $this->container['request.subdomain.global'] . '.' . $this->container['request.domain'] . $this->container['baseUri'] . '/admin/registration/' . $registrationID
+						))
+				)
+				->setTo(array(
+						'registration@twestival.com' => 'Twestival Registration'
+				))
+		);
+		
+		return $registrationID;
 	}
 	
 	function deny($registrationID)

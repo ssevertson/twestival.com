@@ -44,8 +44,6 @@ class EventTeamMemberService extends BaseService
 	}
 	private function fetchTwitterImage($eventID, $twitterName)
 	{
-		$teamMember = $this->getTeamMember($eventID, $eventTeamMemberID);
-
 		$imageFilename = EventTeamMemberService::DEFAULT_IMAGE_FILENAME;
 		
 		$client = $this->container['twitter.twestival.client'];
@@ -68,7 +66,7 @@ class EventTeamMemberService extends BaseService
 			
 			return $imageFilename;
 		}
-		catch(Guzzle\Http\Exception\RequestException $ignore) {
+		catch(\Guzzle\Http\Exception\RequestException $ignore) {
 			return EventTeamMemberService::DEFAULT_IMAGE_FILENAME;
 		}
 	}

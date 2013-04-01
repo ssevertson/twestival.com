@@ -62,7 +62,7 @@ class Formatters extends BaseHelper
 	public function _toLongEuropeanDate($text, $context)
 	{
 		$rendered = $context->render($text);
-		return $rendered ? date('l, j F Y', strtotime($rendered)) : 'Comming Soon';
+		return $rendered ? date('l, j F Y', strtotime($rendered)) : 'Coming Soon';
 	}
 	public function _removeSeconds($text, $context)
 	{

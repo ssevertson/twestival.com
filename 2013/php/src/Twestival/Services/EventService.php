@@ -104,6 +104,7 @@ class EventService extends BaseService
 				$organizerEmailAddress,
 				EventService::DEFAULT_IMAGE_FILENAME);
 		
+		$blog = $this->container['service.blog']->getByID($blogID);
 
 		$registration = $this->container['service.registration']->get($registrationID);
 		
@@ -114,9 +115,8 @@ class EventService extends BaseService
 				$password
 		);
 		
-		$this->container['service.event.teamMember']->save(
+		$this->container['service.event.teamMember']->create(
 				$eventID,
-				1,
 				$registration['TwitterName']
 		);
 		
@@ -124,7 +124,24 @@ class EventService extends BaseService
 				$eventID,
 				$locationID);
 		
-		// TODO: Email notification to $oranizerEmailAddress, with direct link to admin (http://$$subdomain.twestival.com/admin), and generated username/password
+		$this->container['email.mailer']->send(
+				$this->container['email.message']
+				->setSubject('Welcome to Twestival ' . $currentYear . '!')
+				->setBody(
+						$this->container['mustache.engine']->loadTemplate('Email/EventApproval')->render(array(
+								'Username' => $twitterName,
+								'Password' => $password,
+								'BlogUri' => 'http://' 
+										. $blog['Subdomain']
+										. '.' 
+										. $this->container['request.domain']
+										. $this->container['baseUri']
+						))
+						, 'text/html')
+				->setTo(array(
+						'scott@severtson.us' => $name
+				))
+		);
 		
 		
 		return $eventID;

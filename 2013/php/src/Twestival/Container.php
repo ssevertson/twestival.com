@@ -131,7 +131,7 @@ class Container extends \Pimple
 			if($c['session.exists'])
 			{
 				$session = $c['session'];
-				if($session->offsetExists('subdomain'))
+				if($session->offsetExists('blog.subdomain'))
 				{
 					$subdomain = $session['blog.subdomain'];
 				}
@@ -195,6 +195,65 @@ class Container extends \Pimple
 			$client->addSubscriber(new \Guzzle\Plugin\Oauth\OauthPlugin($config));
 			return $client;
 		});
+
+		$this['mustache.loader.view'] = $this->share(function($c)
+		{
+			return new \Mustache_Loader_FilesystemLoader($c['viewDir']);
+		});
+		$this['mustache.loader.partial'] = $this->share(function($c)
+		{
+			return new \Mustache_Loader_FilesystemLoader($c['viewDir'] . '/Partials');
+		});
+		$this['mustache.engine'] = $this->share(function($c)
+		{
+			return new \Mustache_Engine(array(
+					'loader' => $c['mustache.loader.view'],
+					'partials_loader' => $c['mustache.loader.partial'],
+					'helpers' => array(
+							'format' => $c['helper.format'],
+							'security' => $c['helper.security']
+					)
+			));
+		});
+		
+		$this['email.config'] = $this->share(function($c)
+		{
+			$configFile = $c['configDir'] . '/email.php';
+			return require $configFile;
+		});
+		$this['email.transport'] = $this->share(function($c)
+		{
+			$config = $c['email.config'];
+			return \Swift_SmtpTransport::newInstance(
+					$config['hostname'],
+					$config['port']
+			);
+		});
+		$this['email.mailer'] = $this->share(function($c)
+		{
+			$transport = $c['email.transport'];
+			$mailer = \Swift_Mailer::newInstance($transport);
+			$logger = new \Swift_Plugins_Loggers_EchoLogger();
+			$mailer->registerPlugin(new \Swift_Plugins_LoggerPlugin($logger));
+			return $mailer;
+		});
+		$this['email.message'] = function($c)
+		{
+			$config = $c['email.config'];
+			$message = \Swift_SignedMessage::newInstance();
+			$message
+					->setFrom($config['from']);
+			$signer = new \Swift_Signers_DKIMSigner(
+					$config['dkim.key.private'],
+					$config['dkim.domain'],
+					$config['dkim.selector']);
+			$signer
+					->setHeaderCanon('relaxed')
+					->setBodyCanon('relaxed')
+					->setHashAlgorithm('rsa-sha1');
+			$message->attachSigner($signer);
+			return $message;
+		};
 		
 		$this['service.common'] = $this->share(function($c)
 		{
@@ -318,26 +377,6 @@ class Container extends \Pimple
 		$this['helper.security'] = $this->share(function($c)
 		{
 			return new \Twestival\Resources\Helpers\Security($c);
-		});
-		
-		$this['mustache.loader.view'] = $this->share(function($c)
-		{
-			return new \Mustache_Loader_FilesystemLoader($c['viewDir']);
-		});
-		$this['mustache.loader.partial'] = $this->share(function($c)
-		{
-			return new \Mustache_Loader_FilesystemLoader($c['viewDir'] . '/Partials');
-		});
-		$this['mustache.engine'] = $this->share(function($c)
-		{
-			return new \Mustache_Engine(array(
-				'loader' => $c['mustache.loader.view'],
-				'partials_loader' => $c['mustache.loader.partial'],
-				'helpers' => array(
-						'format' => $c['helper.format'],
-						'security' => $c['helper.security']
-				)
-			));
 		});
 	}
 };

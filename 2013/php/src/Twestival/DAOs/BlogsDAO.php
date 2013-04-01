@@ -2,7 +2,7 @@
 
 class BlogsDAO extends BaseDAO
 {
-	function get($subdomain)
+	function getBySubdomain($subdomain)
 	{
 		$conn = $this->container['connection'];
 		$query = $conn->prepare('
@@ -36,6 +36,39 @@ class BlogsDAO extends BaseDAO
 		$query->execute();
 		return $query->fetch(\PDO::FETCH_ASSOC);
 	}
+	function getByID($blogID)
+	{
+		$conn = $this->container['connection'];
+		$query = $conn->prepare('
+				SELECT DISTINCT
+					Blog.*,
+					Event.EventID,
+					EXISTS (
+						SELECT 1
+						FROM Event
+						INNER JOIN Year
+							ON Event.Year = Year.Year
+						WHERE
+							Blog.BlogID = Event.BlogID
+							AND Event.Active = TRUE
+							AND Year.Active = TRUE
+					) AS EventYearActive
+				FROM
+					Blog
+					INNER JOIN Event
+						ON Blog.BlogID = Event.BlogID
+				WHERE
+					Blog.BlogID = ?
+				ORDER BY
+					Event.Year DESC
+				LIMIT 1;
+		');
+		$query->bindValue(1, intval($blogID), \PDO::PARAM_INT);
+	
+		$query->execute();
+		return $query->fetch(\PDO::FETCH_ASSOC);
+	}
+	
 	
 	function findUnassignedForActiveYear()
 	{

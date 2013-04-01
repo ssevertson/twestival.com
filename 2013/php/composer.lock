@@ -1,5 +1,5 @@
 {
-    "hash": "1f6f0d604ed6345926112c436d54bab8",
+    "hash": "fe46642373f2841d3bb7fc7cc4b44d45",
     "packages": [
         {
             "name": "guzzle/guzzle",
@@ -374,6 +374,55 @@
                 "password"
             ],
             "time": "2012-09-26 06:12:57"
+        },
+        {
+            "name": "swiftmailer/swiftmailer",
+            "version": "v4.3.0",
+            "source": {
+                "type": "git",
+                "url": "git://github.com/swiftmailer/swiftmailer.git",
+                "reference": "v4.3.0"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://github.com/swiftmailer/swiftmailer/archive/v4.3.0.zip",
+                "reference": "v4.3.0",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.2.4"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "4.3-dev"
+                }
+            },
+            "autoload": {
+                "files": [
+                    "lib/swift_required.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "LGPL"
+            ],
+            "authors": [
+                {
+                    "name": "Fabien Potencier",
+                    "email": "fabien@symfony.com"
+                },
+                {
+                    "name": "Chris Corbyn"
+                }
+            ],
+            "description": "Swiftmailer, free feature-rich PHP mailer",
+            "homepage": "http://swiftmailer.org",
+            "keywords": [
+                "mail",
+                "mailer"
+            ],
+            "time": "2013-01-08 15:50:34"
         },
         {
             "name": "symfony/event-dispatcher",

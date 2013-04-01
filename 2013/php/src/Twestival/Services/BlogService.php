@@ -6,7 +6,14 @@ class BlogService extends BaseService
 {
 	function getBySubdomain($subdomain)
 	{
-		$blog = $this->container['dao.blogs']->get($subdomain);
+		$blog = $this->container['dao.blogs']->getBySubdomain($subdomain);
+		$this->addUrisToBlog($blog);
+		$this->addDetailsToBlog($blog);
+		return $blog;
+	}
+	function getByID($blogID)
+	{
+		$blog = $this->container['dao.blogs']->getByID($blogID);
 		$this->addUrisToBlog($blog);
 		$this->addDetailsToBlog($blog);
 		return $blog;

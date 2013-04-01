@@ -5,7 +5,8 @@
 		"pimple/pimple": "1.0.*",
 		"monolog/monolog": "1.4.*",
 		"roderik/pwgen-php": "0.1.*",
-		"guzzle/guzzle": "~3.3.1"
+		"guzzle/guzzle": "~3.3.1",
+		"swiftmailer/swiftmailer": "~4.3.0"
 	},
 	"autoload": {
 		"psr-0": {"Twestival": "src/"}

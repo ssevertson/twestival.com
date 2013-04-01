@@ -60,7 +60,6 @@ class GlobalAdminRegistrationEventResource extends BaseResource
 		}
 		else
 		{
-			
 			$blogID = intval($_POST['BlogID']);
 		}
 		

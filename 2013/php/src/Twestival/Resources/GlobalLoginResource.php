@@ -12,12 +12,7 @@ class GlobalLoginResource extends BaseResource
 	 */
 	function showLogin()
 	{
-		if($this->container['session.exists'])
-		{
-			session_start();
-			session_destroy();
-		}
-		
+		$this->container['service.login']->logout();
 		return $this->renderMustacheHeaderFooter('Login', array(
 			'LoginType' => 'Admin',
 		));
