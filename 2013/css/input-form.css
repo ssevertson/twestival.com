@@ -79,6 +79,10 @@ form.input .symbols {
 form.input a {
 	color: #50B1BD;
 }
+form.input fieldset .subsection {
+	padding-left: 4px;
+	font-weight: bold;
+}
 
 form.input input#input-submit-button {
 	background: url('../img/common/button/button-green.png') no-repeat;

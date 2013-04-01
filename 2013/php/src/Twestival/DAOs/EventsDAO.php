@@ -320,7 +320,7 @@ class EventsDAO extends BaseDAO
 		return $query->rowCount();
 	}
 	
-	function updateEventAdminFields($eventID, $fundraisingGoalUsd, $donationTotalUSD, $attendUri, $donateUri, $description, $date, $startTime, $endTime,
+	function updateEventAdminFields($eventID, $imageFilename, $fundraisingGoalUsd, $donationTotalUSD, $attendUri, $donateUri, $description, $date, $startTime, $endTime,
 			$locationName, $locationAddress1, $locationAddress2, $locationUri, $organizerEmailAddress, $twitterName, $facebookUri, $twitterShareMessage)
 	{
 		$conn = $this->container['connection'];
@@ -328,6 +328,7 @@ class EventsDAO extends BaseDAO
 			UPDATE
 				Event
 			SET
+				Event.ImageFilename = ?,
 				Event.FundraisingGoalUSD = ?,
 				Event.DonationTotalUSD = ?,
 				Event.AttendUri = ?,
@@ -347,14 +348,14 @@ class EventsDAO extends BaseDAO
 			WHERE
 				Event.EventID = ?;
 		');
-		$query->bindValue(1, intval($fundraisingGoalUsd), \PDO::PARAM_INT);
-		$query->bindValue(2, intval($donationTotalUSD), \PDO::PARAM_INT);
-		$query->bindValue(3, $this->trimToNull($attendUri), \PDO::PARAM_STR);
-		$query->bindValue(4, $this->trimToNull($donateUri), \PDO::PARAM_STR);
-		$query->bindValue(5, $this->trimToNull($description), \PDO::PARAM_STR);
-		$query->bindValue(6, $this->trimToNull($date), \PDO::PARAM_STR);
-		$query->bindValue(7, $this->trimToNull($startTime), \PDO::PARAM_STR);
-		$query->bindValue(8, $this->trimToNull($endTime), \PDO::PARAM_STR);
+		$query->bindValue(1, $this->trimToNull($imageFilename), \PDO::PARAM_STR);
+		$query->bindValue(2, intval($fundraisingGoalUsd), \PDO::PARAM_INT);
+		$query->bindValue(3, intval($donationTotalUSD), \PDO::PARAM_INT);
+		$query->bindValue(4, $this->trimToNull($attendUri), \PDO::PARAM_STR);
+		$query->bindValue(5, $this->trimToNull($donateUri), \PDO::PARAM_STR);
+		$query->bindValue(6, $this->trimToNull($description), \PDO::PARAM_STR);
+		$query->bindValue(7, $this->toDate($date), \PDO::PARAM_STR);
+		$query->bindValue(8, $this->trimToNull($startTime), \PDO::PARAM_STR);
 		$query->bindValue(9, $this->trimToNull($endTime), \PDO::PARAM_STR);
 		$query->bindValue(10, $this->trimToNull($locationName), \PDO::PARAM_STR);
 		$query->bindValue(11, $this->trimToNull($locationAddress1), \PDO::PARAM_STR);
@@ -363,12 +364,12 @@ class EventsDAO extends BaseDAO
 		$query->bindValue(14, $this->trimToNull($organizerEmailAddress), \PDO::PARAM_STR);
 		$query->bindValue(15, $this->trimToNull($twitterName), \PDO::PARAM_STR);
 		$query->bindValue(16, $this->trimToNull($facebookUri), \PDO::PARAM_STR);
-		$query->bindValue(17, intval($eventID), \PDO::PARAM_INT);
+		$query->bindValue(17, $this->trimToNull($twitterShareMessage), \PDO::PARAM_STR);
+		$query->bindValue(18, intval($eventID), \PDO::PARAM_INT);
 		
 		$query->execute();
 		return $query->rowCount();
 		
 	}
-	
 }
 ?>

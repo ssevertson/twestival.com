@@ -1,6 +1,6 @@
 <?php namespace Twestival\Resources\Files;
 
-class EventSponsorUpload extends Upload
+class EventUpload extends Upload
 {
 	function __construct($container, $fields)
 	{

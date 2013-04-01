@@ -8,12 +8,18 @@ class BaseDAO
 		$this->container = $container;
 	}
 	
-	function trimToNull($value) {
+	function trimToNull($value)
+	{
 		$value = trim($value);
 		return $value ? $value : NULL;
 	}
-	function toBoolean($value) {
+	function toBoolean($value)
+	{
 		return $value ? TRUE : FALSE;
+	}
+	function toDate($value)
+	{
+		return date('Y-m-d', $value);
 	}
 }
 ?>

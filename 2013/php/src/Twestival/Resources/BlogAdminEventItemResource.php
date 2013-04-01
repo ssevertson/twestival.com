@@ -14,7 +14,7 @@ class BlogAdminEventItemResource extends BaseBlogResource
 	function showEditor()
 	{
 		$blog = $this->container['service.blog']->getBySubdomain($this->container['request.subdomain']);
-		return $this->renderMustacheHeaderFooter('Blog/Admin/Sponsor/Edit', $blog);
+		return $this->renderMustacheHeaderFooter('Blog/Admin/Edit', $blog);
 	}
 	
 	/**
@@ -26,7 +26,7 @@ class BlogAdminEventItemResource extends BaseBlogResource
 	{
 		$blog = $this->container['service.blog']->getBySubdomain($this->container['request.subdomain']);
 	
-		$upload = new Files\EventSponsorUpload($this->container, 'Image');
+		$upload = new Files\EventUpload($this->container, 'Image');
 		$result = $upload->process($_FILES);
 		
 		$imageFilename = $_POST['ImageFilename'];

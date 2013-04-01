@@ -147,11 +147,11 @@ class EventService extends BaseService
 		return $eventID;
 	}
 	
-	function saveEventAdminFields($eventID, $fundraisingGoalUsd, $donationTotalUSD, $attendUri, $donateUri, $description, $date, $startTime, $endTime,
+	function saveEventAdminFields($eventID, $imageFilename, $fundraisingGoalUsd, $donationTotalUSD, $attendUri, $donateUri, $description, $date, $startTime, $endTime,
 			$locationName, $locationAddress1, $locationAddress2, $locationUri, $organizerEmailAddress, $twitterName, $facebookUri, $twitterShareMessage)
 	{
 		return $this->container['dao.events']->updateEventAdminFields(
-				$eventID, $fundraisingGoalUsd, $donationTotalUSD, $attendUri, $donateUri, $description, $date, $startTime, $endTime,
+				$eventID, $imageFilename, $fundraisingGoalUsd, $donationTotalUSD, $attendUri, $donateUri, $description, $date, $startTime, $endTime,
 				$locationName, $locationAddress1, $locationAddress2, $locationUri, $organizerEmailAddress, $twitterName, $facebookUri, $twitterShareMessage);
 	}
 	

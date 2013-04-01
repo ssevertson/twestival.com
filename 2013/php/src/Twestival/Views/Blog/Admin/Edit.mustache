@@ -1,0 +1,208 @@
+{{> HTMLTag }}
+	<head>
+		{{> HeadContent }}
+		<title>Twestival {{CurrentYear}} Admin: Event</title>
+		
+		<link rel="stylesheet" href="css/blog.css" />
+		<link rel="stylesheet" href="css/admin.css" />
+		<link rel="stylesheet" href="css/input-form.css" />
+		
+		<script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.2/jquery-ui.min.js"></script>
+		<script>window.jQuery.Widget || document.write('<script src="js/vendor/jqueryui-1.10.2.min.js"><\/script>')</script>
+		
+		<script src="//ajax.microsoft.com/ajax/jquery.validate/1.11.0/jquery.validate.min.js"></script>
+		<script>window.jQuery.validator || document.write('<script src="js/vendor/jquery.validate-1.11.0.min.js"><\/script>')</script>
+		
+		<script src="js/vendor/jquery.fileupload-7.4.1.js" type="text/javascript"></script>
+		
+		<link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.10.2/themes/smoothness/jquery-ui.css" type="text/css" />
+		<script src="js/vendor/jquery.ui.timepicker-0.3.2.js" type="text/javascript"></script>
+		<link rel="stylesheet" href="css/vendor/jquery.ui.timepicker.css" type="text/css"  />
+	</head>
+	<body id="admin">
+		{{> Header }}
+		{{> Blog/Header}}
+		
+		<div class="wrapper">
+			<h1>
+				<a href="admin">Blog Admin</a>:
+				Event
+			</h1>
+			{{#Event}}
+				<form class="input" id="form-event" enctype="multipart/form-data" method="post" action="admin/event!PUT">
+					<fieldset>
+						<div class="legend">What</div>
+						<div class="body">
+							<label for="image" class="required">Image</label><br/>
+							<input type="hidden" id="image-filename" name="ImageFilename" value="{{ImageFilename}}" class="required"/>
+							<img id="image-preview" class="image-field" src="{{ImageUri}}" {{^ImageUri}}style="display: none;"{{/ImageUri}}/>
+							<div id="image-errors" class="error"></div>
+							<div class="image-upload">
+								<span>Upload</span>
+								<input id="image" type="file" name="Image" data-url="admin/event/image"/>
+							</div><br/>
+	
+							<label for="event-fundraising-goal-usd" class="required">Fundraising Goal</label><br/>
+							<div class="before-field">USD</div><input type="text" name="FundraisingGoalUSD" id="event-fundraising-goal-usd" value="{{FundraisingGoalUSD}}" style="width:126px;" class="required digits"/><br/>
+	
+							<label for="event-donation-total-usd" class="required">Current Funds Raised</label><br/>
+							<div class="before-field">USD</div><input type="text" name="DonationTotalUSD" id="event-donation-total-usd" value="{{DonationTotalUSD}}" style="width:126px;" class="required digits"/><br/>
+	
+							<label for="event-attend-uri">Tickets URL</label><br/>
+							<input type="text" name="AttendUri" id="event-attend-uri" value="{{AttendUri}}" style="width:160px;" maxlength="300" class="url"/><br/>
+	
+							<label for="event-donate-uri">Donation URL</label><br/>
+							<input type="text" name="DonateUri" id="event-donate-uri" value="{{DonateUri}}" style="width:160px;" maxlength="300" class="url"/><br/>
+							
+							<label for="event-description">Event Description (2,000 character limit)</label><br/>
+							<textarea name="Description" id="event-description" rows="2" style="width:504px;">{{Description}}</textarea><br/>
+						</div>
+					</fieldset>
+					<fieldset>
+						<div class="legend">When</div>
+						<div class="body">
+							<label for="event-date">Event Date</label><br/>
+							<input type="text" name="Date" id="event-date" value="{{#Date}}{{#format.toEuropeanDate}}{{.}}{{/format.toEuropeanDate}}{{/Date}}" style="width:160px;" class="date"/><br/>
+							<script type="text/javascript">
+								$('#event-date').datepicker({ dateFormat: 'd MM yy' });
+							</script>
+							
+							<label for="event-start-time">Event Time</label><br/>
+							<div class="inline">
+								<input type="text" name="StartTime" id="event-start-time" style="width:80px;" maxlength="5" value="{{#format.removeSeconds}}{{StartTime}}{{/format.removeSeconds}}"/><br/>
+							</div>
+							<script type="text/javascript">
+								$('#event-start-time').timepicker({ defaultTime: '' });
+							</script>
+							<div class="inline">
+								<label for="event-end-time">to</label>
+							</div>
+							<div class="inline">
+								<input type="text" name="EndTime" id="event-end-time" style="width:80px;"maxlength="5" value="{{#format.removeSeconds}}{{EndTime}}{{/format.removeSeconds}}"/><br/>
+							</div>
+							<script type="text/javascript">
+								$('#event-end-time').timepicker({ defaultTime: '' });
+							</script>
+						</div>
+					</fieldset>
+					<fieldset>
+						<div class="legend">Where</div>
+						<div class="body">
+							<label for="event-location-name">Location Name</label><br/>
+							<input type="text" name="LocationName" id="event-location-name" style="width:504px;" maxlength="200" value="{{LocationName}}"/><br/>
+							
+							<label for="event-location-address-1">Address 1</label><br/>
+							<input type="text" name="LocationAddress1" id="event-location-address-1" style="width:504px;" maxlength="120" value="{{LocationAddress1}}"/><br/>
+							
+							<label for="event-location-address-2">Address 2</label><br/>
+							<input type="text" name="LocationAddress2" id="event-location-address-2" style="width:504px;" maxlength="120" value="{{LocationAddress2}}"/><br/>
+	
+							<label for="event-location-uri">URL for Location Website</label><br/>
+							<input type="text" name="LocationUri" id="event-location-uri" style="width:504px;" maxlength="300" value="{{LocationUri}}" class="url"/><br/>
+						</div>
+					</fieldset>
+					<fieldset>
+						<div class="legend">Connect &amp; Share</div>
+						<div class="body">
+							<div class="subsection">Connect</div>
+							<label for="event-organizer-email-address" class="required">Organizer Email</label><br/>
+							<input type="text" name="OrganizerEmailAddress" id="event-organizer-email-address" style="width:504px;" maxlength="100" class="required" value="{{OrganizerEmailAddress}}" class="email"/><br/>
+							
+							<label for="event-twitter-name" class="required">Twitter Name</label><br/>
+							<div class="before-field">@</div><input type="text" name="TwitterName" id="event-twitter-name" style="width: 186px;" class="required" maxlength="15" value="{{TwitterName}}"/><br/>
+							
+							<label for="event-facebook-uri">URL for Event Facebook Profile</label><br/>
+							<input type="text" name="FacebookUri" id="event-facebook-uri" style="width:504px;" class="url" maxlength="120" value="{{FacebookUri}}"/><br/>
+							
+							<div class="subsection">Share</div>
+							<label for="event-twitter-share-message">Tweet This message (please include your Event Blog URL)</label><br/>
+							<textarea name="TwitterShareMessage" id="event-twitter-share-message" rows="2" style="width:504px;">{{TwitterShareMessage}}</textarea><br/>
+						</div>
+					</fieldset>
+					<script type="text/javascript">
+						jQuery.validator.addMethod(
+								'noSpace',
+								function(value, element) { 
+									return this.optional(element)
+											|| !/\s/.test(value);
+								},
+								'This field cannot contain spaces'
+						);
+						jQuery.validator.addMethod(
+								'time',
+								function(value, element) {  
+									return this.optional(element)
+									|| /^(([0-1]?[0-9])|([2][0-3])):([0-5]?[0-9])(:([0-5]?[0-9]))?$/i.test(value);  
+							}, "This field must be a valid time.");
+						
+						var validator = $("#form-event").validate({
+							ignore: '.ignore',
+							errorPlacement: function(error, element) {
+								var target = element.prevAll('br:first');
+								if(target.length) {
+									error.insertAfter(element.prevAll('br:first'));
+								} else {
+									error.insertBefore(element);
+								}
+							},
+							success: function(error) {
+								error.remove();
+							},
+							rules: {
+								TwitterName: {
+									noSpace: true
+								},
+								Description: {
+									maxlength: 2000
+								},
+								StartTime: {
+									time: true
+								},
+								EndTime: {
+									time: true
+								},
+								TwitterShareMessage: {
+									maxlength: 120
+								}
+							}
+						});
+						
+						$(function () {
+							$('#image').fileupload({
+								dataType: 'json',
+								add: function (e, data) {
+									$("#image-errors").html('');
+									$('#image-preview').attr('src', 'img/common/loading.gif');
+									$('#image-preview').show();
+									data.submit();
+								},
+								done: function (e, data) {
+									var image = data.result.Image;
+									$('#image-preview').hide();
+									if(image.Errors) {
+										validator.showErrors({'ImageFilename': image.Errors.join('<br/>')});
+									} else {
+										validator.reset();
+										$('#image-preview').attr('src', image.Uri);
+										$('#image-filename').val(image.Filename);
+										$('#image-preview').show();
+									}
+									console.log(data.result);
+								}
+							});
+						});
+					</script>
+					<div class="symbols">
+						<span class="required"></span> required fields<br/>
+					</div>
+		
+					<input type="submit" class="action" value="Save"/>
+					<input type="button" class="action" value="Cancel" onclick="history.go(-1);"/>
+	
+				</form>
+			{{/Event}}
+		</div>
+		
+		{{> Footer }}
+	</body>
+</html>

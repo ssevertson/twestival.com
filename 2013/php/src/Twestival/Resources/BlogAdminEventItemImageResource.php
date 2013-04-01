@@ -2,7 +2,7 @@
 
 /**
  * @namespace blog
- * @uri /admin/charity/image
+ * @uri /admin/event/image
  */
 class BlogAdminEventItemImageResource extends BaseBlogResource
 {
