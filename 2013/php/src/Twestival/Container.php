@@ -311,7 +311,11 @@ class Container extends \Pimple
 		{
 			return new \Twestival\Services\LocationService($c);
 		});		
-
+		$this['service.email'] = $this->share(function($c)
+		{
+			return new \Twestival\Services\EmailService($c);
+		});
+		
 		$this['dao.event.admins'] = $this->share(function($c)
 		{
 			return new \Twestival\DAOs\EventAdminsDAO($c);

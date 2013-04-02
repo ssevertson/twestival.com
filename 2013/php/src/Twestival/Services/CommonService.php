@@ -16,12 +16,6 @@ class CommonService extends BaseService
 		);
 	}
 	
-	function getMostRecentActiveYear()
-	{
-		$years = $this->container['dao.years'];
-		return $years->getMostRecentActiveYear();
-	}
-
 	function getRunningSummaryStats()
 	{
 		return array(

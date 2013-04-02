@@ -174,5 +174,33 @@ class Formatters extends BaseHelper
 		$rendered = $context->render($text);
 		return urlencode($rendered);
 	}
+	public function _toCleanUrl($text, $context)
+	{
+		$rendered = $context->render($text);
+		return $rendered ? $this->toCleanUri($rendered) : '';
+	}
+	
+	private function toCleanUri($title,  $delimiter='-')
+	{
+		$clean = preg_replace(array('/Ä/', '/Ö/', '/Ü/', '/ä/', '/ö/', '/ü/'), array('Ae', 'Oe', 'Ue', 'ae', 'oe', 'ue'), $title);
+		$clean = iconv('UTF-8', 'ASCII//TRANSLIT', $clean);
+		$clean = preg_replace('/[^a-zA-Z0-9\/_|+ -]/', '', $clean);
+		$clean = strtolower(trim($clean, '-'));
+		$clean = preg_replace('/[\/_|+ -]+/', $delimiter, $clean);
+		return $clean;
+	}
+	
+	public function _toTwitterHtml($text, $context)
+	{
+		$rendered = $context->render($text);
+		return $rendered ? $this->toTwitterLinks($rendered) : '';
+	}
+	
+	private function toTwitterLinks($tweet)
+	{
+		$tweet = preg_replace('/@(\w+)/', '<a href="https://twitter.com/\\1" target="_blank">@\\1</a>', $tweet);
+		$tweet = preg_replace('/#(\w+)/', '<a href="https://twitter.com/search?q=%23\\1" target="_blank">#\\1</a>', $tweet);
+		return $tweet;
+	}
 }
 ?>

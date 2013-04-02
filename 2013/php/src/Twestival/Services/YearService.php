@@ -5,7 +5,7 @@ class YearService extends BaseService
 	function getMostRecentActiveYear()
 	{
 		$years = $this->container['dao.years'];
-		return 2011; //HACK HACK HACK: Use $years->getMostRecentActiveYear(); when we have enough non-historical data
+		return 2011; //$years->getMostRecentActiveYear();
 	}
 	
 	function getYears()

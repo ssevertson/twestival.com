@@ -1,0 +1,85 @@
+ul.index {
+	font-family: 'Melbourne';
+	font-size: 18px;
+	margin: 0px;
+	padding: 0px;
+	list-style-type: none;
+}
+ul.index li img {
+	margin: -4px 0px 0px 6px;
+}
+
+.subteam {
+	border-top: 1px solid #DCDCDC;
+	margin-top: 25px;
+	margin-bottom: 36px;
+	padding: 16px 0px;
+	text-align: center;
+}
+.subteam .title {
+	border: 1px solid #DCDCDC;
+	background-color: #FFFFFF;
+	font-family: 'Melbourne-Bold';
+	font-size: 24px;
+	letter-spacing: 0.5px;
+	color: #50B1BD;
+	
+	display: inline-block;
+	position: relative;
+	top: -40px;
+	margin: 0px auto;
+	padding: 7px 16px 3px 16px;
+	text-align: center;
+}
+.subteam .members {
+	text-align: left;
+	position: relative;
+	top: -24px;
+	margin-bottom: -24px;
+}
+
+.subteam .member {
+	border: 1px solid #DCDCDC;
+	background-color: #FFFFFF;
+	padding: 16px;
+	width: 276px;
+	height: 180px;
+	position: relative;
+	float: left;
+	margin: 8px;
+}
+.subteam .member .photo {
+	float: left;
+	border: 1px solid #DCDCDC;
+	margin-right: 8px;
+}
+.subteam .member .details {
+}
+.subteam .member .details .name {
+	font-weight: bold;
+	font-size: 15px;
+}
+.subteam .member .details .location, .subteam .member .details a.twitter-name {
+	font-size: 12px;
+	color: #939393;
+}
+.subteam .member .details .follow {
+	position: absolute;
+	right: 16px;
+	top: 44px;
+}
+.subteam .member .tweet {
+	margin-top: 20px;
+	font-size: 14px;
+}
+.subteam .member .tweet a {
+	color: #58c2d1;
+}
+.subteam .member .lead {
+	color: #58c2d1;
+	font-weight: bold;
+	font-size: 14px;
+	position: absolute;
+	bottom: 16px;
+	right: 16px;
+}

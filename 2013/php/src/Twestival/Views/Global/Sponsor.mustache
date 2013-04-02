@@ -3,14 +3,124 @@
 		{{> HeadContent }}
 		<title>Twestival {{CurrentYear}}: Sponsor</title>
 		
-		<link rel="stylesheet" href="css/sponsor.css" />
+		<link rel="stylesheet" href="css/input-form.css" />
+		
+		<script src="//ajax.microsoft.com/ajax/jquery.validate/1.11.0/jquery.validate.min.js"></script>
+		<script>window.jQuery.validator || document.write('<script src="js/vendor/jquery.validate-1.11.0.min.js"><\/script>')</script>
 	</head>
 	<body id="sponsor">
 		{{> Header }}
 
  		<div class="wrapper">
-			<h1>Sponsor</h1> 
-			<h2>Coming Soon</h2>
+ 			<h1>Sponsor</h1>
+			
+			<div class="intro">
+				<p>Want to support a Twestival in your city? We gladly accept many types of sponsorship, including financial, in-kind, media and more. Simply submit this form with your information and someone from your local organizing team will be in touch with you. If there is no event in your city yet, your information will be passed on to the organizing team once one is formed.</p>
+			</div>
+			
+			<form id="form-sponsor" class="input" method="post">
+				<fieldset>
+					<div class="legend">Find your City</div>
+					<div class="body">
+						<label for="events">List of Approved Events</label><br/>
+						<select id="events" name="EventID">
+							<option value="-"></option>
+							{{#Continents}}
+								 <optgroup label="{{Key}}">
+								 	{{#Value}}
+								 		<option value="{{EventID}}">{{Name}}</option>
+								 	{{/Value}}
+								 </optgroup>
+							{{/Continents}}
+							<option></option>
+						</select> <br/>
+						<label>If your event is not listed, please provide your location:</label> <br/>
+						<div class="inline">
+							<label for="city">City</label><br/>
+							<input type="text" name="City" id="city" style="width:160px;"/><br/>
+						</div>
+						<div class="inline">
+							<label for="state-province">Province / State</label><br/>
+							<input type="text" name="StateProvince" id="state-province" style="width:160px;"/><br/>
+						</div>
+						<div class="inline">
+							<label for="country">Country</label><br/>
+							<input type="text" name="Country" id="country" style="width:160px;"/><br/>
+						</div>
+					</div>
+				</fieldset>
+				<fieldset>
+					<div class="legend">Contact Information</div>
+					<div class="body" style="margin-top: 9px;">
+						<label for="organization" class="required">Name of Organization</label><br/>
+						<input type="text" name="Organization" id=""organization"" style="width:504px;" class="required"/><br/>
+						
+						<label for="name" class="required">Full Name of Contact</label><br/>
+						<input type="text" name="Name" id="name" style="width:504px;" class="required"/><br/>
+						
+						<label for="email-address" class="required">Email Address</label><br/>
+						<input type="text" name="EmailAddress" id="email-address" style="width:504px;" class="required email"/><br/>
+						
+						<label for="phone-number">Phone Number of Contact at Organization</label><br/>
+						<input type="text" name="PhoneNumber" id="phone-number" style="width:504px;"/><br/>
+						
+						<label for="uri">Organization URL</label><br/>
+						<input type="text" name="Uri" id="uri" style="width:504px;"/><br/>
+						
+						<label for="type">What kind of sponsorship would you like to provide?</label><br/>
+						<select name="Type" id="type">
+							<option></option>
+							<option>Monetary</option>
+							<option>In-Kind</option>
+							<option>Media</option>
+							<option>Event Space</option>
+							<option>Food / Beverage</option>
+							<option>Other</option>
+						</select><br/>
+						
+						<label for="details">Please provide more information on the type of sponsorship you would like to provide. </label><br/>
+						<textarea name="Details" id="details" rows="3" style="width:504px;"></textarea><br/>
+
+						<div class="symbols">
+							<span class="required"></span> required fields<br/>
+						</div>
+						
+						<input type="submit" value="Submit" id="input-submit-button"/>
+					</div>
+				</fieldset>
+				<script type="text/javascript">
+					var validator = $("#form-sponsor").validate({
+						ignore: '.ignore',
+						errorPlacement: function(error, element) {
+							var target = element.prevAll('br:first');
+							if(target.length) {
+								error.insertAfter(element.prevAll('br:first'));
+							} else {
+								error.insertBefore(element);
+							}
+						},
+						success: function(error) {
+							error.remove();
+						},
+						rules: {
+							Details: {
+								maxlength: 2000
+							},
+							City: {
+								required: function(element) {
+									return $("#events").val() == '-';
+								}
+							},
+							Country: {
+								required: function(element) {
+									return $("#events").val() == '-';
+								}
+							}
+						}
+					});
+				</script>
+			</form>
+				 
 		</div>
 		
 		{{> Footer }}

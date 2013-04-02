@@ -9,9 +9,40 @@
 		{{> Header }}
 
  		<div class="wrapper">
-			<h1>Tweet Our Global Team</h1> 
-			<h2>Coming Soon</h2>
+			<h1>Tweet Our Global Team</h1>
+			<ul class="index">
+				{{#Groups}}
+					<li><a href="team#team-{{#format.toCleanUrl}}{{{Name}}}{{/format.toCleanUrl}}">{{Name}} <img src="img/common/arrow-small.png" alt="→"/></a></li>
+				{{/Groups}}
+			</ul>
+			
+			{{#Groups}}
+				<div class="subteam" id="team-{{#format.toCleanUrl}}{{{Name}}}{{/format.toCleanUrl}}">
+					<div class=title>{{Name}}</div>
+					<div class="members">
+						{{#Members}}
+							<div class="member">
+								<img src="img/team/content/{{#format.toCleanUrl}}{{{Name}}}{{/format.toCleanUrl}}.jpg" class="photo" alt=""/>
+								<div class="details">
+									<div class="name">{{Name}}</div>
+									<div class="location">{{Location}}</div>
+									<a href="https://twitter.com/{{TwitterName}}" class="twitter-name">@{{TwitterName}}</a>
+									<div class="follow">
+										<a href="https://twitter.com/{{TwitterName}}" class="twitter-follow-button" data-show-count="false" data-size="large" data-show-screen-name="false">Follow</a>
+									</div>
+								</div>
+								<div class="tweet">{{#format.toTwitterHtml}}{{{Tweet}}}{{/format.toTwitterHtml}}</div>
+								{{#Lead}}
+									<div class="lead">Team Lead</div>
+								{{/Lead}}
+							</div>
+						{{/Members}}
+					</div>
+				</div>
+				<div class="clearfix"></div>
+			{{/Groups}}
 		</div>
+		<script type="text/javascript">!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
 		
 		{{> Footer }}
 	</body>

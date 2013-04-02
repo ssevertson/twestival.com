@@ -3,6 +3,9 @@
 	font-size: 14px;
 	width: 805px;
 }
+.intro a {
+	color: #58c2d1;
+}
 
 form.input {
 	font-family: 'Lato';

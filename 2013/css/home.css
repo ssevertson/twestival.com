@@ -11,7 +11,9 @@
 	top: -100px;
 }
 #header-stamps .stamp img {
-	margin: 10px 14px 2px 14px;
+	width: 134px;
+	height: 99px;
+	margin: 10px 19px 2px 19px;
 }
 #header-stamps .stamp:hover {
 	top: -32px;

@@ -13,8 +13,8 @@ class EventUpload extends Upload
 		$this->setMaxFileSize(64 * 1024);
 		$this->setMimeTypes('image/png, image/jpeg');
 		
-		$this->setExactImageWidth(132);
-		$this->setExactImageHeight(90);
+		$this->setExactImageWidth(170);
+		$this->setExactImageHeight(126);
 	}
 }
 ?>

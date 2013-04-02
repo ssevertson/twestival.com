@@ -70,9 +70,11 @@ ul#blog-admin li {
 	top: 33px;
 	right: 38px;
 	background: url('../img/blog/event/background-logo.png') no-repeat;
-	width: 156px;
-	height: 116px;
-	padding: 11px 12px;
+	width: 154px;
+	height: 124px;
+	padding-top: 13px;
+	text-align: center;
+	vertical-align: middle;
 	transform:rotate(3deg);
 	-ms-transform:rotate(3deg); /* IE 9 */
 	-moz-transform:rotate(3deg); /* Firefox */
@@ -81,7 +83,7 @@ ul#blog-admin li {
 }
 #event .stamp .logo img {
 	width: 134px;
-	height: 92px;
+	height: 99px;
 }
 #event .stamp .overlay {
 	position: absolute;
