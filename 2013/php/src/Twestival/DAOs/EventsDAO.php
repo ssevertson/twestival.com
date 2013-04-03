@@ -245,36 +245,105 @@ class EventsDAO extends BaseDAO
 	{
 		$conn = $this->container['connection'];
 		$query = $conn->prepare('
-			SELECT
-				Event.*
-			FROM
-				Registration
-				INNER JOIN Event
-					ON Registration.Year >= Event.Year
-					AND (
-						double_metaphone(Registration.City) = (
-							SELECT double_metaphone(Location.Name)
-							FROM EventLocation
-							INNER JOIN Location
-							ON EventLocation.LocationID = Location.LocationID
-							AND Location.Type = \'CITY\'
-							WHERE Event.EventID = EventLocation.EventID
+				SELECT
+					Event.*
+				FROM
+					Registration
+					INNER JOIN Event
+						ON Registration.Year >= Event.Year
+						AND (
+							double_metaphone(Registration.City) = (
+								SELECT double_metaphone(Location.Name)
+								FROM EventLocation
+								INNER JOIN Location
+								ON EventLocation.LocationID = Location.LocationID
+								AND Location.Type = \'CITY\'
+								WHERE Event.EventID = EventLocation.EventID
+							)
+							OR double_metaphone(Registration.City) = (
+								SELECT double_metaphone(Blog.Subdomain)
+								FROM Blog
+								WHERE Event.BlogID = Blog.BlogID
+							)
+							OR double_metaphone(Registration.EmailAddress) = double_metaphone(Event.OrganizerEmailAddress)
+							OR double_metaphone(REPLACE(LOWER(Registration.PreferredTwestivalName), \'twestival\', \'\')) = double_metaphone(REPLACE(LOWER(Event.Name), \'twestival\', \'\'))
 						)
-						OR double_metaphone(Registration.City) = (
-							SELECT double_metaphone(Blog.Subdomain)
-							FROM Blog
-							WHERE Event.BlogID = Blog.BlogID
-						)
-						OR double_metaphone(Registration.EmailAddress) = double_metaphone(Event.OrganizerEmailAddress)
-						OR double_metaphone(REPLACE(LOWER(Registration.PreferredTwestivalName), \'twestival\', \'\')) = double_metaphone(REPLACE(LOWER(Event.Name), \'twestival\', \'\'))
-					)
-			WHERE
-				Registration.RegistrationID = ?
-			ORDER BY
-				Event.Year DESC,
-				Event.Name;
+				WHERE
+					Registration.RegistrationID = ?
+				ORDER BY
+					Event.Year DESC,
+					Event.Name;
 		');
 		$query->bindValue(1, intval($registrationID), \PDO::PARAM_INT);
+		
+		$query->execute();
+		return $query->fetchAll(\PDO::FETCH_ASSOC);
+	}
+	function search($year, $q)
+	{
+		$conn = $this->container['connection'];
+		$query = $conn->prepare('
+				SELECT
+					Event.*,
+					(
+						SELECT Location.Name
+						FROM EventLocation
+						INNER JOIN Location
+						ON EventLocation.LocationID = Location.LocationID
+						WHERE EventLocation.EventID = Event.EventID
+						AND Location.Type = \'CONTINENT\'
+					) As LocationContinent,
+					(
+						SELECT Location.Name
+						FROM EventLocation
+						INNER JOIN Location
+						ON EventLocation.LocationID = Location.LocationID
+						WHERE EventLocation.EventID = Event.EventID
+						AND Location.Type = \'COUNTRY\'
+					) As LocationCountry,
+					(
+						SELECT Location.Name
+						FROM EventLocation
+						INNER JOIN Location
+						ON EventLocation.LocationID = Location.LocationID
+						WHERE EventLocation.EventID = Event.EventID
+						AND Location.Type = \'STATE_PROVINCE\'
+					) As LocationStateProvince,
+					Location.Name AS LocationCity,
+					Location.Latitude AS LocationLatitude,
+					Location.Longitude AS LocationLongitude,
+					Blog.Subdomain AS BlogSubdomain
+				FROM
+					Event
+					INNER JOIN Blog
+						ON Event.BlogID = Blog.BlogID
+					LEFT JOIN (
+						EventLocation
+						INNER JOIN Location
+							ON EventLocation.LocationID = Location.LocationID
+							AND Location.Type = \'CITY\'
+					)
+						ON Event.EventID = EventLocation.EventID
+				WHERE
+					Event.Year = ?
+					AND (
+						Event.Name LIKE CONCAT(\'%\', ?, \'%\')
+						OR EXISTS (
+							SELECT 1
+							FROM EventLocation
+							INNER JOIN Location
+								ON EventLocation.LocationID = Location.LocationID
+							WHERE Event.EventID = EventLocation.EventID
+							AND double_metaphone(Location.Name) LIKE CONCAT(double_metaphone(?), \'%\')
+						)
+					)
+				ORDER BY
+					Event.Year DESC,
+					Event.Name;
+		');
+		$query->bindValue(1, intval($year), \PDO::PARAM_INT);
+		$query->bindValue(2, $this->trimToNull($q), \PDO::PARAM_STR);
+		$query->bindValue(3, $this->trimToNull($q), \PDO::PARAM_STR);
 		
 		$query->execute();
 		return $query->fetchAll(\PDO::FETCH_ASSOC);

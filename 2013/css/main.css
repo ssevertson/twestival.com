@@ -133,6 +133,13 @@ h2 {
 	margin-top: 20px;
 	margin-bottom: 0px;
 }
+h3 {
+	font-family: 'Melbourne-Bold';
+	font-weight: normal;
+	font-size: 18px;
+	margin-top: 12px;
+	margin-bottom: 0px;
+}
 
 form.rest-link input[type="submit"] {
 	margin: 0px;
@@ -189,7 +196,6 @@ form input[type="submit"].action, form input[type="button"].action {
 	width: 152px;
 	height: 134px;
 	margin-bottom: -64px;
-	z-index: 200;
 	font-size: 14px;
 	float: right;
 	border: 1px solid #cc2f3a;
@@ -238,11 +244,32 @@ form input[type="submit"].action, form input[type="button"].action {
 	font-family: 'Melbourne';
 	font-size: 16px;
 	background-color: #fbfaf6;
+	position: relative;
 }
 #header .info .search #search-button {
 	margin-right: 0px;
 	float: right;
 	margin-right: 6px;
+}
+#header .info .search .ui-autocomplete {
+	width: 400px;
+	font-family: 'Melbourne';
+	font-size: 16px;
+}
+#header .info .search .ui-autocomplete .location {
+	font-size: 12px;
+	text-align: right;
+}
+
+ul#site-admin {
+	float: right;
+	margin-top: 12px;
+	margin-right: 174px;
+	font-family: 'Melbourne';
+	font-size: 15px;
+}
+ul#site-admin li {
+	margin-left: 12px;
 }
 
 /* Sidebars */
@@ -418,7 +445,8 @@ form input[type="submit"].action, form input[type="button"].action {
 	font-family: 'Melbourne';
 	font-size: 20px;
 	margin-top: 12px;
-	text-align: center;
+	text-align: left;
+	padding-left: 6px;
 }
 #footer .newsletter form input#subscribe-button {
 	position: absolute;

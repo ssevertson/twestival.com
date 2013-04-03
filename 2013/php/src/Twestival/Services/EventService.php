@@ -34,6 +34,12 @@ class EventService extends BaseService
 		$this->addUrisToEvents($events);
 		return $events;
 	}
+	function search($year, $q)
+	{
+		$events = $this->container['dao.events']->search($year, $q);
+		$this->addUrisToEvents($events);
+		return $events;
+	}
 	
 	private function addUrisToEvents(&$events)
 	{

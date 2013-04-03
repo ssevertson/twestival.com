@@ -1,0 +1,49 @@
+.legal {
+	font-family: 'Lato';
+	font-size: 14px;
+}
+.legal a {
+	color: #58c2d1;
+}
+.legal ol.clause {
+	list-style-type: decimal;
+	padding-left: 22px;
+}
+.legal ol.clause li {
+	font-family: 'Melbourne-Bold';
+	font-weight: normal;
+	font-size: 22px;
+}
+.legal ol.clause li p {
+	font-family: 'Lato';
+	font-size: 14px;
+}
+.legal ol.clause ol.subclause {
+	list-style-type: upper-alpha;
+	padding-left: 22px;
+}
+.legal ol.clause ol.subclause li {
+	font-family: 'Melbourne-Bold';
+	font-weight: normal;
+	font-size: 18px;
+}
+.legal ol.clause li p {
+	font-family: 'Lato';
+	font-size: 14px;
+}
+.legal ol.clause ol.subclause ul.list {
+	list-style-type: square;
+}
+.legal ol.clause ol.subclause ul.list li {
+	font-family: 'Lato';
+	font-size: 14px;
+}
+.legal table.chart {
+	width: 70%;
+	font-family: 'Lato';
+	font-size: 14px;
+	text-align: left;
+	margin: 0px auto;
+}
+.legal table.chart th {
+}

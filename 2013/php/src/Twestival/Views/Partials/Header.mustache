@@ -1,6 +1,6 @@
 <div id="header">
 	<div class="wrapper">
-		<a href="index">
+		<a href="{{GlobalUri}}/index">
 			<img class="logo" src="img/common/header/logo.png" alt="TWESTIVAL: tweet. meet. give."/>
 		</a>
 		<div class="menu">
@@ -15,10 +15,10 @@
 		<div class="info">
 			<div class="social-media">
 				<a href="https://www.facebook.com/sharer.php?u=http://www.twestival.com" target="_blank" id="header-social-media-facebook">
-					<img src="img/common/header/share-facebook.png" alt="Facebook Like"/>
+					<img src="{{GlobalUri}}/img/common/header/share-facebook.png" alt="Facebook Like"/>
 				</a>
 				<a href="https://twitter.com/share?text=Check%20out%20%40Twestival!%20It's%20back%20and%20you%20can%20register%20your%20city%20at%26url%3Dhttp%3A%2F%2Fwww.twestival.com" target="_blank" id="header-social-media-twitter">
-					<img src="img/common/header/share-twitter.png" alt="Twitter Share"/>
+					<img src="{{GlobalUri}}/img/common/header/share-twitter.png" alt="Twitter Share"/>
 				</a>
 			</div>
 			<ul class="stats">
@@ -34,11 +34,11 @@
 				</li>
 				<li id="stats-total">{{#format.toUSDollars}}{{SummaryStats.DonationTotalUSD}}{{/format.toUSDollars}} raised</li>
 			</ul>
-			<form action="search" method="GET" class="search">
+			<form action="{{GlobalUri}}/events" method="GET" class="search ui-front" id="form-search">
 				<label class="accessible-text" for="search-query">Find a Twestival</label>
-				<input type="text" id="search-query" name="q" value="Find a Twestival"/>
+				<input type="text" id="search-query" name="q" value="" placeholder="Find a Twestival"/>
 				<label class="accessible-text" for="search-button">Search</label>
-				<input type="image" id="search-button" name="btn" src="img/common/header/search.png" alt="Search"/>
+				<input type="image" id="search-button" name="btn" src="{{GlobalUri}}/img/common/header/search.png" alt="Search"/>
 			</form>
 		</div>
 	</div>

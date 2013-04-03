@@ -4,7 +4,7 @@
 	margin-top: 10px;
 	letter-spacing: 0.5px;
 }
-#blog-admin {
+ul#blog-admin {
 	float: right;
 	margin-right: 220px;
 	font-family: 'Melbourne';
@@ -33,7 +33,7 @@ ul#blog-admin li {
 	position: relative;
 	top: 26px;
 	left: -22px;
-	z-index: 200;
+	z-index: 100;
 }
 
 #event .info {
@@ -149,7 +149,7 @@ ul#blog-admin li {
 	width: 238px;
 	border: 1px solid #DCDCDC;
 	padding: 48px 27px 0px 38px;
-	z-index: 100;
+	z-index: 5;
 	background: url('../img/common/sidebar/background.png');
 }
 #fundraising .caption {

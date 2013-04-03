@@ -32,6 +32,25 @@ class GlobalOfficialEventsResource extends BaseResource
 		));
 	}
 	
+	/**
+	 * @method get
+	 * @provides application/javascript
+	 * @priority 2
+	 */
+	function search()
+	{
+		$q = $_GET['q'];
+		$callback = $_GET['callback'];
+		
+		$currentYear = $this->container['service.year']->getMostRecentActiveYear();
+		$events = $this->container['service.event']->search($currentYear, $q);
+		$json = json_encode($events);
+		
+		return $callback
+				? $callback . '(' . $json . ')'
+				: $json;
+	}
+	
 	private function countUniqueFieldValues(&$array, $field)
 	{
 		$unique = array();

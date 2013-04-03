@@ -137,9 +137,10 @@ class Formatters extends BaseHelper
 		{
 			$rendered = '0,100';
 		}
-		$parts = preg_split('/\s,\s/', $rendered, 2);
+		$parts = preg_split('/\s*,\s*/', $rendered, 2);
 		$value = floatval($parts[0]) * 100;
 		$max = (count($parts) == 2) ? floatval($parts[1]) : 100;
+		
 		if($value > $max)
 		{
 			$value = $max;

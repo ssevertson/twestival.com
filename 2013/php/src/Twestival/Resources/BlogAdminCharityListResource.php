@@ -19,6 +19,11 @@ class BlogAdminCharityListResource extends BaseBlogResource
 	function showEditor()
 	{
 		$blog = $this->container['service.blog']->getBySubdomain($this->container['request.subdomain']);
+		$event = &$blog['Event'];
+		if(!$event['Charities'])
+		{
+			$event['Charities'] = array(array());
+		}
 		return $this->renderMustacheHeaderFooter('Blog/Admin/Charity/Edit', $blog);
 	}
 	
