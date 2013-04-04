@@ -2,9 +2,9 @@
 
 /**
  * @namespace global
- * @uri /impact
+ * @uri /impact/test
  */
-class GlobalImpactResource extends BaseResource
+class GlobalImpactTestResource extends BaseResource
 {
 	/**
 	 * @method get
@@ -12,7 +12,7 @@ class GlobalImpactResource extends BaseResource
 	 */
 	function html()
 	{
-		return $this->renderMustacheHeaderFooter('Global/Impact');
+		return $this->renderMustacheHeaderFooter('Global/ImpactTest');
 	}
 }
 ?>
