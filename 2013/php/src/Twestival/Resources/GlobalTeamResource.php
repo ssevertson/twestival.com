@@ -296,7 +296,7 @@ class GlobalTeamResource extends BaseResource
 												'Name' => 'Emilia Maj',
 												'Location' => 'Poland',
 												'TwitterName' => 'emiliamaj',
-												'Tweet' => 'Welcome to Twestival!'
+												'Tweet' => 'I\'m excited to join to the Twestival global movement and strongly encourage you to do so! Guys, let\'s create powerful & helpful community!'
 										),
 								)
 						),

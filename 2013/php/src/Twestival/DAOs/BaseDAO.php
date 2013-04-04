@@ -19,7 +19,7 @@ class BaseDAO
 	}
 	function toDate($value)
 	{
-		return date('Y-m-d', $value);
+		return $value ? date('Y-m-d', $value) : NULL;
 	}
 }
 ?>

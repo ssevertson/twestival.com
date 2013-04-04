@@ -16,6 +16,9 @@
 	font-size: 14px;
 	line-height: 22px;
 }
+.coverage p a {
+	color: #50B1BD;
+}
 
 .sidebar ul {
 	list-style-type: none;
@@ -27,7 +30,7 @@
 .sidebar ul li {
 	margin: 10px 8px 16px 8px;
 }
-.sidebar #sidebar-contact a {
+#sidebar-contact.sidebar a {
 	color: #50B1BD;
 	font-weight: bold;
 }

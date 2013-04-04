@@ -19,37 +19,39 @@
 			<table class="list">
 				<tbody>
 					{{#Event.Sponsors}}
-						<tr>
-							<td class="symbol">
-								{{^First}}
-									<form action="admin/sponsor/{{SponsorID}}" method="POST" class="rest-link">
-										<input type="submit" name="Operation" value="↑"/>
+						{{#SponsorID}}
+							<tr>
+								<td class="symbol">
+									{{^First}}
+										<form action="admin/sponsor/{{SponsorID}}" method="POST" class="rest-link">
+											<input type="submit" name="Operation" value="↑"/>
+										</form>
+									{{/First}}
+								</td>
+								<td class="symbol">
+									{{^Last}}
+										<form action="admin/sponsor/{{SponsorID}}" method="POST" class="rest-link">
+											<input type="submit" name="Operation" value="↓"/>
+										</form>
+									{{/Last}}
+								</td>
+								<th>
+									<a href="admin/sponsor/{{SponsorID}}">
+										{{Name}}
+									</a>
+								</th>
+								<th>
+									<a href="admin/sponsor/{{SponsorID}}">
+										<img src="{{ImageUri}}" alt="{{Name}}" style="max-width: 48px; max-height: 48px;"/>
+									</a>
+								</th>
+								<td class="symbol">
+									<form action="admin/sponsor/{{SponsorID}}!DELETE" method="POST" class="rest-link">
+										<input type="submit" value="⊠" onclick="return confirm('Are you sure you wish to delete this sponsor member?');"/>
 									</form>
-								{{/First}}
-							</td>
-							<td class="symbol">
-								{{^Last}}
-									<form action="admin/sponsor/{{SponsorID}}" method="POST" class="rest-link">
-										<input type="submit" name="Operation" value="↓"/>
-									</form>
-								{{/Last}}
-							</td>
-							<th>
-								<a href="admin/sponsor/{{SponsorID}}">
-									{{Name}}
-								</a>
-							</th>
-							<th>
-								<a href="admin/sponsor/{{SponsorID}}">
-									<img src="{{ImageUri}}" alt="{{Name}}" style="max-width: 48px; max-height: 48px;"/>
-								</a>
-							</th>
-							<td class="symbol">
-								<form action="admin/sponsor/{{SponsorID}}!DELETE" method="POST" class="rest-link">
-									<input type="submit" value="⊠" onclick="return confirm('Are you sure you wish to delete this sponsor member?');"/>
-								</form>
-							</td>
-						</tr>
+								</td>
+							</tr>
+						{{/SponsorID}}
 					{{/Event.Sponsors}}
 					<tr>
 						<td class="symbol"></td>

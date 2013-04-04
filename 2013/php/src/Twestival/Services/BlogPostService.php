@@ -43,36 +43,39 @@ class BlogPostService extends BaseService
 	}
 	private function addUrisToBlogPost(&$post)
 	{
-		$post['BlogPostUri'] = 'http://'
-				. $post['BlogSubdomain']
-				. '.'
-				. $this->container['request.domain']
-				. $this->container['baseUri']
-				. '/post/'
-				. $post['PostID'];
-		
-		$cleanTitle = $this->toCleanUri($post['Title']);
-		
-		$post['BlogPostPermalinkUri'] = $post['BlogPostUri']
-				. '/'
-				. $cleanTitle;
-		
-		$legacy = ($post['Created'] < '2013-01-01');
-		if($legacy)
+		if($post)
 		{
-			$post['BlogPostShareUri'] = 'http://'
+			$post['BlogPostUri'] = 'http://'
 					. $post['BlogSubdomain']
 					. '.'
 					. $this->container['request.domain']
-					. '/blog-entry/'
-					. $post['PostID']
+					. $this->container['baseUri']
+					. '/post/'
+					. $post['PostID'];
+		
+			$cleanTitle = $this->toCleanUri($post['Title']);
+
+			$post['BlogPostPermalinkUri'] = $post['BlogPostUri']
 					. '/'
-					. $cleanTitle
-					. '.html';
-		}
-		else
-		{
-			$post['BlogPostShareUri'] = $post['BlogPostPermalinkUri'];
+					. $cleanTitle;
+			
+			$legacy = ($post['Created'] < '2013-01-01');
+			if($legacy)
+			{
+				$post['BlogPostShareUri'] = 'http://'
+						. $post['BlogSubdomain']
+						. '.'
+						. $this->container['request.domain']
+						. '/blog-entry/'
+						. $post['PostID']
+						. '/'
+						. $cleanTitle
+						. '.html';
+			}
+			else
+			{
+				$post['BlogPostShareUri'] = $post['BlogPostPermalinkUri'];
+			}
 		}
 	}
 	

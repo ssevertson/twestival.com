@@ -56,7 +56,7 @@ class EventSponsorService extends BaseService
 	
 		$sponsors->delete($eventID, $eventSponsorID);
 	
-		foreach ($sponsors->items($teamMembers) as $sponsor)
+		foreach ($sponsors->items($eventID) as $sponsor)
 		{
 			if($sponsor['Sequence'] > $sequence)
 			{

@@ -21,7 +21,6 @@ class BlogService extends BaseService
 	function getUnassigned()
 	{
 		$blogs = $this->container['dao.blogs']->findUnassignedForActiveYear();
-		$this->addUrisToBlogs($blogs);
 		return $blogs;
 	}
 	
@@ -48,12 +47,15 @@ class BlogService extends BaseService
 	
 	private function addDetailsToBlog(&$blog)
 	{
-		$eventID = $blog['EventID'];
-		$event = $this->container['service.event']->getEvent($eventID);
-		$event['Charities'] = $this->container['service.event.charity']->getCharities($eventID);
-		$event['TeamMembers'] = $this->container['service.event.teamMember']->getTeamMembers($eventID);
-		$event['Sponsors'] = $this->container['service.event.sponsor']->getSponsors($eventID);
-		$blog['Event'] = $event;
+		if(isset($blog['EventID']))
+		{
+			$eventID = $blog['EventID'];
+			$event = $this->container['service.event']->getEvent($eventID);
+			$event['Charities'] = $this->container['service.event.charity']->getCharities($eventID);
+			$event['TeamMembers'] = $this->container['service.event.teamMember']->getTeamMembers($eventID);
+			$event['Sponsors'] = $this->container['service.event.sponsor']->getSponsors($eventID);
+			$blog['Event'] = $event;
+		}
 	}
 }
 ?>

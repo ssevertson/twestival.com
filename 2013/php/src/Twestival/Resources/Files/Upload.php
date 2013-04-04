@@ -177,6 +177,7 @@ class Upload
 	{
 		if($this->imageDimensions)
 		{
+			$fileName = $file['name'];
 			$result = getimagesize($file['tmp_name']);
 			if(!$result)
 			{

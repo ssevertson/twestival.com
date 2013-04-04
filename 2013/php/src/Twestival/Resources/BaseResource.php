@@ -13,7 +13,7 @@ class BaseResource extends \Tonic\Resource
 	{
 		$data['BaseUri'] = $this->container['baseUri'];
 		$data['RequestUri'] = $this->container['request.uri'];
-		$data['GlobalUri'] = 'http://'
+		$data['GlobalUri'] = $this->container['request.protocol']
 				. $this->container['request.subdomain.global'] 
 				. '.'
 				. $this->container['request.domain']
@@ -21,13 +21,24 @@ class BaseResource extends \Tonic\Resource
 		return $this->container['mustache.engine']->loadTemplate($template)->render($data);
 	}
 	
-
+	function isSecure()
+	{
+		return $this->container['request.secure'];
+	}
+	function requireSecure()
+	{
+		if(!$this->isSecure())
+		{
+			throw new \Twestival\RedirectException($this->container['request.secure.uri']);
+		}
+	}
 	function isSiteAdmin()
 	{
 		return $this->container['security.siteAdmin'];
 	}
 	function requireSiteAdmin()
 	{
+		$this->requireSecure();
 		if(!$this->isSiteAdmin())
 		{
 			throw new \Tonic\UnauthorizedException;
@@ -40,6 +51,7 @@ class BaseResource extends \Tonic\Resource
 	}
 	function requireCurrentBlogEventAdmin()
 	{
+		$this->requireSecure();
 		if(!$this->isCurrentBlogEventAdmin())
 		{
 			throw new \Tonic\UnauthorizedException;

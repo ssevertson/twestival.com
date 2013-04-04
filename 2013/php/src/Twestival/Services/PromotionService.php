@@ -25,7 +25,29 @@ class PromotionService extends BaseService
 				. $imageFilename;
 	}
 	
-	function getList($pageName, $sectionName, $force = FALSE)
+	function getList($pageName, $sectionName)
+	{
+		$promotions = $this->container['dao.promotions'];
+		$count = $this->getMaxEvents($pageName, $sectionName);
+		
+		$eventPromotions = array();
+		foreach ($promotions->items($pageName, $sectionName, $count) as $eventPromotion)
+		{
+			array_push($eventPromotions, array(
+			'PageName' => $pageName,
+			'SectionName' => $sectionName,
+			'Sequence' => $eventPromotion['Sequence'],
+			'Name' => $eventPromotion['Name'],
+			'ImageFilename' => $eventPromotion['ImageFilename'],
+			'ImageUri' => $this->getImageUri($pageName, $sectionName, $eventPromotion['ImageFilename']),
+			'LinkUri' => $this->container['request.protocol'] . $eventPromotion['Subdomain'] . '.' . $this->container['request.domain'] . '/',
+			'Date' => $eventPromotion['EventDate']
+			));
+		}
+		return $eventPromotions;
+	}
+	
+	function getListForceCount($pageName, $sectionName, $defaultImageFilenames)
 	{
 		$promotions = $this->container['dao.promotions'];
 		$count = $this->getMaxEvents($pageName, $sectionName);
@@ -44,21 +66,22 @@ class PromotionService extends BaseService
 				'Date' => $eventPromotion['EventDate']
 			));
 		}
-		if($force)
+		
+		$defaultImageIndex = 0;
+		while(count($eventPromotions) < $count)
 		{
-			while(count($eventPromotions) < $count)
-			{
-				array_push($eventPromotions, array(
-					'PageName' => $pageName,
-					'SectionName' => $sectionName,
-					'Sequence' => count($eventPromotions) + 1,
-					'Name' => '',
-					'ImageFilename' => '',
-					'ImageUri' => '',
-					'LinkUri' => '',
-					'Date' => 0
-				));
-			}
+			$defaultImageFilename = $defaultImageFilenames[$defaultImageIndex % count($defaultImageFilenames)];
+			array_push($eventPromotions, array(
+				'PageName' => $pageName,
+				'SectionName' => $sectionName,
+				'Sequence' => count($eventPromotions) + 1,
+				'Name' => '',
+				'ImageFilename' => $defaultImageFilename,
+				'ImageUri' => $this->getImageUri($pageName, $sectionName, $defaultImageFilename),
+				'LinkUri' => '',
+				'Date' => 0
+			));
+			$defaultImageIndex++;
 		}
 		return $eventPromotions;
 	}

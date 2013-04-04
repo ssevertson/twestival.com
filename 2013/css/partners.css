@@ -48,6 +48,9 @@
 .partners .captions .caption {
 	padding: 16px 36px 32px 36px;
 }
+.partners .captions .caption a {
+	color: #58c2d1;
+}
 
 #partners-sponsor {
 	display: block;

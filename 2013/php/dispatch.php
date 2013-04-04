@@ -15,13 +15,17 @@ $app = new Tonic\Application(array(
 		'blog' => '/blog')
 ));
 
+$globalSubdomain = 'www';
+$baseUri = '';
+$supportsSecure = TRUE;
 $baseDir = realpath(dirname(__FILE__));
-$baseUri = '/2013';
 $hostname = $_SERVER['HTTP_HOST'];
 $domain = getRequestDomain($hostname);
-$globalSubdomain = 'www';
 $subdomain = getRequestSubdomain($hostname, $globalSubdomain);
 $uri = getRequestUri();
+$secure = !$supportsSecure || isRequestSecure();
+$protocol = $secure ? 'https://' : 'http://';
+
 $tonicUri = getTonicUri(
 		$uri,
 		getTonicNamespace($subdomain),
@@ -41,12 +45,14 @@ $container = new Twestival\Container(array(
 		'baseDir' => $baseDir,
 		'baseUri' => $baseUri,
 		'readOnly' => $isGet,
-		'request.protocol' => 'http://',
+		'request.protocol' => $protocol,
+		'request.secure' => $secure,
 		'request.hostname' => $hostname,
 		'request.domain' => $domain,
 		'request.subdomain' => $subdomain,
 		'request.subdomain.global' => $globalSubdomain,
-		'request.uri' => 'http://' . $hostname . $uri
+		'request.uri' => $protocol . $hostname . $uri,
+		'request.secure.uri' => 'https://' . $hostname . $uri
 ));
 
 register_shutdown_function(function() use (&$container) { handleShutdown($container); });
@@ -66,7 +72,6 @@ try
 }
 catch (Tonic\NotFoundException $e)
 {
-	$container['logger']->addError($e->getMessage());
 	$response = buildRedirectResponse($request, $baseUri . '/error?code=404', $isGet);
 }
 catch (Tonic\UnauthorizedException $e)
@@ -74,7 +79,7 @@ catch (Tonic\UnauthorizedException $e)
 	$container['logger']->addError($e->getMessage());
 	if($isGet && substr_compare($tonicUri, '/login', -6, 6))
 	{
-		setcookie('URI_POST_LOGIN', $uri, 0, '/', $domain, false, true);
+		setcookie('URI_POST_LOGIN', $uri, 0, '/', $domain, $secure, true);
 	}
 	$response = buildRedirectResponse($request, $baseUri, '/login', $isGet);
 }
@@ -101,6 +106,10 @@ catch (Exception $e)
 
 $response->output();
 
+
+
+
+
 function getRequestSubdomain($hostname, $globalSubdomain)
 {
 	$subdomain = NULL;
@@ -122,6 +131,20 @@ function getRequestDomain($hostname)
 		$domain = substr($hostname, strpos($hostname, '.') + 1);
 	}
 	return $domain;
+}
+function isRequestSecure()
+{
+	if(isset($_SERVER['HTTPS']))
+	{
+		$https = strtolower($_SERVER['HTTPS']);
+		return ('on' == $https || '1' == $https);
+	}
+	if(isset($_SERVER['SERVER_PORT']))
+	{
+		$port = intval($_SERVER['SERVER_PORT']);
+		return (443 == $port || 8443 == $port);
+	}
+	return false;
 }
 
 function getTonicNamespace($subdomain)

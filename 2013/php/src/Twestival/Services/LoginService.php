@@ -8,7 +8,7 @@ class LoginService extends BaseService
 		{
 			session_start();
 			session_destroy();
-			setcookie($this->container['session.cookie'], FALSE, 0, '/', $this->container['request.domain'], false, true);
+			setcookie($this->container['session.cookie'], FALSE, 0, '/', $this->container['request.domain'], $this->container['request.secure'], true);
 		}
 	}
 	

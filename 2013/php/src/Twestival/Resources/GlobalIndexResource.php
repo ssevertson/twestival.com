@@ -13,8 +13,8 @@ class GlobalIndexResource extends BaseResource
 	function html()
 	{
 		$promotions = $this->container['service.promotion'];
-		$primaryPromotions = $promotions->getList('HOME', 'PRIMARY', FALSE);
-		$secondaryPromotions = $promotions->getList('HOME', 'SECONDARY', TRUE);
+		$primaryPromotions = $promotions->getList('HOME', 'PRIMARY');
+		$secondaryPromotions = $promotions->getListForceCount('HOME', 'SECONDARY', array('event-default-1.png', 'event-default-2.png', 'event-default-3.png', 'event-default-4.png', 'event-default-5.png'));
 		
 		return $this->renderMustacheHeaderFooter('Global/Index', array(
 			'PrimaryPromotions' => $primaryPromotions,

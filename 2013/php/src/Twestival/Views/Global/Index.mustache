@@ -5,6 +5,10 @@
 		
 		<link rel="stylesheet" href="css/home.css" />
 		
+		<meta property="og:title" content="Twestival {{CurrentYear}}" />
+		<meta property="og:description" content="Twestival is a global movement that uses social media for social good, empowering communities around the world to organize one-of-a-kind offline events in support of local causes. Explore how you can make a difference!" />
+		<meta property="og:image" content="{{GlobalUri}}/img/common/facebook-share.png" />
+		
 		<!--  Slider -->
 		<script type="text/javascript" src="js/vendor/slides.jquery-1.2.0.min.js"></script>
 		<script type="text/javascript">
@@ -84,11 +88,11 @@
 					</div>
 				</div>
 				<div class="slide">
-					<a href="http://twestival.tumblr.com/post//42900846396/charitywater" target="_blank">
+					<a href="http://twestival.tumblr.com/post/47078718642/charitywater" target="_blank">
 						<img src="img/home/slider/content/slide-3.jpg" width="1500" height="600" alt="See the 50 wells Twestival helped drill"/>
 					</a>
 					<div class="caption">
-						<a href="http://twestival.tumblr.com/post//42900846396/charitywater" target="_blank">
+						<a href="http://twestival.tumblr.com/post/47078718642/charitywater" target="_blank">
 							<span class="title">
 								See the 50 wells Twestival helped drill
 							</span>
@@ -99,11 +103,11 @@
 					</div>
 				</div>
 				<div class="slide">
-					<a href="http://twestival.tumblr.com/post/46842400384/concern" target="_blank">
+					<a href="http://twestival.tumblr.com/post/47077610497/concern" target="_blank">
 						<img src="img/home/slider/content/slide-4.jpg" width="1500" height="600" alt="Update from Concern Worldwide: How Twestival helped 53,000 children"/>
 					</a>
 					<div class="caption">
-						<a href="http://twestival.tumblr.com/post/46842400384/concern" target="_blank">
+						<a href="http://twestival.tumblr.com/post/47077610497/concern" target="_blank">
 							<span class="title">
 								Update from Concern Worldwide: How Twestival helped 53,000 children
 							</span>
@@ -304,6 +308,9 @@
 									<span class="date">{{#format.toEuropeanDate}}{{Date}}{{/format.toEuropeanDate}}</span>
 								</a>
 							{{/LinkUri}}
+							{{^LinkUri}}
+								<span class="logo"><img src="{{ImageUri}}" alt="" /></span>
+							{{/LinkUri}}
 						</li>
 					{{/SecondaryPromotionsRow1}}
 				</ul>
@@ -316,6 +323,9 @@
 									<span class="location">{{Name}}</span>
 									<span class="date">{{#format.toEuropeanDate}}{{Date}}{{/format.toEuropeanDate}}</span>
 								</a>
+							{{/LinkUri}}
+							{{^LinkUri}}
+								<span class="logo"><img src="{{ImageUri}}" alt="" /></span>
 							{{/LinkUri}}
 						</li>
 					{{/SecondaryPromotionsRow2}}
@@ -330,10 +340,13 @@
 									<span class="date">{{#format.toEuropeanDate}}{{Date}}{{/format.toEuropeanDate}}</span>
 								</a>
 							{{/LinkUri}}
+							{{^LinkUri}}
+								<span class="logo"><img src="{{ImageUri}}" alt="" /></span>
+							{{/LinkUri}}
 						</li>
 					{{/SecondaryPromotionsRow3}}
 					<li id="event-more" class="event right">
-						<a href="official_events">See All Events</a>
+						<a href="events">See All Events</a>
 					</li>
 				</ul>
 			</div>

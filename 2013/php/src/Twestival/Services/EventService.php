@@ -31,7 +31,6 @@ class EventService extends BaseService
 	function findPriorRelatedToRegistration($registrationID)
 	{
 		$events = $this->container['dao.events']->findPriorRelatedToRegistration($registrationID);
-		$this->addUrisToEvents($events);
 		return $events;
 	}
 	function search($year, $q)
@@ -51,12 +50,18 @@ class EventService extends BaseService
 	private function addUrisToEvent(&$event)
 	{
 		$event['TwitterUri'] = EventService::BASE_URI_TWITTER . $event['TwitterName'];
-		$event['BlogUri'] = 'http://' 
-				. $event['BlogSubdomain']
-				. '.' 
-				. $this->container['request.domain']
-				. $this->container['baseUri'];
-		$event['ImageUri'] = $this->getImageUri($event['ImageFilename']);
+		if(isset($event['BlogSubdomain']))
+		{
+			$event['BlogUri'] = 'http://' 
+					. $event['BlogSubdomain']
+					. '.' 
+					. $this->container['request.domain']
+					. $this->container['baseUri'];
+		}
+		if(isset($event['ImageFilename']))
+		{
+			$event['ImageUri'] = $this->getImageUri($event['ImageFilename']);
+		}
 	}
 	function getImagePath()
 	{
@@ -135,7 +140,7 @@ class EventService extends BaseService
 				->setSubject('Welcome to Twestival ' . $currentYear . '!')
 				->setBody(
 						$this->container['mustache.engine']->loadTemplate('Email/EventApproval')->render(array(
-								'Username' => $twitterName,
+								'Username' => $registration['TwitterName'],
 								'Password' => $password,
 								'BlogUri' => 'http://' 
 										. $blog['Subdomain']
@@ -145,7 +150,7 @@ class EventService extends BaseService
 						))
 						, 'text/html')
 				->setTo(array(
-						'scott@severtson.us' => $name
+						$organizerEmailAddress => $name
 				))
 		);
 		

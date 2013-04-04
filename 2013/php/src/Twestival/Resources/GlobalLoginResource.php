@@ -9,6 +9,7 @@ class GlobalLoginResource extends BaseResource
 	/**
 	 * @method GET
 	 * @provides text/html
+	 * @requireSecure
 	 */
 	function showLogin()
 	{
@@ -21,6 +22,7 @@ class GlobalLoginResource extends BaseResource
 	/**
 	 * @method POST
 	 * @provides text/html
+	 * @requireSecure
 	 */
 	function authenticate()
 	{
@@ -29,7 +31,7 @@ class GlobalLoginResource extends BaseResource
 		{
 			if(isset($_COOKIE['URI_POST_LOGIN']))
 			{
-				setcookie('URI_POST_LOGIN', FALSE, 0, '/', $this->container['request.domain'], false, true);
+				setcookie('URI_POST_LOGIN', FALSE, 0, '/', $this->container['request.domain'], false, $this->container['request.secure']);
 				throw new \Twestival\RedirectException($_COOKIE['URI_POST_LOGIN']);
 			}
 			else

@@ -55,7 +55,7 @@
 						<div class="body">
 							<label for="location-id" class="required">Location</label><br/>
 							{{#PossibleCities}}
-								<input type="radio" name="ReRegistration" id="location-id-{{LocationID}}" value="true" class="required" />
+								<input type="radio" name="LocationID" id="location-id-{{LocationID}}" value="{{LocationID}}" class="required" />
 								<label for="location-id-{{LocationID}}">{{Name}}</label>
 								(<a href="https://maps.google.com/?q={{Latitude}},{{Longitude}}&z=5" target="_blank">Map</a>)<br/>
 							{{/PossibleCities}}

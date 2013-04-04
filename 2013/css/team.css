@@ -4,6 +4,7 @@ ul.index {
 	margin: 0px;
 	padding: 0px;
 	list-style-type: none;
+	float: left;
 }
 ul.index li img {
 	margin: -4px 0px 0px 6px;
@@ -31,6 +32,14 @@ ul.index li img {
 	padding: 7px 16px 3px 16px;
 	text-align: center;
 }
+#team-founder-advisor.subteam {
+	width: 326px;
+	float: right;
+	margin-right: 330px;
+	margin-bottom: 0px;
+	padding-bottom: 0px;
+}
+
 .subteam .members {
 	text-align: left;
 	position: relative;

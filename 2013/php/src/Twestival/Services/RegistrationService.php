@@ -44,7 +44,7 @@ class RegistrationService extends BaseService
 						))
 				)
 				->setTo(array(
-						'registration@twestival.com' => 'Twestival Registration'
+						'registrations@twestival.com' => 'Twestival Registration'
 				))
 		);
 		

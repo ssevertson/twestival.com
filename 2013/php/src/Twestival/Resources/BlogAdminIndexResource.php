@@ -10,6 +10,7 @@ class BlogAdminIndexResource extends BaseBlogResource
 	/**
 	 * @method get
 	 * @provides text/html
+	 * @requireCurrentBlogEventAdmin
 	 */
 	function html()
 	{

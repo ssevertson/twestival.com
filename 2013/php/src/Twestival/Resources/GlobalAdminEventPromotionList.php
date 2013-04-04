@@ -17,7 +17,7 @@ class GlobalAdminEventPromotionListResource extends BaseResource
 	 */
 	function showList($pageName, $sectionName)
 	{
-		$eventPromotions = $this->container['service.promotion']->getList($pageName, $sectionName, TRUE);
+		$eventPromotions = $this->container['service.promotion']->getListForceCount($pageName, $sectionName, array(''));
 		$eventPromotions[0]['First'] = TRUE;
 		$eventPromotions[count($eventPromotions) - 1]['Last'] = TRUE;
 		

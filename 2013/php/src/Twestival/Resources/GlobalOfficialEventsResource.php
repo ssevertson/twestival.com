@@ -39,15 +39,18 @@ class GlobalOfficialEventsResource extends BaseResource
 	 */
 	function search()
 	{
+		if(!isset($_GET['q']))
+		{
+			return;
+		}
 		$q = $_GET['q'];
-		$callback = $_GET['callback'];
 		
 		$currentYear = $this->container['service.year']->getMostRecentActiveYear();
 		$events = $this->container['service.event']->search($currentYear, $q);
 		$json = json_encode($events);
 		
-		return $callback
-				? $callback . '(' . $json . ')'
+		return isset($_GET['callback'])
+				? $_GET['callback'] . '(' . $json . ')'
 				: $json;
 	}
 	
