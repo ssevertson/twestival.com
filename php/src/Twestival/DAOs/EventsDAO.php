@@ -18,7 +18,8 @@ class EventsDAO extends BaseDAO
 					ON EventLocation.LocationID = Location.LocationID
 			WHERE
 				Year.Active = TRUE
-				AND Location.Type = UPPER(?)
+				AND Event.Active = TRUE
+				AND Location.Type = UPPER(?);
 		');
 		$query->bindValue(1, $locationType, \PDO::PARAM_STR);
 		$query->execute();
@@ -37,6 +38,7 @@ class EventsDAO extends BaseDAO
 					ON Year.Year = Event.Year
 			WHERE
 				Year.Active = TRUE
+				AND Event.Active = TRUE;
 		');
 		$query->execute();
 		return floatval($query->fetchColumn());

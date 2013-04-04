@@ -142,9 +142,15 @@ class EventService extends BaseService
 						$this->container['mustache.engine']->loadTemplate('Email/EventApproval')->render(array(
 								'Username' => $registration['TwitterName'],
 								'Password' => $password,
-								'BlogUri' => 'http://' 
+								'CurrentYear' => $currentYear,
+								'BlogUri' => 'https://' 
 										. $blog['Subdomain']
 										. '.' 
+										. $this->container['request.domain']
+										. $this->container['baseUri'],
+								'GlobalUri' => 'https://'
+										. $this->container['request.subdomain.global']
+										. '.'
 										. $this->container['request.domain']
 										. $this->container['baseUri']
 						))
