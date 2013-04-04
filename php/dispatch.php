@@ -19,7 +19,7 @@ $app = new Tonic\Application(array(
 
 $globalSubdomain = 'www';
 $baseUri = '';
-$supportsSecure = FALSE;
+$supportsSecure = TRUE;
 $baseDir = realpath(dirname(__FILE__));
 $hostname = $_SERVER['HTTP_HOST'];
 $domain = getRequestDomain($hostname);
