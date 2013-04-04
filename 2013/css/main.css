@@ -513,6 +513,10 @@ ul#site-admin li {
 	float: right;
 }
 
+#google_translate_element .goog-te-gadget {
+	text-align: right;
+}
+
 
 /* ==========================================================================
    Media Queries

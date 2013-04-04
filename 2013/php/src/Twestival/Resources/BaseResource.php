@@ -2,6 +2,15 @@
 
 class BaseResource extends \Tonic\Resource
 {
+	/**
+	 * @method head
+	 * @provides text/html
+	 */
+	function head()
+	{
+		return '';
+	}
+	
 	function renderMustacheHeaderFooter($template, $data = array())
 	{
 		$data['CurrentYear'] = $this->container['service.year']->getMostRecentActiveYear();

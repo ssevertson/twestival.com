@@ -12,7 +12,9 @@ $app = new Tonic\Application(array(
 	),
 	'mount' => array(
 		'global' => '/global',
-		'blog' => '/blog')
+		'blog' => '/blog'),
+	'cache' => new Tonic\MetadataCacheFile(
+		'/tmp/tonic.cache')
 ));
 
 $globalSubdomain = 'www';
@@ -72,16 +74,22 @@ try
 }
 catch (Tonic\NotFoundException $e)
 {
+	$container['logger']->addWarning($e->getMessage());
 	$response = buildRedirectResponse($request, $baseUri . '/error?code=404', $isGet);
 }
 catch (Tonic\UnauthorizedException $e)
 {
-	$container['logger']->addError($e->getMessage());
+	$container['logger']->addWarning($e->getMessage());
 	if($isGet && substr_compare($tonicUri, '/login', -6, 6))
 	{
 		setcookie('URI_POST_LOGIN', $uri, 0, '/', $domain, $secure, true);
 	}
 	$response = buildRedirectResponse($request, $baseUri, '/login', $isGet);
+}
+catch (Tonic\NotAcceptableException $e)
+{
+	$container['logger']->addWarning($e->getMessage());
+	$response = buildRedirectResponse($request, $baseUri . '/error?code=406', $isGet);
 }
 catch (Tonic\Exception $e)
 {
