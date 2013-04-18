@@ -5,44 +5,366 @@
 		
 		<link rel="stylesheet" href="css/impact.css" />
 		
-		<script type="text/javascript" src="https:////www.google.com/jsapi"></script>
-		<script type="text/javascript">
-			
-			// TODO: Move into iframe for Firefox compatibility
-		
-			function drawRegionsMap() {
-				var data = google.visualization.arrayToDataTable([
-						['Country', 'Popularity'],
-						['Germany', 200],
-						['United States', 300],
-						['Brazil', 400],
-						['Canada', 500],
-						['France', 600],
-						['RU', 2000]
-				]);
-				
-
-				var geochart = new google.visualization.GeoChart(
-						document.getElementById('map_canvas'));
-				
-				google.visualization.events.addListener(geochart, 'select', function () {
-					var selection = geochart.getSelection();
-					alert('You clicked on row ' + selection[0].row + ' which corresponds to data point ' + data.getValue(selection[0].row, 0) + ': ' + data.getValue(selection[0].row, 1));
-				});
-
-				geochart.draw(data, {});
-			};
-			
-			google.load('visualization', '1', {'packages': ['geochart']});
-			google.setOnLoadCallback(function() { setTimeout(drawRegionsMap, 100); });
-		</script>
+		<script type="text/javascript" src="https://www.google.com/jsapi"></script>
 	</head>
 	<body id="impact">
 		{{> Header }}
 
  		<div class="wrapper">
-			<h1>Impact</h1> 
-			<div id="map_canvas"></div>
+			<h1>Impact</h1>
+			<!-- IFrame necessary to work around a bug in Google Visualizations in Firefox when a <base> tag is used -->
+			<!-- src="blank.html" necessary to ensure same-origin policy  -->
+			<iframe id="map-frame" src="blank.html" scrolling="no" seamless="seamless"></iframe>
+			<iframe id="table-frame" src="blank.html" scrolling="no" seamless="seamless"></iframe>
+			
+			<script type="text/javascript">
+				google.load('visualization', '1', {'packages': ['geochart', 'table']});
+
+				var currentLocation = {};
+				var currentYear = 2011;
+				
+				var geochartIFrame, geochartDiv;
+				var tableIFrame, tableDiv;
+				$('#map-frame').load(function() {
+					geochartIFrame = $(this);
+					geochartDiv = makeDivInIFrame(
+							geochartIFrame,
+							'map-canvas',
+							{ style: 'margin-left: -16px; margin-right: 16px' });
+
+					$('#table-frame').load(function() {
+						tableIFrame = $(this);
+						tableDiv = makeDivInIFrame(
+								tableIFrame,
+								'table-canvas',
+								{});
+						
+						addIFrameStylesheet(tableIFrame, '//fonts.googleapis.com/css?family=Lato');
+						addIFrameStylesheet(tableIFrame, 'css/google-visualization-data-table.css');
+						
+						google.setOnLoadCallback(function() {
+							setLocation({
+								Type: 'WORLD',
+								ISO3166Code: null,
+								LocationID: null
+							});
+						});
+					});
+				});
+					
+
+				function makeDivInIFrame(iframe, id, attributes) {
+					var iframeBody = iframe.contents().find('body');
+					
+					attributes['id'] = id;
+					iframeBody.append($('<div/>', attributes));
+					
+					return $('#' + id, iframeBody).get(0);
+				};
+				
+				function setIFrameHeight(iframe) {
+					return function() {
+						var iframeBody = iframe.contents().find('body');
+						iframe.height(iframeBody.height() + 20);
+					};
+				};
+				function addIFrameStylesheet(iframe, uri) {
+					iframe.contents().find('head').append($(
+							'<link/>',
+							{
+								rel: 'stylesheet',
+								type: 'text/css',
+								href: uri
+							}
+					));
+				};
+				function addDataTableRow(dataTable, entry, location) {
+					dataTable.addRow([
+							location || entry['ISO3166Code'],
+							entry['LocationID'],
+							entry['Type'],
+							entry['ISO3166Code'],
+							entry['Name'],
+							entry['Latitude'],
+							entry['Longitude'],
+							entry['DonationTotalUSD'] / entry['Population'] * 1000,
+							entry['DonationTotalUSD']
+					]);
+				};
+				var Columns = {
+						LOCATION: 0,
+						ID: 1,
+						TYPE: 2,
+						ISO3166CODE: 3,
+						NAME: 4,
+						LATITUDE: 5,
+						LONGITUDE: 6,
+						PER_CAPITA: 7,
+						DONATIONS: 8
+				};
+				function createDataTable() {
+					var dataTable = new google.visualization.DataTable();
+					dataTable.addColumn({
+						'type': 'string',
+						'label': 'Location',
+					});
+					dataTable.addColumn({
+						'type': 'number',
+						'label': 'LocationID',
+					});
+					dataTable.addColumn({
+						'type': 'string',
+						'label': 'Type',
+					});
+					dataTable.addColumn({
+						'type': 'string',
+						'label': 'ISO3166Code',
+					});
+					dataTable.addColumn({
+						'type': 'string',
+						'label': 'Name',
+					});
+					dataTable.addColumn({
+						'type': 'number',
+						'label': 'Latitude',
+					});
+					dataTable.addColumn({
+						'type': 'number',
+						'label': 'Longitude',
+					});
+					dataTable.addColumn({
+						'type': 'number',
+						'label': 'Donations Per 1,000 Capita',
+					});
+					dataTable.addColumn({
+						'type': 'number',
+						'label': 'Total Donations',
+					});
+					return dataTable;
+				};
+
+				function setLocation(location) {
+					console.log(location);
+					currentLocation = location;
+
+					var apiUri;
+					switch(location.Type) {
+						case 'WORLD':
+							apiUri = 'CONTINENT';
+							break;
+						case 'CONTINENT':
+							apiUri = 'COUNTRY/' + location.LocationID;
+							break;
+						case 'COUNTRY':
+							apiUri = 'CITY/'  + location.LocationID;
+							break;
+					};
+					
+					if(apiUri) {
+						$.ajax({
+								type: 'GET',
+								url: 'impact/api/' + currentYear + '/' + apiUri,
+								dataType: 'json',
+								success: function(data) {
+									showGeochart(
+											geochartDiv,
+											location,
+											data,
+											null,
+											setLocation
+									);
+									showTable(
+											tableDiv,
+											location,
+											data,
+											setIFrameHeight(tableIFrame),
+											setLocation
+									);
+								}
+						});
+					};
+				};
+
+				
+				function showGeochart(canvas, location, data, drawCallback, selectCallback) {
+					
+					function getOptions(location) {
+						var options = {
+								colorAxis: {colors: ['#8d53a0', '#52c5d7', '#72be44', '#f9a51a', '#f26f21', '#D23A42']},
+								backgroundColor: { fill:'transparent' },
+								width: 919,
+								height: 613,
+								datalessRegionColor: '#999999'
+						};
+						switch(location.Type) {
+							case 'WORLD':
+								return $.extend(options, {
+										displayMode: 'regions',
+										resolution: 'subcontinents',
+										region: 'world'
+								});
+							case 'CONTINENT':
+								var region, additional = {};
+								switch(location.ISO3166Code) {
+									case 'AF':
+										region = '002';
+										break;
+									case 'AS':
+										region = '142';
+										break;
+									case 'EU':
+										region = '150';
+										break;
+									case 'NA':
+										region = '019';
+										options.width *= 1.8;
+										options.height *= 1.8;
+										break;
+									case 'OC':
+										region = '009';
+										break;
+									case 'SA':
+										region = '005';
+										break;
+								};
+								return $.extend(options, {
+									displayMode: 'regions',
+									resolution: 'countries',
+									region: region
+								});
+							case 'COUNTRY':
+								return $.extend(options, {
+									displayMode: 'markers',
+									resolution: 'provinces',
+									region: location.ISO3166Code,
+									datalessRegionColor: '#cccccc'
+
+								});
+						};
+					};
+					function buildDataTable(location, data) {
+						var dataTable = createDataTable();
+						
+						switch(location.Type) {
+							case 'WORLD':
+								var subContinentsByISO3166ContinentCode = {
+										'AF': ['015', '011', '017', '014', '018'],
+										'EU': ['154', '155', '151', '039'],
+										'NA': ['021', '029', '013'],
+										'SA': ['005'],
+										'AS': ['143', '030', '034', '035', '145'],
+										'OC': ['053', '054', '057', '061']
+								};
+								for(var i in data) {
+									var entry = data[i];
+									var subContinents = subContinentsByISO3166ContinentCode[entry['ISO3166Code']];
+									for(var j in subContinents) {
+										addDataTableRow(dataTable, entry, subContinents[j]);
+									};
+								};
+								break;
+							default:
+								for(var i in data) {
+									var entry = data[i];
+									addDataTableRow(dataTable, entry);
+								};
+								break;
+						};
+						return dataTable;
+					};
+					
+					var jCanvas = $(canvas);
+					if(location.Type == 'CONTINENT' && location.ISO3166Code == 'NA') {
+						jCanvas.css({top: '-120px', left: '-350px'});
+					} else {
+						jCanvas.css({top: '0px', left: '0px'});
+					}
+					var geochart = new google.visualization.GeoChart(canvas);
+					
+					var dataTable = buildDataTable(location, data);
+					
+					// Replace region name with specified name
+					new google.visualization.PatternFormat('{0}').format(dataTable, [Columns.NAME], Columns.LOCATION);
+					new google.visualization.NumberFormat({pattern: 'USD #,##0.00'}).format(dataTable, Columns.PER_CAPITA);
+					new google.visualization.NumberFormat({pattern: 'USD #,##0.00'}).format(dataTable, Columns.DONATIONS);
+					
+					google.visualization.events.addListener(geochart, 'select', function()
+					{
+						var row = geochart.getSelection()[0].row;
+						selectCallback({
+								Type:        dataTable.getValue(row, Columns.TYPE),
+								LocationID:  dataTable.getValue(row, Columns.ID),
+								ISO3166Code: dataTable.getValue(row, Columns.ISO3166CODE)
+						});
+					});
+					
+					var dataView = new google.visualization.DataView(dataTable);
+					switch(location.Type) {
+						case 'COUNTRY':
+							dataView.setColumns([Columns.LATITUDE, Columns.LONGITUDE, Columns.NAME, Columns.PER_CAPITA, Columns.DONATIONS]);
+							break;
+						default:
+							dataView.setColumns([Columns.LOCATION, Columns.PER_CAPITA, Columns.DONATIONS]);
+							break;
+					};
+					geochart.draw(
+						dataView, 
+						getOptions(location));
+					
+					if(drawCallback) {
+						drawCallback();
+					};
+				};
+				
+				function showTable(canvas, location, data, drawCallback, selectCallback) {
+					function getOptions(location) {
+						return {
+							width: '100%',
+							sortColumn: 1,
+							sortAscending: false,
+							allowHtml: true
+						};
+					};
+					function buildDataTable(location, data) {
+						var dataTable = createDataTable();
+						for(var i in data) {
+							var entry = data[i];
+							addDataTableRow(dataTable, entry);
+						};
+						return dataTable;
+					};
+					
+					var table = new google.visualization.Table(canvas);
+					
+					var dataTable = buildDataTable(location, data);
+					
+					dataTable.setProperty(0, Columns.NAME, 'style', 'width: 50%');
+					dataTable.setProperty(0, Columns.PER_CAPITA, 'style', 'width: 25%');
+					dataTable.setProperty(0, Columns.DONATIONS, 'style', 'width: 25%');
+
+					new google.visualization.NumberFormat({pattern: 'USD #,##0.00'}).format(dataTable, Columns.PER_CAPITA);
+					new google.visualization.NumberFormat({pattern: 'USD #,##0.00'}).format(dataTable, Columns.DONATIONS);
+
+					var dataView = new google.visualization.DataView(dataTable);
+					dataView.setColumns([Columns.NAME, Columns.PER_CAPITA, Columns.DONATIONS]);
+					
+					google.visualization.events.addListener(table, 'select', function()
+							{
+								var row = table.getSelection()[0].row;
+								selectCallback({
+										Type:        dataTable.getValue(row, Columns.TYPE),
+										LocationID:  dataTable.getValue(row, Columns.ID),
+										ISO3166Code: dataTable.getValue(row, Columns.ISO3166CODE)
+								});
+							});
+					
+					table.draw(
+							dataView, 
+							getOptions(location));
+					
+					drawCallback();
+				};
+			</script>
 		</div>
 		
 		{{> Footer }}

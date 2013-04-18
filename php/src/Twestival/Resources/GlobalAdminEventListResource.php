@@ -35,5 +35,25 @@ class GlobalAdminEventListResource extends BaseResource
 				'Events' => $events
 		));
 	}
+	/**
+	 * @method post
+	 * @requireSiteAdmin
+	 */
+	function updateLocations()
+	{
+		foreach($this->container['service.year']->getYears() as $year)
+		{
+			$this->container['logger']->addInfo('Processing Year: ' . $year);
+			foreach($this->container['service.event']->getEvents($year['Year'], TRUE) as $event)
+			{
+				if($event['LocationID'])
+				{
+					$this->container['logger']->addInfo('Updating Event: ' . $event['EventID']);
+					$this->container['service.location']->saveEventLocationCity($event['EventID'], $event['LocationID']);
+				}
+			}
+		}
+		throw new \Twestival\RedirectException("/admin");
+	}
 }
 ?>

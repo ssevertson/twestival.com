@@ -40,13 +40,16 @@
 .partners td {
 	width: 33%;
 }
+.partners .logos td {
+	padding-bottom: 16px;
+}
 .partners .captions {
 	vertical-align: top;
 	font-family: 'Lato';
 	font-size: 13px;
 }
 .partners .captions .caption {
-	padding: 16px 36px 32px 36px;
+	padding: 0px 36px 32px 20px;
 }
 .partners .captions .caption a {
 	color: #58c2d1;

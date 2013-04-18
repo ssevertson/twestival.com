@@ -125,18 +125,6 @@ class GlobalTeamResource extends BaseResource
 												'TwitterName' => 'fooz',
 												'Tweet' => 'I love Twestival because you see hope turn into reality if you put all your heart in it! Let\'s change the world for the better together!'
 										),
-										array(
-												'Name' => 'Mohak Prince',
-												'Location' => 'India',
-												'TwitterName' => 'mohakprince',
-												'Tweet' => 'Redefining the concept of doing a good deed, every single time! Lets make this twestival a nice one to remember.'
-										),
-										array(
-												'Name' => 'Rosario Juan',
-												'Location' => 'Philippines',
-												'TwitterName' => 'juanxi',
-												'Tweet' => 'Mabuhay from @TwestivalMNL! Be a part of a global initiative of social media for social good! Make your tweets count & make a difference :)'
-										),
 								)
 						),
 						array(
@@ -280,6 +268,12 @@ class GlobalTeamResource extends BaseResource
 						array(
 								'Name' => 'Design',
 								'Members' => array(
+										array(
+												'Name' => 'Morgan Rose',
+												'Location' => 'Canada',
+												'TwitterName' => 'morganlisarose',
+												'Tweet' => 'So proud to be a part of it @twestival. Think global. Act local. Start something beautiful.'
+										),
 										array(
 												'Name' => 'Ignacio Garcia',
 												'Location' => 'Argentina',

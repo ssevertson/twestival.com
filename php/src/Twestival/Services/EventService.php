@@ -81,8 +81,8 @@ class EventService extends BaseService
 	function getDefaultEventSettings($year, $registration)
 	{
 		$name = isset($registration['PreferredTwestivalName'])
-		? $registration['PreferredTwestivalName']
-		: 'Twestival ' . $registration['City'] . ' ' . $year;
+				? $registration['PreferredTwestivalName']
+				: 'Twestival ' . $registration['City'] . ' ' . $year;
 	
 		$relatedBlogID = 0;
 		$relatedEvents = $this->findPriorRelatedToRegistration($registration['RegistrationID']);

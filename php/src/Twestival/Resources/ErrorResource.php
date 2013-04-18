@@ -11,10 +11,13 @@ class ErrorResource extends BaseResource
 	 */
 	function html()
 	{
-		$code = $_GET['code'];
-		if(is_numeric($code))
+		if(isset($_GET['code']))
 		{
-			header(':', true, intval($code));
+			$code = $_GET['code'];
+			if(is_numeric($code))
+			{
+				header(':', true, intval($code));
+			}
 		}
 		return $this->renderMustache('Error');
 	}

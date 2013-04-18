@@ -194,7 +194,7 @@ form input[type="submit"].action, form input[type="button"].action {
 #header .info {
 	position: relative;
 	width: 152px;
-	height: 134px;
+	height: 116px; /* 2013-04-07: Temporary until we start getting donations - original is 134px */
 	margin-bottom: -64px;
 	font-size: 14px;
 	float: right;
@@ -227,6 +227,8 @@ form input[type="submit"].action, form input[type="button"].action {
 	margin: 3px 0px 3px 0px;
 	border-bottom: 1px solid #b32b35;
 }
+
+#header .info .stats #stats-total, /* 2013-04-07: Temporary until we start getting donations */
 #header .info .stats #stats-total {
 	border: none;
 }

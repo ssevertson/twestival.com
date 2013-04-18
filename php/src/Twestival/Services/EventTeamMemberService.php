@@ -124,7 +124,7 @@ class EventTeamMemberService extends BaseService
 		
 		$teamMembers->delete($eventID, $eventTeamMemberID);
 	
-		foreach ($teamMembers->items($teamMembers) as $teamMember)
+		foreach ($teamMembers->items($eventID) as $teamMember)
 		{
 			if($teamMember['Sequence'] > $sequence)
 			{

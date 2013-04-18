@@ -92,6 +92,7 @@ class EventsDAO extends BaseDAO
 						WHERE EventLocation.EventID = Event.EventID
 						AND Location.Type = \'STATE_PROVINCE\'
 					) As LocationStateProvince,
+					Location.LocationID As LocationID,
 					Location.Name AS LocationCity,
 					Location.Latitude AS LocationLatitude,
 					Location.Longitude AS LocationLongitude,
@@ -150,6 +151,7 @@ class EventsDAO extends BaseDAO
 						WHERE EventLocation.EventID = Event.EventID
 						AND Location.Type = \'STATE_PROVINCE\'
 					) As LocationStateProvince,
+					Location.LocationID As LocationID,
 					Location.Name AS LocationCity,
 					Location.Latitude AS LocationLatitude,
 					Location.Longitude AS LocationLongitude,
@@ -214,6 +216,7 @@ class EventsDAO extends BaseDAO
 						WHERE EventLocation.EventID = Event.EventID
 						AND Location.Type = \'STATE_PROVINCE\'
 					) As LocationStateProvince,
+					Location.LocationID As LocationID,
 					Location.Name AS LocationCity,
 					Location.Latitude AS LocationLatitude,
 					Location.Longitude AS LocationLongitude,
@@ -311,6 +314,7 @@ class EventsDAO extends BaseDAO
 						WHERE EventLocation.EventID = Event.EventID
 						AND Location.Type = \'STATE_PROVINCE\'
 					) As LocationStateProvince,
+					Location.LocationID As LocationID,
 					Location.Name AS LocationCity,
 					Location.Latitude AS LocationLatitude,
 					Location.Longitude AS LocationLongitude,

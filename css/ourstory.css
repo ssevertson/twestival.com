@@ -86,12 +86,22 @@
 	float: left;
 	padding-top: 20px;
 }
-.timeline .pull-left .info  img {
+.timeline .thumbnail {
+	display: inline-block;
+	width: 217px;
+	height: 132px;
+}
+.timeline .pull-left .info  .thumbnail {
 	float: left;
 	margin: 0px 32px 0px 10px;
-	
 }
-.timeline .pull-right .info  img {
+.timeline .pull-right .info  .thumbnail {
 	float: right;
 	margin: 0px 15px 0px 24px;
+}
+.timeline .info .video-play {
+	display: inline-block;
+	width: 217px;
+	height: 132px;
+	background: transparent url(../img/ourstory/overlay-play.png) no-repeat center center;
 }

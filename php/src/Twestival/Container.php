@@ -21,7 +21,6 @@ class Container extends \Pimple
 				ini_set('session.' . $key, $value);
 			}
 			
-			session_set_cookie_params(0, '/', $c['request.domain'], $c['request.secure'], true);
 			session_start();
 			return new Session();
 		});
@@ -63,12 +62,12 @@ class Container extends \Pimple
 					\Monolog\Logger::getLevelName($config['level'])
 			));
 			
-			if($config['email.address'])
+			if(isset($config['email.address']))
 			{
 				$logger->pushHandler(new \Monolog\Handler\SwiftMailerHandler(
 						$c['email.mailer'],
 						$c['email.message']
-								->setSubject($config['email.subject'] ? $config['email.subject'] : 'PHP Error')
+								->setSubject(isset($config['email.subject']) ? $config['email.subject'] : 'PHP Error')
 								->setTo($config['email.address'])
 				));
 			}

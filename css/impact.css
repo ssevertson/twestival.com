@@ -1,0 +1,11 @@
+
+iframe#map-frame {
+	border: none;
+	width: 966px;
+	height: 613px;
+	overflow: hidden;
+}
+iframe#table-frame {
+	border: none;
+	width: 100%;
+}
