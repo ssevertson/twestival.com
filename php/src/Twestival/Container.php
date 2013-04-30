@@ -206,6 +206,16 @@ class Container extends \Pimple
 			$client->addSubscriber(new \Guzzle\Plugin\Oauth\OauthPlugin($config));
 			return $client;
 		});
+		$this['openexchange.config'] = $this->share(function($c)
+		{
+			$configFile = $c['configDir'] . '/openexchange.php';
+			return require $configFile;
+		});
+		$this['openexchange.client'] = $this->share(function($c)
+		{
+			$config = $c['openexchange.config'];
+			return new \Guzzle\Http\Client('http://openexchangerates.org/api/', $config);
+		});
 
 		$this['mustache.loader.view'] = $this->share(function($c)
 		{
@@ -326,6 +336,10 @@ class Container extends \Pimple
 		{
 			return new \Twestival\Services\EmailService($c);
 		});
+		$this['service.currency'] = $this->share(function($c)
+		{
+			return new \Twestival\Services\CurrencyService($c);
+		});
 		
 		$this['dao.event.admins'] = $this->share(function($c)
 		{
@@ -382,6 +396,10 @@ class Container extends \Pimple
 		$this['dao.event.locations'] = $this->share(function($c)
 		{
 			return new \Twestival\DAOs\EventLocationsDAO($c);
+		});
+		$this['dao.currencies'] = $this->share(function($c)
+		{
+			return new \Twestival\DAOs\CurrenciesDAO($c);
 		});
 		
 		
