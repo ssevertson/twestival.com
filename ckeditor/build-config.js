@@ -55,10 +55,12 @@ var CKBUILDER_CONFIG = {
 		'oembed' : 1,
 		'panelbutton' : 1,
 		'colorbutton' : 1,
-		'justify' : 1
+		'justify' : 1,
+		'iframe' : 1
 	},
 	languages : {
 		'af' : 1,
+		'sq' : 1,
 		'ar' : 1,
 		'eu' : 1,
 		'bn' : 1,
