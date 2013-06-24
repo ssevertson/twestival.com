@@ -125,6 +125,12 @@ class GlobalTeamResource extends BaseResource
 												'TwitterName' => 'fooz',
 												'Tweet' => 'I love Twestival because you see hope turn into reality if you put all your heart in it! Let\'s change the world for the better together!'
 										),
+										array(
+												'Name' => 'Stephanie Terroir',
+												'Location' => 'UAE',
+												'TwitterName' => 'MissGoogle',
+												'Tweet' => 'Twestival gives this extra special meaning to my life. Proud to be part of the \'Tweet.Meet.Give\' family - A daily dose of inspiration <3'
+										),
 								)
 						),
 						array(
@@ -304,6 +310,54 @@ class GlobalTeamResource extends BaseResource
 												'TwitterName' => 'cofrenchy',
 												'Tweet' => 'I\'m thrilled to be part of #Twestival and continue supporting its amazing causes and communities! Language = communication = connection.'
 										),
+										array(
+												'Name' => 'Yurek Zhang',
+												'Location' => 'China',
+												'TwitterName' => 'YurekZhang',
+												'Tweet' => 'Welcome to Twestival'
+										),
+										array(
+												'Name' => 'Christine Capelle',
+												'Location' => 'US',
+												'TwitterName' => NULL,
+												'Tweet' => 'Native of Belgium, English to French translator for 20+ years living in Sacramento, happy to participate in the #twestival project.'
+										),
+										array(
+												'Name' => 'Xavier Paul',
+												'Location' => 'Belgium',
+												'TwitterName' => 'eXPeee7',
+												'Tweet' => 'Translation & social media share the same goal: enhance communication & create links. That’s why I\'m so pleased to be part of #twestival!'
+										),
+										array(
+												'Name' => 'Emma Beaudaux',
+												'Location' => 'Belgium',
+												'TwitterName' => NULL,
+												'Tweet' => 'As a freelance translator/interpreter I\'m always happy to help a good cause.'
+										),
+										array(
+												'Name' => 'Benoît DeVriendt',
+												'Location' => 'Belgium',
+												'TwitterName' => NULL,
+												'Tweet' => 'Translator in Belgium happy to particitpate in #twestival.'
+										),
+										array(
+												'Name' => 'Maria De Vera',
+												'Location' => 'Spain',
+												'TwitterName' => NULL,
+												'Tweet' => '#Ideator, #polyglot, #transcreator, #raw chef, #culinary #creative entrepreneur @crucinamadrid, all about creativity and innovation.'
+										),
+										array(
+												'Name' => 'Silvina Prado',
+												'Location' => 'Spain',
+												'TwitterName' => NULL,
+												'Tweet' => 'Do you know that the important things in life are told in less than 140 characters? Happy to collaborate with Twestival.'
+										),
+										array(
+												'Name' => 'Jorge Amparan',
+												'Location' => 'Mexico',
+												'TwitterName' => 'jjamparan',
+												'Tweet' => 'It is always a pleasure to help in anyway for anyone.'
+										)
 								)
 						)
 				)
