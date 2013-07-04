@@ -72,14 +72,19 @@ try
 		$container['connection']->commit();
 	}
 }
+catch (Tonic\MethodNotAllowedException $e)
+{
+	$container['logger']->addError($tonicUri . "\n" . $e->getMessage());
+	$response = buildRedirectResponse($request, $baseUri . '/error?code=405', $isGet);
+}
 catch (Tonic\NotFoundException $e)
 {
-	$container['logger']->addWarning($e->getMessage());
+	$container['logger']->addWarning($tonicUri . "\n" . $e->getMessage());
 	$response = buildRedirectResponse($request, $baseUri . '/error?code=404', $isGet);
 }
 catch (Tonic\UnauthorizedException $e)
 {
-	$container['logger']->addWarning($e->getMessage());
+	$container['logger']->addWarning($tonicUri . "\n" . $e->getMessage());
 	if($isGet && substr_compare($tonicUri, '/login', -6, 6))
 	{
 		setcookie('URI_POST_LOGIN', $uri, 0, '/', $domain, $secure, true);
@@ -88,12 +93,12 @@ catch (Tonic\UnauthorizedException $e)
 }
 catch (Tonic\NotAcceptableException $e)
 {
-	$container['logger']->addWarning($e->getMessage());
+	$container['logger']->addWarning($tonicUri . "\n" . $e->getMessage());
 	$response = buildRedirectResponse($request, $baseUri . '/error?code=406', $isGet);
 }
 catch (Tonic\Exception $e)
 {
-	$container['logger']->addError($e->getMessage() . ':' . $e->getTraceAsString());
+	$container['logger']->addError($tonicUri . "\n" . $e->getMessage() . ':' . $e->getTraceAsString());
 	$response = buildRedirectResponse($request, $baseUri, '/error?code=' . $e->getCode(), $isGet);
 }
 catch (Twestival\RedirectException $e)
@@ -103,12 +108,12 @@ catch (Twestival\RedirectException $e)
 		$container['connection']->commit();
 	}
 	
-	$container['logger']->addInfo('Redirecting to ' . $e->getUri());
+	$container['logger']->addInfo($tonicUri . "\n" . 'Redirecting to ' . $e->getUri());
 	$response = buildRedirectResponse($request, $baseUri, $e->getUri(), $isGet);
 }
 catch (Exception $e)
 {
-	$container['logger']->addError($e->getMessage() . ':' . $e->getTraceAsString());
+	$container['logger']->addError($tonicUri . "\n" . $e->getMessage() . ':' . $e->getTraceAsString());
 	$response = buildRedirectResponse($request, $baseUri, '/error?code=500', $isGet);
 }
 
