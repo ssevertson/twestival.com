@@ -36,12 +36,6 @@ class GlobalTeamResource extends BaseResource
 												'Tweet' => 'Twestival is community & giving for the sake of community & giving. Seeing people, worldwide, rally for good causes gives me warm fuzzies.'
 										),
 										array(
-												'Name' => 'Sara Needham',
-												'Location' => 'US',
-												'TwitterName' => 'SaraNeedham',
-												'Tweet' => 'We\'re powerful when we\'re connected. That\'s Twestival. Grateful to be part of a worldwide community causing positive change.'
-										),
-										array(
 												'Name' => 'Marieme Jamme',
 												'Location' => 'UK',
 												'TwitterName' => 'mjamme',
@@ -52,12 +46,6 @@ class GlobalTeamResource extends BaseResource
 												'Location' => 'UAE',
 												'TwitterName' => 'jadhindy',
 												'Tweet' => 'Twestival turns your eagerness to help & give into a reality, a global reality!'
-										),
-										array(
-												'Name' => 'Shauna Causey',
-												'Location' => 'US',
-												'TwitterName' => 'shaunacausey',
-												'Tweet' => 'Twestival is creating ripples of change across the world. It\'s the heart of how technology can enable a digital connected community.'
 										),
 										array(
 												'Name' => 'Vaijayanthi KM (VJ)',
@@ -78,6 +66,12 @@ class GlobalTeamResource extends BaseResource
 								'Members' => array(
 										array(
 												'Lead' => TRUE,
+												'Name' => 'Sylvia Tan',
+												'Location' => 'Canada',
+												'TwitterName' => 'sylvia_tan',
+												'Tweet' => 'Let\'s connect. We\'re all in this together.'
+										),
+										array(
 												'Name' => 'Christina Lor',
 												'Location' => 'US',
 												'TwitterName' => 'skimtheocean',
@@ -142,12 +136,6 @@ class GlobalTeamResource extends BaseResource
 												'Location' => 'UK',
 												'TwitterName' => 'presleysylwia',
 												'Tweet' => '@presleysylwia loves @Twestival because it brings people together - so join us: meet up, have a coffee together and organise an event too! ;)'
-										),
-										array(
-												'Name' => 'Sylvia Tan',
-												'Location' => 'Canada',
-												'TwitterName' => 'sylvia_tan',
-												'Tweet' => 'Let\'s connect. We\'re all in this together.'
 										),
 										array(
 												'Name' => 'Laila Takeh',
