@@ -230,46 +230,6 @@
 	margin: 20px -12px -12px 0px;
 }
 
-#social-media .twtr-widget .twtr-hd, #social-media .twtr-widget .twtr-ft {
-	display: none;
-}
-#social-media .twtr-widget .twtr-tweet {
-	border: none;
-}
-
-#social-media .twtr-widget .twtr-tweet-wrap {
-	padding: 0px 5px 12px 5px;
-	position: relative;
-}
-#social-media .twtr-widget .twtr-avatar, #social-media .twtr-widget .twtr-img {
-	width: 48px;
-	height: 48px;
-}
-#social-media .twtr-widget .twtr-avatar {
-	margin-top: 2px;
-}
-#social-media .twtr-widget .twtr-tweet-text {
-	margin-left: 57px;
-}
-#social-media .twtr-widget .twtr-img img {
-	width: 100%;
-	height: 100%;
-	vertical-align: middle;
-	-webkit-border-radius: 3px;
-	-moz-border-radius: 3px;
-	border-radius: 4px;
-}
-#social-media .twtr-widget .twtr-user {
-	display: block;
-	font-weight: bold;
-	font-size: 14px;
-}
-#social-media .twtr-widget .twtr-user:before {
-	content: '@';
-}
-#social-media .twtr-widget .twtr-timestamp {
-	color: #444444 !important;
-}
 #social-media #social-media-twitter-action {
 	background: url('../img/home/social-media/button-twitter.png') no-repeat;
 }
