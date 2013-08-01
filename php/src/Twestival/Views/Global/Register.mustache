@@ -4,6 +4,7 @@
 		<title>Twestival {{CurrentYear}}: Register</title>
 		
 		<link rel="stylesheet" href="css/input-form.css" />
+		<link rel="stylesheet" href="css/register.css" />
 		
 		<script src="//ajax.microsoft.com/ajax/jquery.validate/1.11.0/jquery.validate.min.js"></script>
 		<script>window.jQuery.validator || document.write('<script src="js/vendor/jquery.validate-1.11.0.min.js"><\/script>')</script>
@@ -14,105 +15,180 @@
 			<div class="wrapper">
 				<h1>Register</h1>
 				
-				<div class="intro">
-					<p>Forming a team of volunteers to host a Twestival in your community is an incredible opportunity to work closely with others to make a real difference for a cause you believe in. It can also be tremendous fun!</p>
-	
-					<p>To get started, fill out the form below and someone from our global team will be in touch with more information, including a handbook and the contact details of an experienced Twestival organizer who can answer any questions that come up.</p>
-	
-					<p>Just remember, all events are to be 100% volunteer-run, and 100% of ticket sales and donations go directly to the charitable project you select. To get all the details of how Twestival works and what it means to be a local organizer, <a href="faq">please read our FAQ.</a></p>
-				</div>
-				
-				<form id="form-register" class="input" method="post">
-					<fieldset>
-						<div class="legend">Registration Type</div>
-						<div class="body">
-							<input type="radio" name="ReRegistration" id="reregistration_true" value="true" class="required" />
-							<label for="reregistration_true">I helped organize the previous Twestival and would like to re-register my city.</label><br/>
-							<input type="radio" name="ReRegistration" id="reregistration_false" value="false" class="required" />
-							<label for="reregistration_false">I have a team together and would like to register to host a Twestival.</label><br/>
-						</div>
-					</fieldset>
-					<fieldset>
-						<div class="legend">Contact Information</div>
-						<div class="body" style="margin-top: 9px;">
-							<label for="name" class="required">Full Name</label><br/>
-							<input type="text" name="Name" id="name" style="width:504px;" class="required" maxlength="100"/><br/>
-							
-							<label for="twitter-name" class="required">Twitter Name</label><br/>
-							<div class="before-field">@</div><input type="text" name="TwitterName" id="twitter-name" style="width: 186px;" class="required" maxlength="15"/><br/>
-							
-							<label for="email-address" class="required">Email Address</label><br/>
-							<input type="text" name="EmailAddress" id="email-address" style="width:504px;" class="required email" maxlength="100"/><br/>
-							
-							<div class="inline">
-								<label for="city" class="required">City</label><br/>
-								<input type="text" name="City" id="city" style="width:160px;" class="required" maxlength="100"/><br/>
-							</div>
-							<div class="inline">
-								<label for="state-province">Province / State</label><br/>
-								<input type="text" name="StateProvince" id="state-province" style="width:160px;" maxlength="50"/><br/>
-							</div>
-							<div class="inline">
-								<label for="country" class="required">Country</label><br/>
-								<input type="text" name="Country" id="country" style="width:160px;" class="required" maxlength="50"/><br/>
-							</div>
-							<div class="clearfix"></div>
-							
-							<label for="twestival-name">Preferred Twestival Name (if different from City name)</label><br/>
-							<input type="text" name="PreferredTwestivalName" id="twestival-name" style="width:504px;" maxlength="50"/><br/>
-							
-							<label for="charity">If you have a charity that you are interested in supporting, please describe.</label><br/>
-							<textarea name="CharityDescription" id="charity" rows="2" style="width:504px;"></textarea><br/>
-	
-							<label for="comment">Comment</label><br/>
-							<textarea name="Comment" id="comment" rows="2" style="width:504px;"></textarea><br/>
-	
-							<input type="checkbox" name="Acknowledge" id="acknowledge" class="required"/>
-							<label for="acknowledge" class="required">Click here to confirm that you have <a href="conditions" target="_blank">read and agree to our terms</a></label><br/>
-							
-							<div class="symbols">
-								<span class="required"></span> required fields<br/>
-							</div>
-							
-							<input type="submit" value="Submit" id="input-submit-button"/>
-						</div>
-					</fieldset>
-					<script type="text/javascript">
-						jQuery.validator.addMethod(
-								'noSpace',
-								function(value, element) { 
-									return !/\s/.test(value);
-								},
-								'This field cannot contain spaces'
-						);
+				<div class="content">
+					<div id="form">
+						<h2>Make it happen — Host a Twestival!</h2>
+						<p>Organizing a team of volunteers to host a Twestival is an incredible opportunity to make a real difference for a local cause. Here's how to join the largest global movement for social good, and have fun connecting your online community offline. <a href="#form-register">Already know about Twestival? Jump to the registration form!</a></p>
 						
-						var validator = $("#form-register").validate({
-							ignore: '.ignore',
-							errorPlacement: function(error, element) {
-								var target = element.prevAll('br:first');
-								if(target.length) {
-									error.insertAfter(element.prevAll('br:first'));
-								} else {
-									error.insertBefore(element);
-								}
-							},
-							success: function(error) {
-								error.remove();
-							},
-							rules: {
-								TwitterName: {
-									noSpace: true
+						<h2>What does it mean to “host a Twestival”?</h2>
+						<p>Twestival is a global movement of volunteers using social media to mobilize communities for a one-time charitable event in support of a cause they care about. All events are 100% volunteer-run, and 100% of the proceeds from ticket sales and donations go directly to a charitable project.</p>
+						<p>As lead organizer in your city, you will be responsible for working with a committed team of volunteers to pick a date and venue, choose a charitable project and promote your Twestival. The lead organizer is also the primary contact with our orientation team. For more information, <a href="faq">please read our FAQ</a>.</p>
+		
+						<h2>Why host a Twestival</h2>
+						<ul>
+							<li>
+								<strong>It’s rewarding and fun</strong> &mdash; 
+								Meet new people online and in person
+							</li>
+							<li>
+								<strong>Have a blast planning an event that rocks</strong> &mdash; 
+								Live music, comedy, great food, video games...whatever you think will draw a crowd!
+							</li>
+							<li>
+								<strong>Fundraise for a cause that directly impacts your own community</strong>
+							</li>
+							<li>
+								<strong>Put your city on the map</strong> &mdash; 
+								<a href="events">Join a global movement</a> and form connections with concerned citizens all over the world, from Aalborg to Zacatecas
+							</li>
+							<li>
+								<strong>Learn from seasoned volunteers </strong> &mdash; 
+								Twestival attracts experienced event organizers, fundraisers and thought leaders from across the world of philanthropy
+							</li>
+						</ul>
+						
+						<h2>The road to your Twestival begins here</h2>
+						<p>All events using the Twestival brand must be official and approved, so here are some important steps you will take:</p>
+						<ul>
+							<li>
+								<strong>Fill out the registration form below</strong> &mdash; 
+								Please note, we restrict nonprofits from hosting their own events to prevent conflicts of interest
+							</li>
+							<li>
+								<strong>Watch for an email from our orientation team</strong> &mdash; 
+								We will share complete instructions on how to get started, including our 2013 Handbook, Brand Guidelines, design pack, login details for your blog on Twestival.com, and a package of helpful templates
+							</li>
+							<li>
+								<strong>Meet your mentor</strong> &mdash; 
+								We will introduce you to a veteran Twestival organizer who will support you as an advisor and sounding board
+							</li>
+							<li>
+								<strong>Recruit volunteers, and host your first meeting</strong> &mdash; 
+								Give each person clearly defined responsibilities so everyone can play a part
+							</li>
+							<li>
+								<strong>Select a charitable project to support</strong> &mdash; 
+								Many worthy causes deserve the funds and awareness that a Twestival brings. Submit your choice to Twestival for approval
+							</li>
+							<li>
+								<strong>Pick a date</strong> &mdash; 
+								This year, it’s your choice!
+							</li>
+						</ul>
+						
+						<h2>Let’s bring Twestival to your community! Just fill out the short form below to get started!</h2>
+					</div>
+					
+					<form id="form-register" class="input" method="post">
+						<fieldset>
+							<div class="legend">Registration Type</div>
+							<div class="body">
+								<input type="radio" name="ReRegistration" id="reregistration_true" value="true" class="required" />
+								<label for="reregistration_true">I helped organize the previous Twestival and would like to re-register my city.</label><br/>
+								<input type="radio" name="ReRegistration" id="reregistration_false" value="false" class="required" />
+								<label for="reregistration_false">I have a team together and would like to register to host a Twestival.</label><br/>
+							</div>
+						</fieldset>
+						<fieldset>
+							<div class="legend">Contact Information</div>
+							<div class="body" style="margin-top: 9px;">
+								<label for="name" class="required">Full Name</label><br/>
+								<input type="text" name="Name" id="name" style="width:504px;" class="required" maxlength="100"/><br/>
+								
+								<label for="twitter-name" class="required">Twitter Name</label><br/>
+								<div class="before-field">@</div><input type="text" name="TwitterName" id="twitter-name" style="width: 186px;" class="required" maxlength="15"/><br/>
+								
+								<label for="email-address" class="required">Email Address</label><br/>
+								<input type="text" name="EmailAddress" id="email-address" style="width:504px;" class="required email" maxlength="100"/><br/>
+								
+								<div class="inline">
+									<label for="city" class="required">City</label><br/>
+									<input type="text" name="City" id="city" style="width:160px;" class="required" maxlength="100"/><br/>
+								</div>
+								<div class="inline">
+									<label for="state-province">Province / State</label><br/>
+									<input type="text" name="StateProvince" id="state-province" style="width:160px;" maxlength="50"/><br/>
+								</div>
+								<div class="inline">
+									<label for="country" class="required">Country</label><br/>
+									<input type="text" name="Country" id="country" style="width:160px;" class="required" maxlength="50"/><br/>
+								</div>
+								<div class="clearfix"></div>
+								
+								<label for="twestival-name">Preferred Twestival Name (if different from City name)</label><br/>
+								<input type="text" name="PreferredTwestivalName" id="twestival-name" style="width:504px;" maxlength="50"/><br/>
+								
+								<label for="charity">If you have a charity that you are interested in supporting, please describe.</label><br/>
+								<textarea name="CharityDescription" id="charity" rows="2" style="width:504px;"></textarea><br/>
+		
+								<label for="comment">Comment</label><br/>
+								<textarea name="Comment" id="comment" rows="2" style="width:504px;"></textarea><br/>
+		
+								<input type="checkbox" name="Acknowledge" id="acknowledge" class="required"/>
+								<label for="acknowledge" class="required">Click here to confirm that you have <a href="conditions" target="_blank">read and agree to our terms</a></label><br/>
+								
+								<div class="symbols">
+									<span class="required"></span> required fields<br/>
+								</div>
+								
+								<input type="submit" value="Submit" id="input-submit-button"/>
+							</div>
+						</fieldset>
+						<script type="text/javascript">
+							jQuery.validator.addMethod(
+									'noSpace',
+									function(value, element) { 
+										return !/\s/.test(value);
+									},
+									'This field cannot contain spaces'
+							);
+							
+							var validator = $("#form-register").validate({
+								ignore: '.ignore',
+								errorPlacement: function(error, element) {
+									var target = element.prevAll('br:first');
+									if(target.length) {
+										error.insertAfter(element.prevAll('br:first'));
+									} else {
+										error.insertBefore(element);
+									}
 								},
-								CharityDescription: {
-									maxlength: 2000
+								success: function(error) {
+									error.remove();
 								},
-								Comment: {
-									maxlength: 2000
+								rules: {
+									TwitterName: {
+										noSpace: true
+									},
+									CharityDescription: {
+										maxlength: 2000
+									},
+									Comment: {
+										maxlength: 2000
+									}
 								}
-							}
-						});
-					</script>
-				</form>
+							});
+						</script>
+					</form>
+				</div>
+				<div id="sidebars">
+					<div id="sidebar-volunteer" class="sidebar">
+						<div class="title">Volunteer</div>
+						<div class="body">
+							<strong>Share your time and ideas.</strong>
+							<p>Why just attend a Twestival when you can help make it amazing? Click the button to find out what is happening in your community and put your name forward to pitch in!</p>
+							<a href="volunteer" class="button" id="button-volunteer">Help Out&nbsp;&nbsp;</a>
+						</div>
+					</div>
+					<div id="sidebar-sponsor" class="sidebar">
+						<div class="title">Sponsor</div>
+						<div class="body">
+							<strong>Sponsor a Twestival.</strong>
+							<p>Support a local event through monetary, in-kind or media sponsorships. Submit your interest in helping a great cause, and you’ll also gain exposure to digital leaders in your community.</p>
+							<a href="sponsor" class="button" id="button-sponsor">Sponsor&nbsp;&nbsp;</a>
+						</div>
+					</div>
+				</div>
 			</div>
 
 		{{> Footer }}

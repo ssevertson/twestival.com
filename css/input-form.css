@@ -93,11 +93,12 @@ form.input input#input-submit-button {
 	height: 70px;
 	text-transform: uppercase;
 	font-family: 'Melbourne-Bold';
-	font-size: 14px;
+	font-size: 15px;
 	text-align: center;
-	padding-top: 5px;
+	padding-top: 4px;
 	letter-spacing: 1px;
 	margin-top: 60px;
+	color: #FFFFFF;
 }
 form.input img.image-field {
 	margin-top: 4px;

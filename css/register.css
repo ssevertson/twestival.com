@@ -1,0 +1,35 @@
+.content {
+	width: 622px;
+	float: left;
+	padding-right: 15px;
+}
+
+.content h2 {
+	color: #50B1BD;
+}
+
+.content ul li {
+	list-style-type: none;
+	padding-bottom: 6px;
+}
+
+.content a {
+	color: #50B1BD;
+}
+
+.sidebar .button {
+	background: url('../img/register/button-sidebar.png') no-repeat;
+	position: relative;
+	display: block;
+	bottom: 0px;
+	right: -154px;
+	width: 142px;
+	height: 42px;
+	font-family: 'Melbourne';
+	font-weight: bold;
+	font-size: 12px;
+	text-align: center;
+	text-transform: uppercase;
+	padding-top: 13px;
+	color: #FFFFFF;
+}
