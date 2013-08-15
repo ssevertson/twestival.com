@@ -56,7 +56,8 @@ var CKBUILDER_CONFIG = {
 		'panelbutton' : 1,
 		'colorbutton' : 1,
 		'justify' : 1,
-		'iframe' : 1
+		'iframe' : 1,
+		'indentlist' : 1
 	},
 	languages : {
 		'af' : 1,
@@ -92,6 +93,7 @@ var CKBUILDER_CONFIG = {
 		'hi' : 1,
 		'hu' : 1,
 		'is' : 1,
+		'id' : 1,
 		'it' : 1,
 		'ja' : 1,
 		'km' : 1,
@@ -112,6 +114,7 @@ var CKBUILDER_CONFIG = {
 		'ru' : 1,
 		'sr' : 1,
 		'sr-latn' : 1,
+		'si' : 1,
 		'sk' : 1,
 		'sl' : 1,
 		'es' : 1,
