@@ -1,8 +1,8 @@
 {{#security.currentBlogEventAdmin}}
 	<ul class="commands horizontal">
-		<li><a href="{{BlogPostUri}}" class="command">Edit</a></li>
+		<li><a href="{{BlogPostSecureUri}}" class="command">Edit</a></li>
 		<li>
-			<form action="{{BlogPostUri}}!DELETE" method="POST" class="rest-link command" onclick="return confirm('Are you sure you wish to delete this post?');">
+			<form action="{{BlogPostSecureUri}}!DELETE" method="POST" class="rest-link command" onclick="return confirm('Are you sure you wish to delete this post?');">
 				<input type="submit" value="Delete" class="command"/>
 			</form>
 		</li>

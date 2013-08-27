@@ -45,13 +45,15 @@ class BlogPostService extends BaseService
 	{
 		if($post)
 		{
-			$post['BlogPostUri'] = 'http://'
-					. $post['BlogSubdomain']
+			$postBaseUri = $post['BlogSubdomain']
 					. '.'
 					. $this->container['request.domain']
 					. $this->container['baseUri']
 					. '/post/'
-					. $post['PostID'];
+							. $post['PostID'];
+
+			$post['BlogPostUri'] = 'http://' . $postBaseUri;
+			$post['BlogPostSecureUri'] = 'https://' . $postBaseUri;
 		
 			$cleanTitle = $this->toCleanUri($post['Title']);
 
