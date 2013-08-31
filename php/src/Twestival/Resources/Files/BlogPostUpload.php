@@ -11,6 +11,8 @@ class BlogPostUpload extends Upload
 		parent::__construct($path, $uri, $fields);
 
 		$this->setMaxFileSize(128 * 1024);
+		$this->setMaxImageWidth(590);
+		$this->setMaxImageHeight(590);
 		$this->setMimeTypes('image/png, image/jpeg');
 	}
 }
