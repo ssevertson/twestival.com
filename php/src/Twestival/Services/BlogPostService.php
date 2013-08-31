@@ -4,6 +4,8 @@ use Twestival\DAOs\BlogsDAO;
 
 class BlogPostService extends BaseService
 {
+	const IMAGE_FILENAME_PREFIX = 'blog-post-';
+
 	function getPosts($subdomain, $count, $offset)
 	{
 		$posts = $this->container['dao.blog.posts']->items($subdomain, $count, $offset);
@@ -89,6 +91,21 @@ class BlogPostService extends BaseService
 		$clean = strtolower(trim($clean, '-'));
 		$clean = preg_replace('/[\/_|+ -]+/', $delimiter, $clean);
 		return $clean;
+	}
+	
+	function getImagePath()
+	{
+		return 'img/blog/post/content';
+	}
+	function getImageUri($imageFilename = '')
+	{
+		return $this->container['request.protocol']
+		. $this->container['request.hostname']
+		. $this->container['baseUri']
+		. '/'
+		. $this->getImagePath()
+		. '/'
+		. $imageFilename;
 	}
 }
 ?>

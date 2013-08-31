@@ -1,0 +1,12 @@
+{{> HTMLTag }}
+	<head>
+		<script type="text/javascript">
+			{{#File.Errors}}
+				window.parent.CKEDITOR.tools.callFunction('{{Callback}}', '', 'Error! {{.}}');
+			{{/File.Errors}}
+			{{^File.Errors}}
+				window.parent.CKEDITOR.tools.callFunction('{{Callback}}', '{{File.Uri}}', '');
+			{{/File.Errors}}
+		</script>
+	</head>
+</html>

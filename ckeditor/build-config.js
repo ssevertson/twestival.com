@@ -57,7 +57,8 @@ var CKBUILDER_CONFIG = {
 		'colorbutton' : 1,
 		'justify' : 1,
 		'iframe' : 1,
-		'indentlist' : 1
+		'indentlist' : 1,
+		'image' : 1
 	},
 	languages : {
 		'af' : 1,

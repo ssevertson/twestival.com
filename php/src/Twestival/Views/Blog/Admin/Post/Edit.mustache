@@ -27,7 +27,11 @@
 							{{Content}}
 						</textarea>
 						<script type="text/javascript">
-							CKEDITOR.replace('blog-post-content', { contentsCss: ['//fonts.googleapis.com/css?family=Lato', 'css/blog-ckeditor-contents.css'], height: 350 });
+							CKEDITOR.replace('blog-post-content', {
+								contentsCss: ['//fonts.googleapis.com/css?family=Lato', 'css/blog-ckeditor-contents.css'],
+								height: 350,
+								filebrowserImageUploadUrl: 'admin/post/image'
+							});
 						</script>
 					</div>
 					<input type="submit" class="action" value="Post"/>

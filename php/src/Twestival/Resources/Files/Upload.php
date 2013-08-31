@@ -39,7 +39,7 @@ class Upload
 	
 	function setMaxFileSize($maxFileSize)
 	{
-		$maxFileSize = intval($maxFileSize);
+		$this->maxFileSize = intval($maxFileSize);
 	}
 	function setMimeTypes($mimeTypes)
 	{
@@ -152,7 +152,8 @@ class Upload
 	private function buildFileSizeError($file, $maxFileSize)
 	{
 		$fileName = $file['name'];
-		$formattedFileSize = $this->formatBytes($file['size']);
+		$fileSize = $file['size'];
+		$formattedFileSize = $this->formatBytes($fileSize);
 		$formattedMaxSize = $this->formatBytes($maxFileSize);
 		return "File $fileName is too large: must be less than $formattedMaxSize, but is $formattedFileSize.";
 		
@@ -255,7 +256,12 @@ class Upload
 		}
 	}
 	
-	private function formatBytes($bytes, $precision = 2) { 
+	private function formatBytes($bytes, $precision = 2) {
+		if($bytes != intval($bytes))
+		{
+			return $bytes;
+		}
+		
 		$units = array('b', 'kb', 'mb', 'gb', 'tb'); 
 		
 		$bytes = max($bytes, 0); 
